@@ -8,7 +8,7 @@
   
   
   <title>
-    labelImg闪退错误修复 |
+    AR技术分析报告 |
     
     aeeeeeep personal blog
   </title>
@@ -35,7 +35,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-labelImg闪退错误修复" class="article article-type-post" itemscope
+  <article id="post-AR技术分析报告" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -44,7 +44,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  labelImg闪退错误修复
+  AR技术分析报告
 </h1>
 
 
@@ -54,14 +54,10 @@
 
     
     <div class="article-meta">
-      <a href="/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/" class="article-date">
-  <time datetime="2021-12-05T14:04:16.000Z" itemprop="datePublished">2021-12-05</time>
+      <a href="/2022/02/23/AR%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/" class="article-date">
+  <time datetime="2022-02-23T02:11:02.000Z" itemprop="datePublished">2022-02-23</time>
 </a>
       
-<div class="article-category">
-  <a class="article-category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-</div>
-
     </div>
     
 
@@ -75,20 +71,35 @@
       
       
       
-      <h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
-<span id="more"></span>
-<p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
-<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
-<p>第783行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure></p>
-<p>改为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    <span class="keyword">if</span> shape <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;add empty label&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure>
+      <span id="more"></span>
+<p align="right">信20（4）数媒D 2012630418 孙爱华</p>
 
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>增强现实( AR ) 是一种真实世界环境的交互式体验，其中存在于现实世界中的对象通过计算机生成的感知信息得到增强，有时跨越多种感官模式，包括视觉、听觉、触觉、体感和嗅觉。AR 可以定义为一个包含三个基本特征的系统：真实和虚拟世界的结合、实时交互以及虚拟和真实对象的准确 3D 配准。重叠的感觉信息可以是建设性的（即对自然环境的补充）或破坏性的（即对自然环境的掩蔽）。这种体验与物理世界无缝交织，因此被视为真实环境的沉浸式体验。[4]通过这种方式，增强现实改变了人们对现实世界环境的持续感知，而虚拟现实完全用模拟环境取代了用户的现实世界环境。增强现实与两个主要同义词相关：混合现实和计算机介导的现实。</p>
+<p align="right">——以上内容来自Wiki百科</p>
+
+</blockquote>
+<h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><h3 id="Vision-based-AR（基于计算机视觉的AR）"><a href="#Vision-based-AR（基于计算机视觉的AR）" class="headerlink" title="Vision based AR（基于计算机视觉的AR）"></a>Vision based AR（基于计算机视觉的AR）</h3><h4 id="Marker-Based-AR-（基于标定的AR）"><a href="#Marker-Based-AR-（基于标定的AR）" class="headerlink" title="Marker-Based AR （基于标定的AR）"></a>Marker-Based AR （基于标定的AR）</h4><p>如：</p>
+<h4 id="Marker-Less-AR（基于特征点的AR）"><a href="#Marker-Less-AR（基于特征点的AR）" class="headerlink" title="Marker-Less AR（基于特征点的AR）"></a>Marker-Less AR（基于特征点的AR）</h4><p>如：</p>
+<h3 id="LBS-based-AR（基于地理位置信息的AR）"><a href="#LBS-based-AR（基于地理位置信息的AR）" class="headerlink" title="LBS based AR（基于地理位置信息的AR）"></a>LBS based AR（基于地理位置信息的AR）</h3><p>如：</p>
+<blockquote>
+<p>本文将具体讲解和实验基于特征点的AR技术 </p>
+</blockquote>
+<h2 id="Demo演示"><a href="#Demo演示" class="headerlink" title="Demo演示"></a>Demo演示</h2><ol>
+<li><strong>准备数据</strong></li>
+<li><strong>读取数据</strong></li>
+<li><strong>识别数据</strong></li>
+<li><strong>单应性</strong></li>
+<li><strong>姿势估计</strong></li>
+<li><strong>展示</strong></li>
+</ol>
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">Source code</summary><pre><code class="python">
+
+</code></pre></details>
       
     </div>
     <footer class="article-footer">
       
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/labelImg/" rel="tag">labelImg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" rel="tag">数据集</a></li></ul>
-
       
 	<div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束&nbsp;<i class="fe fe-smile"></i>&nbsp;感谢您的阅读 -------------</div>
 
@@ -101,19 +112,19 @@
   
 <nav class="article-nav">
   
-  <a href="/2022/02/23/AR%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/" class="article-nav-link">
+  <a href="/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/" class="article-nav-link">
     <strong class="article-nav-caption">Newer</strong>
     <div class="article-nav-title">
       
-      AR技术分析报告
+      Archlinux在Virtualbox上的简要安装步骤
       
     </div>
   </a>
   
   
-  <a href="/2021/11/29/2021%E4%BA%9A%E5%A4%AA%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AB%9E%E8%B5%9BA%E9%A2%98/" class="article-nav-link">
+  <a href="/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/" class="article-nav-link">
     <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">2021亚太数学建模竞赛A题</div>
+    <div class="article-nav-title">labelImg闪退错误修复</div>
   </a>
   
 </nav>

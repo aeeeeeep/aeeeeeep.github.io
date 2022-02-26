@@ -67,6 +67,190 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-Archlinux在Virtualbox上的简要安装步骤" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/">Archlinux在Virtualbox上的简要安装步骤</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/" class="article-date">
+  <time datetime="2022-02-26T02:25:18.000Z" itemprop="datePublished">2022-02-26</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <span id="more"></span>
+<p align="right">信20（4）数媒D 2012630418 孙爱华</p>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>从清华源下载<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/2022.02.01/">最新Archlinux官网镜像</a></li>
+<li>下载安装对应当前系统的<a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads">最新VirtualBox安装程序</a></li>
+</ul>
+<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>打开Virtualbox</p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/1.png" alt=""></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/2.png" alt="2"></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/3.png" alt="3"></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/4.png" alt="4"></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/5.png" alt="5"></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/6.png" alt="6"></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/7.png" alt="7"></p>
+<p>检查网络，正常；<br>设置时间</p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/8.png" alt="8"></p>
+<p>查看硬盘分区</p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/9.png" alt="9"></p>
+<p>擦除分区表<code>sgdisk -Z /dev/sda</code></p>
+<p>创建大小为 260M 的 ESP 分区<code>sgdisk -n=0:0:+260M -t=0:ef00 /dev/sda</code></p>
+<p>使用剩余空间创建系统分区：<code>sgdisk -N=0 /dev/sda</code></p>
+<p>格式化 ESP 分区为 FAT32：<code>mkfs.fat -F 32 /dev/sda1</code></p>
+<p>格式化系统分区为 xfs：<code>mkfs.xfs /dev/sda2</code></p>
+<p>挂载系统分区：<code>mount /dev/sda2 /mnt</code></p>
+<p>创建 ESP 分区挂载路径：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot</span><br><span class="line">mount -o umask=0077 /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></p>
+<p>设置中国镜像源<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o /etc/pacman.d/mirrorlist &quot;https://archlinux.org/mirrorlist/?country=CN&quot;</span><br><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure><br>删除#Server = 前面的#以启用镜像</p>
+<p>设置本地化环境：<code>export LANG=C</code></p>
+<p>安装所需软件包到系统分区：`pacstrap /mnt base linux linux-firmware bash-completion xfsprogs vim networkmanager pacman-contrib sudo amd-ucode yay git neofetch</p>
+<p>成功安装完成后生成 fstab 文件：<code>genfstab -U /mnt &gt; /mnt/etc/fstab</code></p>
+<p>进入新系统环境：<code>arch-chroot /mnt</code></p>
+<p>设置时区为中国：<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
+<p>同步硬件时钟：<code>hwclock --systohc</code></p>
+<p>设置系统主机名：<code>echo $&#123;hostname&#125; &gt; /etc/hostname</code></p>
+<p>编辑 hosts 文件<code>vim /etc/hosts</code>并添加以下行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">127.0.0.1 Dolphin</span><br><span class="line">::1 ip6-localhost ip6-loopback</span><br><span class="line">::1 Dolphin</span><br></pre></td></tr></table></figure></p>
+<p>编辑本地化配置文件<code>vim /etc/locale.gen</code><br>删除以下行前面的<code>#</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">en_US.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_CN.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_TW.UTF-8 UTF-8</span></span><br></pre></td></tr></table></figure></p>
+<p>设置默认本地化环境：<code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code></p>
+<p>执行<code>SUDO_EDITOR=nano visudo</code>编辑 sudo 配置文件，删除<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> %wheel ALL=(ALL) ALL</span></span><br></pre></td></tr></table></figure><br>前面的<code>#</code>让 wheel 用户组可以使用sudo获取 root 权限</p>
+<p>创建一个新用户并加入 wheel 用户组：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel -s /bin/bash pacaep</span><br></pre></td></tr></table></figure></p>
+<p>设置新用户密码：<code>passwd pacaep</code></p>
+<p>安装引导管理程序 GRUB：<code>pacman -S grub</code></p>
+<p>安装 GRUB 至 ESP 分区：<code>grub-install --removable --target=x86_64-efi --efi-directory=/boot</code></p>
+<p>生成 GRUB 配置文件：<code>grub-mkconfig -o /boot/grub/grub.cfg</code></p>
+<p>启用网络管理器：<code>sudo systemctl enable --now NetworkManager</code></p>
+<p>启用从网络同步系统时间：<code>sudo timedatectl set-ntp true</code></p>
+<p>启用本地 DNS 解析器：<code>sudo systemctl enable --now systemd-resolved</code></p>
+<p>创建 DNS 解析文件软链接：<code>sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</code></p>
+<p>启用每周自动清理不需要的 Pacman 软件包缓存：<code>sudo systemctl enable paccache.timer</code></p>
+<p>安装KDE桌面环境、显示管理器、终端（Konsole）以及 Noto 字体集：<code>sudo pacman -S --noconfirm plasma sddm konsole noto-fonts noto-fonts-cjk noto-fonts-emoji</code></p>
+<p>安装 Plasma 可选依赖：<code>sudo pacman -S --asdeps gst-plugins-good packagekit-qt5 xsettingsd</code></p>
+<p>打开系统设置，按需求设置</p>
+<p>安装完成</p>
+<p>输入<code>neofetch</code></p>
+<p><img src="/home/pacaep/aepBlog/source/image/Archlinux在Virtualbox上的简要安装步骤/10.png" alt="10"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag">作业</a></li></ul>
+
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+    
+    <article id="post-AR技术分析报告" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/23/AR%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/">AR技术分析报告</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/02/23/AR%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/" class="article-date">
+  <time datetime="2022-02-23T02:11:02.000Z" itemprop="datePublished">2022-02-23</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <span id="more"></span>
+<p align="right">信20（4）数媒D 2012630418 孙爱华</p>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>增强现实( AR ) 是一种真实世界环境的交互式体验，其中存在于现实世界中的对象通过计算机生成的感知信息得到增强，有时跨越多种感官模式，包括视觉、听觉、触觉、体感和嗅觉。AR 可以定义为一个包含三个基本特征的系统：真实和虚拟世界的结合、实时交互以及虚拟和真实对象的准确 3D 配准。重叠的感觉信息可以是建设性的（即对自然环境的补充）或破坏性的（即对自然环境的掩蔽）。这种体验与物理世界无缝交织，因此被视为真实环境的沉浸式体验。[4]通过这种方式，增强现实改变了人们对现实世界环境的持续感知，而虚拟现实完全用模拟环境取代了用户的现实世界环境。增强现实与两个主要同义词相关：混合现实和计算机介导的现实。</p>
+<p align="right">——以上内容来自Wiki百科</p>
+
+</blockquote>
+<h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><h3 id="Vision-based-AR（基于计算机视觉的AR）"><a href="#Vision-based-AR（基于计算机视觉的AR）" class="headerlink" title="Vision based AR（基于计算机视觉的AR）"></a>Vision based AR（基于计算机视觉的AR）</h3><h4 id="Marker-Based-AR-（基于标定的AR）"><a href="#Marker-Based-AR-（基于标定的AR）" class="headerlink" title="Marker-Based AR （基于标定的AR）"></a>Marker-Based AR （基于标定的AR）</h4><p>如：</p>
+<h4 id="Marker-Less-AR（基于特征点的AR）"><a href="#Marker-Less-AR（基于特征点的AR）" class="headerlink" title="Marker-Less AR（基于特征点的AR）"></a>Marker-Less AR（基于特征点的AR）</h4><p>如：</p>
+<h3 id="LBS-based-AR（基于地理位置信息的AR）"><a href="#LBS-based-AR（基于地理位置信息的AR）" class="headerlink" title="LBS based AR（基于地理位置信息的AR）"></a>LBS based AR（基于地理位置信息的AR）</h3><p>如：</p>
+<blockquote>
+<p>本文将具体讲解和实验基于特征点的AR技术 </p>
+</blockquote>
+<h2 id="Demo演示"><a href="#Demo演示" class="headerlink" title="Demo演示"></a>Demo演示</h2><ol>
+<li><strong>准备数据</strong></li>
+<li><strong>读取数据</strong></li>
+<li><strong>识别数据</strong></li>
+<li><strong>单应性</strong></li>
+<li><strong>姿势估计</strong></li>
+<li><strong>展示</strong></li>
+</ol>
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">Source code</summary><pre><code class="python">
+
+</code></pre></details>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+    
     <article id="post-labelImg闪退错误修复" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -581,140 +765,13 @@
 </article>
 
     
-    <article id="post-matlab画图功能再探" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/">matlab画图功能再探</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/" class="article-date">
-  <time datetime="2021-10-08T13:51:11.000Z" itemprop="datePublished">2021-10-08</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">使用教程</a>
-</div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">close all;</span><br><span class="line">th = <span class="built_in">linspace</span>()<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">fig1 = <span class="built_in">plot</span>(th,<span class="built_in">sin</span>(th),<span class="string">&#x27;g&#x27;</span>,th,<span class="built_in">cos</span>(th),<span class="string">&#x27;b:&#x27;</span>);</span><br></pre></td></tr></table></figure>
-        
-          <p>
-            <a class="article-more-link" href="/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matlab/" rel="tag">matlab</a></li></ul>
-
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-    
-    <article id="post-拉格朗日插值多项式" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/06/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F/">拉格朗日插值多项式</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/06/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F/" class="article-date">
-  <time datetime="2021-10-06T09:52:06.000Z" itemprop="datePublished">2021-10-06</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/">数值分析</a>
-</div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <h3 id="多项式插值"><a href="#多项式插值" class="headerlink" title="多项式插值"></a>多项式插值</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><blockquote>
-<p> 给定有序点集 $\{x_0,x_1,\cdots,x_n\}$ 且 $x_0 \lt x_1\lt \cdots\lt x_n$ 以及定义在 $x_0,x_n$ 上的连续函数$f(x)$或对应于 $x$ 值的 $y$ 值集合 $y_0,y_1,\cdots,y_n$ (即 $(x_i,y_i)$) 对.<br>
-        
-          <p>
-            <a class="article-more-link" href="/2021/10/06/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/" rel="tag">多项式插值</a></li></ul>
-
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+  </nav>
   
 </section>
 </div>
