@@ -103,7 +103,7 @@
 <p>创建 ESP 分区挂载路径：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot</span><br><span class="line">mount -o umask=0077 /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></p>
 <p>设置中国镜像源<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o /etc/pacman.d/mirrorlist &quot;https://archlinux.org/mirrorlist/?country=CN&quot;</span><br><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure><br>删除#Server = 前面的#以启用镜像</p>
 <p>设置本地化环境：<code>export LANG=C</code></p>
-<p>安装所需软件包到系统分区：`pacstrap /mnt base linux linux-firmware bash-completion xfsprogs vim networkmanager pacman-contrib sudo amd-ucode yay git neofetch</p>
+<p>安装所需软件包到系统分区：<code>pacstrap /mnt base linux linux-firmware bash-completion xfsprogs vim networkmanager pacman-contrib sudo amd-ucode yay git neofetch</code></p>
 <p>成功安装完成后生成 fstab 文件：<code>genfstab -U /mnt &gt; /mnt/etc/fstab</code></p>
 <p>进入新系统环境：<code>arch-chroot /mnt</code></p>
 <p>设置时区为中国：<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
