@@ -105,61 +105,19 @@
         
       
       
-      <span id="more"></span>
-<p align="right">信20（4）数媒D 2012630418 孙爱华</p>
+        <p align="right">信20（4）数媒D 2012630418 孙爱华</p>
 
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
 <li>从清华源下载<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/2022.02.01/">最新Archlinux官网镜像</a></li>
 <li>下载安装对应当前系统的<a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads">最新VirtualBox安装程序</a></li>
 </ul>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>打开Virtualbox</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/1.png" alt="1"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/2.png" alt="2"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/3.png" alt="3"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/4.png" alt="4"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/5.png" alt="5"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/6.png" alt="6"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/7.png" alt="7"></p>
-<p>检查网络，正常；<br>设置时间</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/8.png" alt="8"></p>
-<p>查看硬盘分区</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/9.png" alt="9"></p>
-<p>擦除分区表<code>sgdisk -Z /dev/sda</code></p>
-<p>创建大小为 260M 的 ESP 分区<code>sgdisk -n=0:0:+260M -t=0:ef00 /dev/sda</code></p>
-<p>使用剩余空间创建系统分区：<code>sgdisk -N=0 /dev/sda</code></p>
-<p>格式化 ESP 分区为 FAT32：<code>mkfs.fat -F 32 /dev/sda1</code></p>
-<p>格式化系统分区为 xfs：<code>mkfs.xfs /dev/sda2</code></p>
-<p>挂载系统分区：<code>mount /dev/sda2 /mnt</code></p>
-<p>创建 ESP 分区挂载路径：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/boot</span><br><span class="line">mount -o umask=0077 /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></p>
-<p>设置中国镜像源<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o /etc/pacman.d/mirrorlist &quot;https://archlinux.org/mirrorlist/?country=CN&quot;</span><br><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure><br>删除#Server = 前面的#以启用镜像</p>
-<p>设置本地化环境：<code>export LANG=C</code></p>
-<p>安装所需软件包到系统分区：`pacstrap /mnt base linux linux-firmware bash-completion xfsprogs vim networkmanager pacman-contrib sudo amd-ucode yay git neofetch</p>
-<p>成功安装完成后生成 fstab 文件：<code>genfstab -U /mnt &gt; /mnt/etc/fstab</code></p>
-<p>进入新系统环境：<code>arch-chroot /mnt</code></p>
-<p>设置时区为中国：<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
-<p>同步硬件时钟：<code>hwclock --systohc</code></p>
-<p>设置系统主机名：<code>echo $&#123;hostname&#125; &gt; /etc/hostname</code></p>
-<p>编辑 hosts 文件<code>vim /etc/hosts</code>并添加以下行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">127.0.0.1 Dolphin</span><br><span class="line">::1 ip6-localhost ip6-loopback</span><br><span class="line">::1 Dolphin</span><br></pre></td></tr></table></figure></p>
-<p>编辑本地化配置文件<code>vim /etc/locale.gen</code><br>删除以下行前面的<code>#</code><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">en_US.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_CN.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_TW.UTF-8 UTF-8</span></span><br></pre></td></tr></table></figure></p>
-<p>设置默认本地化环境：<code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code></p>
-<p>执行<code>SUDO_EDITOR=nano visudo</code>编辑 sudo 配置文件，删除<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> %wheel ALL=(ALL) ALL</span></span><br></pre></td></tr></table></figure><br>前面的<code>#</code>让 wheel 用户组可以使用sudo获取 root 权限</p>
-<p>创建一个新用户并加入 wheel 用户组：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel -s /bin/bash pacaep</span><br></pre></td></tr></table></figure></p>
-<p>设置新用户密码：<code>passwd pacaep</code></p>
-<p>安装引导管理程序 GRUB：<code>pacman -S grub</code></p>
-<p>安装 GRUB 至 ESP 分区：<code>grub-install --removable --target=x86_64-efi --efi-directory=/boot</code></p>
-<p>生成 GRUB 配置文件：<code>grub-mkconfig -o /boot/grub/grub.cfg</code></p>
-<p>启用网络管理器：<code>sudo systemctl enable --now NetworkManager</code></p>
-<p>启用从网络同步系统时间：<code>sudo timedatectl set-ntp true</code></p>
-<p>启用本地 DNS 解析器：<code>sudo systemctl enable --now systemd-resolved</code></p>
-<p>创建 DNS 解析文件软链接：<code>sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</code></p>
-<p>启用每周自动清理不需要的 Pacman 软件包缓存：<code>sudo systemctl enable paccache.timer</code></p>
-<p>安装KDE桌面环境、显示管理器、终端（Konsole）以及 Noto 字体集：<code>sudo pacman -S --noconfirm plasma sddm konsole noto-fonts noto-fonts-cjk noto-fonts-emoji</code></p>
-<p>安装 Plasma 可选依赖：<code>sudo pacman -S --asdeps gst-plugins-good packagekit-qt5 xsettingsd</code></p>
-<p>打开系统设置，按需求设置</p>
-<p>安装完成</p>
-<p>输入<code>neofetch</code></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/10.png" alt="10"></p>
-
+        
+          <p>
+            <a class="article-more-link" href="/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
