@@ -58,6 +58,10 @@
   <time datetime="2022-02-23T02:11:02.000Z" itemprop="datePublished">2022-02-23</time>
 </a>
       
+<div class="article-category">
+  <a class="article-category-link" href="/categories/%E4%BD%9C%E4%B8%9A/">作业</a>
+</div>
+
     </div>
     
 
@@ -80,26 +84,305 @@
 </blockquote>
 <span id="more"></span>
 <h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><h3 id="Vision-based-AR（基于计算机视觉的AR）"><a href="#Vision-based-AR（基于计算机视觉的AR）" class="headerlink" title="Vision based AR（基于计算机视觉的AR）"></a>Vision based AR（基于计算机视觉的AR）</h3><h4 id="Marker-Based-AR-（基于标定的AR）"><a href="#Marker-Based-AR-（基于标定的AR）" class="headerlink" title="Marker-Based AR （基于标定的AR）"></a>Marker-Based AR （基于标定的AR）</h4><p>如：</p>
-<h4 id="Marker-Less-AR（基于特征点的AR）"><a href="#Marker-Less-AR（基于特征点的AR）" class="headerlink" title="Marker-Less AR（基于特征点的AR）"></a>Marker-Less AR（基于特征点的AR）</h4><p>如：</p>
+<p><img src="https://bitesofcode.files.wordpress.com/2017/09/img_1139.png?w=782" alt="IMG_1139" style="zoom:50%;" /></p>
+<h4 id="Marker-Less-AR（基于特征点的AR"><a href="#Marker-Less-AR（基于特征点的AR" class="headerlink" title="Marker-Less AR（基于特征点的AR)"></a>Marker-Less AR（基于特征点的AR)</h4><p>如：</p>
+<p><img src="https://filescdn.proginn.com/ec66024a0f8ac267ae1a7d77476d5a92/090e5e1aa0fbead24532b13dc4866793.webp" alt="img" style="zoom: 67%;" /></p>
 <h3 id="LBS-based-AR（基于地理位置信息的AR）"><a href="#LBS-based-AR（基于地理位置信息的AR）" class="headerlink" title="LBS based AR（基于地理位置信息的AR）"></a>LBS based AR（基于地理位置信息的AR）</h3><p>如：</p>
+<p><img src="http://upload.techweb.com.cn/s/640/2020/0820/1597893648446.png" alt="img" style="zoom:67%;" /></p>
 <blockquote>
 <p>本文将具体讲解和实验基于特征点的AR技术 </p>
 </blockquote>
-<h2 id="Demo演示"><a href="#Demo演示" class="headerlink" title="Demo演示"></a>Demo演示</h2><ol>
-<li><strong>准备数据</strong></li>
-<li><strong>读取数据</strong></li>
-<li><strong>识别数据</strong></li>
-<li><strong>单应性</strong></li>
-<li><strong>姿势估计</strong></li>
-<li><strong>展示</strong></li>
+<h2 id="Demo-演示"><a href="#Demo-演示" class="headerlink" title="Demo 演示"></a>Demo 演示</h2><ol>
+<li><p><strong>演示环境</strong></p>
+<ul>
+<li><p>iphone 8 手机</p>
+<ul>
+<li>App Store 下载 Focus [+]</li>
+</ul>
+</li>
+<li><p>计算机</p>
+<ul>
+<li>python 和 conda</li>
+</ul>
+</li>
+<li><p>OpenCV 棋盘标定纸</p>
+<p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/calibration_img/9.png" style="zoom:25%;" /></p>
+</li>
+</ul>
+</li>
+<li><p><strong>准备图片</strong></p>
+<ul>
+<li><p>参考图片</p>
+<p><img src="/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.png" style="zoom:25%;" /></p>
+</li>
+<li><p>用例图片</p>
+<p><img src="/home/pacaep/Tests/OpenCvArDemo/img/sourceImage.png" style="zoom:25%;" /></p>
+</li>
+</ul>
+</li>
+<li><p><strong>识别数据</strong></p>
+</li>
+<li><p><strong>单应性</strong></p>
+</li>
+<li><p><strong>姿势估计</strong></p>
+</li>
+<li><p><strong>展示</strong></p>
+</li>
 </ol>
-<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">Source code</summary><pre><code class="python">
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">ar_python_opencv.py</summary><pre><code class="python">
+import cv2
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from objloader_simple import *
 
+referenceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.png',0)
+plt.imshow(referenceImage, cmap = 'gray')
+sourceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/sourceImage.png',0)
+plt.imshow(sourceImage, cmap='gray')
+
+orb = cv2.ORB_create()
+
+referenceImagePts = orb.detect(referenceImage, None)
+sourceImagePts = orb.detect(sourceImage, None)
+
+referenceImagePts, referenceImageDsc = orb.compute(referenceImage, referenceImagePts)
+sourceImagePts, sourceImageDsc = orb.compute(sourceImage, sourceImagePts)
+
+referenceImageFeatures = cv2.drawKeypoints(referenceImage, referenceImagePts,
+                                                                                        referenceImage, color = (0,255,0), flags = 0)
+sourceImageFeatures = cv2.drawKeypoints(sourceImage, sourceImagePts,
+                                                                                        sourceImage, color = (0,255,0), flags = 0)
+
+plt.figure(figsize=(10,5))
+plt.subplot(1,2,1)
+plt.axis("off")
+plt.imshow(referenceImageFeatures, cmap = 'gray')
+plt.title('Reference Image Features')
+plt.subplot(1,2,2)
+plt.axis("off")
+plt.imshow(sourceImageFeatures,cmap='gray')
+plt.title('Source Image Features')
+plt.tight_layout()
+plt.show()
+
+MIN_MATCHES = 10
+bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
+referenceImagePts, referenceImageDsc = orb.detectAndCompute(referenceImage, None)
+sourceImagePts, sourceImageDsc = orb.detectAndCompute(sourceImage, None)
+matches = bf.match(referenceImageDsc, sourceImageDsc)
+matches = sorted(matches, key = lambda x: x.distance)
+
+if len(matches) > MIN_MATCHES:
+    idxPairs = cv2.drawMatches(referenceImage, referenceImagePts,
+                                sourceImage, sourceImagePts, matches[:MIN_MATCHES],0,flags =2)
+
+    plt.figure(figsize=(12,6))
+    plt.axis('off')
+    plt.imshow(idxPairs, cmap='gray')
+    plt.title('Matching between features')
+    plt.show()
+
+else:
+    print("Not enough matches have been found - %d/%d" %(len(matches), MIN_MATCHES))
+    matchesMask = None
+
+if len(matches) > MIN_MATCHES:
+    sourcePoints = np.float32([referenceImagePts[m.queryIdx].pt for m in matches]).reshape(-1,1,2)
+    destinationPoints = np.float32([sourceImagePts[m.trainIdx].pt for m in matches]).reshape(-1,1,2)
+    homography, mask = cv2.findHomography(sourcePoints, destinationPoints, cv2.RANSAC, 5.0)
+    matchesMask = mask.ravel().tolist()
+
+    h, w = referenceImage.shape
+    corners = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
+    transformedCorners = cv2.perspectiveTransform(corners, homography)
+
+    sourceImageMarker = cv2.polylines(sourceImage, [np.int32(transformedCorners)], True,
+                                      255, 5, cv2.LINE_AA)
+
+else:
+    print("Not enough matches are found - %d/%d" % (len(matches), MIN_MATCHES))
+    matchesMask = None
+
+drawParameters = dict(matchColor=(0, 255, 0), singlePointColor=None,
+                      matchesMask=matchesMask, flags=2)
+result = cv2.drawMatches(referenceImage, referenceImagePts, sourceImageMarker,
+                         sourceImagePts, matches, None, **drawParameters)
+
+plt.figure(figsize=(12, 6))
+plt.imshow(result, cmap='gray')
+plt.show()
+
+camera_parameters = np.array([[1108.38916, 0,          513.796472],
+                              [0,          1111.41724, 661.637500],
+                              [0,          0,          1]])
+
+obj = OBJ('/home/pacaep/Tests/OpenCvArDemo/models/fox.obj', swapyz = True)
+
+def projection_matrix(camera_parameters, homography):
+    homography = homography * (-1)
+    rot_and_transl = np.dot(np.linalg.inv(camera_parameters), homography )
+    col_1 = rot_and_transl[:,0]
+    col_2 = rot_and_transl[:,1]
+    col_3 = rot_and_transl[:,2]
+
+    l = math.sqrt(np.linalg.norm(col_1, 2) * np.linalg.norm(col_2, 2))
+    rot_1 = col_1 / l
+    rot_2 = col_2 / l
+    translation = col_3 / l
+
+    c = rot_1 + rot_2
+    p = np.cross(rot_1, rot_2)
+    d = np.cross(c,p)
+    rot_1 = np.dot(c/np.linalg.norm(c,2) + d / np.linalg.norm(d,2), 1/math.sqrt(2))
+    rot_2 = np.dot(c/np.linalg.norm(c,2) - d / np.linalg.norm(d,2), 1/math.sqrt(2))
+    rot_3 = np.cross(rot_1, rot_2)
+
+    projection = np.stack((rot_1, rot_2, rot_3, translation)).T
+    return np.dot(camera_parameters, projection)
+
+def render(img, obj, projection, model, color=False):
+    vertices = obj.vertices
+    scale_matrix = np.eye(3)*6
+    h,w = model.shape
+
+    for face in obj.faces:
+        face_vertices = face[0]
+        points = np.array([vertices[vertex -1] for vertex in face_vertices])
+        points = np.dot(points, scale_matrix)
+
+        points = np.array([[p[0] + w / 2, p[1] + h/2, p[2]] for p in points])
+        dst = cv2.perspectiveTransform(points.reshape(-1,1,3), projection)
+        imgpts = np.int32(dst)
+
+        cv2.fillConvexPoly(img, imgpts, (80, 217, 81))
+    return img
+
+sourcePoints = np.float32([referenceImagePts[m.queryIdx].pt for m in matches]).reshape(-1,1,2)
+destinationPoints = np.float32([sourceImagePts[m.trainIdx].pt for m in matches]).reshape(-1,1,2)
+
+homography, _ = cv2.findHomography(sourcePoints,destinationPoints, cv2.RANSAC, 5.0)
+matchesMask = mask.ravel().tolist()
+h, w = referenceImage.shape
+corners = np.float32([[0,0],[0,h-1],[w-1,h-1],[w-1,0]]).reshape(-1,1,2)
+transformedCorners = cv2.perspectiveTransform(corners, homography)
+frame = cv2.polylines(sourceImage, [np.int32(transformedCorners)], True, 255,3,cv2.LINE_AA)
+projection = projection_matrix(camera_parameters, homography)
+frame = render(frame, obj, projection, referenceImage, True)
+
+plt.figure(figsize=(6,12))
+plt.imshow(frame, cmap='gray')
+plt.show()
+</code></pre></details>
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">camera_calibration.py</summary><pre><code class="python">
+import cv2
+import numpy as np
+import glob
+
+criteria = (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 30, 0.001)
+
+objp = np.zeros((9 * 13, 3), np.float32)
+objp[:, :2] = np.mgrid[0:13, 0:9].T.reshape(-1, 2)
+
+obj_points = []
+img_points = []
+
+images = glob.glob("/home/pacaep/Tests/OpenCvArDemo/calibration_img/*.png")
+i=0;
+for fname in images:
+    img = cv2.imread(fname)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    size = gray.shape[::-1]
+    ret, corners = cv2.findChessboardCorners(gray, (13, 9), None)
+
+    if ret:
+
+        obj_points.append(objp)
+
+        corners2 = cv2.cornerSubPix(gray, corners, (5, 5), (-1, -1), criteria)
+        if [corners2]:
+            img_points.append(corners2)
+        else:
+            img_points.append(corners)
+
+        cv2.drawChessboardCorners(img, (13, 9), corners, ret)
+        i+=1;
+        cv2.imwrite('conimg'+str(i)+'.png', img)
+        cv2.waitKey(1500)
+
+print(len(img_points))
+cv2.destroyAllWindows()
+
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, size, None, None)
+
+print("ret:", ret)
+print("mtx:\n", mtx)
+print("dist:\n", dist)
+print("rvecs:\n", rvecs)
+print("tvecs:\n", tvecs )
+
+print("-----------------------------------------------------")
+
+img = cv2.imread(images[2])
+h, w = img.shape[:2]
+newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
+print (newcameramtx)
+print("------------------use undistort-------------------")
+dst = cv2.undistort(img,mtx,dist,None,newcameramtx)
+x,y,w,h = roi
+dst1 = dst[y:y+h,x:x+w]
+cv2.imwrite('calibresult.png', dst1)
+print ("dst:", dst1.shape)
+</code></pre></details>
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">objloader_simple.py</summary><pre><code class="python">
+class OBJ:
+    def __init__(self, filename, swapyz=False):
+        self.vertices = []
+        self.normals = []
+        self.texcoords = []
+        self.faces = []
+        material = None
+        for line in open(filename, "r"):
+            if line.startswith('#'): continue
+            values = line.split()
+            if not values: continue
+            if values[0] == 'v':
+                v = list(map(float, values[1:4]))
+                if swapyz:
+                    v = v[0], v[2], v[1]
+                self.vertices.append(v)
+            elif values[0] == 'vn':
+                v = list(map(float, values[1:4]))
+                if swapyz:
+                    v = v[0], v[2], v[1]
+                self.normals.append(v)
+            elif values[0] == 'vt':
+                self.texcoords.append(map(float, values[1:3]))
+            elif values[0] == 'f':
+                face = []
+                texcoords = []
+                norms = []
+                for v in values[1:]:
+                    w = v.split('/')
+                    face.append(int(w[0]))
+                    if len(w) >= 2 and len(w[1]) > 0:
+                        texcoords.append(int(w[1]))
+                    else:
+                        texcoords.append(0)
+                    if len(w) >= 3 and len(w[2]) > 0:
+                        norms.append(int(w[2]))
+                    else:
+                        norms.append(0)
+                self.faces.append((face, norms, texcoords))
 </code></pre></details>
       
     </div>
     <footer class="article-footer">
       
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul>
+
       
 	<div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束&nbsp;<i class="fe fe-smile"></i>&nbsp;感谢您的阅读 -------------</div>
 
