@@ -97,7 +97,7 @@
 <ul>
 <li><p>iphone 8 手机</p>
 <ul>
-<li>App Store 下载 Focus [+]</li>
+<li>App Store 下载 Focus [+] # 手动对焦拍摄</li>
 </ul>
 </li>
 <li><p>计算机</p>
@@ -120,6 +120,16 @@
 </li>
 </ul>
 </li>
+<li><p><strong>相机标定</strong></p>
+<p>从世界坐标系转换到图像坐标系，求投影矩阵 $P$ 的过程</p>
+<p>分为两步</p>
+<ol>
+<li><p>从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，包括 $R,t$ （相机外参）等参数</p>
+</li>
+<li><p>从相机坐标系转换为图像坐标系，这一步是三维点到二维点的转换，包括 $K$（相机内参）等参数；</p>
+</li>
+</ol>
+</li>
 <li><p><strong>识别数据</strong></p>
 </li>
 <li><p><strong>单应性</strong></p>
@@ -135,7 +145,6 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from objloader_simple import *
-
 referenceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.png',0)
 plt.imshow(referenceImage, cmap = 'gray')
 sourceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/sourceImage.png',0)
