@@ -84,26 +84,20 @@
 </blockquote>
 <span id="more"></span>
 <h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><h3 id="Vision-based-AR（基于计算机视觉的AR）"><a href="#Vision-based-AR（基于计算机视觉的AR）" class="headerlink" title="Vision based AR（基于计算机视觉的AR）"></a>Vision based AR（基于计算机视觉的AR）</h3><h4 id="Marker-Based-AR-（基于标定的AR）"><a href="#Marker-Based-AR-（基于标定的AR）" class="headerlink" title="Marker-Based AR （基于标定的AR）"></a>Marker-Based AR （基于标定的AR）</h4><p>如：</p>
-<p><img src="https://bitesofcode.files.wordpress.com/2017/09/img_1139.png?w=782" alt="IMG_1139" style="zoom:50%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/6.png" alt=""></p>
 <h4 id="Marker-Less-AR（基于特征点的AR"><a href="#Marker-Less-AR（基于特征点的AR" class="headerlink" title="Marker-Less AR（基于特征点的AR)"></a>Marker-Less AR（基于特征点的AR)</h4><p>如：</p>
-<p><img src="https://filescdn.proginn.com/ec66024a0f8ac267ae1a7d77476d5a92/090e5e1aa0fbead24532b13dc4866793.webp" alt="img" style="zoom: 67%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/7.webp" alt=""></p>
 <h3 id="LBS-based-AR（基于地理位置信息的AR）"><a href="#LBS-based-AR（基于地理位置信息的AR）" class="headerlink" title="LBS based AR（基于地理位置信息的AR）"></a>LBS based AR（基于地理位置信息的AR）</h3><p>如：</p>
-<p><img src="http://upload.techweb.com.cn/s/640/2020/0820/1597893648446.png" alt="img" style="zoom:67%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/8.png" alt=""></p>
 <blockquote>
 <p>本文将具体讲解和实验基于特征点的AR技术 </p>
 </blockquote>
 <h2 id="Demo-演示"><a href="#Demo-演示" class="headerlink" title="Demo 演示"></a>Demo 演示</h2><ol>
 <li><p><strong>演示环境</strong></p>
 <ul>
-<li><p>iphone 8 手机</p>
-<ul>
-<li>App Store 下载 Focus [+] # 手动对焦拍摄</li>
-</ul>
+<li><p>iphone 8 手机：App Store 下载 Focus [+] # 手动对焦拍摄</p>
 </li>
-<li><p>计算机</p>
-<ul>
-<li>python 和 conda</li>
-</ul>
+<li><p>计算机：python 和 conda</p>
 </li>
 <li><p>OpenCV 棋盘标定纸</p>
 <p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/calibration_img/9.png" style="zoom:25%;" /></p>
@@ -125,10 +119,15 @@
 <p>分为两步</p>
 <ol>
 <li><p>从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，包括 $R,t$ （相机外参）等参数</p>
-<p><img src="https://images2015.cnblogs.com/blog/1034872/201703/1034872-20170322154327674-741545036.png" alt="img"></p>
-</li>
+<p><img src="/home/pacaep/aepBlog/source/image/AR技术分析报告/5.png" alt="5"></p>
+<script type="math/tex; mode=display">
+\widetilde{X}_{c a m}=R(\widetilde{X}-\widetilde{C})</script></li>
+</ol>
+<p>$ \widetilde{X} $ 为 $X$ 在世界坐标中的位置<br>$ R $ 为旋转矩阵<br>$ \widetilde{C} $ 为相机原点 $C$ 所在世界坐标中的位置<br>$ \widetilde{X}_{c a m} $ 为 $ X $ 在相机坐标系中的位置</p>
+<ol>
 <li><p>从相机坐标系转换为图像坐标系，这一步是三维点到二维点的转换，包括 $K$（相机内参）等参数；</p>
-</li>
+<script type="math/tex; mode=display">
+P = K[R | t]</script></li>
 </ol>
 </li>
 <li><p><strong>识别数据</strong></p>
