@@ -323,6 +323,25 @@
       </tags>
   </entry>
   <entry>
+    <title>labelImg闪退错误修复</title>
+    <url>/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
+    <content><![CDATA[<h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
+<span id="more"></span>
+<p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
+<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
+<p>第783行<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure></p>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    <span class="keyword">if</span> shape <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;add empty label&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>labelImg</tag>
+        <tag>数据集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Archlinux在Virtualbox上的简要安装步骤</title>
     <url>/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/</url>
     <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
@@ -386,22 +405,17 @@
       </tags>
   </entry>
   <entry>
-    <title>labelImg闪退错误修复</title>
-    <url>/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
-    <content><![CDATA[<h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
-<span id="more"></span>
-<p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
-<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
-<p>第783行<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure></p>
-<p>改为</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    <span class="keyword">if</span> shape <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;add empty label&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure>
-]]></content>
+    <title>伽马函数</title>
+    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><span id="more"></span>
+<p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
+<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
+<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h3 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h3><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
       <categories>
-        <category>深度学习</category>
+        <category>数学</category>
       </categories>
       <tags>
-        <tag>labelImg</tag>
-        <tag>数据集</tag>
+        <tag>知识点</tag>
       </tags>
   </entry>
   <entry>
@@ -584,20 +598,6 @@ Position: [200 200 600 472]
       </categories>
       <tags>
         <tag>matlab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>伽马函数</title>
-    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><span id="more"></span>
-<p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
-<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
-<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h3 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h3><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>知识点</tag>
       </tags>
   </entry>
   <entry>
@@ -1094,6 +1094,18 @@ class OBJ:
       </tags>
   </entry>
   <entry>
+    <title>利用平行线段进行摄像机标定</title>
+    <url>/2022/03/02/%E5%88%A9%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E8%BF%9B%E8%A1%8C%E6%91%84%E5%83%8F%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>和周小姐高中的对话（一）</title>
     <url>/2021/11/08/%E5%92%8C%E5%91%A8%E5%B0%8F%E5%A7%90%E9%AB%98%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%AF%9D%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<p>一日，周小姐忽然递过一张纸条，上面写道：</p>
@@ -1180,18 +1192,6 @@ class OBJ:
       </tags>
   </entry>
   <entry>
-    <title>利用平行线段进行摄像机标定</title>
-    <url>/2022/03/02/%E5%88%A9%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E8%BF%9B%E8%A1%8C%E6%91%84%E5%83%8F%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>拟合和统计中的检验参数</title>
     <url>/2021/10/20/%E6%8B%9F%E5%90%88%E5%92%8C%E7%BB%9F%E8%AE%A1%E4%B8%AD%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8F%82%E6%95%B0/</url>
     <content><![CDATA[<blockquote>
@@ -1214,96 +1214,6 @@ class OBJ:
 ]]></content>
       <categories>
         <category>统计学</category>
-      </categories>
-      <tags>
-        <tag>知识点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>求解微分方程</title>
-    <url>/2021/11/02/%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>含导数或微分的方程称之为微分方程，一般形式为$f(x,y’ \cdots y^{(n)})$</p>
-<span id="more"></span>
-<h4 id="阶数"><a href="#阶数" class="headerlink" title="阶数"></a>阶数</h4><p>微分方程所含的导数或微分的最高阶数称为微分方程的阶数</p>
-<h4 id="解"><a href="#解" class="headerlink" title="解"></a>解</h4><p>解：使得微分方程成立的函数<br>特解：不含任意常数<br>通解：所含的相互独立的任意常数的个数与微分方程的阶数相等</p>
-<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><h4 id="可分离变量微分方程"><a href="#可分离变量微分方程" class="headerlink" title="可分离变量微分方程"></a>可分离变量微分方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = f(x)g(y)</script><p>解</p>
-<script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{g(y)} = \int f(x)\mathrm{d}x</script><blockquote>
-<p>e.g. </p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = 2xy</script><p>解</p>
-<script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{y} = \int 2x\mathrm{d}x</script><script type="math/tex; mode=display">\ln y = x^2+C</script><script type="math/tex; mode=display">\begin{aligned} y {}& = e^{x^2+C} {} \\ & = e^C e^{x^2} {} \\ & = C_1 e^{x^2} {} \\ & \quad(C_1 = e^C) \end{aligned}</script></blockquote>
-<h4 id="一阶齐次线性微分方程"><a href="#一阶齐次线性微分方程" class="headerlink" title="一阶齐次线性微分方程"></a>一阶齐次线性微分方程</h4><script type="math/tex; mode=display">y' +P(x)y = 0</script><p>解</p>
-<script type="math/tex; mode=display">y = Ce^{-\int{P(x)\mathrm{d}x}}</script><blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">y'-xy=0</script><p>解</p>
-<script type="math/tex; mode=display">y = Ce^{\int x\mathrm{d}x}=Ce^{\frac{x^2}{2}}</script></blockquote>
-<h4 id="一阶非齐次线性微分方程"><a href="#一阶非齐次线性微分方程" class="headerlink" title="一阶非齐次线性微分方程"></a>一阶非齐次线性微分方程</h4><script type="math/tex; mode=display">y'+P(x)y = Q(x) \neq 0</script><p>解</p>
-<script type="math/tex; mode=display">y = (\int Q(x)e^{\int P(x) \mathrm{d}x}\mathrm{d}x+C)e^{-\int P(x) \mathrm{d}x}</script><blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">y'+y \tan x = \cos x</script><p>解</p>
-<script type="math/tex; mode=display">y = (\int \cos x e^{\int \tan x \mathrm{d}x}\mathrm{d}x+C)e^{-\int\tan x \mathrm{d}x} = (x+C)\cos x</script></blockquote>
-<h4 id="贝努利方程"><a href="#贝努利方程" class="headerlink" title="贝努利方程"></a>贝努利方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x)y^n \quad (n \neq 0)</script><p>解<br>令$z = y^{1-n}$，代入原方程得$\frac{\mathrm{d}z}{\mathrm{d}x}+(1-n)P(x)z = (1-n)Q(x)$，再求解该一阶非齐次线性方程即可</p>
-<blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">x^2y'+xy = y^2</script><p>解</p>
-<script type="math/tex; mode=display">z = y^{1-2} = y^{-1},\quad y' = -\frac{1}{z^2}z'</script><p>代入原式</p>
-<script type="math/tex; mode=display">z' - \frac{1}{x}z = -\frac{1}{x^2}</script><script type="math/tex; mode=display">z = (\int (-\frac{1}{x^2})e^{\int -\frac{1}{x}\mathrm{d}x}\mathrm{d}x +C)e^{\int \frac{1}{x}\mathrm{d}x} = (\frac{1}{2x^2}+C)x</script><script type="math/tex; mode=display">\frac{1}{y} = (\frac{1}{2x^2}+C)x</script></blockquote>
-<h4 id="可降阶微分方程"><a href="#可降阶微分方程" class="headerlink" title="可降阶微分方程"></a>可降阶微分方程</h4><h5 id="形式一"><a href="#形式一" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y^{(n) = f(x)}</script><p>解<br>对方程进行$n$次不定积分</p>
-<blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">y'' = x^2</script><p>解</p>
-<script type="math/tex; mode=display">y' = \frac{1}{3} x^3 +C_1</script><script type="math/tex; mode=display">y = \frac{1}{12}x^4+C_1 x + C_2</script></blockquote>
-<h5 id="形式二"><a href="#形式二" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">f(x,y',y'') = 0</script><p>解</p>
-<ol>
-<li>令$y’ = p$，则$y’’=p’$，原方程变为$f(x,p,p’) = 0$</li>
-<li>解出$p = \varphi(x)$</li>
-<li>$y = \int \varphi(x)\mathrm{d}x+C$<blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">y'' + \frac{y'}{x} = 0</script><p>解<br>令$y’ = p$，则$y’’ = p’$，原方程变为$p’ + \frac{p}{x} = 0$</p>
-<script type="math/tex; mode=display">p = C_1e^{\int -\frac{1}{x}\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">y = C_1 \ln \lvert x \rvert +C_2</script></blockquote>
-</li>
-</ol>
-<h5 id="形式三"><a href="#形式三" class="headerlink" title="形式三"></a>形式三</h5><script type="math/tex; mode=display">f(y,y',y'') = 0</script><p>解</p>
-<ol>
-<li>令$y’ = p$，则$y’’ = \frac{\mathrm{d}p}{\mathrm{d}x} = \frac{\mathrm{d}p}{\mathrm{d}y} \frac{\mathrm{d}y}{\mathrm{d}x} = p \frac{\mathrm{d}p}{\mathrm{d}y}$，原方程变为$f(y,p,p’) = 0$</li>
-<li>解出$p = \varphi(y)$</li>
-<li>$\int \frac{\mathrm{d}y}{\varphi(y)} = x+C$<blockquote>
-<p>e.g.</p>
-<script type="math/tex; mode=display">y y'' = y'^2</script><p>令$y’ = p$，$y’’ = p \frac{\mathrm{d}p}{\mathrm{d}y}$，代入原式</p>
-<script type="math/tex; mode=display">yp\frac{\mathrm{d}p}{\mathrm{d}y}-p^2 = 0 \Rightarrow p = C_1 e^{\int \frac{1}{y} \mathrm{d}y = C_1 y }</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = C_1 y \Rightarrow \int \frac{\mathrm{d}y}{y} = \int C_1 \mathrm{d}x</script><script type="math/tex; mode=display">\ln y = C_1x+C_2 \Rightarrow y = e^{C_1 x+C_2} = C_3 e^{C_1 x} \quad (C_3 = e^{C_2})</script></blockquote>
-</li>
-</ol>
-<h4 id="二阶常系数线性微分方程"><a href="#二阶常系数线性微分方程" class="headerlink" title="二阶常系数线性微分方程"></a>二阶常系数线性微分方程</h4><script type="math/tex; mode=display">y'' +py' +qy = 0</script><p>解</p>
-<ol>
-<li>求解$y’’ +py’ +qy = 0$的特征方程是$r^2+pr+q = 0$</li>
-<li>根据方程根的不同分为三种情况<ol>
-<li>当特征方程有两个实根$r_1$，$r_2$，且$r_1\neq r_2$，则$y = C_1e^{r1 x}+C_2e^{r_2 x}$</li>
-<li>当特征方程有重根$r_1 = r_2$，则$y = (C_1+C_2x)e^{r_1 x}$</li>
-<li>当特征方程有两个共轭重根$r_{1,2} = \alpha \pm \beta i$，则$y = e^{\alpha x} (C_1 \cos \beta x + C_2 \sin \beta x)$<blockquote>
-<p>e.g.1</p>
-<script type="math/tex; mode=display">y'' - y' - 6y = 0</script><p>解</p>
-<script type="math/tex; mode=display">r^2-r-6 = (r-3)(r+2) = 0 \Rightarrow r_1 = 3,\quad r_2 = -2</script><script type="math/tex; mode=display">y = C_1 e^{3x} + C_2 e^{-2x}</script><p>e.g.2</p>
-<script type="math/tex; mode=display">y''-2y'+y = 0</script><p>解</p>
-<script type="math/tex; mode=display">r^2-2r+1 = (r-1)^2 = 0 \Rightarrow r_{1,2} = 1</script><script type="math/tex; mode=display">y = (C_1 + C_2 x)e^x</script><p>e.g.3</p>
-<script type="math/tex; mode=display">y'' - 2y' + 2y = 0</script><p>解</p>
-<script type="math/tex; mode=display">r^2- 2r +2 = 0 \Rightarrow r_{1,2} = 1 \pm i</script><script type="math/tex; mode=display">y = e^x (C_1 \cos x + C_2 \sin x)</script></blockquote>
-</li>
-</ol>
-</li>
-</ol>
-<h4 id="二阶常系数非齐次线性微分方程"><a href="#二阶常系数非齐次线性微分方程" class="headerlink" title="二阶常系数非齐次线性微分方程"></a>二阶常系数非齐次线性微分方程</h4><h5 id="形式一-1"><a href="#形式一-1" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y'' + py' +qy = P_n(x)e^{kx}</script><p>其中$P_n(x)$代表$x$的$n$阶多项式<br>解<br>根据$k$的值有以下三种情况：</p>
-<ol>
-<li>若$k$非特征值，即$k \neq r_1 \neq r_2$，则特解 $y^* = e^{kx} \sum_{i=0}^n a_i x^i$</li>
-<li>若$k$与一个特征值相同，则特解  $y^* = xe^{kx} \sum_{i=0}^n a_i x^i$</li>
-<li>若$k$与两个特征值相同，则特解  $y^* = x^2e^{kx} \sum_{i=0}^n a_i x^i$</li>
-</ol>
-<h5 id="形式二-1"><a href="#形式二-1" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">y'' + py' + qy = e^{ax} [P_l \cos bx + P_s \sin bx]</script><p>其中$P_l(x)$，$P_s(x)$代表$x$的$l$，$s$阶多项式<br>解<br>根据$a$，$b$的值有以下三种情况</p>
-<ol>
-<li>若$a\pm b i$不是特征值，则特解 $y^* = (Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>
-<li>若$a\pm b i$是特征值，则特解 $y^* = x(Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>
-</ol>
-]]></content>
-      <categories>
-        <category>高等数学</category>
       </categories>
       <tags>
         <tag>知识点</tag>
@@ -1394,6 +1304,96 @@ NMSE_hermite =
 ]]></content>
       <categories>
         <category>数值分析</category>
+      </categories>
+      <tags>
+        <tag>知识点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>求解微分方程</title>
+    <url>/2021/11/02/%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>含导数或微分的方程称之为微分方程，一般形式为$f(x,y’ \cdots y^{(n)})$</p>
+<span id="more"></span>
+<h4 id="阶数"><a href="#阶数" class="headerlink" title="阶数"></a>阶数</h4><p>微分方程所含的导数或微分的最高阶数称为微分方程的阶数</p>
+<h4 id="解"><a href="#解" class="headerlink" title="解"></a>解</h4><p>解：使得微分方程成立的函数<br>特解：不含任意常数<br>通解：所含的相互独立的任意常数的个数与微分方程的阶数相等</p>
+<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><h4 id="可分离变量微分方程"><a href="#可分离变量微分方程" class="headerlink" title="可分离变量微分方程"></a>可分离变量微分方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = f(x)g(y)</script><p>解</p>
+<script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{g(y)} = \int f(x)\mathrm{d}x</script><blockquote>
+<p>e.g. </p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = 2xy</script><p>解</p>
+<script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{y} = \int 2x\mathrm{d}x</script><script type="math/tex; mode=display">\ln y = x^2+C</script><script type="math/tex; mode=display">\begin{aligned} y {}& = e^{x^2+C} {} \\ & = e^C e^{x^2} {} \\ & = C_1 e^{x^2} {} \\ & \quad(C_1 = e^C) \end{aligned}</script></blockquote>
+<h4 id="一阶齐次线性微分方程"><a href="#一阶齐次线性微分方程" class="headerlink" title="一阶齐次线性微分方程"></a>一阶齐次线性微分方程</h4><script type="math/tex; mode=display">y' +P(x)y = 0</script><p>解</p>
+<script type="math/tex; mode=display">y = Ce^{-\int{P(x)\mathrm{d}x}}</script><blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">y'-xy=0</script><p>解</p>
+<script type="math/tex; mode=display">y = Ce^{\int x\mathrm{d}x}=Ce^{\frac{x^2}{2}}</script></blockquote>
+<h4 id="一阶非齐次线性微分方程"><a href="#一阶非齐次线性微分方程" class="headerlink" title="一阶非齐次线性微分方程"></a>一阶非齐次线性微分方程</h4><script type="math/tex; mode=display">y'+P(x)y = Q(x) \neq 0</script><p>解</p>
+<script type="math/tex; mode=display">y = (\int Q(x)e^{\int P(x) \mathrm{d}x}\mathrm{d}x+C)e^{-\int P(x) \mathrm{d}x}</script><blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">y'+y \tan x = \cos x</script><p>解</p>
+<script type="math/tex; mode=display">y = (\int \cos x e^{\int \tan x \mathrm{d}x}\mathrm{d}x+C)e^{-\int\tan x \mathrm{d}x} = (x+C)\cos x</script></blockquote>
+<h4 id="贝努利方程"><a href="#贝努利方程" class="headerlink" title="贝努利方程"></a>贝努利方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x)y^n \quad (n \neq 0)</script><p>解<br>令$z = y^{1-n}$，代入原方程得$\frac{\mathrm{d}z}{\mathrm{d}x}+(1-n)P(x)z = (1-n)Q(x)$，再求解该一阶非齐次线性方程即可</p>
+<blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">x^2y'+xy = y^2</script><p>解</p>
+<script type="math/tex; mode=display">z = y^{1-2} = y^{-1},\quad y' = -\frac{1}{z^2}z'</script><p>代入原式</p>
+<script type="math/tex; mode=display">z' - \frac{1}{x}z = -\frac{1}{x^2}</script><script type="math/tex; mode=display">z = (\int (-\frac{1}{x^2})e^{\int -\frac{1}{x}\mathrm{d}x}\mathrm{d}x +C)e^{\int \frac{1}{x}\mathrm{d}x} = (\frac{1}{2x^2}+C)x</script><script type="math/tex; mode=display">\frac{1}{y} = (\frac{1}{2x^2}+C)x</script></blockquote>
+<h4 id="可降阶微分方程"><a href="#可降阶微分方程" class="headerlink" title="可降阶微分方程"></a>可降阶微分方程</h4><h5 id="形式一"><a href="#形式一" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y^{(n) = f(x)}</script><p>解<br>对方程进行$n$次不定积分</p>
+<blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">y'' = x^2</script><p>解</p>
+<script type="math/tex; mode=display">y' = \frac{1}{3} x^3 +C_1</script><script type="math/tex; mode=display">y = \frac{1}{12}x^4+C_1 x + C_2</script></blockquote>
+<h5 id="形式二"><a href="#形式二" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">f(x,y',y'') = 0</script><p>解</p>
+<ol>
+<li>令$y’ = p$，则$y’’=p’$，原方程变为$f(x,p,p’) = 0$</li>
+<li>解出$p = \varphi(x)$</li>
+<li>$y = \int \varphi(x)\mathrm{d}x+C$<blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">y'' + \frac{y'}{x} = 0</script><p>解<br>令$y’ = p$，则$y’’ = p’$，原方程变为$p’ + \frac{p}{x} = 0$</p>
+<script type="math/tex; mode=display">p = C_1e^{\int -\frac{1}{x}\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">y = C_1 \ln \lvert x \rvert +C_2</script></blockquote>
+</li>
+</ol>
+<h5 id="形式三"><a href="#形式三" class="headerlink" title="形式三"></a>形式三</h5><script type="math/tex; mode=display">f(y,y',y'') = 0</script><p>解</p>
+<ol>
+<li>令$y’ = p$，则$y’’ = \frac{\mathrm{d}p}{\mathrm{d}x} = \frac{\mathrm{d}p}{\mathrm{d}y} \frac{\mathrm{d}y}{\mathrm{d}x} = p \frac{\mathrm{d}p}{\mathrm{d}y}$，原方程变为$f(y,p,p’) = 0$</li>
+<li>解出$p = \varphi(y)$</li>
+<li>$\int \frac{\mathrm{d}y}{\varphi(y)} = x+C$<blockquote>
+<p>e.g.</p>
+<script type="math/tex; mode=display">y y'' = y'^2</script><p>令$y’ = p$，$y’’ = p \frac{\mathrm{d}p}{\mathrm{d}y}$，代入原式</p>
+<script type="math/tex; mode=display">yp\frac{\mathrm{d}p}{\mathrm{d}y}-p^2 = 0 \Rightarrow p = C_1 e^{\int \frac{1}{y} \mathrm{d}y = C_1 y }</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = C_1 y \Rightarrow \int \frac{\mathrm{d}y}{y} = \int C_1 \mathrm{d}x</script><script type="math/tex; mode=display">\ln y = C_1x+C_2 \Rightarrow y = e^{C_1 x+C_2} = C_3 e^{C_1 x} \quad (C_3 = e^{C_2})</script></blockquote>
+</li>
+</ol>
+<h4 id="二阶常系数线性微分方程"><a href="#二阶常系数线性微分方程" class="headerlink" title="二阶常系数线性微分方程"></a>二阶常系数线性微分方程</h4><script type="math/tex; mode=display">y'' +py' +qy = 0</script><p>解</p>
+<ol>
+<li>求解$y’’ +py’ +qy = 0$的特征方程是$r^2+pr+q = 0$</li>
+<li>根据方程根的不同分为三种情况<ol>
+<li>当特征方程有两个实根$r_1$，$r_2$，且$r_1\neq r_2$，则$y = C_1e^{r1 x}+C_2e^{r_2 x}$</li>
+<li>当特征方程有重根$r_1 = r_2$，则$y = (C_1+C_2x)e^{r_1 x}$</li>
+<li>当特征方程有两个共轭重根$r_{1,2} = \alpha \pm \beta i$，则$y = e^{\alpha x} (C_1 \cos \beta x + C_2 \sin \beta x)$<blockquote>
+<p>e.g.1</p>
+<script type="math/tex; mode=display">y'' - y' - 6y = 0</script><p>解</p>
+<script type="math/tex; mode=display">r^2-r-6 = (r-3)(r+2) = 0 \Rightarrow r_1 = 3,\quad r_2 = -2</script><script type="math/tex; mode=display">y = C_1 e^{3x} + C_2 e^{-2x}</script><p>e.g.2</p>
+<script type="math/tex; mode=display">y''-2y'+y = 0</script><p>解</p>
+<script type="math/tex; mode=display">r^2-2r+1 = (r-1)^2 = 0 \Rightarrow r_{1,2} = 1</script><script type="math/tex; mode=display">y = (C_1 + C_2 x)e^x</script><p>e.g.3</p>
+<script type="math/tex; mode=display">y'' - 2y' + 2y = 0</script><p>解</p>
+<script type="math/tex; mode=display">r^2- 2r +2 = 0 \Rightarrow r_{1,2} = 1 \pm i</script><script type="math/tex; mode=display">y = e^x (C_1 \cos x + C_2 \sin x)</script></blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="二阶常系数非齐次线性微分方程"><a href="#二阶常系数非齐次线性微分方程" class="headerlink" title="二阶常系数非齐次线性微分方程"></a>二阶常系数非齐次线性微分方程</h4><h5 id="形式一-1"><a href="#形式一-1" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y'' + py' +qy = P_n(x)e^{kx}</script><p>其中$P_n(x)$代表$x$的$n$阶多项式<br>解<br>根据$k$的值有以下三种情况：</p>
+<ol>
+<li>若$k$非特征值，即$k \neq r_1 \neq r_2$，则特解 $y^* = e^{kx} \sum_{i=0}^n a_i x^i$</li>
+<li>若$k$与一个特征值相同，则特解  $y^* = xe^{kx} \sum_{i=0}^n a_i x^i$</li>
+<li>若$k$与两个特征值相同，则特解  $y^* = x^2e^{kx} \sum_{i=0}^n a_i x^i$</li>
+</ol>
+<h5 id="形式二-1"><a href="#形式二-1" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">y'' + py' + qy = e^{ax} [P_l \cos bx + P_s \sin bx]</script><p>其中$P_l(x)$，$P_s(x)$代表$x$的$l$，$s$阶多项式<br>解<br>根据$a$，$b$的值有以下三种情况</p>
+<ol>
+<li>若$a\pm b i$不是特征值，则特解 $y^* = (Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>
+<li>若$a\pm b i$是特征值，则特解 $y^* = x(Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>
+</ol>
+]]></content>
+      <categories>
+        <category>高等数学</category>
       </categories>
       <tags>
         <tag>知识点</tag>
