@@ -1439,4 +1439,325 @@ NMSE_hermite =
         <tag>grub</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Tensorflow-Keras-Python对应版本</title>
+    <url>/2022/03/03/Tensorflow-Keras-Python%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install XXX -i https://pypi.tuna.tsinghua.edu.cn/simple # 中国源</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>Framework</strong></th>
+<th><strong>Env name (—env parameter)</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TensorFlow 2.2</td>
+<td>tensorflow-2.2</td>
+<td>TensorFlow 2.2.0 + Keras 2.3.1 on Python 3.7.</td>
+</tr>
+<tr>
+<td>TensorFlow 2.1</td>
+<td>tensorflow-2.1</td>
+<td>TensorFlow 2.1.0 + Keras 2.3.1 on Python 3.6.</td>
+</tr>
+<tr>
+<td>TensorFlow 2.0</td>
+<td>tensorflow-2.0</td>
+<td>TensorFlow 2.0.0 + Keras 2.3.1 on Python 3.6.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.15</td>
+<td>tensorflow-1.15</td>
+<td>TensorFlow 1.15.0 + Keras 2.3.1 on Python 3.6.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.14</td>
+<td>tensorflow-1.14</td>
+<td>TensorFlow 1.14.0 + Keras 2.2.5 on Python 3.6.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.13</td>
+<td>tensorflow-1.13</td>
+<td>TensorFlow 1.13.0 + Keras 2.2.4 on Python 3.6.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.12</td>
+<td>tensorflow-1.12</td>
+<td>TensorFlow 1.12.0 + Keras 2.2.4 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.12:py2</td>
+<td>TensorFlow 1.12.0 + Keras 2.2.4 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.11</td>
+<td>tensorflow-1.11</td>
+<td>TensorFlow 1.11.0 + Keras 2.2.4 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.11:py2</td>
+<td>TensorFlow 1.11.0 + Keras 2.2.4 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.10</td>
+<td>tensorflow-1.10</td>
+<td>TensorFlow 1.10.0 + Keras 2.2.0 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.10:py2</td>
+<td>TensorFlow 1.10.0 + Keras 2.2.0 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.9</td>
+<td>tensorflow-1.9</td>
+<td>TensorFlow 1.9.0 + Keras 2.2.0 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.9:py2</td>
+<td>TensorFlow 1.9.0 + Keras 2.2.0 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.8</td>
+<td>tensorflow-1.8</td>
+<td>TensorFlow 1.8.0 + Keras 2.1.6 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.8:py2</td>
+<td>TensorFlow 1.8.0 + Keras 2.1.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.7</td>
+<td>tensorflow-1.7</td>
+<td>TensorFlow 1.7.0 + Keras 2.1.6 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.7:py2</td>
+<td>TensorFlow 1.7.0 + Keras 2.1.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.5</td>
+<td>tensorflow-1.5</td>
+<td>TensorFlow 1.5.0 + Keras 2.1.6 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.5:py2</td>
+<td>TensorFlow 1.5.0 + Keras 2.1.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.4</td>
+<td>tensorflow-1.4</td>
+<td>TensorFlow 1.4.0 + Keras 2.0.8 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.4:py2</td>
+<td>TensorFlow 1.4.0 + Keras 2.0.8 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.3</td>
+<td>tensorflow-1.3</td>
+<td>TensorFlow 1.3.0 + Keras 2.0.6 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.3:py2</td>
+<td>TensorFlow 1.3.0 + Keras 2.0.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.2</td>
+<td>tensorflow-1.2</td>
+<td>TensorFlow 1.2.0 + Keras 2.0.6 on Python 3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.2:py2</td>
+<td>TensorFlow 1.2.0 + Keras 2.0.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.1</td>
+<td>tensorflow</td>
+<td>TensorFlow 1.1.0 + Keras 2.0.6 on Python 3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow:py2</td>
+<td>TensorFlow 1.1.0 + Keras 2.0.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 1.0</td>
+<td>tensorflow-1.0</td>
+<td>TensorFlow 1.0.0 + Keras 2.0.6 on Python 3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-1.0:py2</td>
+<td>TensorFlow 1.0.0 + Keras 2.0.6 on Python 2.</td>
+</tr>
+<tr>
+<td>TensorFlow 0.12</td>
+<td>tensorflow-0.12</td>
+<td>TensorFlow 0.12.1 + Keras 1.2.2 on Python 3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>tensorflow-0.12:py2</td>
+<td>TensorFlow 0.12.1 + Keras 1.2.2 on Python 2.</td>
+</tr>
+<tr>
+<td>PyTorch 1.5</td>
+<td>pytorch-1.5</td>
+<td>PyTorch 1.5.0 + fastai 1.0.61 on Python 3.7.</td>
+</tr>
+<tr>
+<td>PyTorch 1.4</td>
+<td>pytorch-1.4</td>
+<td>PyTorch 1.4.0 + fastai 1.0.60 on Python 3.6.</td>
+</tr>
+<tr>
+<td>PyTorch 1.3</td>
+<td>pytorch-1.3</td>
+<td>PyTorch 1.3.0 + fastai 1.0.60 on Python 3.6.</td>
+</tr>
+<tr>
+<td>PyTorch 1.2</td>
+<td>pytorch-1.2</td>
+<td>PyTorch 1.2.0 + fastai 1.0.60 on Python 3.6.</td>
+</tr>
+<tr>
+<td>PyTorch 1.1</td>
+<td>pytorch-1.1</td>
+<td>PyTorch 1.1.0 + fastai 1.0.57 on Python 3.6.</td>
+</tr>
+<tr>
+<td>PyTorch 1.0</td>
+<td>pytorch-1.0</td>
+<td>PyTorch 1.0.0 + fastai 1.0.51 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>pytorch-1.0:py2</td>
+<td>PyTorch 1.0.0 on Python 2.</td>
+</tr>
+<tr>
+<td>PyTorch 0.4</td>
+<td>pytorch-0.4</td>
+<td>PyTorch 0.4.1 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>pytorch-0.4:py2</td>
+<td>PyTorch 0.4.1 on Python 2.</td>
+</tr>
+<tr>
+<td>PyTorch 0.3</td>
+<td>pytorch-0.3</td>
+<td>PyTorch 0.3.1 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>pytorch-0.3:py2</td>
+<td>PyTorch 0.3.1 on Python 2.</td>
+</tr>
+<tr>
+<td>PyTorch 0.2</td>
+<td>pytorch-0.2</td>
+<td>PyTorch 0.2.0 on Python 3.5</td>
+</tr>
+<tr>
+<td></td>
+<td>pytorch-0.2:py2</td>
+<td>PyTorch 0.2.0 on Python 2.</td>
+</tr>
+<tr>
+<td>PyTorch 0.1</td>
+<td>pytorch-0.1</td>
+<td>PyTorch 0.1.12 on Python 3.</td>
+</tr>
+<tr>
+<td></td>
+<td>pytorch-0.1:py2</td>
+<td>PyTorch 0.1.12 on Python 2.</td>
+</tr>
+<tr>
+<td>Theano 0.9</td>
+<td>theano-0.9</td>
+<td>Theano rel-0.8.2 + Keras 2.0.3 on Python3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>theano-0.9:py2</td>
+<td>Theano rel-0.8.2 + Keras 2.0.3 on Python2.</td>
+</tr>
+<tr>
+<td>Caffe</td>
+<td>caffe</td>
+<td>Caffe rc4 on Python3.5.</td>
+</tr>
+<tr>
+<td></td>
+<td>caffe:py2</td>
+<td>Caffe rc4 on Python2.</td>
+</tr>
+<tr>
+<td>Torch</td>
+<td>torch</td>
+<td>Torch 7 with Python 3 env.</td>
+</tr>
+<tr>
+<td></td>
+<td>torch:py2</td>
+<td>Torch 7 with Python 2 env.</td>
+</tr>
+<tr>
+<td>Chainer 1.23</td>
+<td>chainer-1.23</td>
+<td>Chainer 1.23.0 on Python 3.</td>
+</tr>
+<tr>
+<td></td>
+<td>chainer-1.23:py2</td>
+<td>Chainer 1.23.0 on Python 2.</td>
+</tr>
+<tr>
+<td>Chainer 2.0</td>
+<td>chainer-2.0</td>
+<td>Chainer 1.23.0 on Python 3.</td>
+</tr>
+<tr>
+<td></td>
+<td>chainer-2.0:py2</td>
+<td>Chainer 1.23.0 on Python 2.</td>
+</tr>
+<tr>
+<td>MxNet 1.0</td>
+<td>mxnet</td>
+<td>MxNet 1.0.0 on Python 3.6.</td>
+</tr>
+<tr>
+<td></td>
+<td>mxnet:py2</td>
+<td>MxNet 1.0.0 on Python 2.</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
 </search>
