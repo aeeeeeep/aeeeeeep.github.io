@@ -323,25 +323,6 @@
       </tags>
   </entry>
   <entry>
-    <title>labelImg闪退错误修复</title>
-    <url>/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
-    <content><![CDATA[<h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
-<span id="more"></span>
-<p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
-<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
-<p>第783行<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure></p>
-<p>改为</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    <span class="keyword">if</span> shape <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;add empty label&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>labelImg</tag>
-        <tag>数据集</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Archlinux在Virtualbox上的简要安装步骤</title>
     <url>/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/</url>
     <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
@@ -405,17 +386,22 @@
       </tags>
   </entry>
   <entry>
-    <title>伽马函数</title>
-    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><span id="more"></span>
-<p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
-<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
-<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h3 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h3><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
+    <title>labelImg闪退错误修复</title>
+    <url>/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
+    <content><![CDATA[<h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
+<span id="more"></span>
+<p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
+<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
+<p>第783行<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure></p>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_label</span>(<span class="params">self, shape</span>):</span></span><br><span class="line">    <span class="keyword">if</span> shape <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;add empty label&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    shape.paint_label = self.display_label_option.isChecked()</span><br><span class="line">    item = HashableQListWidgetItem(shape.label)</span><br><span class="line">    item.setFlags(item.flags() | Qt.ItemIsUserCheckable)</span><br><span class="line">    item.setCheckState(Qt.Checked)</span><br><span class="line">    item.setBackground(generate_color_by_text(shape.label))</span><br><span class="line">    self.items_to_shapes[item] = shape</span><br><span class="line">    self.shapes_to_items[shape] = item</span><br><span class="line">    self.label_list.addItem(item)</span><br><span class="line">    <span class="keyword">for</span> action <span class="keyword">in</span> self.actions.onShapesPresent:</span><br><span class="line">        action.setEnabled(<span class="literal">True</span>)</span><br><span class="line">    self.update_combo_box()</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
-        <category>数学</category>
+        <category>深度学习</category>
       </categories>
       <tags>
-        <tag>知识点</tag>
+        <tag>labelImg</tag>
+        <tag>数据集</tag>
       </tags>
   </entry>
   <entry>
@@ -598,6 +584,32 @@ Position: [200 200 600 472]
       </categories>
       <tags>
         <tag>matlab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>伽马函数</title>
+    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><span id="more"></span>
+<p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
+<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
+<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h3 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h3><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>知识点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用平行线段进行摄像机标定</title>
+    <url>/2022/03/02/%E5%88%A9%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E8%BF%9B%E8%A1%8C%E6%91%84%E5%83%8F%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
       </tags>
   </entry>
   <entry>
@@ -1088,18 +1100,6 @@ class OBJ:
 </code></pre></details>]]></content>
       <categories>
         <category>作业</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用平行线段进行摄像机标定</title>
-    <url>/2022/03/02/%E5%88%A9%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E8%BF%9B%E8%A1%8C%E6%91%84%E5%83%8F%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>论文</category>
       </categories>
       <tags>
         <tag>图像处理</tag>
