@@ -77,7 +77,31 @@
       
       <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>机器学习所使用的交叉熵损失函数与信息论里的交叉熵的推导与思考</p>
 <span id="more"></span>
-<blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="信息论中的交叉熵定义"><a href="#信息论中的交叉熵定义" class="headerlink" title="信息论中的交叉熵定义"></a>信息论中的交叉熵定义</h3><script type="math/tex; mode=display">
+H(p,q) = H(p) + D_{KL}(p||q)</script><p>在 $ p,q $ 是离散分布时， 上式等价为</p>
+<script type="math/tex; mode=display">
+H(p,q) = -\sum^K_{i=1} p(x_i) \log q(x_i)</script><p>其中， $x_i$ 是 $p,q$ 分布共同样本空间的同一个样本点，样本空间的大小为 $K$</p>
+<h3 id="机器学习中的交叉熵定义"><a href="#机器学习中的交叉熵定义" class="headerlink" title="机器学习中的交叉熵定义"></a>机器学习中的交叉熵定义</h3><p>机器学习进行优化时， 会把所有样本的交叉熵值求平均，假设有 $N$ 个样本</p>
+<script type="math/tex; mode=display">
+J(w) = \frac{1}{N} \sum^N_{n=1} H(p_n,q_n)</script><p>而信息论中的交叉熵仅仅是针对一个样本</p>
+<p>因为交叉熵常用于解决分类问题，而分类问题的概率本质是计算类别变量的广义的伯努利分布，所以机器学习采用的是交叉熵的离散形式</p>
+<script type="math/tex; mode=display">
+CE = -\sum^K_{i=1} t_i \log s_i</script><p>其中，$t_i$ 是期望的类别标签，$s_i$ 是模型对第 $i$ 个类别计算得到的 $score$ ，通常在计算损失之前，会用激活函数对 $score$ 加以转换，用 $f(s_i)$ 替代上式的 $s_i$</p>
+<p>得到机器学习的交叉熵损失函数</p>
+<script type="math/tex; mode=display">
+J(w) = - \frac{1}{N} \sum^N_{n=1} \sum^K_{i=1} t_i \log s_i</script><p>因为对于分类问题，假设模型的输出层上只有2个输出结点，而且是一个二分类单标签问题，如果输出层用符号 $Y$ 表示，那么 $Y$ 服从 $0-1$ 分布(是二项分布的特例，或称伯努利分布，二元分布)，即随机变量 $Y$ 的样本空间有两个样本点(分别对应输出层的两个输出结点)，每个样本点就是一个类别。我们希望机器学习模型训练出的分布是某个类别的概率为 $1$ ，另一个类别的概率为 $0$ 。推广到多分类单标签问题，那么 $Y$ 服从广义的伯努利分布(是多项式分布的特例，或称 $Category$ 分布，范畴分布，类别分布，$Multinoulli$ 分布(2012年在《Machine Learning - A Probabilistic Perspective》中正式提出))。</p>
+<h3 id="最小化交叉熵损失与最大似然"><a href="#最小化交叉熵损失与最大似然" class="headerlink" title="最小化交叉熵损失与最大似然"></a>最小化交叉熵损失与最大似然</h3><p>先从一个直观的例子感受最小化交叉熵损失与最大似然的关系</p>
+<script type="math/tex; mode=display">
+J(w)=-\frac{1}{N} \sum_{n=1}^{N}\left[y_{n} \log \hat{y}_{n}+\left(1-y_{n}\right) \log \left(1-\hat{y}_{n}\right)\right]</script><p>去掉 $\frac{1}{N}$ 并不影响函数的单调性，机器学习任务的也可以是最小化下面的交叉熵损失</p>
+<script type="math/tex; mode=display">
+J(w)=-\sum_{n=1}^{N}\left[y_{n} \log \hat{y}_{n}+\left(1-y_{n}\right) \log \left(1-\hat{y}_{n}\right)\right]</script><p>等价于最大化</p>
+<script type="math/tex; mode=display">
+J(w)=\sum_{n=1}^{N}\left[y_{n} \log \hat{y}_{n}+\left(1-y_{n}\right) \log \left(1-\hat{y}_{n}\right)\right]</script><p>这其实就是对伯努利分布求最大似然中的对数似然函数</p>
+<h3 id="伯努利分布的最大似然推导"><a href="#伯努利分布的最大似然推导" class="headerlink" title="伯努利分布的最大似然推导"></a>伯努利分布的最大似然推导</h3><p>有二元随机变量 $Y \in\{0,1\}$ ，设 $p(Y=1) = \beta$ ，那么它的概率质量函数(PMF)为</p>
+<script type="math/tex; mode=display">
+P(Y \mid \beta)=\beta^{Y}(1-\beta)^{1-Y}</script><p>现有 $D=\left\{y_{1}, y_{2}, \ldots, y_{N}\right\} $ 来自 $Y$ ，样本容量为 $N$ 的一个样本，似然函数为</p>
+<script type="math/tex; mode=display">
+P(D \mid \beta)=\prod_{i=1}^{N} P\left(Y=y_{i} \mid \beta\right)=\prod_{i=1}^{N} \beta^{y_{i}}(1-\beta)^{1-y_{i}}</script><blockquote>
 <p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51099880">https://zhuanlan.zhihu.com/p/51099880</a></p>
 </blockquote>
 
