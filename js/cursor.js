@@ -9,14 +9,14 @@
         constructor() {
             num = Math.floor(Math.random() * characters.length);
             this.character = characters[num];
-            this.lifeSpan = 60;
+            this.lifeSpan = 90;
             this.initialStyles = {
                 position: "fixed",
                 top: "0",
                 display: "block",
                 pointerEvents: "none",
                 "z-index": "10000000",
-                fontSize: "18px",
+                fontSize: "25px",
                 "will-change": "transform",
                 color: "#000000"
             };
