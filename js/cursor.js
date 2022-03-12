@@ -9,7 +9,7 @@
         constructor() {
             num = Math.floor(Math.random() * characters.length);
             this.character = characters[num];
-            this.lifeSpan = 120;
+            this.lifeSpan = 60;
             this.initialStyles = {
                 position: "fixed",
                 top: "0",
@@ -52,7 +52,7 @@
         function () {
             Rander();
         },
-        1000 / 30);
+        1000 / 60);
     //添加事件监听器
     function AddListener() {
         //当前事件对象会作为第一个参数传入函数
