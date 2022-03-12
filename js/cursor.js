@@ -16,7 +16,7 @@
                 display: "block",
                 pointerEvents: "none",
                 "z-index": "10000000",
-                fontSize: "25px",
+                fontSize: "18px",
                 "will-change": "transform",
                 color: "#000000"
             };
@@ -52,7 +52,7 @@
         function () {
             Rander();
         },
-        1000 / 60);
+        1000 / 30);
     //添加事件监听器
     function AddListener() {
         //当前事件对象会作为第一个参数传入函数
