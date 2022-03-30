@@ -290,39 +290,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Archlinux上的Spring Cloud微服务器实例搭建</title>
-    <url>/2022/02/26/Archlinux%E4%B8%8A%E7%9A%84Spring-Cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="用例介绍"><a href="#用例介绍" class="headerlink" title="用例介绍"></a>用例介绍</h2><h3 id="Piggy-Metrics"><a href="#Piggy-Metrics" class="headerlink" title="Piggy Metrics"></a>Piggy Metrics</h3><p><a href="https://github.com/sqshq/piggymetrics">Piggy Metrics</a> 是一个简单的财务顾问应用程序，旨在使用 Spring Boot、Spring Cloud 和 Docker演示微服务架构模式。</p>
-<h3 id="功能服务"><a href="#功能服务" class="headerlink" title="功能服务"></a>功能服务</h3><p>Piggy Metrics 被分解为三个核心微服务。它们都是围绕特定业务领域组织的可独立部署的应用程序。</p>
-<span id="more"></span>
-<p><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/1.png" alt="1"></p>
-<h3 id="基础设施"><a href="#基础设施" class="headerlink" title="基础设施"></a>基础设施</h3><p>Spring Cloud 为开发者提供了强大的工具来快速实现常见的分布式系统模式。<br><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/2.png" alt="2"></p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载必需软件</span></span><br><span class="line">yay -S git maven docker docker-compose</span><br><span class="line">cd ~</span><br><span class="line"><span class="meta">#</span><span class="bash"> 克隆SpringCloud项目</span></span><br><span class="line">git clone https://github.com/sqshq/piggymetrics.git</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查`docker`服务是否打开</span></span><br><span class="line">systemctl status docker</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果没有打开</span></span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-<h2 id="Let’s-try-it-out"><a href="#Let’s-try-it-out" class="headerlink" title="Let’s try it out"></a>Let’s try it out</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更改管理员默认密码</span></span><br><span class="line">vim .env</span><br><span class="line"><span class="meta">#</span><span class="bash"> 部署 docker，自动搭建环境</span></span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
-<h2 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h2><ul>
-<li><p>终端</p>
-<p><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/5.png" alt="5"></p>
-</li>
-<li><p><a href="http://localhost:80">http://localhost:80</a> - Gateway<br><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/6.png" alt="6"></p>
-</li>
-<li><p><a href="http://localhost:8761">http://localhost:8761</a> - Eureka Dashboard<br><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/7.png" alt="7"></p>
-</li>
-<li><p><a href="http://localhost:9000/hystrix">http://localhost:9000/hystrix</a> - Hystrix Dashboard<br><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/8.png" alt="8"></p>
-</li>
-<li><p><a href="http://localhost:15672">http://localhost:15672</a> - RabbitMq management<br><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/9.png" alt="9"></p>
-<h2 id="停止运行"><a href="#停止运行" class="headerlink" title="停止运行"></a>停止运行</h2><p><code>Ctrl + C</code></p>
-</li>
-</ul>
-<p><img src="/image/Archlinux上的Spring-Cloud微服务器实例搭建/10.png" alt="10"></p>
-]]></content>
-      <categories>
-        <category>作业</category>
-      </categories>
-      <tags>
-        <tag>Spring-Cloud</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Tensorflow-Keras-Python对应版本</title>
     <url>/2022/03/03/Tensorflow-Keras-Python%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC/</url>
     <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install XXX -i https://pypi.tuna.tsinghua.edu.cn/simple # 中国源</span><br></pre></td></tr></table></figure>
@@ -641,69 +608,6 @@
       </categories>
       <tags>
         <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Archlinux在Virtualbox上的简要安装步骤</title>
-    <url>/2022/02/26/Archlinux%E5%9C%A8Virtualbox%E4%B8%8A%E7%9A%84%E7%AE%80%E8%A6%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/</url>
-    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>从清华源下载<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/2022.02.01/">最新Archlinux官网镜像</a></li>
-<li>下载安装对应当前系统的<a href="https://www.virtualbox.org/wiki/Downloads">最新VirtualBox安装程序</a></li>
-</ul>
-<span id="more"></span>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>打开Virtualbox</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/1.png" alt="1"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/2.png" alt="2"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/3.png" alt="3"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/4.png" alt="4"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/5.png" alt="5"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/6.png" alt="6"></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/7.png" alt="7"></p>
-<p>检查网络，正常；<br>设置时间</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/8.png" alt="8"></p>
-<p>查看硬盘分区</p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/9.png" alt="9"></p>
-<p>擦除分区表<code>sgdisk -Z /dev/sda</code></p>
-<p>创建大小为 260M 的 ESP 分区<code>sgdisk -n=0:0:+260M -t=0:ef00 /dev/sda</code></p>
-<p>使用剩余空间创建系统分区：<code>sgdisk -N=0 /dev/sda</code></p>
-<p>格式化 ESP 分区为 FAT32：<code>mkfs.fat -F 32 /dev/sda1</code></p>
-<p>格式化系统分区为 xfs：<code>mkfs.xfs /dev/sda2</code></p>
-<p>挂载系统分区：<code>mount /dev/sda2 /mnt</code></p>
-<p>创建 ESP 分区挂载路径：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir /mnt/boot</span><br><span class="line">mount -o umask=0077 /dev/sda1 /mnt/boot</span><br></pre></td></tr></table></figure></p>
-<p>设置中国镜像源<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L -o /etc/pacman.d/mirrorlist &quot;https://archlinux.org/mirrorlist/?country=CN&quot;</span><br><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure><br>删除#Server = 前面的#以启用镜像</p>
-<p>设置本地化环境：<code>export LANG=C</code></p>
-<p>安装所需软件包到系统分区：<code>pacstrap /mnt base linux linux-firmware bash-completion xfsprogs vim networkmanager pacman-contrib sudo amd-ucode yay git neofetch</code></p>
-<p>成功安装完成后生成 fstab 文件：<code>genfstab -U /mnt &gt; /mnt/etc/fstab</code></p>
-<p>进入新系统环境：<code>arch-chroot /mnt</code></p>
-<p>设置时区为中国：<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
-<p>同步硬件时钟：<code>hwclock --systohc</code></p>
-<p>设置系统主机名：<code>echo $&#123;hostname&#125; &gt; /etc/hostname</code></p>
-<p>编辑 hosts 文件<code>vim /etc/hosts</code>并添加以下行：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">127.0.0.1 Dolphin</span><br><span class="line">::1 ip6-localhost ip6-loopback</span><br><span class="line">::1 Dolphin</span><br></pre></td></tr></table></figure></p>
-<p>编辑本地化配置文件<code>vim /etc/locale.gen</code><br>删除以下行前面的<code>#</code><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">en_US.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_CN.UTF-8 UTF-8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">zh_TW.UTF-8 UTF-8</span></span><br></pre></td></tr></table></figure></p>
-<p>设置默认本地化环境：<code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code></p>
-<p>执行<code>SUDO_EDITOR=nano visudo</code>编辑 sudo 配置文件，删除<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> %wheel ALL=(ALL) ALL</span></span><br></pre></td></tr></table></figure><br>前面的<code>#</code>让 wheel 用户组可以使用sudo获取 root 权限</p>
-<p>创建一个新用户并加入 wheel 用户组：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -m -G wheel -s /bin/bash pacaep</span><br></pre></td></tr></table></figure></p>
-<p>设置新用户密码：<code>passwd pacaep</code></p>
-<p>安装引导管理程序 GRUB：<code>pacman -S grub</code></p>
-<p>安装 GRUB 至 ESP 分区：<code>grub-install --removable --target=x86_64-efi --efi-directory=/boot</code></p>
-<p>生成 GRUB 配置文件：<code>grub-mkconfig -o /boot/grub/grub.cfg</code></p>
-<p>启用网络管理器：<code>sudo systemctl enable --now NetworkManager</code></p>
-<p>启用从网络同步系统时间：<code>sudo timedatectl set-ntp true</code></p>
-<p>启用本地 DNS 解析器：<code>sudo systemctl enable --now systemd-resolved</code></p>
-<p>创建 DNS 解析文件软链接：<code>sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</code></p>
-<p>启用每周自动清理不需要的 Pacman 软件包缓存：<code>sudo systemctl enable paccache.timer</code></p>
-<p>安装KDE桌面环境、显示管理器、终端（Konsole）以及 Noto 字体集：<code>sudo pacman -S --noconfirm plasma sddm konsole noto-fonts noto-fonts-cjk noto-fonts-emoji</code></p>
-<p>安装 Plasma 可选依赖：<code>sudo pacman -S --asdeps gst-plugins-good packagekit-qt5 xsettingsd</code></p>
-<p>打开系统设置，按需求设置</p>
-<p>安装完成</p>
-<p>输入<code>neofetch</code></p>
-<p><img src="/image/Archlinux在Virtualbox上的简要安装步骤/10.png" alt="10"></p>
-]]></content>
-      <categories>
-        <category>作业</category>
-      </categories>
-      <tags>
-        <tag>Archlinux</tag>
       </tags>
   </entry>
   <entry>
@@ -1883,5 +1787,11 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
       <tags>
         <tag>知识点</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>基于tf2和Keras搭建Faster RCNN目标检测网络</title>
+    <url>/2022/03/30/%E5%9F%BA%E4%BA%8Etf2%E5%92%8CKeras%E6%90%AD%E5%BB%BAFaster-RCNN%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
   </entry>
 </search>
