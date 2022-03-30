@@ -235,16 +235,20 @@
               WindowState: 'normal'
               WindowStyle: 'normal'
                  XDisplay: ':0'</code></pre></details>
+为了解图形窗口的设置，输入`set(1)`
+`set(H,Name,Value)` 为 H 标识的对象指定其 Name 属性的值
+从图像中删去余弦曲线，输入`delete(fig1(2))`
+`refresh`命令可以刷新图像.
+建立一个新的图形窗口，保留前一个图形窗口，输入`H=figure`，将打开新的图形窗口并设定为活动，输入`gcf`获得当前图形的句柄.
 
-<p>为了解图形窗口的设置，输入<code>set(1)</code><br><code>set(H,Name,Value)</code> 为 H 标识的对象指定其 Name 属性的值<br>从图像中删去余弦曲线，输入<code>delete(fig1(2))</code><br><code>refresh</code>命令可以刷新图像.<br>建立一个新的图形窗口，保留前一个图形窗口，输入<code>H=figure</code>，将打开新的图形窗口并设定为活动，输入<code>gcf</code>获得当前图形的句柄.</p>
-<p><details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">输出</summary><pre><code class="matlab"><br>  Figure (2) - 属性:</p>
-<pre><code>  Number: 2
-    Name: &#39;&#39;
-   Color: [0.9400 0.9400 0.9400]
-Position: [200 200 600 472]
-   Units: &#39;pixels&#39;
-</code></pre><p>&lt;/code&gt;&lt;/pre&gt;&lt;/details&gt;<br>```matlab</p>
-
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">输出</summary><pre><code class="matlab">
+  Figure (2) - 属性:
+      Number: 2
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [200 200 600 472]
+       Units: 'pixels'
+</code></pre></details>
       
     </div>
     <footer class="article-footer">

@@ -1,293 +1,339 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2021亚太数学建模竞赛A题</title>
+    <title>2021亚太数学建模竞赛A题简要思路</title>
     <url>/2021/11/29/2021%E4%BA%9A%E5%A4%AA%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AB%9E%E8%B5%9BA%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><span id="more"></span>
-<ul>
-<li><p>第一题</p>
-<ul>
-<li><p>图1和图2</p>
-<ul>
-<li><p>边缘处理</p>
-<ul>
-<li><p>导入</p>
-<ul>
-<li>打开一个新的图形窗口</li>
-</ul>
-</li>
-<li><p>高斯滤波 去杂质</p>
-</li>
-<li><p>二值化（自动阈值方法）</p>
-</li>
-<li><p>形态学运算</p>
-<ul>
-<li><p>获取内层边界</p>
-</li>
-<li><p>使用圆形元素对区域进行膨胀</p>
-</li>
-<li><p>从原图中分离出目标区域，加快运算</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>边缘检测</p>
-<ul>
-<li><p>滤波器提取亚像素精确边缘（Canny方法）</p>
-</li>
-<li><p>最小二乘近似线平滑</p>
-</li>
-<li><p>将 XLD 轮廓分割为线段和圆弧或椭圆弧。</p>
-</li>
-</ul>
-</li>
-<li><p>导出png</p>
-</li>
-<li><p>获取各个轮廓坐标和长度</p>
-<ul>
-<li><p>根据轮廓的相对位置对轮廓进行排序</p>
-</li>
-<li><p>获取XLD的长度</p>
-</li>
-<li><p>获取区域位置</p>
-</li>
-<li><p>round四舍五入映射到图片坐标</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>图3</p>
-<ul>
-<li><p>边缘处理</p>
-<ul>
-<li><p>导入</p>
-<ul>
-<li>打开一个新的图形窗口</li>
-</ul>
-</li>
-<li><p>灰度值开运算</p>
-</li>
-<li><p>灰度值进行线性平滑</p>
-</li>
-<li><p>二值化（自动阈值方法）</p>
-</li>
-<li><p>形态学运算</p>
-<ul>
-<li><p>获取内层边界</p>
-</li>
-<li><p>使用圆形元素对区域进行膨胀</p>
-</li>
-<li><p>从原图中分离出目标区域，加快运算</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>边缘检测</p>
-<ul>
-<li><p>滤波器提取亚像素精确边缘（Canny方法）</p>
-</li>
-<li><p>根据端点处的局部曲率连接轮廓</p>
-</li>
-<li><p>最小二乘近似线平滑</p>
-</li>
-<li><p>将 XLD 轮廓分割为线段和圆弧或椭圆弧。</p>
-</li>
-</ul>
-</li>
-<li><p>导出png</p>
-</li>
-<li><p>获取各个轮廓坐标和长度</p>
-<ul>
-<li><p>根据轮廓的相对位置对轮廓进行排序</p>
-</li>
-<li><p>获取XLD的长度</p>
-</li>
-<li><p>获取区域位置</p>
-</li>
-<li><p>round四舍五入映射到图片坐标</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>第二题</p>
-<ul>
-<li><p>自标定消除畸变</p>
-<ul>
-<li><p>导入4张图片</p>
-</li>
-<li><p>最小二乘近似线平滑</p>
-</li>
-<li><p>将 XLD 轮廓分割为线段和圆弧或椭圆弧。</p>
-</li>
-<li><p>根据形状选择轮廓或多边形</p>
-</li>
-<li><p>连接两个标志性对象元组</p>
-</li>
-<li><p>循环</p>
-</li>
-<li><p>生成校准径向畸变参数</p>
-</li>
-<li><p>根据指定的径向畸变确定新的相机参数</p>
-</li>
-</ul>
-</li>
-<li><p>获取每个像素对应的物理坐标</p>
-<ul>
-<li><p>导入第一张标定图片</p>
-</li>
-<li><p>获取图像的区域</p>
-</li>
-<li><p>校准图像的径向畸变</p>
-</li>
-<li><p>动态二值化</p>
-<ul>
-<li><p>对图片均值滤波去杂质</p>
-</li>
-<li><p>使用局部阈值分割图像</p>
-</li>
-</ul>
-</li>
-<li><p>填充区域中的孔或和缝等</p>
-</li>
-<li><p>计算区域的连接组件</p>
-</li>
-<li><p>找圆形</p>
-</li>
-<li><p>求出最小外接圆的半径和中心点</p>
-</li>
-<li><p>计算物理坐标</p>
-</li>
-</ul>
-</li>
-<li><p>计算每个边缘轮廓的长度(mm)</p>
-<ul>
-<li><p>同第一题</p>
-<ul>
-<li><p>边缘处理</p>
-<ul>
-<li><p>导入</p>
-<ul>
-<li>打开一个新的图形窗口</li>
-</ul>
-</li>
-<li><p>高斯滤波 去杂质</p>
-</li>
-<li><p>二值化（自动阈值方法）</p>
-</li>
-<li><p>形态学运算</p>
-<ul>
-<li><p>获取内层边界</p>
-</li>
-<li><p>使用圆形元素对区域进行膨胀</p>
-</li>
-<li><p>从原图中分离出目标区域，加快运算</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>边缘检测</p>
-<ul>
-<li><p>滤波器提取亚像素精确边缘（Canny方法）</p>
-</li>
-<li><p>最小二乘近似线平滑</p>
-</li>
-<li><p>(本题没用)将 XLD 轮廓分割为线段和圆弧或椭圆弧。</p>
-</li>
-</ul>
-</li>
-<li><p>获取各个轮廓坐标和长度</p>
-</li>
-</ul>
-</li>
-<li><p>获取长度</p>
-<ul>
-<li><p>根据轮廓的相对位置对轮廓进行排序</p>
-</li>
-<li><p>获取XLD的长度</p>
-</li>
-<li><p>计算6个轮廓的真实长度</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>第三题</p>
-<ul>
-<li><p>生成轮廓</p>
-<ul>
-<li><p>坐标导入matlab</p>
-</li>
-<li><p>matlab通过DXFLib生成dxf文件</p>
-</li>
-<li><p>dxf文件导入halcon生成轮廓</p>
-</li>
-</ul>
-</li>
-<li><p>基本图形分割</p>
-<ul>
-<li><p>将 XLD 轮廓分割为线段和圆弧或椭圆弧。</p>
-</li>
-<li><p>根据轮廓的相对位置对轮廓进行排序</p>
-</li>
-<li><p>从左上角开始选中分割后的各个轮廓</p>
-</li>
-<li><p>返回当前 XLD 轮廓的全局属性值</p>
-<ul>
-<li><p>Attrib==-1为直线</p>
-</li>
-<li><p>Attrib==1为圆弧或圆</p>
-</li>
-<li><p>Attrib==0为椭弧或椭圆</p>
-</li>
-</ul>
-</li>
-<li><p>如果Attrib==-1</p>
-<ul>
-<li><p>按线段近似当前轮廓</p>
-</li>
-<li><p>从多边形（以元组形式给出）生成 XLD 轮廓</p>
-</li>
-<li><p>记录表格所需参数</p>
-</li>
-</ul>
-</li>
-<li><p>如果Attrib==1</p>
-<ul>
-<li><p>按圆近似当前轮廓</p>
-</li>
-<li><p>创建对应于圆或圆弧的 XLD 轮廓</p>
-</li>
-<li><p>记录表格所需参数</p>
-</li>
-</ul>
-</li>
-<li><p>否则</p>
-<ul>
-<li><p>按椭圆近似当前轮廓</p>
-</li>
-<li><p>创建对应于椭圆或椭圆弧的 XLD 轮廓</p>
-</li>
-<li><p>记录表格所需参数</p>
-</li>
-</ul>
-</li>
-<li><p>循环</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>小记一下第一次参加数模赛</p>
+<span id="more"></span>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><img src="/image/2021亚太数学建模竞赛A题/mind.png" alt="1"></p>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>用高斯滤波对图像 Pic1_1 和 Pic1_2 进行降噪处理，用灰度值开运算降低图像 Pic1_ 3的噪声；对三个图像进行二值化处理，将灰度图像转化为二值化图像，其次用圆形元素对区域进行膨胀，再用改进的 canny 方法提取亚像素精确边缘，对 XLD 轮廓用最小二乘近似线平滑，再根据斜率以及拐点将 XLD 轮廓分割为直线段和圆弧段或椭圆弧，最后根据轮廓的相对位置对轮廓进行排序，并获取XLD轮廓的长度及区域位置</p>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>为达到自标定消除畸变的目的，通过最小二乘近似线平滑、均值滤波降噪、局部阈值分割等算法，将输出的XLD轮廓分割，连接两个标志性的对象元组重复问题一的步骤得到最佳的校准径向畸变参数，用来校准图像的径向畸变由轮廓的相对位置对轮廓进行排序并获取XLD轮廓的长度，最后根据轮廓长度以及实际的物理坐标计算出6个轮廓的真实长度</p>
+<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>依据问题一的模型将 XLD 轮廓分割为直线段和圆弧段或椭圆弧。当分割轮廓为直线段时，用最小二乘法进行直线拟合并用多边形生成XLD轮廓；圆弧段或圆，用 algebraic 方法使轮廓点与生成的圆之间的代数距离最小化；椭圆弧或椭圆，基于 tukey 的算法对轮廓点进行加权并忽略异常值</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><h3 id="问题一-1"><a href="#问题一-1" class="headerlink" title="问题一"></a>问题一</h3><p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit1.png" alt="1_1"></p>
+<p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit2.png" alt="1_2"></p>
+<p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit3.png" alt="1_3"></p>
+<h3 id="问题二-1"><a href="#问题二-1" class="headerlink" title="问题二"></a>问题二</h3><p><img src="/image/2021亚太数学建模竞赛A题/Borders.png" alt="2"></p>
+<h3 id="问题三-1"><a href="#问题三-1" class="headerlink" title="问题三"></a>问题三</h3><p><img src="/image/2021亚太数学建模竞赛A题/SortedContours.png" alt="3"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">问题一</summary><pre><code class="halcon">
+read_image (Img, 'Pic1_1.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDread_image (Img, 'Pic1_1.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 24 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+X := Col
+Y := Rowilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 24 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+X := Col
+Y := Row
+read_image (Img, 'Pic1_2.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 84 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+x := round(Col)
+y := round(Row)
+read_image (Img, 'Pic1_3.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gray_opening_shape (Img, ImgOpen, 16, 16, 'octagon')
+mean_image(ImgOpen, ImgMean, 9.3, 9.3)
+binary_threshold (ImgMean, Region,  'smooth_histo', 'dark',  UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 4.6)
+reduce_domain (ImgMean, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+union_cotangential_contours_xld (Edges, UnionContours, 2, 5, 3.14, 25.0, 10, 2.0, 'attr_forget')
+smooth_contours_xld(UnionContours, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 120 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+x := round(Col)
+y := round(Row)
+</code></pre></details>
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">问题二</summary><pre><code class="halcon">
+dev_update_off ()
+read_image (Img, 'Pic2_4.bmp')
+dev_close_window ()
+dev_open_window_fit_image (Img, 0, 0, -1, -1, WindowHandle)
+set_display_font (WindowHandle, 16, 'mono', 'true', 'false')
+dev_display (Img)
+disp_message (WindowHandle, 'Img with radial distortions', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+gen_empty_obj (Borders)
+for N := 1 to 4 by 1
+    read_image (Img, 'Pic2_' + N$'d' + '.bmp')
+    edges_sub_pix (Img, ImgBorders, 'canny', 1, 10, 40)
+    smooth_contours_xld(ImgBorders, ImgSmoothed, 9)
+    segment_contours_xld (ImgSmoothed, SplitBorders, 'lines_circles', 5, 4, 2)
+    select_shape_xld (SplitBorders, SelectedBorders, 'contlength', 'and', 30, 100000)
+    concat_obj (Borders, SelectedBorders, Borders)
+    dev_display (Img)
+    dev_set_colored (12)
+    dev_display (SelectedBorders)
+    disp_message (WindowHandle, 'Edges extracted from image ' + N$'d', 'window', 0, 0, 'black', 'true')
+endfor
+dev_clear_window ()
+dev_set_colored (12)
+dev_display (Borders)
+disp_message (WindowHandle, 'Collected edges from multiple images', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+dev_clear_window ()
+disp_message (WindowHandle, 'Performing self-calibration...', 'window', 0, 0, 'black', 'true')
+radial_distortion_self_calibration (Borders, CalibrationBorders, 1296, 972, 0.08, 42, 'division', 'fixed', 0, CamParMultiImage)
+dev_clear_window ()
+dev_set_colored (12)
+dev_display (CalibrationBorders)
+disp_message (WindowHandle, 'Edges used for calibration', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+change_radial_distortion_cam_par ('fixed', CamParMultiImage, 0, CamParMultiImageRect)
+read_image (ImgCir, 'Pic2_1.bmp')
+get_domain (ImgCir, Domain)
+change_radial_distortion_image (ImgCir, Domain, ImgCirRectified, CamParMultiImage, CamParMultiImageRect)
+get_image_size (ImgCir, WidthCir, HeightCir)
+dev_open_window_fit_image (ImgCir, 0, 0, -1, -1, WindowHandleCir)
+set_display_font (WindowHandleCir, 16, 'mono', 'true', 'false')
+dev_display (ImgCir)
+mean_image(ImgCir, MeanCir, 61, 61)
+dyn_threshold(ImgCir, MeanCir, SegCir, 5, 'dark')
+fill_up(SegCir, SegFillUpCir)
+connection(SegFillUpCir, segConnectCir)
+select_shape(segConnectCir, SelectedRegionsCir, ['area','circularity'], 'and', [500, 0.7], [20000, 1])
+smallest_circle(SelectedRegionsCir, RowCir, ColumnCir, RadiusCir)
+area_center(SelectedRegionsCir, AreaCir, Row1Cir, Column1Cir)
+CRadius:=sqrt(AreaCir/3.1415926)
+RowSize := mean(0.5 / CRadius)
+read_image (Img, 'Pic2_4.bmp')
+get_domain (Img, Domain)
+change_radial_distortion_image (Img, Domain, ImageRectified, CamParMultiImage, CamParMultiImageRect)
+dev_close_window ()
+get_image_size (ImageRectified, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Borders, 'canny', 2, 20, 60)
+smooth_contours_xld(Borders, ImgSmoothed, 9)
+dev_display (ImgSmoothed)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+sort_contours_xld (ImgSmoothed, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ImgSmoothed, Number)
+length_xld(SortedContours,Length)
+RealSize := Length * RowSize
+AllSzie := sum(RealSize)
+</code></pre></details>
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">问题三</summary><pre><code class="halcon">
+read_contour_xld_dxf (DxfContours, 'EdgeContour.dxf', [], [], DxfStatus)
+segment_contours_xld (DxfContours, ContoursSplit, 'lines_circles', 5, 4, 3)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (SortedContours, Number)
+dev_display (DxfContours)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (SortedContours)
+dev_set_colored (3)
+dev_set_line_width (3)
+ColBL := []
+RowsBL := []
+ColEL := []
+RowsEL := []
+Lines := []
+ColsC := []
+RowsC := []
+RadiiC := []
+PhisC := []
+ColsSC := []
+RowsSC := []
+ColsEC := []
+RowsEC := []
+ColsE := []
+RowsE := []
+RadiiE := []
+PhisE := []
+ColsSE := []
+RowsSE := []
+ColsEE := []
+RowsEE := []
+k:=0
+J := []
+for I := 1 to Number by 1
+   select_obj (SortedContours, ObjectSelected, I)
+   get_contour_global_attrib_xld (ObjectSelected, 'cont_approx', Attrib)
+    if(Attrib == -1)
+        k := k+1
+        J := [J,k]
+        fit_line_contour_xld (ObjectSelected, 'tukey', -1, 2, 6, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)
+        gen_contour_polygon_xld (ContLine, [RowBegin,RowEnd], [ColBegin,ColEnd])
+        RowsBL := [RowsBL,RowBegin]
+        RowsEL := [RowsEL,RowEnd]
+        ColBL := [ColBL,ColBegin]
+        ColEL := [ColEL,ColEnd]
+        length_xld(ContLine,LengthL)
+        Lines := [Lines, LengthL]
+        dev_display (ContLine)
+    elseif(Attrib == 1)
+        J := [J,0]
+        fit_circle_contour_xld (ObjectSelected, 'algebraic', -1, 6, 0, 3, 2, RowC, ColumnC, RadiusC, StartPhiC, EndPhiC, PointOrderC)
+        gen_circle_contour_xld (ContCircle, RowC, ColumnC, RadiusC, 0, rad(360), PointOrderC, 1.0)
+        RowsC := [RowsC,RowC]
+        ColsC := [ColsC,ColumnC]
+        RadiiC := [RadiiC,RadiusC]
+        PhisC := [PhisC,(EndPhiC-StartPhiC)*180/3.14159]
+        ColsSC := [ColsSC,ColumnC+RadiusC*cos(StartPhiC)]
+        RowsSC := [RowsSC,RowC+RadiusC*sin(StartPhiC)]
+        ColsEC := [ColsEC,ColumnC+RadiusC*cos(EndPhiC)]
+        RowsEC := [RowsEC,RowC+RadiusC*sin(EndPhiC)]
+        dev_display (ContCircle)
+    else
+        fit_ellipse_contour_xld(ObjectSelected, 'ftukey',-1, 6, 0, 2, 3, 2, RowE, ColumnE, RadiusE, RaE, RbE, StartPhiE, EndPhiE, PointOrderE)
+        gen_ellipse_contour_xld(ContEllipse, RowE, ColumnE, RadiusE, RaE, RbE, 0, rad(360), PointOrderE, 1.0)
+        RowsE := [RowsE,RowE]
+        ColsE := [ColsE,ColumnE]
+        RadiiE := [RadiiE,RadiusE]
+        PhisE := [PhisE,(EndPhiE-StartPhiE)*180/3.14159]
+        ColsSE := [ColsSE,ColumnE+RadiusE*cos(StartPhiE)]
+        RowsSE := [RowsSE,RowE+RadiusE*sin(StartPhiE)]
+        ColsEE := [ColsEE,ColumnE+RadiusE*cos(EndPhiE)]
+        RowsEE := [RowsEE,RowE+RadiusE*sin(EndPhiE)]
+        dev_display (ContEllipse)
+        J:=[J,-1]
+    endif
+endfor
+</code></pre></details>
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">matlab代码</summary><pre><code class="matlab">
+clear;
+clc;
+a = xlsread('Edge1.xlsx');
+b = xlsread('Edge2.xlsx');
+FID = dxf_open('EdgeContour.dxf');
+dxf_polyline(FID, a(:,1), a(:,2), zeros(length(a),1));
+dxf_polyline(FID, b(:,1), b(:,2), zeros(length(b),1));
+dxf_close(FID);
+</code></pre></details>
+
+<blockquote>
+<p>matlab 库地址: <a href="https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib">https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib</a></p>
+</blockquote>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>康宇,赵冬青,上官鹏,储成群.基于FPGA的图像边缘保护高斯滤波算法实现[J].电子设计工程,2021,29(06):94-98+110.DOI:10.14022/j.issn1674-6236.2021.06.020.</li>
+<li>梁义涛,孟亚敏,朱玲艳,张猛,李永刚.二维Otsu拟合线阈值图像分割方法[J].科学技术与工程,2021,21(09):3689-3697.</li>
+<li>王先传,江岩,赵佳,张岩.基于切比雪夫多项式的函数插值逼近[J].阜阳师范学院学报(自然科学版),2017,34(04):7-11+20.DOI:10.14096/j.cnki.cn34-1069/n/1004-4329(2017)04-04-007-05.</li>
+<li>吴曦. 基于MATLAB的图像边缘检测算法的研究和实现[D].吉林大学,2014.</li>
+<li>苗莉,王昱煜,于小燕.基于FPGA的双线性插值视频缩放算法实现[J].信息与电脑(理论版),2021,33(08):84-86.</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+      </tags>
   </entry>
   <entry>
     <title>Tensorflow-Keras-Python对应版本</title>
@@ -794,16 +840,20 @@
               WindowState: 'normal'
               WindowStyle: 'normal'
                  XDisplay: ':0'</code></pre></details>
+为了解图形窗口的设置，输入`set(1)`
+`set(H,Name,Value)` 为 H 标识的对象指定其 Name 属性的值
+从图像中删去余弦曲线，输入`delete(fig1(2))`
+`refresh`命令可以刷新图像.
+建立一个新的图形窗口，保留前一个图形窗口，输入`H=figure`，将打开新的图形窗口并设定为活动，输入`gcf`获得当前图形的句柄.
 
-<p>为了解图形窗口的设置，输入<code>set(1)</code><br><code>set(H,Name,Value)</code> 为 H 标识的对象指定其 Name 属性的值<br>从图像中删去余弦曲线，输入<code>delete(fig1(2))</code><br><code>refresh</code>命令可以刷新图像.<br>建立一个新的图形窗口，保留前一个图形窗口，输入<code>H=figure</code>，将打开新的图形窗口并设定为活动，输入<code>gcf</code>获得当前图形的句柄.</p>
-<p><details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">输出</summary><pre><code class="matlab"><br>  Figure (2) - 属性:</p>
-<pre><code>  Number: 2
-    Name: &#39;&#39;
-   Color: [0.9400 0.9400 0.9400]
-Position: [200 200 600 472]
-   Units: &#39;pixels&#39;
-</code></pre><p>&lt;/code&gt;&lt;/pre&gt;&lt;/details&gt;<br>```matlab</p>
-]]></content>
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">输出</summary><pre><code class="matlab">
+  Figure (2) - 属性:
+      Number: 2
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [200 200 600 472]
+       Units: 'pixels'
+</code></pre></details>]]></content>
       <categories>
         <category>使用教程</category>
       </categories>
@@ -1793,5 +1843,11 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
     <url>/2022/03/30/%E5%9F%BA%E4%BA%8Etf2%E5%92%8CKeras%E6%90%AD%E5%BB%BAFaster-RCNN%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BD%91%E7%BB%9C/</url>
     <content><![CDATA[<span id="more"></span>
 ]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>目标检测</tag>
+      </tags>
   </entry>
 </search>
