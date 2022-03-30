@@ -318,7 +318,7 @@ dxf_close(FID);
 </code></pre></details>
 
 <blockquote>
-<p>matlab 库地址: <a href="https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib">https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib</a></p>
+<p>DXFLib 库地址: <a href="https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib">https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib</a></p>
 </blockquote>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li>康宇,赵冬青,上官鹏,储成群.基于FPGA的图像边缘保护高斯滤波算法实现[J].电子设计工程,2021,29(06):94-98+110.DOI:10.14022/j.issn1674-6236.2021.06.020.</li>
