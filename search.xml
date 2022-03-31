@@ -1839,10 +1839,18 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
       </tags>
   </entry>
   <entry>
-    <title>基于tf2和Keras搭建Faster RCNN目标检测网络</title>
+    <title>基于tf2和Keras搭建Faster RCNN目标检测网络 [持续更新]</title>
     <url>/2022/03/30/%E5%9F%BA%E4%BA%8Etf2%E5%92%8CKeras%E6%90%AD%E5%BB%BAFaster-RCNN%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>使用Tensorflow 2.0.0 和  Keras 2.3.1 搭建一个 Faster RCNN 网络，主干特征提取网络使用 vgg16，自己标注的 VOC 数据集，后续会更新训练过程文章</p>
+<span id="more"></span>
+<ul>
+<li><a href="https://arxiv.org/abs/1506.01497">论文下载</a></li>
+<li><a href="https://github.com/endernewton/tf-faster-rcnn">论文源码</a></li>
+</ul>
+<h2 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h2><p><a href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/">Tensorflow 2.0 基础</a></p>
+<p><a href="https://blog.csdn.net/hjimce/article/details/50187029">RCNN 原理</a></p>
+<p><a href="https://www.cnblogs.com/dxscode/p/11443752.html">Fast RCNN 原理</a></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
