@@ -1875,8 +1875,8 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
 <ul>
 <li>256-d: 论文中主干特征提取网络的最后一层 num_output=256，对应生成的 feature map 是256维的</li>
 <li>sliding window: feature map 在进入 RPN 网络后，又进行了一次 3x3 的卷积，256-d 没有变</li>
-<li>$cls layer$: 已知每个像素点上有 k 个 anchor(图中 k = 9)，每个 anchor 要分前景(positive)和背景(negative)，所以每个点由 256-d 的 feature map 转化为 2k scores</li>
-<li>$reg layer$: 已知每个像素点上有 k 个 anchor(图中 k = 9)，每个 anchor 有 $(x, y, w, h)$ 对应的4个偏移量，所以每个点由 256-d 的 feature map 转化为 4k coordinates</li>
+<li>$cls \quad layer$: 已知每个像素点上有 k 个 anchor(图中 k = 9)，每个 anchor 要分前景(positive)和背景(negative)，所以每个点由 256-d 的 feature map 转化为 2k scores</li>
+<li>$reg \quad layer$: 已知每个像素点上有 k 个 anchor(图中 k = 9)，每个 anchor 有 $(x, y, w, h)$ 对应的4个偏移量，所以每个点由 256-d 的 feature map 转化为 4k coordinates</li>
 </ul>
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/gernerate_anchors.jpg" alt="gernerate_anchors" style="zoom:60%;" /></p>
 <p>上图以 图片大小 800x600 为例，计算生成的 gernerate anchors 的数量</p>
