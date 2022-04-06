@@ -205,11 +205,11 @@ Loss = \begin{cases}
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample2.png" alt="pool_sample2" style="zoom:35%;" /></p>
 <p>假定 pooled_w=2, pooled_h=2</p>
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample3.png" alt="pool_sample3" style="zoom:35%;" /></p>
-<p>对网格的每一份都进行max pooling处理</p>
+<p>对网格的每一份都进行 max pooling 处理</p>
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample4.png" alt="pool_sample4" style="zoom:40%;" /></p>
 <p>这种方法显著加快了训练和测试时间</p>
 <h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/classfication.png" alt="classfication" style="zoom:67%;" /></p>
-<p>利用 ROIpooling 输出的 proposal feature maps，通过 1x1的conv2d 层j与 softmax 计算每个 proposal 具体属于那个类别，输出 cls_prob 概率向量，同时再次利用 bounding box regression 获得每个 proposal 的位置偏移量 bbox_pred，用于回归更加精确的目标检测框</p>
+<p>利用 ROIpooling 输出的 proposal feature maps，通过 1x1的conv2d 层与 softmax 计算每个 proposal 具体属于那个类别，输出 cls_prob 概率向量，同时再次利用 bounding box regression 获得每个 proposal 的位置偏移量 bbox_pred，用于回归更加精确的目标检测框</p>
 <h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>论文源码中训练 Faster RCNN 有两种方式，一种是四步交替训练法，一种是 end-to-end 训练法，本文只讨论四步交替训练法</p>
 <p>由前面我们可知，Faster RCNN 大概可以分为 RPN 网络和 Fast RCNN 网络部分</p>
 <ol>
@@ -249,12 +249,9 @@ Loss = \begin{cases}
 ├── faster_rcnn.py
 └── vgg16.py
 </code></pre></details>
-### 环境搭建
 
-PyCharm + conda
-
-conda 环境配置文件
-
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>PyCharm + conda</p>
+<p>conda 环境配置文件</p>
 <details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">environment.yml</summary><pre><code class="yml">
 name: learntensor
 channels:
