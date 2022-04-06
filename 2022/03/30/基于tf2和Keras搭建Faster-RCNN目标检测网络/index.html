@@ -84,10 +84,10 @@
 <h2 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h2><p><a target="_blank" rel="noopener" href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/">Tensorflow 2.0 基础</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hjimce/article/details/50187029">RCNN 原理</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dxscode/p/11443752.html">Fast RCNN 原理</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
-<p><a href="#代码实现">跳转到代码实现</a></p>
+<blockquote>
+<p> <a href="#代码实现">跳转到代码实现</a></p>
 </blockquote>
-<h3 id="论文中的网络结构图解"><a href="#论文中的网络结构图解" class="headerlink" title="论文中的网络结构图解"></a>论文中的网络结构图解</h3><p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/faster-rcnn-network.png" style="zoom:30%;" /></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="论文中的网络结构图解"><a href="#论文中的网络结构图解" class="headerlink" title="论文中的网络结构图解"></a>论文中的网络结构图解</h3><p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/faster-rcnn-network.png" style="zoom:30%;" /></p>
 <p>主要步骤是</p>
 <ol>
 <li>输入图片</li>
@@ -208,9 +208,22 @@ Loss = \begin{cases}
 <p>对网格的每一份都进行max pooling处理</p>
 <p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample4.png" alt="pool_sample4" style="zoom:40%;" /></p>
 <p>这种方法显著加快了训练和测试时间</p>
-<h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p>利用 ROIpooling 输出的 proposal feature maps，通过 1x1的conv2d 层j与 softmax 计算每个 proposal 具体属于那个类别，输出 cls_prob 概率向量，同时再次利用 bounding box regression 获得每个 proposal 的位置偏移量 bbox_pred，用于回归更加精确的目标检测框</p>
-<p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/classfication.png" alt="classfication" style="zoom:67%;" /></p>
-<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><h3 id="预训练权重下载"><a href="#预训练权重下载" class="headerlink" title="预训练权重下载"></a>预训练权重下载</h3><h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/classfication.png" alt="classfication" style="zoom:67%;" /></p>
+<p>利用 ROIpooling 输出的 proposal feature maps，通过 1x1的conv2d 层j与 softmax 计算每个 proposal 具体属于那个类别，输出 cls_prob 概率向量，同时再次利用 bounding box regression 获得每个 proposal 的位置偏移量 bbox_pred，用于回归更加精确的目标检测框</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>论文源码中训练 Faster RCNN 有两种方式，一种是四步交替训练法，一种是 end-to-end 训练法，本文只讨论四步交替训练法</p>
+<p>由前面我们可知，Faster RCNN 大概可以分为 RPN 网络和 Fast RCNN 网络部分</p>
+<ol>
+<li><p>训练 RPN，用 feature map 初始化 RPN 网络，并端到端微调，生成 region proposal</p>
+</li>
+<li><p>用 feature map 初始化 Fast RCNN 网络部分，利用第一步的 RPN 生成的 region proposals 作为输入数据，接着训练 Fast RCNN部分，这时两个网络没有共享卷积层</p>
+</li>
+<li><p>用第二步的 Fast RCNN model 初始化 RPN 第二次进行训练，但固定共享的卷积层，并且只微调 RPN 独有的层，现在两个网络共享卷积层</p>
+</li>
+<li><p>由第三步的 RPN model 初始化 Fast RCNN 网络部分，输入数据为第三步生成的 proposals，保持共享的卷积层固定，微调 Fast RCNN 网络部分 Classification 中的卷积层，两个网络共享相同的卷积层，构成一个统一的网络，也就是论文中的 unified network</p>
+</li>
+</ol>
+<p>文中提到的共享卷积层的方法为迁移学习中的技术: <a target="_blank" rel="noopener" href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/chapter09_computer-vision/9.2_fine-tuning?id=_92-%e5%be%ae%e8%b0%83">微调(fine tunin)</a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><h3 id="预训练权重下载"><a href="#预训练权重下载" class="headerlink" title="预训练权重下载"></a>预训练权重下载</h3><h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks Shaoqing Ren; Kaiming He; Ross B. Girshick; Jian Sun 0001</li>
 <li>Fast R-CNN Ross Girshick; Microsoft Research</li>
 <li>Research on Apple Detection Classification and Location Technology in Complex Environment Based on Deep Learning Tian Bokai; Professor Yue Youjun</li>
@@ -225,6 +238,8 @@ Loss = \begin{cases}
 <li><p><a target="_blank" rel="noopener" href="https://github.com/jinfagang/keras_frcnn">https://github.com/jinfagang/keras_frcnn</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/bubbliiiing/faster-rcnn-keras">https://github.com/bubbliiiing/faster-rcnn-keras</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40449426/article/details/78141635">https://blog.csdn.net/weixin_40449426/article/details/78141635</a></p>
 </li>
 </ul>
 
