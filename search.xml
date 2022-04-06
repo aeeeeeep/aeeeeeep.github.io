@@ -1968,7 +1968,7 @@ Loss = \begin{cases}
 <p>假定输入 feature map 为</p>
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample1.png" alt="pool_sample1" style="zoom:35%;" /></p>
 <p>假定区域建议为</p>
-<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample2.png" alt="pool_sample2" style="zoom:35%;" />￼</p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample2.png" alt="pool_sample2" style="zoom:35%;" /></p>
 <p>假定 pooled_w=2, pooled_h=2</p>
 <p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample3.png" alt="pool_sample3" style="zoom:35%;" /></p>
 <p>对网格的每一份都进行max pooling处理</p>
