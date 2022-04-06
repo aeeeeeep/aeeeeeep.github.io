@@ -116,7 +116,49 @@
 <p>上图以 图片大小 800x600 为例，计算生成的 gernerate anchors 的数量</p>
 <script type="math/tex; mode=display">
 \operatorname{ceil}(800 / 16) \times \operatorname{ceil}(600 / 16) \times 9=50 \times 38 \times 9=17100</script><p>ceil()为向上取整，因为图中VGG网络输出的 feature map size= 50*38</p>
-<h4 id="判定-positive-negative"><a href="#判定-positive-negative" class="headerlink" title="判定 positive/negative"></a>判定 positive/negative</h4><h4 id="bounding-box-regression"><a href="#bounding-box-regression" class="headerlink" title="bounding box regression"></a>bounding box regression</h4><h4 id="bounding-box-regression-1"><a href="#bounding-box-regression-1" class="headerlink" title="bounding box regression"></a>bounding box regression</h4><h4 id="Proposal-Layer"><a href="#Proposal-Layer" class="headerlink" title="Proposal Layer"></a>Proposal Layer</h4><h3 id="ROIHead"><a href="#ROIHead" class="headerlink" title="ROIHead"></a>ROIHead</h3><h4 id="ROI-pooling"><a href="#ROI-pooling" class="headerlink" title="ROI pooling"></a>ROI pooling</h4><h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h4 id="判定-positive-negative"><a href="#判定-positive-negative" class="headerlink" title="判定 positive/negative"></a>判定 positive/negative</h4><p>主要步骤：</p>
+<ol>
+<li>RPN 网络图中上面一条输入为共享层卷积的输出</li>
+<li>进行通道数为2k(k=num_anchors)的 1x1 卷积</li>
+<li>reshape 成两个通道</li>
+<li>对通道层做归一化，使类别预测的概率和为 1</li>
+<li>取最终的预测类别和概率</li>
+<li>reshape 回复原状 <code>[1, h, w, 9*2]</code></li>
+</ol>
+<p>论文作者在源码中的 softmax_loss_layer.cpp 对最后 reshape层 的解释:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Number of labels must match number of predictions; &quot;</span></span><br><span class="line"><span class="string">&quot;e.g., if softmax axis == 1 and prediction shape is (N, C, H, W), &quot;</span></span><br><span class="line"><span class="string">&quot;label count (number of labels) must be N*H*W, &quot;</span></span><br><span class="line"><span class="string">&quot;with integer values in &#123;0, 1, ..., C-1&#125;.&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="bounding-box-regression"><a href="#bounding-box-regression" class="headerlink" title="bounding box regression"></a>bounding box regression</h4><p>图中所示，绿色框为苹果的 ground truth，红色为提取的 positive anchors，即便红色的框被分类器识别为苹果，但是由于红色的框定位不准，这张图相当于没有正确的检测出苹果。所以我们希望采用一种方法对红色的框进行微调，使得 positive anchors 和 ground truth 更加接近</p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/bounding.png" alt="bounding" style="zoom:75%;" /></p>
+<p>对于窗口一般使用四维向量 $(x, y, w, h)$ 表示，分别表示窗口的中心点坐标和宽高，红框代表原始的positive anchors，绿框代表目标的 ground truth，使得输入原始的 anchor 经过映射得到一个跟 ground truth 更接近的回归窗口，即</p>
+<p>positive anchors:  $A = (A_x, A_y, A_w, A_h)$</p>
+<p>ground truth:  $GT = (G_x, G_y, G_w, G_h)$</p>
+<p>寻找 $F$，使 $F(A) = (G_{x}^{\prime}, G_{y}^{\prime}, G_{w}^{\prime}, G_{h}^{\prime})$</p>
+<p>其中 $(G_{x}^{\prime}, G_{y}^{\prime}, G_{w}^{\prime}, G_{h}^{\prime}) \approx (G_{x}, G_{y}, G_{w}, G_{h})$</p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/fag.png" alt="fag" style="zoom:33%;" /></p>
+<p>从 $F$ 变换到 $A$，我们要做的是</p>
+<p>平移</p>
+<script type="math/tex; mode=display">
+G_x^\prime = A_w \cdot d_x(A) + A_x \\
+G_y^\prime = A_h \cdot d_y(A) + A_y</script><p>缩放</p>
+<script type="math/tex; mode=display">
+G_w^\prime = A_w \cdot exp(d_w(A))\\
+G_h^\prime = A_h \cdot exp(d_h(A))</script><p>需要学习的是 $d_x(A), d_y(A), d_w(A) ,d_h(A)$ 这四个变换。当输入的 $A$ 与 $GT$ 相差较小时，认为这种变换是一种线性变换， 用线性回归来建模对窗口进行微调，当 $A$ 和 $GT$ 比较接近时，认为是复杂的非线性问题</p>
+<p>已知线性回归公式 $Y = WX$，$X$ 为 feature map，定义为 $\phi$，训练传入$A$与$GT$之间的变换量 $(t_x, t_y, t_w, t_h, )$，Y为 $(d_x(A), d_y(A), d_w(A) ,d_h(A))$，则目标函数为</p>
+<script type="math/tex; mode=display">
+d_*(A) = W_*^T\phi(A)</script><p>其中 $\phi(A)$ 是对应 anchor 的 feature map 组成的特征向量，$W_<em>$ 是需要学习的参数，$d_</em>(A)$ 是得到的预测值*</p>
+<p>在 Faster RCNN 论文中，positive anchor 与 ground truth 之间的平移量 $(t_x, t_y)$ 与尺度因子 $(t_w, t_h)$  如下</p>
+<script type="math/tex; mode=display">
+t_x = (x-x_a)/w_a \quad t_y = (y-y_a)/h_a \\
+t_w = \log(w/w_a) \quad t_h = \log(h/h_a)</script><p><em>为了让预测值 $d_</em>(A)$ 与真实值差距最小，$smooth_{L_1}$ 损失函数为</p>
+<script type="math/tex; mode=display">
+Loss = \begin{cases} 
+0.5 \cdot (\sum_i^N (t_*^i -W_*^T \cdot \phi(A^i))^2 & \text{if}|x| <1 \\
+\sum_i^N |t_*^i -W_*^T \cdot \phi(A^i)| - 0.5 & \text{otherwise} \\
+\end{cases}</script><p>优化目标函数为</p>
+<script type="math/tex; mode=display">
+\hat{W}_* = {argmin}_{W_*} \sum_i^n (t_*^i -W_*^T \cdot \phi(A^i))^2 + \lambda \| W_* \|</script><p>之后可通过梯度下降等方法修正 anchor 位置，注意当 $A$ 和 $GT$ 比较接近时，才可近似认为上述线性变换及优化目标函数成立</p>
+<h4 id="Proposal-Layer"><a href="#Proposal-Layer" class="headerlink" title="Proposal Layer"></a>Proposal Layer</h4><p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/proposal_layer.png" style="zoom:67%;" /></p>
+<h3 id="ROIHead"><a href="#ROIHead" class="headerlink" title="ROIHead"></a>ROIHead</h3><h4 id="ROI-pooling"><a href="#ROI-pooling" class="headerlink" title="ROI pooling"></a>ROI pooling</h4><h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks Shaoqing Ren; Kaiming He; Ross B. Girshick; Jian Sun 0001</li>
 <li>Research on Apple Detection Classification and Location Technology in Complex Environment Based on Deep Learning Tian Bokai; Professor Yue Youjun</li>
 <li><p>Apple Target Detection Based on Improved Faster - RCNN Framework of Deep Learning LI Linsheng; ZENG Pingping</p>
