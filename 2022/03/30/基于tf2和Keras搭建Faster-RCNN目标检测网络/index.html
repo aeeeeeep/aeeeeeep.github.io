@@ -200,15 +200,15 @@ Loss = \begin{cases}
 <p>由于 proposal 是对应 MxN 尺度的，所以首先使用 spatial_scale 将其映射回  (M/16)x(N/16) 大小的 feature map 尺度，再将每个 proposal 对应的 feature map 区域水平分为 pooled_w x pooled_h 的网格，对网格的每一份都进行max pooling处理</p>
 <p>例:</p>
 <p>假定输入 feature map 为</p>
-<p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample1.png" alt="pool_sample1" style="zoom:35%;" /></p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample1.png" alt="pool_sample1" style="zoom:35%;" /></p>
 <p>假定区域建议为</p>
-<p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample2.png" alt="pool_sample2" style="zoom:35%;" /></p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample2.png" alt="pool_sample2" style="zoom:35%;" />￼</p>
 <p>假定 pooled_w=2, pooled_h=2</p>
-<p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample3.png" alt="pool_sample3" style="zoom:35%;" /></p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample3.png" alt="pool_sample3" style="zoom:35%;" /></p>
 <p>对网格的每一份都进行max pooling处理</p>
-<p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample4.png" alt="pool_sample4" style="zoom:40%;" /></p>
+<p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/pool_sample4.png" alt="pool_sample4" style="zoom:40%;" /></p>
 <p>这种方法显著加快了训练和测试时间</p>
-<h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p><img src="/home/pacaep/aepBlog/source/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/classfication.png" alt="classfication" style="zoom:67%;" /></p>
+<h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p><img src="/image/基于tf2和Keras搭建Faster-RCNN目标检测网络/classfication.png" alt="classfication" style="zoom:67%;" /></p>
 <p>利用 ROIpooling 输出的 proposal feature maps，通过 1x1的conv2d 层j与 softmax 计算每个 proposal 具体属于那个类别，输出 cls_prob 概率向量，同时再次利用 bounding box regression 获得每个 proposal 的位置偏移量 bbox_pred，用于回归更加精确的目标检测框</p>
 <h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>论文源码中训练 Faster RCNN 有两种方式，一种是四步交替训练法，一种是 end-to-end 训练法，本文只讨论四步交替训练法</p>
 <p>由前面我们可知，Faster RCNN 大概可以分为 RPN 网络和 Fast RCNN 网络部分</p>
@@ -223,7 +223,153 @@ Loss = \begin{cases}
 </li>
 </ol>
 <p>文中提到的共享卷积层的方法为迁移学习中的技术: <a target="_blank" rel="noopener" href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/chapter09_computer-vision/9.2_fine-tuning?id=_92-%e5%be%ae%e8%b0%83">微调(fine tunin)</a></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><h3 id="预训练权重下载"><a href="#预训练权重下载" class="headerlink" title="预训练权重下载"></a>预训练权重下载</h3><h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">代码目录结构</summary><pre><code class="">
+.
+├── anchors_ops.py
+├── bbox_ops.py
+├── data
+│   ├── Dataset
+│   │   ├── Annotations
+│   │   │   └── 1.xml
+│   │   ├── ImageSets
+│   │   │   └── Segmentation
+│   │   │       ├── train.txt
+│   │   │       └── val.txt
+│   │   ├── JPEGImages
+│   │   │   └── 1.jpg
+│   │   ├── SegmentationClass
+│   │   │   └── 1.jpg
+│   │   └── SegmentationObject
+│   │       └── 1.jpg
+│   ├── generate_voc_data.py
+│   ├── __init__.py
+│   ├── visual_ops.py
+│   └── xml_ops.py
+├── environment.yml
+├── faster_rcnn.py
+└── vgg16.py
+</code></pre></details>
+### 环境搭建
+
+PyCharm + conda
+
+conda 环境配置文件
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">environment.yml</summary><pre><code class="yml">
+name: learntensor
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=4.5=1_gnu
+  - ca-certificates=2022.2.1=h06a4308_0
+  - certifi=2020.6.20=pyhd3eb1b0_3
+  - ld_impl_linux-64=2.35.1=h7274673_9
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=9.3.0=h5101ec6_17
+  - libgomp=9.3.0=h5101ec6_17
+  - libstdcxx-ng=9.3.0=hd4cf53a_17
+  - ncurses=6.3=h7f8727e_2
+  - openssl=1.1.1m=h7f8727e_0
+  - pip=21.2.2=py36h06a4308_0
+  - python=3.6.13=h12debd9_1
+  - readline=8.1.2=h7f8727e_1
+  - setuptools=58.0.4=py36h06a4308_0
+  - sqlite=3.37.2=hc218d9a_0
+  - tk=8.6.11=h1ccaba5_0
+  - wheel=0.37.1=pyhd3eb1b0_0
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7f8727e_4
+  - pip:
+    - absl-py==1.0.0
+    - astor==0.8.1
+    - backcall==0.2.0
+    - cached-property==1.5.2
+    - cachetools==4.2.4
+    - charset-normalizer==2.0.12
+    - colorama==0.4.4
+    - cycler==0.11.0
+    - dataclasses==0.8
+    - decorator==4.4.2
+    - entrypoints==0.4
+    - gast==0.2.2
+    - google-auth==1.35.0
+    - google-auth-oauthlib==0.4.6
+    - google-pasta==0.2.0
+    - grpcio==1.44.0
+    - h5py==2.10.0
+    - idna==3.3
+    - imageio==2.15.0
+    - importlib-metadata==4.8.3
+    - importlib-resources==5.4.0
+    - ipykernel==5.5.6
+    - ipython==7.16.3
+    - ipython-genutils==0.2.0
+    - jedi==0.17.2
+    - jupyter-client==7.1.2
+    - jupyter-core==4.9.2
+    - keras==2.3.1
+    - keras-applications==1.0.8
+    - keras-preprocessing==1.1.2
+    - kiwisolver==1.3.1
+    - markdown==3.3.6
+    - matplotlib==3.3.4
+    - mxnet==1.9.0
+    - nest-asyncio==1.5.4
+    - networkx==2.5.1
+    - nose==1.3.7
+    - numpy==1.19.5
+    - oauthlib==3.2.0
+    - opencv-python==4.5.5.64
+    - opt-einsum==3.3.0
+    - pandas==1.1.5
+    - parso==0.7.1
+    - pexpect==4.8.0
+    - pickleshare==0.7.5
+    - pillow==8.4.0
+    - pretty-errors==1.2.25
+    - prompt-toolkit==3.0.28
+    - protobuf==3.19.4
+    - ptyprocess==0.7.0
+    - pyasn1==0.4.8
+    - pyasn1-modules==0.2.8
+    - pygments==2.11.2
+    - pyparsing==3.0.7
+    - python-dateutil==2.8.2
+    - python-graphviz==0.8.4
+    - pytz==2021.3
+    - pywavelets==1.1.1
+    - pyyaml==6.0
+    - pyzmq==22.3.0
+    - requests==2.27.1
+    - requests-oauthlib==1.3.1
+    - rsa==4.8
+    - scikit-image==0.17.2
+    - scipy==1.5.4
+    - six==1.16.0
+    - style==1.1.0
+    - tensorboard==2.0.2
+    - tensorflow==2.0.0
+    - tensorflow-estimator==2.0.1
+    - termcolor==1.1.0
+    - tifffile==2020.9.3
+    - tornado==6.1
+    - tqdm==4.63.0
+    - traitlets==4.3.3
+    - typing-extensions==4.1.1
+    - update==0.0.1
+    - urllib3==1.26.8
+    - wcwidth==0.2.5
+    - werkzeug==2.0.3
+    - wget==3.2
+    - wrapt==1.13.3
+    - xmltodict==0.12.0
+    - zipp==3.6.0
+</code></pre></details>
+
+<h3 id="预训练权重下载"><a href="#预训练权重下载" class="headerlink" title="预训练权重下载"></a>预训练权重下载</h3><p><a target="_blank" rel="noopener" href="https://github.com/fchollet/deep-learning-models/releases">https://github.com/fchollet/deep-learning-models/releases</a></p>
+<h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><p>自标注的 PascolVOC 数据集，稍后放链接</p>
+<h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks Shaoqing Ren; Kaiming He; Ross B. Girshick; Jian Sun 0001</li>
 <li>Fast R-CNN Ross Girshick; Microsoft Research</li>
 <li>Research on Apple Detection Classification and Location Technology in Complex Environment Based on Deep Learning Tian Bokai; Professor Yue Youjun</li>
