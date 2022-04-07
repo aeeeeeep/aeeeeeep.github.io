@@ -76,8 +76,9 @@
       
       
       <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在数值分析中，多项式插值是最常提到的内容</p>
+<span id="more"></span>
 <h2 id="多项式插值"><a href="#多项式插值" class="headerlink" title="多项式插值"></a>多项式插值</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
-<p> 给定有序点集 $\{x_0,x_1,\cdots,x_n\}$ 且 $x_0 \lt x_1\lt \cdots\lt x_n$ 以及定义在 $x_0,x_n$ 上的连续函数$f(x)$或对应于 $x$ 值的 $y$ 值集合 $y_0,y_1,\cdots,y_n$ (即 $(x_i,y_i)$) 对.<br><span id="more"></span><br> 多项式插值就是要求出对数据 $(x_0,y_0),(x_1,y_1),\cdots,(x_n,y_n)$ 进行插值的次数最多为 $n$ 的多项式 $p(x)$ ,即</p>
+<p> 给定有序点集 $\{x_0,x_1,\cdots,x_n\}$ 且 $x_0 \lt x_1\lt \cdots\lt x_n$ 以及定义在 $x_0,x_n$ 上的连续函数$f(x)$或对应于 $x$ 值的 $y$ 值集合 $y_0,y_1,\cdots,y_n$ (即 $(x_i,y_i)$) 对.<br>多项式插值就是要求出对数据 $(x_0,y_0),(x_1,y_1),\cdots,(x_n,y_n)$ 进行插值的次数最多为 $n$ 的多项式 $p(x)$ ,即</p>
 <script type="math/tex; mode=display">y_0 = p(x_0)</script><script type="math/tex; mode=display">y_1 = p(x_1)</script><script type="math/tex; mode=display">\vdots</script><script type="math/tex; mode=display">y_n = p(x_n)</script><p> 称 $p$ 在 $\{x_0,x_1,\cdots,x_n\}$ 上插值 $f$ ，且 $p$ 是插值. 插值必须在相应点 $\{x_0,x_1,\cdots,x_n\}$ 上与函数 $f$ 或  $y_0,y_1,\cdots,y_n$ 取值相同，这些点通常称为节点(或分割点).<br> 则插值多项式为</p>
 <script type="math/tex; mode=display">p(x) = a_n x^n + a_n-1 x^n-1 + \cdots + a_1 x + a_0</script><p> 插值条件为</p>
 <script type="math/tex; mode=display">a_n x_0^n + a_n-1 x_0^n-1 + \cdots +a_1 x_0 + a_0 = y_0</script><script type="math/tex; mode=display">a_n x_1^n + a_n-1 x_1^n-1 + \cdots +a_1 x_1 + a_0 = y_1</script><script type="math/tex; mode=display">\vdots</script><script type="math/tex; mode=display">a_n x_n^n + a_n-1 x_n^n-1 + \cdots +a_1 x_n + a_0 = y_n</script><p> 其中矩阵</p>
