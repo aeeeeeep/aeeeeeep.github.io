@@ -195,9 +195,8 @@ dependencies:
 <ul>
 <li><a href="https://arxiv.org/abs/1506.01497">论文下载</a></li>
 <li><a href="https://github.com/rbgirshick/py-faster-rcnn">论文源码</a></li>
-<li><h2 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h2></li>
 </ul>
-<p><a href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/">Tensorflow 2.0 基础</a></p>
+<h2 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h2><p><a href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/">Tensorflow 2.0 基础</a></p>
 <p><a href="https://blog.csdn.net/hjimce/article/details/50187029">RCNN 原理</a></p>
 <p><a href="https://www.cnblogs.com/dxscode/p/11443752.html">Fast RCNN 原理</a></p>
 <blockquote>
