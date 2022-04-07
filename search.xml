@@ -2018,7 +2018,7 @@ Loss = \begin{cases}
 
 <h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>PyCharm + conda</p>
 <p>conda 环境配置文件</p>
-<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">environment.yml</summary><pre><code class="yml">
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">environment.yml</summary><pre><code class="css">
 name: learntensor
 channels:
   - defaults
@@ -2130,9 +2130,14 @@ dependencies:
     - zipp==3.6.0
 </code></pre></details>
 
+
 <h3 id="预训练权重下载"><a href="#预训练权重下载" class="headerlink" title="预训练权重下载"></a>预训练权重下载</h3><p><a href="https://github.com/fchollet/deep-learning-models/releases">https://github.com/fchollet/deep-learning-models/releases</a></p>
 <h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><p>自标注的 PascolVOC 数据集，稍后放链接</p>
-<h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h3 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h3><p>数据输入格式<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">blobs = &#123;<span class="string">&#x27;data&#x27;</span>: [b, h, w, c], <span class="string">&#x27;gt_boxes&#x27;</span>: [[xmin, ymin, xmax, ymax, cls]]&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="主干特征提取网络-1"><a href="#主干特征提取网络-1" class="headerlink" title="主干特征提取网络"></a>主干特征提取网络</h3><h3 id="RPN-网络"><a href="#RPN-网络" class="headerlink" title="RPN 网络"></a>RPN 网络</h3><p>anchor 生成</p>
+<p>anchor 打标</p>
+<p>提前的类别标注</p>
+<h3 id="Classification-检测网络"><a href="#Classification-检测网络" class="headerlink" title="Classification 检测网络"></a>Classification 检测网络</h3><h3 id="计算-Loss"><a href="#计算-Loss" class="headerlink" title="计算 Loss"></a>计算 Loss</h3><h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks Shaoqing Ren; Kaiming He; Ross B. Girshick; Jian Sun 0001</li>
 <li>Fast R-CNN Ross Girshick; Microsoft Research</li>
 <li>Research on Apple Detection Classification and Location Technology in Complex Environment Based on Deep Learning Tian Bokai; Professor Yue Youjun</li>
