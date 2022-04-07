@@ -75,37 +75,38 @@
       
       
       
-      <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>含导数或微分的方程称之为微分方程，一般形式为$f(x,y’ \cdots y^{(n)})$</p>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>解微分方程是我的弱项，就靠这个了</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>含导数或微分的方程称之为微分方程，一般形式为$f(x,y’ \cdots y^{(n)})$</p>
 <span id="more"></span>
-<h4 id="阶数"><a href="#阶数" class="headerlink" title="阶数"></a>阶数</h4><p>微分方程所含的导数或微分的最高阶数称为微分方程的阶数</p>
-<h4 id="解"><a href="#解" class="headerlink" title="解"></a>解</h4><p>解：使得微分方程成立的函数<br>特解：不含任意常数<br>通解：所含的相互独立的任意常数的个数与微分方程的阶数相等</p>
-<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><h4 id="可分离变量微分方程"><a href="#可分离变量微分方程" class="headerlink" title="可分离变量微分方程"></a>可分离变量微分方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = f(x)g(y)</script><p>解</p>
+<h3 id="阶数"><a href="#阶数" class="headerlink" title="阶数"></a>阶数</h3><p>微分方程所含的导数或微分的最高阶数称为微分方程的阶数</p>
+<h3 id="解"><a href="#解" class="headerlink" title="解"></a>解</h3><p>解：使得微分方程成立的函数<br>特解：不含任意常数<br>通解：所含的相互独立的任意常数的个数与微分方程的阶数相等</p>
+<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><h3 id="可分离变量微分方程"><a href="#可分离变量微分方程" class="headerlink" title="可分离变量微分方程"></a>可分离变量微分方程</h3><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = f(x)g(y)</script><p>解</p>
 <script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{g(y)} = \int f(x)\mathrm{d}x</script><blockquote>
 <p>e.g. </p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = 2xy</script><p>解</p>
 <script type="math/tex; mode=display">\int \frac{\mathrm{d}y}{y} = \int 2x\mathrm{d}x</script><script type="math/tex; mode=display">\ln y = x^2+C</script><script type="math/tex; mode=display">\begin{aligned} y {}& = e^{x^2+C} {} \\ & = e^C e^{x^2} {} \\ & = C_1 e^{x^2} {} \\ & \quad(C_1 = e^C) \end{aligned}</script></blockquote>
-<h4 id="一阶齐次线性微分方程"><a href="#一阶齐次线性微分方程" class="headerlink" title="一阶齐次线性微分方程"></a>一阶齐次线性微分方程</h4><script type="math/tex; mode=display">y' +P(x)y = 0</script><p>解</p>
+<h3 id="一阶齐次线性微分方程"><a href="#一阶齐次线性微分方程" class="headerlink" title="一阶齐次线性微分方程"></a>一阶齐次线性微分方程</h3><script type="math/tex; mode=display">y' +P(x)y = 0</script><p>解</p>
 <script type="math/tex; mode=display">y = Ce^{-\int{P(x)\mathrm{d}x}}</script><blockquote>
 <p>e.g.</p>
 <script type="math/tex; mode=display">y'-xy=0</script><p>解</p>
 <script type="math/tex; mode=display">y = Ce^{\int x\mathrm{d}x}=Ce^{\frac{x^2}{2}}</script></blockquote>
-<h4 id="一阶非齐次线性微分方程"><a href="#一阶非齐次线性微分方程" class="headerlink" title="一阶非齐次线性微分方程"></a>一阶非齐次线性微分方程</h4><script type="math/tex; mode=display">y'+P(x)y = Q(x) \neq 0</script><p>解</p>
+<h3 id="一阶非齐次线性微分方程"><a href="#一阶非齐次线性微分方程" class="headerlink" title="一阶非齐次线性微分方程"></a>一阶非齐次线性微分方程</h3><script type="math/tex; mode=display">y'+P(x)y = Q(x) \neq 0</script><p>解</p>
 <script type="math/tex; mode=display">y = (\int Q(x)e^{\int P(x) \mathrm{d}x}\mathrm{d}x+C)e^{-\int P(x) \mathrm{d}x}</script><blockquote>
 <p>e.g.</p>
 <script type="math/tex; mode=display">y'+y \tan x = \cos x</script><p>解</p>
 <script type="math/tex; mode=display">y = (\int \cos x e^{\int \tan x \mathrm{d}x}\mathrm{d}x+C)e^{-\int\tan x \mathrm{d}x} = (x+C)\cos x</script></blockquote>
-<h4 id="贝努利方程"><a href="#贝努利方程" class="headerlink" title="贝努利方程"></a>贝努利方程</h4><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x)y^n \quad (n \neq 0)</script><p>解<br>令$z = y^{1-n}$，代入原方程得$\frac{\mathrm{d}z}{\mathrm{d}x}+(1-n)P(x)z = (1-n)Q(x)$，再求解该一阶非齐次线性方程即可</p>
+<h3 id="贝努利方程"><a href="#贝努利方程" class="headerlink" title="贝努利方程"></a>贝努利方程</h3><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x)y^n \quad (n \neq 0)</script><p>解<br>令$z = y^{1-n}$，代入原方程得$\frac{\mathrm{d}z}{\mathrm{d}x}+(1-n)P(x)z = (1-n)Q(x)$，再求解该一阶非齐次线性方程即可</p>
 <blockquote>
 <p>e.g.</p>
 <script type="math/tex; mode=display">x^2y'+xy = y^2</script><p>解</p>
 <script type="math/tex; mode=display">z = y^{1-2} = y^{-1},\quad y' = -\frac{1}{z^2}z'</script><p>代入原式</p>
 <script type="math/tex; mode=display">z' - \frac{1}{x}z = -\frac{1}{x^2}</script><script type="math/tex; mode=display">z = (\int (-\frac{1}{x^2})e^{\int -\frac{1}{x}\mathrm{d}x}\mathrm{d}x +C)e^{\int \frac{1}{x}\mathrm{d}x} = (\frac{1}{2x^2}+C)x</script><script type="math/tex; mode=display">\frac{1}{y} = (\frac{1}{2x^2}+C)x</script></blockquote>
-<h4 id="可降阶微分方程"><a href="#可降阶微分方程" class="headerlink" title="可降阶微分方程"></a>可降阶微分方程</h4><h5 id="形式一"><a href="#形式一" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y^{(n) = f(x)}</script><p>解<br>对方程进行$n$次不定积分</p>
+<h3 id="可降阶微分方程"><a href="#可降阶微分方程" class="headerlink" title="可降阶微分方程"></a>可降阶微分方程</h3><h4 id="形式一"><a href="#形式一" class="headerlink" title="形式一"></a>形式一</h4><script type="math/tex; mode=display">y^{(n) = f(x)}</script><p>解<br>对方程进行$n$次不定积分</p>
 <blockquote>
 <p>e.g.</p>
 <script type="math/tex; mode=display">y'' = x^2</script><p>解</p>
 <script type="math/tex; mode=display">y' = \frac{1}{3} x^3 +C_1</script><script type="math/tex; mode=display">y = \frac{1}{12}x^4+C_1 x + C_2</script></blockquote>
-<h5 id="形式二"><a href="#形式二" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">f(x,y',y'') = 0</script><p>解</p>
+<h4 id="形式二"><a href="#形式二" class="headerlink" title="形式二"></a>形式二</h4><script type="math/tex; mode=display">f(x,y',y'') = 0</script><p>解</p>
 <ol>
 <li>令$y’ = p$，则$y’’=p’$，原方程变为$f(x,p,p’) = 0$</li>
 <li>解出$p = \varphi(x)$</li>
@@ -115,7 +116,7 @@
 <script type="math/tex; mode=display">p = C_1e^{\int -\frac{1}{x}\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{C_1}{x}</script><script type="math/tex; mode=display">y = C_1 \ln \lvert x \rvert +C_2</script></blockquote>
 </li>
 </ol>
-<h5 id="形式三"><a href="#形式三" class="headerlink" title="形式三"></a>形式三</h5><script type="math/tex; mode=display">f(y,y',y'') = 0</script><p>解</p>
+<h4 id="形式三"><a href="#形式三" class="headerlink" title="形式三"></a>形式三</h4><script type="math/tex; mode=display">f(y,y',y'') = 0</script><p>解</p>
 <ol>
 <li>令$y’ = p$，则$y’’ = \frac{\mathrm{d}p}{\mathrm{d}x} = \frac{\mathrm{d}p}{\mathrm{d}y} \frac{\mathrm{d}y}{\mathrm{d}x} = p \frac{\mathrm{d}p}{\mathrm{d}y}$，原方程变为$f(y,p,p’) = 0$</li>
 <li>解出$p = \varphi(y)$</li>
@@ -125,7 +126,7 @@
 <script type="math/tex; mode=display">yp\frac{\mathrm{d}p}{\mathrm{d}y}-p^2 = 0 \Rightarrow p = C_1 e^{\int \frac{1}{y} \mathrm{d}y = C_1 y }</script><script type="math/tex; mode=display">\frac{\mathrm{d}y}{\mathrm{d}x} = C_1 y \Rightarrow \int \frac{\mathrm{d}y}{y} = \int C_1 \mathrm{d}x</script><script type="math/tex; mode=display">\ln y = C_1x+C_2 \Rightarrow y = e^{C_1 x+C_2} = C_3 e^{C_1 x} \quad (C_3 = e^{C_2})</script></blockquote>
 </li>
 </ol>
-<h4 id="二阶常系数线性微分方程"><a href="#二阶常系数线性微分方程" class="headerlink" title="二阶常系数线性微分方程"></a>二阶常系数线性微分方程</h4><script type="math/tex; mode=display">y'' +py' +qy = 0</script><p>解</p>
+<h3 id="二阶常系数线性微分方程"><a href="#二阶常系数线性微分方程" class="headerlink" title="二阶常系数线性微分方程"></a>二阶常系数线性微分方程</h3><script type="math/tex; mode=display">y'' +py' +qy = 0</script><p>解</p>
 <ol>
 <li>求解$y’’ +py’ +qy = 0$的特征方程是$r^2+pr+q = 0$</li>
 <li>根据方程根的不同分为三种情况<ol>
@@ -143,13 +144,13 @@
 </ol>
 </li>
 </ol>
-<h4 id="二阶常系数非齐次线性微分方程"><a href="#二阶常系数非齐次线性微分方程" class="headerlink" title="二阶常系数非齐次线性微分方程"></a>二阶常系数非齐次线性微分方程</h4><h5 id="形式一-1"><a href="#形式一-1" class="headerlink" title="形式一"></a>形式一</h5><script type="math/tex; mode=display">y'' + py' +qy = P_n(x)e^{kx}</script><p>其中$P_n(x)$代表$x$的$n$阶多项式<br>解<br>根据$k$的值有以下三种情况：</p>
+<h3 id="二阶常系数非齐次线性微分方程"><a href="#二阶常系数非齐次线性微分方程" class="headerlink" title="二阶常系数非齐次线性微分方程"></a>二阶常系数非齐次线性微分方程</h3><h4 id="形式一-1"><a href="#形式一-1" class="headerlink" title="形式一"></a>形式一</h4><script type="math/tex; mode=display">y'' + py' +qy = P_n(x)e^{kx}</script><p>其中$P_n(x)$代表$x$的$n$阶多项式<br>解<br>根据$k$的值有以下三种情况：</p>
 <ol>
 <li>若$k$非特征值，即$k \neq r_1 \neq r_2$，则特解 $y^* = e^{kx} \sum_{i=0}^n a_i x^i$</li>
 <li>若$k$与一个特征值相同，则特解  $y^* = xe^{kx} \sum_{i=0}^n a_i x^i$</li>
 <li>若$k$与两个特征值相同，则特解  $y^* = x^2e^{kx} \sum_{i=0}^n a_i x^i$</li>
 </ol>
-<h5 id="形式二-1"><a href="#形式二-1" class="headerlink" title="形式二"></a>形式二</h5><script type="math/tex; mode=display">y'' + py' + qy = e^{ax} [P_l \cos bx + P_s \sin bx]</script><p>其中$P_l(x)$，$P_s(x)$代表$x$的$l$，$s$阶多项式<br>解<br>根据$a$，$b$的值有以下三种情况</p>
+<h4 id="形式二-1"><a href="#形式二-1" class="headerlink" title="形式二"></a>形式二</h4><script type="math/tex; mode=display">y'' + py' + qy = e^{ax} [P_l \cos bx + P_s \sin bx]</script><p>其中$P_l(x)$，$P_s(x)$代表$x$的$l$，$s$阶多项式<br>解<br>根据$a$，$b$的值有以下三种情况</p>
 <ol>
 <li>若$a\pm b i$不是特征值，则特解 $y^* = (Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>
 <li>若$a\pm b i$是特征值，则特解 $y^* = x(Q_n^{(1)}(x)\cos bx+Q_n^{(2)}(x)\sin bx)e^{ax}$</li>

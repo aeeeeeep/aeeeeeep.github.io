@@ -67,14 +67,17 @@
 
     
     
+<div class="tocbot"></div>
+
     
 
     <div class="article-entry" itemprop="articleBody">
       
       
       
-      <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">close all;</span><br><span class="line">th = <span class="built_in">linspace</span>()<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">fig1 = <span class="built_in">plot</span>(th,<span class="built_in">sin</span>(th),<span class="string">&#x27;g&#x27;</span>,th,<span class="built_in">cos</span>(th),<span class="string">&#x27;b:&#x27;</span>);</span><br></pre></td></tr></table></figure>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>复习了一下 matlab 里面的基本画图函数的属性</p>
 <span id="more"></span>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">close all;</span><br><span class="line">th = <span class="built_in">linspace</span>()<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">fig1 = <span class="built_in">plot</span>(th,<span class="built_in">sin</span>(th),<span class="string">&#x27;g&#x27;</span>,th,<span class="built_in">cos</span>(th),<span class="string">&#x27;b:&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p><img src="/image/matlab使用方法再探/1.svg" alt="1"></p>
 <p>plot 命令返回一个标识图形目标的向量，其元素称为句柄，这些句柄可以确定目标的特性.若想知道第一条曲线的特性，输入<code>get(fig1(1))</code>，不要关闭Figure 1窗口.</p>
 <details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">输出</summary><pre><code class="matlab">

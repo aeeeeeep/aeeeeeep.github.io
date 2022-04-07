@@ -75,10 +75,10 @@
       
       
       
-      <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>给U盘装了archlinux后，没注意把固态上archlinux的/etc/fstab分区挂载配置文件修改了，以为是grub又坏了，干脆把挂载在/boot下的EFI 系统格式化了，孙子云：“置之死地而后生。”从头开始。</p>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>给U盘装了archlinux后，没注意把固态上archlinux的/etc/fstab分区挂载配置文件修改了，以为是grub又坏了，干脆把挂载在/boot下的EFI 系统格式化了，孙子云：“置之死地而后生。” 从头开始</p>
 <span id="more"></span>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>插网线，喝热水</p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><ol>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>插网线，喝热水</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><ol>
 <li><p>U盘启动进去后挂载根分区和启动分区，arch-chroot到根分区</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line">mkfs.vfat -F32 /dev/$&#123;/boot&#125;	# $&#123;/boot&#125; 启动分区</span><br><span class="line">mount /dev/$&#123;/&#125; /mnt	# $&#123;/&#125; 根分区</span><br><span class="line">mount /dev/$&#123;/boot&#125; /mnt/boot	</span><br><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -111,7 +111,7 @@
 <li>Add Boot Option</li>
 <li>File Name 为 /boot/EFI/grub下的grubx64.efi</li>
 <li>Boot Option Name 非空</li>
-<li>Apply，Exit<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><blockquote>
+<li>Apply，Exit<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><blockquote>
 <p>修grub的周期大概是3个月一次，各种坏掉的原因都有，记录下方便下次解决。</p>
 </blockquote>
 </li>

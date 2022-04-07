@@ -75,7 +75,7 @@
       
       
       
-      <h2 id="闪退错误"><a href="#闪退错误" class="headerlink" title="闪退错误"></a>闪退错误</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
 <span id="more"></span>
 <p><img src="/image/labelImg闪退错误修复/1.png" alt="1"></p>
 <h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>在<code>/usr/lib/python3.9/site-packages/labelImg/labelImg.py</code> 第784行，没有数据标签选中时<code>shape</code>对象没有<code>paint_label</code>属性，添加一个条件过滤就好</p>
