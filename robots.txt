@@ -10,3 +10,4 @@ Disallow: /css/
 Disallow: /js/
 Disallow: /fancybox/
 Sitemap: https://aeeeeeep.top/sitemap.xml
+Sitemap: https://aeeeeeep.github.io/sitemap.xml
