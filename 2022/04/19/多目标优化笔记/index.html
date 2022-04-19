@@ -8,7 +8,7 @@
   
   
   <title>
-    使用平行线段的相机标定[论文复现][计划更新] |
+    多目标优化笔记[持续更新] |
     
     Aeeeeeep Blog
   </title>
@@ -35,7 +35,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-使用平行线段的相机标定-论文复现" class="article article-type-post" itemscope
+  <article id="post-多目标优化笔记" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -44,7 +44,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  使用平行线段的相机标定[论文复现][计划更新]
+  多目标优化笔记[持续更新]
 </h1>
 
 
@@ -54,12 +54,12 @@
 
     
     <div class="article-meta">
-      <a href="/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A-%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/" class="article-date">
-  <time datetime="2022-04-16T15:21:13.000Z" itemprop="datePublished">2022-04-16</time>
+      <a href="/2022/04/19/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2022-04-19T01:58:03.000Z" itemprop="datePublished">2022-04-19</time>
 </a>
       
 <div class="article-category">
-  <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/">论文复现</a>
+  <a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
 </div>
 
     </div>
@@ -75,18 +75,45 @@
       
       
       
-      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记得更新</p>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>多目标优化 ( MOO ) - Multi-Objective Optimization</p>
+<p>从问题定义，单目标、多目标，无约束、有约束方面了解多目标优化</p>
 <span id="more"></span>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>监控摄像机标定一直是计算机视觉工业应用的一个重要课题。内部和外部参数都必须精确校准，才能从记录的2D图像或视频中识别出3D场景中发生的事情，相机标定的一般方法是使用标定对象，如棋盘标定。然而，这些方法对于监控摄像机来说往往是不切实际的，因为它们需要一个足够大的校准对象来覆盖整个拍摄区域。</p>
-<blockquote>
-<p> 原论文下载：<a target="_blank" rel="noopener" href="https://aeeeeeep.github.io/papers/icpr2020_nakano.pdf">https://aeeeeeep.github.io/papers/icpr2020_nakano.pdf</a></p>
-</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="无约束的单目标优化问题"><a href="#无约束的单目标优化问题" class="headerlink" title="无约束的单目标优化问题"></a>无约束的单目标优化问题</h3><script type="math/tex; mode=display">
+\min_{x} f(x),x \in R^{N}</script><h3 id="无约束的多目标优化问题"><a href="#无约束的多目标优化问题" class="headerlink" title="无约束的多目标优化问题"></a>无约束的多目标优化问题</h3><script type="math/tex; mode=display">
+\min_{x} F(x) = [f_1(x), f_2(x),\cdots, f_n(x)], x \in R^{N}</script><p>$ n $ 为子目标的数量，$ f_n(x) $为一阶可导目标函数 $F(x)$ 的子函数</p>
+<h3 id="有约束的单目标优化问题"><a href="#有约束的单目标优化问题" class="headerlink" title="有约束的单目标优化问题"></a>有约束的单目标优化问题</h3><script type="math/tex; mode=display">
+\begin{array}{lcl}
+\min_{x} & f(x) & \\
+\text { s.t. } & g_{i}(x) \geq 0 & , i \in[1, M] \\
+& h_{j}(x)=0 & , j \in[1, L]
+\end{array}</script><p>$\text { s.t. }$ 为 <code>subject to</code> ，受限于的缩写，设 $ D $ 为可行域</p>
+<script type="math/tex; mode=display">
+D = \{x | g_i(x) \geq 0, i \in [1, M], h_j(x) =0 , j \in [1,L]  \}</script><h3 id="有约束的多目标优化问题"><a href="#有约束的多目标优化问题" class="headerlink" title="有约束的多目标优化问题"></a>有约束的多目标优化问题</h3><script type="math/tex; mode=display">
+\begin{array}{lcl}
+\min_x & F(x) = [f_1(x), f_2(x),\cdots, f_n(x)]\\
+\text{s.t.} & g_i(x) \geq 0 ,\quad i\in(1, M) \\
+& h_j(x) = 0 ,\quad j \in (1,L)
+\end{array}</script><p>设 $ D $ 为可行域</p>
+<script type="math/tex; mode=display">
+D = \{x | g_i(x) \geq 0, i \in [1, M], h_j(x) =0 , j \in [1,L]  \}</script><h2 id="MOO-的解集"><a href="#MOO-的解集" class="headerlink" title="MOO 的解集"></a>MOO 的解集</h2><p>对于 MOO，通常没有解  $ x^* \in D $, 使 $ f_i(x), \forall i \in [1,N] $  同时处于最优解，因此单目标优化问题的解在 MOO 中通常不适用</p>
+<p>MOO 中的解集分为 <strong>绝对有效解</strong>，<strong>有效解</strong>，<strong>弱有效解</strong></p>
+<p>设 $R^N $为 $N$ 维的实向量空间，$y=(y_1,y_2,\cdots, y_N)^{T}$，$z=(z_1,z_2,\cdots, z_N)^{T}$</p>
+<script type="math/tex; mode=display">
+\begin{cases}\text { 相等 } & y=z \Leftrightarrow y_{i}=z_{i}, i=1,2, \ldots, N \\ \text { 严格小于 } & y<z \Leftrightarrow y_{i}<z_{i}, i=1,2, \ldots, N \\ \text { 小于 } & y \leqq z \Leftrightarrow y_{i} \leqslant z_{i}, i=1,2, \ldots, N \\ \text { 小于且不相等(支配) } & y \leqslant z \Leftrightarrow y_{i} \leqslant z_{i}, i=1,2, \ldots, N, y \neq z\end{cases}</script><h3 id="Pareto-支配（Pareto-Dominance）"><a href="#Pareto-支配（Pareto-Dominance）" class="headerlink" title="Pareto 支配（Pareto Dominance）"></a>Pareto 支配（Pareto Dominance）</h3><p>$ \forall x_1, x_2 \in R^{N}     $， 对于 $ k = 1,\cdots,K $，都有 $ f_k(x_1) \leqslant f_k(x_2)$，则 $ x_1 $ 支配 $ x_2 $</p>
+<h3 id="Pareto-解集（绝对最优解）"><a href="#Pareto-解集（绝对最优解）" class="headerlink" title="Pareto 解集（绝对最优解）"></a>Pareto 解集（绝对最优解）</h3><p>$x^<em> \in D$ ，$\forall x \in D, \quad f(x^</em>) \leqq  f(x)$，即 $\forall k \in 1,\cdots,K, \quad f_K(x^<em>) \leqq f_{K}(x)$ ，则 $x^</em>$ 为 MOO 问题的最优解</p>
+<h3 id="Pareto-解集（有效解）"><a href="#Pareto-解集（有效解）" class="headerlink" title="Pareto 解集（有效解）"></a>Pareto 解集（有效解）</h3><p>$x^<em> \in D $，若 $f_k(x) \leq f_k(x^</em>) \quad \and \quad \exists i,f_i(x) &lt; f_i(x^<em>), i \in [1,k] $ 不成立，则 $x^</em>$ 是MOO问题的有效解，也叫 Pareto 最优解，其含义是如果 $x^<em>$ 是 Pareto 最优解，则找不到这样的可行解  $x \in D$，使得 $ f (x) $ 的每个目标值都不比 $ f (x^</em>) $ 的目标值坏,并且 $ f (x) $ 至少有一个目标比 f (x ) 的相应目标值好，即 $ x^* $ 是最好的，不能再进行改进（Pareto 改进）</p>
+<h3 id="Pareto-解集（弱有效解）"><a href="#Pareto-解集（弱有效解）" class="headerlink" title="Pareto 解集（弱有效解）"></a>Pareto 解集（弱有效解）</h3><p>$x^<em> \in D$，如果不存在 $x \in D$，使得 $f(x) &lt; f(x^</em>)$ ，即</p>
+<script type="math/tex; mode=display">
+f_k(x) < f_k(x^*) \quad \and \quad \forall k \in [1,K]</script><p>则 $x^<em>$ 是 MOO 问题的有效解，其含义是如果 $x^</em>$ 是弱有效解,则找不到这样的可行解 $x \in D$，使得 $ f (x)$ 的每个目标值都比 $f (x^*) $ 的目标值严格（$&lt;$）的好</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a> f (x^*) </li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
     
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96/" rel="tag">多目标优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li></ul>
 
     
 	<div style="text-align:center;color: #ccc;font-size:14px;">------------- ETX &nbsp;<i class="fe fe-smile"></i>&nbsp;Thank you for reading -------------</div>
@@ -115,19 +142,10 @@
   
 <nav class="article-nav">
   
-  <a href="/2022/04/19/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/" class="article-nav-link">
-    <strong class="article-nav-caption">Newer</strong>
-    <div class="article-nav-title">
-      
-      多目标优化笔记[持续更新]
-      
-    </div>
-  </a>
   
-  
-  <a href="/2022/04/13/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/" class="article-nav-link">
+  <a href="/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A-%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/" class="article-nav-link">
     <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">设计实现内存的分配和回收算法</div>
+    <div class="article-nav-title">使用平行线段的相机标定[论文复现][计划更新]</div>
   </a>
   
 </nav>
