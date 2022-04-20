@@ -122,7 +122,24 @@ PF = \{F(x)|x\in PS\}</script><p><img src="/home/pacaep/aepBlog/source/image/多
 \nabla_{x} L\left(x^{*}, \lambda^{*}, u^{*}, v^{*}\right)=\nabla f\left(x^{*}\right) \lambda^{*}+\nabla g\left(x^{*}\right) u^{*}+\nabla h\left(x^{*}\right) v^{*}=0 \\
 u^{* T} g\left(x^{*}\right)=0 \\
 \lambda^{*}>0, u^{*} \geq 0
-\end{array}\right.</script><h3 id="MOO-的经典算法"><a href="#MOO-的经典算法" class="headerlink" title="MOO 的经典算法"></a>MOO 的经典算法</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+\end{array}\right.</script><h2 id="MOO-的经典算法"><a href="#MOO-的经典算法" class="headerlink" title="MOO 的经典算法"></a>MOO 的经典算法</h2><h3 id="线性加权法"><a href="#线性加权法" class="headerlink" title="线性加权法"></a>线性加权法</h3><p>根据 $f(x)$ 的重要程度，设定权重进行线性加权</p>
+<script type="math/tex; mode=display">
+\begin{array}{r}
+& \min _{x} \sum_{k=1}^{K} \lambda_{k} f_{k}(x) \\
+\text { s.t. } & g_{i}(x) \geq 0,\quad i \in[1, M] \\
+& h_{j}(x)=0,\quad j \in[1, L]
+\end{array}</script><p>于是就变成了单目标优化问题，上述问题存在有效解的条件，对于给定的 $\lambda \in \Lambda^{++}$ ，则上述问题的最优解是 MOO 问题的有效解，其中</p>
+<script type="math/tex; mode=display">
+\Lambda^{++}=\left\{\lambda \mid \lambda_{k}>0, k=1,2 \ldots K, \sum_{k=1}^{K} \lambda_{k}=1\right\}</script><p>优点：实现简单，有成熟的算法求解<br>缺点：$\lambda_k$ 难以确定，求出的解的优劣无法确定</p>
+<h3 id="主要目标法"><a href="#主要目标法" class="headerlink" title="主要目标法"></a>主要目标法</h3><p>也称 $\epsilon$-约束方法</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+& \min _{x} & f_{p}(x) \\
+\text { s.t. } & f_{k}(x) &\leq \epsilon_{k} &,k=1, \ldots, K, k \neq p \\
+& g_{i}(x) &\geq 0, i \in[1, M] \\
+& h_{j}(x) &= 0, j \in[1, L]
+\end{array}</script><p>$\epsilon$-约束方法从 $K$ 个目标中选择最重要的子目标作为优化目标,其余的子目标作为约束条件。每个子目标,通过上界 $\epsilon_{K}$ 来约束</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
 <li><a target="_blank" rel="noopener" href="https://hpzhao.github.io/2018/09/17/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/">https://hpzhao.github.io/2018/09/17/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23311674">https://www.zhihu.com/question/23311674</a></li>
