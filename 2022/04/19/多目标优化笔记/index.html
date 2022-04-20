@@ -101,11 +101,11 @@ D = \{x | g_i(x) \geq 0, i \in [1, M], h_j(x) =0 , j \in [1,L]  \}</script><h2 i
 <script type="math/tex; mode=display">
 \begin{cases}\text { 相等 } & y=z \Leftrightarrow y_{i}=z_{i}, i=1,2, \ldots, N \\ \text { 严格小于 } & y<z \Leftrightarrow y_{i}<z_{i}, i=1,2, \ldots, N \\ \text { 小于 } & y \leqq z \Leftrightarrow y_{i} \leqslant z_{i}, i=1,2, \ldots, N \\ \text { 小于且不相等(支配) } & y \leqslant z \Leftrightarrow y_{i} \leqslant z_{i}, i=1,2, \ldots, N, y \neq z\end{cases}</script><h3 id="Pareto-支配（Pareto-Dominance）"><a href="#Pareto-支配（Pareto-Dominance）" class="headerlink" title="Pareto 支配（Pareto Dominance）"></a>Pareto 支配（Pareto Dominance）</h3><p>$ \forall x_1, x_2 \in R^{N}     $， 对于 $ k = 1,\cdots,K $，都有 $ f_k(x_1) \leqslant f_k(x_2)$，则 $ x_1 $ 支配 $ x_2 $</p>
 <p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/D.jpg" style="zoom:67%;" /></p>
-<h3 id="Pareto-解集（绝对最优解）"><a href="#Pareto-解集（绝对最优解）" class="headerlink" title="Pareto 解集（绝对最优解）"></a>Pareto 解集（绝对最优解）</h3><p>$x^<em> \in D$ ，$\forall x \in D, \quad f(x^</em>) \leqq  f(x)$，即 $\forall k \in 1,\cdots,K, \quad f_K(x^<em>) \leqq f_{K}(x)$ ，则 $x^</em>$ 为 MOO 问题的最优解</p>
-<h3 id="Pareto-解集（有效解）"><a href="#Pareto-解集（有效解）" class="headerlink" title="Pareto 解集（有效解）"></a>Pareto 解集（有效解）</h3><p>$x^<em> \in D $，若 $f_k(x) \leq f_k(x^</em>) \quad \wedge \quad \exists i,f_i(x) &lt; f_i(x^<em>), i \in [1,k]$ 不成立，则 $x^</em>$ 是MOO问题的有效解，也叫 Pareto 最优解，其含义是如果 $x^<em>$ 是 Pareto 最优解，则找不到这样的可行解  $x \in D$，使得 $ f (x) $ 的每个目标值都不比 $ f (x^</em>) $ 的目标值坏,并且 $ f (x) $ 至少有一个目标比 $f (x^<em>)$ 的相应目标值好，即 $ x^</em> $ 是最好的，不能再进行改进（Pareto 改进）</p>
-<h3 id="Pareto-解集（弱有效解）"><a href="#Pareto-解集（弱有效解）" class="headerlink" title="Pareto 解集（弱有效解）"></a>Pareto 解集（弱有效解）</h3><p>$x^<em> \in D$，如果不存在 $x \in D$，使得 $f(x) &lt; f(x^</em>)$ ，即</p>
+<h3 id="Pareto-解集（绝对最优解）"><a href="#Pareto-解集（绝对最优解）" class="headerlink" title="Pareto 解集（绝对最优解）"></a>Pareto 解集（绝对最优解）</h3><p>$x^<em> \in D$  ， $\forall x \in D, \quad f(x^</em>) \leqq  f(x)$ ，即 $\forall k \in 1,\cdots,K, \quad f_K(x^<em>) \leqq f_{K}(x)$ ，则 $x^</em>$ 为 MOO 问题的最优解</p>
+<h3 id="Pareto-解集（有效解）"><a href="#Pareto-解集（有效解）" class="headerlink" title="Pareto 解集（有效解）"></a>Pareto 解集（有效解）</h3><p>$x^<em>\in{D} $ ，若 $f_k(x)\leq f_k(x^</em>) \wedge \exists i,f_i(x) &lt; f_i(x^<em>),i\in [1,k]$ 不成立，则 $x^</em>$ 是 MOO 问题的有效解，也叫 Pareto 最优解，其含义是如果 $x^<em>$ 是 Pareto 最优解，则找不到这样的可行解  $x\in{D}$ ，使得 $f(x)$ 的每个目标值都不比 $f(x^</em>)$ 的目标值坏,并且 $ f (x) $ 至少有一个目标比 $f(x^<em>)$ 的相应目标值好，即 $ x^</em> $ 是最好的，不能再进行改进（Pareto 改进）</p>
+<h3 id="Pareto-解集（弱有效解）"><a href="#Pareto-解集（弱有效解）" class="headerlink" title="Pareto 解集（弱有效解）"></a>Pareto 解集（弱有效解）</h3><p>$x^<em>\in{D}$ ，如果不存在 $x\in{D}$，使得 $f(x)&lt;f(x^</em>)$ ，即</p>
 <script type="math/tex; mode=display">
-f_k(x) < f_k(x^*) \quad \wedge \quad \forall k \in [1,K]</script><p>则 $x^<em>$ 是 MOO 问题的有效解，其含义是如果 $x^</em>$ 是弱有效解,则找不到这样的可行解 $x \in D$，使得 $ f (x)$ 的每个目标值都比 $f (x^*) $ 的目标值严格（$&lt;$）的好</p>
+f_k(x) < f_k(x^*) \quad \wedge \quad \forall k \in [1,K]</script><p>则 $x^<em>$ 是 MOO 问题的有效解，其含义是如果 $x^</em>$ 是弱有效解,则找不到这样的可行解 $x\in{D}$，使得 $f(x)$ 的每个目标值都比 $f(x^*)$ 的目标值严格（ $&lt;$ ）的好</p>
 <h3 id="Pareto-最优解集（Pareto-optimal-Set）"><a href="#Pareto-最优解集（Pareto-optimal-Set）" class="headerlink" title="Pareto 最优解集（Pareto-optimal Set）"></a>Pareto 最优解集（Pareto-optimal Set）</h3><p>给定问题的有效解集（Pareto 最优解）构成的解集，集合中的解是相互非支配的，两两非支配关系，简称 $PS$</p>
 <h3 id="Pareto-最优前沿（Pareto-optimal-Front）"><a href="#Pareto-最优前沿（Pareto-optimal-Front）" class="headerlink" title="Pareto 最优前沿（Pareto-optimal Front）"></a>Pareto 最优前沿（Pareto-optimal Front）</h3><p>Pareto 每一个解对应的目标值向量组成的集合，简称 $PF$</p>
 <script type="math/tex; mode=display">
@@ -211,6 +211,7 @@ x^{(t+1)}&=& x^{t}+\lambda \cdot d^{t} \\
 f_{k}\left(x^{(t+1)}\right) &\leq& f_{k}\left(x^{t}\right), k=1, \ldots, K
 \end{array}</script><h2 id="多任务学习（MTL）"><a href="#多任务学习（MTL）" class="headerlink" title="多任务学习（MTL）"></a>多任务学习（MTL）</h2><p>多任务学习（MTL）- Multi-Task Learning</p>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在同一时间学习多个任务，求得最优解</p>
+<p>设有 $N$ 个样本点 $\{ x,y_i^1,y_i^2,\cdots, y_i^T\},i \in N$，其中 $T$ 为任务数量，y_t</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
