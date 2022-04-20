@@ -128,9 +128,13 @@ u^{* T} g\left(x^{*}\right)=0 \\
 & \min _{x} \sum_{k=1}^{K} \lambda_{k} f_{k}(x) \\
 \text { s.t. } & g_{i}(x) \geq 0,\quad i \in[1, M] \\
 & h_{j}(x)=0,\quad j \in[1, L]
-\end{array}</script><p>于是就变成了单目标优化问题，上述问题存在有效解的条件，对于给定的 $\lambda \in \Lambda^{++}$ ，则上述问题的最优解是 MOO 问题的有效解，其中</p>
+\end{array}</script><p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/weight.jpg" style="zoom:67%;" /></p>
+<p>于是就变成了单目标优化问题，上述问题存在有效解的条件，对于给定的 $\lambda \in \Lambda^{++}$ ，则上述问题的最优解是 MOO 问题的有效解，其中</p>
 <script type="math/tex; mode=display">
-\Lambda^{++}=\left\{\lambda \mid \lambda_{k}>0, k=1,2 \ldots K, \sum_{k=1}^{K} \lambda_{k}=1\right\}</script><p>优点：实现简单，有成熟的算法求解<br>缺点：$\lambda_k$ 难以确定，求出的解的优劣无法确定</p>
+\Lambda^{++}=\left\{\lambda \mid \lambda_{k}>0, k=1,2 \ldots K, \sum_{k=1}^{K} \lambda_{k}=1\right\}</script><ul>
+<li>优点：实现简单，有成熟的算法求解</li>
+<li>缺点：$\lambda_k$ 难以确定，求出的解的优劣无法确定</li>
+</ul>
 <h3 id="主要目标法"><a href="#主要目标法" class="headerlink" title="主要目标法"></a>主要目标法</h3><p>也称 $\epsilon$-约束方法</p>
 <script type="math/tex; mode=display">
 \begin{array}{l}
@@ -138,8 +142,55 @@ u^{* T} g\left(x^{*}\right)=0 \\
 \text { s.t. } & f_{k}(x) &\leq \epsilon_{k} &,k=1, \ldots, K, k \neq p \\
 & g_{i}(x) &\geq 0, i \in[1, M] \\
 & h_{j}(x) &= 0, j \in[1, L]
-\end{array}</script><p>$\epsilon$-约束方法从 $K$ 个目标中选择最重要的子目标作为优化目标,其余的子目标作为约束条件。每个子目标,通过上界 $\epsilon_{K}$ 来约束</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+\end{array}</script><p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/constraint.jpg" style="zoom: 67%;" /></p>
+<p>$\epsilon$-约束方法从 $K$ 个目标中选择最重要的子目标作为优化目标,其余的子目标作为约束条件。每个子目标,通过上界 $\epsilon_{K}$ 来约束</p>
+<h4 id="主要目标法最优解和-MOO-解集的关系"><a href="#主要目标法最优解和-MOO-解集的关系" class="headerlink" title="主要目标法最优解和 MOO 解集的关系"></a>主要目标法最优解和 MOO 解集的关系</h4><ul>
+<li><p>主要目标法最优解是 MOO 解的弱有效解</p>
+</li>
+<li><p>若主要目标 $f_p (x)$ 是严格凸函数，可行域为 $\hat{D}$ 的凸集，则主要目标法最优解是 MOO 解的有效解</p>
+</li>
+</ul>
+<h4 id="界限值-epsilon-的选取"><a href="#界限值-epsilon-的选取" class="headerlink" title="界限值 $\epsilon$ 的选取"></a>界限值 $\epsilon$ 的选取</h4><p>可以取子目标函数的上限值</p>
+<script type="math/tex; mode=display">
+\min \left\{f_{k} \mid f_{k}(x), k=1, \ldots, K, k \neq p\right\} \leq \epsilon_{k}</script><p>这种取法可以使得某些 $f_k(x)$ 留在可行域 $\hat{D}$ 内,并且 $\hat{D}$ 内有较多的点靠近 $f_k (x)$ 的最优解</p>
+<ul>
+<li>优点：简单，能应用到凸函数和非凸函数场景下</li>
+<li>缺点：$\epsilon_k$ 如果取值不合适，可行域 $\hat{D}$ 可能为空值</li>
+</ul>
+<h3 id="逼近目标法"><a href="#逼近目标法" class="headerlink" title="逼近目标法"></a>逼近目标法</h3><p>提出一个目标值 $f^0 = (f_1^0,f_2^0,\cdots,f_k^0)$，使得每个目标函数 $f_k(x)$ 都逼近对应的目标值</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+L = (f(x), f^0) & = ||f(x) - f^0 ||^{\lambda}_{2} \\
+&= \sum_{k=1}^{K} \lambda_k(f_k(x)-f^0)^2,\lambda \in \Lambda^{++}
+\end{array}</script><p>和机器学习中的损失函数类似，是一个单目标优化问题，可以通过经典的方法进行求解，这里求解的最优解和有效解及弱有效解没有直接的联系，反映了决策者希望的目标值</p>
+<h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>这是一种直接优化的方法，而上面提到的算法都是采取先验的知识将多目标优化转化成单目标优化</p>
+<h3 id="最速梯度下降"><a href="#最速梯度下降" class="headerlink" title="最速梯度下降"></a>最速梯度下降</h3><p>简单起见，将讨论问题限制在无约束的单目标优化问题，并要求无约束的单目标优化问题中的 $f (x)$ 具有一阶连续偏导数，对于这类问题，能够从某一点出发，选择目标函数 $f (x) $ 下降最快的方向进行搜索，尽快达到最小值，问题是如何选择下降最快的方向</p>
+<script type="math/tex; mode=display">
+DF(x;d) = \nabla f(x)^T d</script><p>求 $f(x)$ 在点 $x$ 处的下降最快的方向导数，归结为求如下最优化问题</p>
+<script type="math/tex; mode=display">
+\min \nabla f(x)^T d \\
+\text{s.t.} \quad ||d|| \leq 1</script><p>其中 $||\cdot||$ 为欧式距离，上述问题的解为</p>
+<script type="math/tex; mode=display">
+d = -\frac{\nabla f(x)}{||\nabla f(x)||}</script><p>负梯度方向为最速下降方向，最速下降法的迭代公式为</p>
+<script type="math/tex; mode=display">
+x^{t+1} = x^t + \lambda_k d^{(k)}</script><p>其中，$\lambda _k$ 可以通过一维搜索来得到</p>
+<h3 id="多目标梯度下降算法"><a href="#多目标梯度下降算法" class="headerlink" title="多目标梯度下降算法"></a>多目标梯度下降算法</h3><p>设当前为 $t+1$ 轮迭代，梯度迭代公式</p>
+<script type="math/tex; mode=display">
+x^{t+1} = x^t + \lambda \cdot d^{t}</script><p>多目标优化的方向导数</p>
+<script type="math/tex; mode=display">
+\nabla f_k(x)^T d,k = 1,2,\cdots,K</script><p>定义最大方向导数</p>
+<script type="math/tex; mode=display">
+M_x(d^t) = max\{ \nabla f_k(x)^T d^t \mid k = 1,2,\cdots,K\}</script><p>多目标问题的最速梯度下降方向，可以归结为求解以下问题</p>
+<script type="math/tex; mode=display">
+\min M_x(d^t) + \frac{1}{2} \| d^t \| ^2 \\
+\text{s.t.} \quad d^t \in R</script><p>上述优化问题是闭且强凸优化问题，一定存在最优解，令 $M_x (d^t) = \alpha$，可以将一阶偏导项消去</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\min & \alpha + \frac{1}{2} \|d^t \|^2 \\
+\text{s.t.} & \nabla f_k(x)^T d^t \leq \alpha ,k = 1,2,\cdots,K \\
+& d^t \in R
+\end{array}</script><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
 <li><a target="_blank" rel="noopener" href="https://hpzhao.github.io/2018/09/17/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/">https://hpzhao.github.io/2018/09/17/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23311674">https://www.zhihu.com/question/23311674</a></li>
