@@ -220,6 +220,52 @@ L^t(\_,\_) = Y^t \times Y^t \rightarrow R^+</script><script type="math/tex; mode
 \min_{\theta^{sh} ,\theta} = \sum_{t=1}^{T} c^t \hat{L}^{t}(\theta^{sh},\theta)</script><p>$c^t$ 为每个具体任务的权重，每个具体任务 $t$ 的 $Loss$ 为</p>
 <script type="math/tex; mode=display">
 \hat{L}^t(\theta^{sh},\theta) \triangleq \frac{1}{N} \sum_t L(f^t(x;\theta^{sh}, \theta^t), y^t_i)</script><h3 id="多任务学习转化为多目标优化"><a href="#多任务学习转化为多目标优化" class="headerlink" title="多任务学习转化为多目标优化"></a>多任务学习转化为多目标优化</h3><p>将多任务学习转换为 MOO 问题求解，定义</p>
+<script type="math/tex; mode=display">
+\min _{\theta^{s h}, \theta} L\left(\theta^{s h}, \theta^{1}, \ldots, \theta^{T}\right)=\min _{\theta^{s h}, \theta}\left(\hat{L}^{1}\left(\theta^{s h}, \theta^{1}\right), \cdots, \hat{L}^{T}\left(\theta^{s h}, \theta^{T}\right)\right)</script><p>多目标优化的目的是求得 Pareto 最优解，多目标优化的 Pareto 最优解定义</p>
+<p>一个解 $\theta$ 支配另一个解 $\bar{\theta}$ ，如果</p>
+<script type="math/tex; mode=display">
+\hat{L}(\theta^{sh},\theta^t) \leq \hat{L}(\bar{\theta}^{sh},\bar{\theta}^t)</script><p>对于所有的任务 $t$ 都成立，且</p>
+<script type="math/tex; mode=display">
+L(\theta^{sh},\theta^1,\theta^2,\cdots,\theta^{T}) \neq L(\bar{\theta}^{sh},\bar{\theta}^1,\bar{\theta}^2,\cdots, \bar{\theta}^T)</script><p>一个解 $\theta^{\ast}$ 称为 Pareto 最优解的集合称为 Pareto 最优解集，其图像称为 Pareto 前沿（Pareto Front）</p>
+<h2 id="多任务求解：单个-Pareto-解"><a href="#多任务求解：单个-Pareto-解" class="headerlink" title="多任务求解：单个 Pareto 解"></a>多任务求解：单个 Pareto 解</h2><h3 id="问题转化"><a href="#问题转化" class="headerlink" title="问题转化"></a>问题转化</h3><p>单个 Pareto 解使用了多重梯度下降法，由多目标优化的 $KKT$ 条件，得</p>
+<p>存在 $\alpha^1,\alpha^2,\cdots,\alpha^T \geq 0$，使得</p>
+<script type="math/tex; mode=display">
+\begin{array}{r}
+\sum_{t=1}^{T} \alpha^T = 1 \\
+\sum_{t=1}^{T} \alpha^t \nabla_{\theta^{sh}} \hat{L}(\theta^{sh},\theta^{t}) = 0
+\end{array}</script><p>对应所有的任务 $t$</p>
+<script type="math/tex; mode=display">
+\nabla_{\theta^t}\hat{L}(\theta^{sh},\theta^t) = 0</script><p>满足上式的解称为 Pareto 平衡点（Pareto Stationary Point），Pareto 最优点都是 Pareto 平稳点，反之不一定成立，考虑如下的优化问题</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\min _{\alpha^{1}, \cdots ,\alpha^{T}}\left\|\sum_{t=1}^{T} \alpha^{t} \nabla_{\theta s h} \hat{L}^{t}\left(\theta^{s h}, \theta^{t}\right)\right\| \\
+\sum_{t=1}^{T} \alpha^{t}=1, \alpha^{t} \geq 0, \forall t
+\end{gathered}</script><p>上述优化问题的解存在两种情况</p>
+<ul>
+<li>最优值 $=0$，则对应的解满足 $KKT$ 条件</li>
+<li>最优值 $\neq 0$，则对应的解给出了下降方向，使得多任务目标函数提升（函数值下降）上述优化问题等价于在输入点集凸包中找到最小模点</li>
+</ul>
+<h3 id="两个任务的情形"><a href="#两个任务的情形" class="headerlink" title="两个任务的情形"></a>两个任务的情形</h3><p>由多目标优化的 $KKT$ 条件，得</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\min _{\alpha^{1}, \ldots \alpha^{T}}\|\gamma \theta+(1-\gamma) \bar{\theta}\| \\
+\gamma+(1-\gamma)=1, \gamma \geq 0
+\end{gathered}</script><p>其中 $\theta,\bar{\theta}$ 定义为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\theta \triangleq \nabla_{\theta s h} \hat{L}^{1}\left(\theta^{s h}, \theta^{1}\right) \\
+&\bar{\theta} \triangleq \nabla_{\theta s h} \hat{L}^{2}\left(\theta^{s h}, \theta^{2}\right)
+\end{aligned}</script><p>其解的情况枚举如下</p>
+<ul>
+<li>当 $\theta^T \bar{\theta} \geq \theta^T \theta,\gamma = 1$</li>
+<li>当 $\theta^T \bar{\theta} \geq \bar{\theta}^T \bar{\theta},\gamma = 0$</li>
+<li>$\text{otherwise}$</li>
+</ul>
+<script type="math/tex; mode=display">
+\gamma=\frac{(\bar{\theta}-\theta)^{T} \bar{\theta}}{\| \bar{\theta}-\theta) \|_{2}^{2}}p7</script><p>几何解释</p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/interpret.png" style="zoom:50%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/algo1.png" style="zoom:45%;" /></p>
+<p>基于 Frank-wolfe 算法，得求解 MTL 任务算法</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
