@@ -304,11 +304,71 @@ v \in \Omega_k \Leftrightarrow u_k^T v = \| u_k \| \cdot \| v \| \cos{\alpha}</s
 <script type="math/tex; mode=display">
 I(\theta_r) = \{ j|G_j(\theta_r) \geq 0,j=1,\cdots,K \}</script><p>令 $I(\theta_r)$ 中所有的活跃限制函数值下降的方向</p>
 <script type="math/tex; mode=display">
-(d_r,\alpha_r) = \text{argmin}_{d \in R^n,\alpha \in R} \alpha + \frac{1}{2} \|d\|^2 \\
+(d_r,\alpha_r) = \text{argmin}_{d \in R^n,\alpha \in R} \quad \alpha + \frac{1}{2} \|d\|^2 \\
 \text{s.t.} \quad \nabla G_j (\theta_r)^T d \leq \alpha,j\in I(\theta_r)</script><p>得到更新公式</p>
 <script type="math/tex; mode=display">
 \theta_{r_{t+1}} = \theta_{r_t} + \eta_r d_{r_t}</script><p>上述方法能将活跃集内的约束目标值减少，使得越来越多的约束目标小于 0，$I(\theta_{r})$ 最后变为空集，则 $\theta_{r}$ 是可行解</p>
-<h4 id="求解子问题"><a href="#求解子问题" class="headerlink" title="求解子问题"></a>求解子问题</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h4 id="求解子问题"><a href="#求解子问题" class="headerlink" title="求解子问题"></a>求解子问题</h4><p>受限 pareto 最优：$\theta^<em>$ 是多任务 $L(\theta)$ 在子区域 $\Omega_k$ 的最优解，如果 $\theta^</em> \in \Omega_k$ 且不存在 $\hat{\theta} \in  \Omega_k$，使得 $\hat{\theta} &lt; \theta^*$</p>
+<p>考虑如下多目标优化问题</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+& (d_t,\alpha_t)  = \text{argmin}_{d\in R^n,\alpha \in R} \quad \alpha + \frac{1}{2}\|d\|^2 \\
+
+\text{s.t.} & \nabla L_i(\theta_t)^Td \leq \alpha,i=1,\cdots,m\\
+& \nabla G_j(\theta_t)^Td \leq \alpha,j \in I_{\in}(\theta_t)
+\end{array}</script><p> 其中 $I_{\in}(\theta_t)$ 定义</p>
+<script type="math/tex; mode=display">
+I_{\in} (\theta_t) = \{j \in I | G_j (\theta) \geq - \epsilon \}</script><p>令 $(d^k,a^k)$ 是多任务学习问题的解，则</p>
+<ul>
+<li><p>如果 $\theta_t$ 是严格受限于 $\Omega_k$，则 $d_t = 0 \in R^n$ 且 $\alpha_t = 0$</p>
+</li>
+<li><p>如果 $\theta_t$ 不是严格受限于 $\Omega_k$，则</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\alpha_{t} \leq-\frac{1}{2}\left\|d_{t}\right\|^{2}<0 \\
+\nabla L_{i}\left(\theta_{t}\right)^{T} d \leq \alpha,& i=1, \ldots, m \\
+\nabla G_{j}\left(\theta_{t}\right)^{T} d \leq \alpha,& j \in I_{\epsilon}\left(\theta_{t}\right)
+\end{array}</script><p>迭代公式</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t + \eta d_t</script></li>
+</ul>
+<p>通过求解上述问题，能够获得一个有效的搜索方向</p>
+<h4 id="大规模求解方法"><a href="#大规模求解方法" class="headerlink" title="大规模求解方法"></a>大规模求解方法</h4><p>上述方法能够获得一个有效的搜索方向，对于大规模的问题，会比较困难，这里将问题重写，将其表示为对偶形式</p>
+<ul>
+<li><p>$KKT$ 条件</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+& d_{t} =-\sum_{i=1}^{m} \lambda_{i} \nabla L_{i}\left(\theta_{t}\right)+\sum_{j \in I_{\epsilon}(\theta)} \beta_{i} \nabla G_{j}\left(\theta_{t}\right) \\
+\text{s.t.} & \sum_{i=1}^{m} \lambda_{i}+\sum_{j \in I_{\epsilon}(\theta)} \beta_{j}=1
+\end{array}</script></li>
+<li><p>对偶问题</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+& \max_{\lambda_{i}, \beta_{j}}-\frac{1}{2}\left\|\sum_{i=1}^{m} \lambda_{i} \nabla L_{i}\left(\theta_{t}\right)+\sum_{j \in I_{\epsilon}(\theta)} \beta_{i} \nabla G_{j}\left(\theta_{t}\right)\right\|^{2} \\
+\text { s.t. } & \sum_{i=1}^{m} \lambda_{i}+\sum_{j \in I_{\epsilon}(\theta)} \beta_{j}=1 \\ 
+& \lambda_{i} \geq 0, \beta_{j} \geq 0 \\
+& \forall i=1, \cdots, m\\
+& \forall j \in I_{\epsilon}(\theta)
+\end{array}</script></li>
+</ul>
+<p>将多任务学习转化为其对偶问题后，求解空间不再是参数空间，而是变成了任务个数和受限条件数，使得求解问题极大的减少了</p>
+<p>Pareto MTL 算法如下图</p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/pareto_MTL.png" style="zoom: 50%;" /></p>
+<p>为表述方便，这里引用论文中关于多任务学习的定义</p>
+<p>设 $f(x)$ 表面光滑</p>
+<script type="math/tex; mode=display">
+f(x):\mathcal{R}^n \rightarrow \mathcal{R}^m \\
+f_i(x):\mathcal{R}^n \rightarrow \mathcal{R},i=1,\cdots,m</script><h3 id="准备：-Krylov-子空间"><a href="#准备：-Krylov-子空间" class="headerlink" title="准备：$Krylov$ 子空间"></a>准备：$Krylov$ 子空间</h3><p>大规模稀疏线性方程组 $AX=b$ 求解的首先方法是 $krylov$ 子空间方法，基本思想是在一个较小的子空间 $\mathcal{K} \subset R_n$ 中寻找近似解</p>
+<p>定义：设 $A \in R^{n \times n},r \in R^n$，则</p>
+<script type="math/tex; mode=display">
+\mathcal{K}_{m}(A, r) \triangleq \text{span}\{r, Ar, \cdots, A^{m-1} r\} \subseteq R_{n}</script><p>是由 $A$ 和 $r$ 生成的 $Krylov$ 子空间，通常简记为 $\mathcal{K}_m$，$Krylov$ 子空间有如下的三个性质</p>
+<ul>
+<li>$Krylov$ 子空间嵌套性：$\mathcal{K}_{1} \subseteq \mathcal{K}_{2} \subseteq \cdots \subseteq \mathcal{K}_{m}$</li>
+<li>$\mathcal{K}_m$ 的维数不超过 $m$</li>
+<li>$\mathcal{K}_{m}(A, r)=\{x=p(A)\}$，$r$ 为次数小于 $m$ 的多项式</li>
+</ul>
+<p>求解 $Krylov$ 子空间的解来近似原始线性方程组的解</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
 <li><a target="_blank" rel="noopener" href="https://hpzhao.github.io/2018/09/17/多目标优化四种方法/">https://hpzhao.github.io/2018/09/17/多目标优化四种方法/</a></li>
