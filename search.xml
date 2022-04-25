@@ -2399,14 +2399,39 @@ L(\theta^{sh},\theta^1,\theta^2,\cdots,\theta^{T}) \neq L(\bar{\theta}^{sh},\bar
 </ul>
 <script type="math/tex; mode=display">
 \gamma=\frac{(\bar{\theta}-\theta)^{T} \bar{\theta}}{\| \bar{\theta}-\theta) \|_{2}^{2}}p7</script><p>几何解释</p>
-<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/interpret.png" style="zoom:50%;" /></p>
-<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/algo1.png" style="zoom:45%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/interpret.png" style="zoom:66%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/algo1.png" style="zoom:60%;" /></p>
 <p>基于 Frank-wolfe 算法，得求解 MTL 任务算法</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/algo2.png" style="zoom: 66%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/frankwolfesolver.png" style="zoom:62%;" /></p>
+<h2 id="多任务求解：多个-Pareto-解"><a href="#多任务求解：多个-Pareto-解" class="headerlink" title="多任务求解：多个 Pareto 解"></a>多任务求解：多个 Pareto 解</h2><p>上一节介绍的方法只能求得一个 pareto 解，有时需要多个 pareto 解才能做出更好的决策</p>
+<h3 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h3><p>将多任务学习分解为多个带约束的多目标子问题，通过对子问题进行并行求解</p>
+<p>原始多任务学习定义</p>
+<script type="math/tex; mode=display">
+\min_{\theta} L(\theta) = (L_1(\theta),L_2(\theta),\cdots,L_i(\theta),\cdots,L_m(\theta))</script><p>$L_i(\theta)$ 是第 $i$ 个任务的损失函数</p>
+<p>下图所示</p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/pareto1.png" style="zoom:60%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/pareto2.png" style="zoom:60%;" /></p>
+<p>用一组分布良好的 Preference Vectors（PV）将多任务学习的目标空间分解为 $K$ 个子区域</p>
+<script type="math/tex; mode=display">
+PV = \{u_1,u_2,\cdots,u_k,\cdots,u_K\},u_k \in R_+^m</script><p>重新定义多任务学习</p>
+<script type="math/tex; mode=display">
+\min_{\theta} L(\theta) = (L_1(\theta),L_2(\theta),L_m(\theta)) \\
+s.t. \quad L(\theta) \in \Omega_k,k = 1,\cdots,K</script><p>$\Omega_k$ 是目标空间的子区域</p>
+<script type="math/tex; mode=display">
+\Omega_k = \{v \in R_+^m | u_j^T v \leq u_k^Tv,\forall j = 1,\cdots,K \}</script><p>$\Omega_k$ 中的元素 $v$</p>
+<script type="math/tex; mode=display">
+v \in \Omega_k \Leftrightarrow u_k^T v = \| u_k \| \cdot \| v \| \cos{\alpha}</script><p>$u_k^T v$ 为最大的内积</p>
+<p>重新定义多任务学习</p>
+<script type="math/tex; mode=display">
+\min_\theta L(\theta) = (L_1(\theta),L_2(\theta),L_m(\theta)) \\
+\text{s.t.} \quad G_j(\theta_t) = (u_j - u_k)^TL(\theta_t) \leq 0,j=1,\cdots,K</script><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
 <li><a href="https://hpzhao.github.io/2018/09/17/多目标优化四种方法/">https://hpzhao.github.io/2018/09/17/多目标优化四种方法/</a></li>
 <li><a href="https://www.zhihu.com/question/23311674">https://www.zhihu.com/question/23311674</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#Regularity_conditions_(or_constraint_qualifications">https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#Regularity_conditions_(or_constraint_qualifications</a>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions">https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions</a></li>
 </ul>
 ]]></content>
       <categories>
