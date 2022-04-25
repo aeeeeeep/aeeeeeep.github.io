@@ -8,7 +8,7 @@
   
   
   <title>
-    markdown中输入latex公式遇到的问题整理 |
+    第二届网刃杯misc所见非所见wp |
     
     Aeeeeeep Blog
   </title>
@@ -35,7 +35,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-markdown中输入latex公式遇到的问题整理" class="article article-type-post" itemscope
+  <article id="post-第二届网刃杯misc所见非所见wp" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -44,7 +44,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  markdown中输入latex公式遇到的问题整理
+  第二届网刃杯misc所见非所见wp
 </h1>
 
 
@@ -54,12 +54,12 @@
 
     
     <div class="article-meta">
-      <a href="/2022/04/20/markdown%E4%B8%AD%E8%BE%93%E5%85%A5latex%E5%85%AC%E5%BC%8F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" class="article-date">
-  <time datetime="2022-04-20T14:56:43.000Z" itemprop="datePublished">2022-04-20</time>
+      <a href="/2022/04/25/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AFmisc%E6%89%80%E8%A7%81%E9%9D%9E%E6%89%80%E8%A7%81wp/" class="article-date">
+  <time datetime="2022-04-25T02:59:17.000Z" itemprop="datePublished">2022-04-25</time>
 </a>
       
 <div class="article-category">
-  <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98/">博客问题</a>
+  <a class="article-category-link" href="/categories/misc/">misc</a>
 </div>
 
     </div>
@@ -75,18 +75,29 @@
       
       
       
-      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>整理一下博客书写过程中搜索未能解决最后自己解决的问题</p>
+      <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录一下这道深度学习入门的wp</p>
 <span id="more"></span>
-<h2 id="数学公式渲染错误"><a href="#数学公式渲染错误" class="headerlink" title="数学公式渲染错误"></a>数学公式渲染错误</h2><ul>
-<li>Typora 中输入 Latex 的 <code>*</code> 符号可以直接渲染，如 <code>x^*</code>，为 $x^{\ast}$，但 hexo 网页中显示为 <code>$x^</code>之类，且会直接影响一整段公式渲染，需将 <code>*</code> 替换为 <code>\ast</code> ，即 <code>x^&#123;\ast&#125;</code>，渲染为 $x^{\ast}$ ，解决</li>
-<li><code>\and</code> 符号无法渲染，替换成 <code>\wedge</code> 即 $\wedge$ ，解决</li>
-</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>隐藏层的输出为512，输出层的输出10，，导入模型得到报错，神经网络的输入必须为<code>(28,28)</code>，再用 <code>tf.latest_checkpoint</code> 和 <code>tf.load_weights</code> 导入模型文件，最后输出概率最大的预测结果组成 <code>flag</code> ，由于预测图片在压缩中有精度误差，和真实结果不同，所幸赛方给出了 <code>hint4</code>，修改第4位为 2。</p>
+<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>```python<br>import tensorflow as tf<br>from tensorflow.keras import models,layers<br>from PIL import Image<br>import numpy as np</p>
+<p>class model(object):<br>    def <strong>init</strong>(self):<br>        model = models.Sequential()<br>        model.add(layers.Flatten(input_shape = (28,28,1)))<br>        model.add(layers.Dense(512, activation=’relu’))<br>        model.add(layers.Dense(10, activation=’softmax’))</p>
+<pre><code>    model.summary()
+    self.model = model
+</code></pre><p>class Predict(object):<br>    def <strong>init</strong>(self):<br>        latest = tf.train.latest_checkpoint(‘./weights’)<br>        self.cnn = model()<br>        self.cnn.model.load_weights(latest)</p>
+<pre><code>def predict(self, image_path):
+    img = Image.open(image_path).convert(&#39;I&#39;)
+    img = img.resize((28,28))
+    img = np.reshape(img, (28, 28, 1)) / 255.
+    x = np.array([img])
+    y = np.argmax(self.cnn.model.predict(x))
+    print(image_path)
+    print(y)
+</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>    p = Predict()<br>    for i in range(0, 14):<br>        p.predict(‘./flag/{}.jpg’.format(i))<br>``</p>
 
       
     </div>
     <footer class="article-footer">
     
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li></ul>
 
     
 	<div style="text-align:center;color: #ccc;font-size:14px;">------------- ETX &nbsp;<i class="fe fe-smile"></i>&nbsp;Thank you for reading -------------</div>
@@ -115,19 +126,10 @@
   
 <nav class="article-nav">
   
-  <a href="/2022/04/25/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AFmisc%E6%89%80%E8%A7%81%E9%9D%9E%E6%89%80%E8%A7%81wp/" class="article-nav-link">
-    <strong class="article-nav-caption">Newer</strong>
-    <div class="article-nav-title">
-      
-      第二届网刃杯misc所见非所见wp
-      
-    </div>
-  </a>
   
-  
-  <a href="/2022/04/19/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/" class="article-nav-link">
+  <a href="/2022/04/20/markdown%E4%B8%AD%E8%BE%93%E5%85%A5latex%E5%85%AC%E5%BC%8F%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" class="article-nav-link">
     <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">多目标优化笔记[持续更新]</div>
+    <div class="article-nav-title">markdown中输入latex公式遇到的问题整理</div>
   </a>
   
 </nav>

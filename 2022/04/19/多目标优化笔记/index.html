@@ -288,8 +288,27 @@ s.t. \quad L(\theta) \in \Omega_k,k = 1,\cdots,K</script><p>$\Omega_k$ 是目标
 v \in \Omega_k \Leftrightarrow u_k^T v = \| u_k \| \cdot \| v \| \cos{\alpha}</script><p>$u_k^T v$ 为最大的内积</p>
 <p>重新定义多任务学习</p>
 <script type="math/tex; mode=display">
-\min_\theta L(\theta) = (L_1(\theta),L_2(\theta),L_m(\theta)) \\
-\text{s.t.} \quad G_j(\theta_t) = (u_j - u_k)^TL(\theta_t) \leq 0,j=1,\cdots,K</script><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+\begin{array}{l}
+& \min_\theta L(\theta) = (L_1(\theta),L_2(\theta),L_m(\theta)) \\
+\text{s.t.} & G_j(\theta_t) = (u_j - u_k)^T \\
+& L(\theta_t) \leq 0 \\
+& j=1,\cdots,K
+\end{array}</script><p>这样得到的解集将会分布在不同的子区域 $\Omega_k$</p>
+<h3 id="子问题的梯度下降方法"><a href="#子问题的梯度下降方法" class="headerlink" title="子问题的梯度下降方法"></a>子问题的梯度下降方法</h3><h4 id="寻找初始解-theta-r"><a href="#寻找初始解-theta-r" class="headerlink" title="寻找初始解 $\theta_r$"></a>寻找初始解 $\theta_r$</h4><p>求解多任务学习，需要找到一个满足约束的基本可行解，对于随机产生的可行解 $\theta_r$ ，一种最直接的方法就是找到初始可行解 $\theta_0$ </p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+& \min_{\theta_0} \| \theta_0 - \theta_r \|^2 \\
+ \text{s.t.} & L(\theta_0) \in \Omega_k
+\end{array}</script><p>上述问题投影方法求解的效率不高，特别是对于大规模的深度神经网络，改写为无约束优化问题，使用序列梯度方法找到初始解 $\theta_0$</p>
+<p>定义活跃限制集合（activated constraints）</p>
+<script type="math/tex; mode=display">
+I(\theta_r) = \{ j|G_j(\theta_r) \geq 0,j=1,\cdots,K \}</script><p>令 $I(\theta_r)$ 中所有的活跃限制函数值下降的方向</p>
+<script type="math/tex; mode=display">
+(d_r,\alpha_r) = \text{argmin}_{d \in R^n,\alpha \in R} \alpha + \frac{1}{2} \|d\|^2 \\
+\text{s.t.} \quad \nabla G_j (\theta_r)^T d \leq \alpha,j\in I(\theta_r)</script><p>得到更新公式</p>
+<script type="math/tex; mode=display">
+\theta_{r_{t+1}} = \theta_{r_t} + \eta_r d_{r_t}</script><p>上述方法能将活跃集内的约束目标值减少，使得越来越多的约束目标小于 0，$I(\theta_{r})$ 最后变为空集，则 $\theta_{r}$ 是可行解</p>
+<h4 id="求解子问题"><a href="#求解子问题" class="headerlink" title="求解子问题"></a>求解子问题</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352461938">https://zhuanlan.zhihu.com/p/352461938</a></li>
 <li><a target="_blank" rel="noopener" href="https://hpzhao.github.io/2018/09/17/多目标优化四种方法/">https://hpzhao.github.io/2018/09/17/多目标优化四种方法/</a></li>
