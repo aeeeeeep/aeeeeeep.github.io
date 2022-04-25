@@ -19,7 +19,7 @@
     y = np.argmax(self.cnn.model.predict(x))
     print(image_path)
     print(y)
-</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>    p = Predict()<br>    for i in range(0, 14):<br>        p.predict(‘./flag/{}.jpg’.format(i))<br>``</p>
+</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>    p = Predict()<br>    for i in range(0, 14):<br>        p.predict(‘./flag/{}.jpg’.format(i))</p>
 ]]></content>
       <categories>
         <category>misc</category>
