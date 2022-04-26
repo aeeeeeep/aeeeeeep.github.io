@@ -368,9 +368,84 @@ f_i(x):\mathcal{R}^n \rightarrow \mathcal{R},i=1,\cdots,m</script><h3 id="准备
 <li>$\mathcal{K}_{m}(A, r)=\{x=p(A)\}$，$r$ 为次数小于 $m$ 的多项式</li>
 </ul>
 <p>求解 $Krylov$ 子空间的解来近似原始线性方程组的解</p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><img src="/image/多目标优化笔记/krylov_expand.png" style="zoom:70%;" /></p>
+<p><img src="/home/pacaep/aepBlog/source/image/多目标优化笔记/krylov.png" style="zoom:50%;" /></p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p>Pareto 平稳点（Pareto Stationary）：设 $f_i(x)$ 连续可身微，点 $x$ 称为 Pareto 平稳点，如果存在 $\alpha \in \mathcal{R}^{m},a_i \geq 0$ 使得下式成立</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^{m} \alpha_i \nabla f_i(x) = 0 \\
+\sum_{i=1}^{m} \alpha_i = 1</script></li>
+<li><p>Pareto 点都是 Pareto 平稳点</p>
+</li>
+<li><p>设 $f(x)$ 是光滑且 $x^{\ast}$ 是 Pareto 点，$x(t)$ 是过点 $x^{\ast}$ 的曲线</p>
+<script type="math/tex; mode=display">
+x(t):t\in (-\epsilon,\epsilon) \rightarrow \mathcal{R}^n \\
+x(0) = x^{\ast}</script><p>则存在 $\beta \in \mathcal{R}^m$ 使得</p>
+<script type="math/tex; mode=display">
+H(x^{\ast})x'(t) = \nabla f(x^{\ast})^T \beta \\
+H(x^{\ast}) = \sum_{i=1}^{m} \alpha_i \nabla^2 f_i(x^{\ast})</script><p>$x’(t)$ 为切线</p>
+</li>
+</ul>
+<p>上式表明,算子 $H(x^{\ast})$ 将点 $x$ 处的切向量 $v = x’(t)$ 变换为由 $∇f_i(x^{\ast})$ 扩张成的 $Krylov$ 子空间的向量</p>
+<p><img src="/image/多目标优化笔记/krylov_expand.png" style="zoom:70%;" /></p>
+<h3 id="离散-Pareto-求解"><a href="#离散-Pareto-求解" class="headerlink" title="离散 Pareto 求解"></a>离散 Pareto 求解</h3><p>给定初始点 $x_0 \in \mathcal{R}^n,f_i(x)$ 光滑，可以从如下三步来获取连续 Pareto 解</p>
+<ul>
+<li>求解 Pareto 平稳点: 从初始点 $x_0$ 出发，通过梯度下降的方法求解 Pareto 平稳点 $x_0^{\ast}$</li>
+<li>扩展 Pareto 平稳点，$f(x)$ 在点 $x_0^{\ast}$ 处光滑，如果 Pareto 前沿存在，则在点 $x_0^{\ast}$ 处的某个领域内存在 Pareto 平稳点，由此出发，可以求得一系列的 Pareto 平稳点 $x_i^{\ast}$</li>
+<li>将已知的平稳点所在的局部 Pareto 前沿进行连接合并，扩充成更大的连续Pareto 前沿</li>
+</ul>
 <p><img src="/image/多目标优化笔记/pareto_front.png" style="zoom:50%;" /></p>
+<p>接下来讨论获取 Pareto 平稳点的方法</p>
+<h3 id="梯度求解法"><a href="#梯度求解法" class="headerlink" title="梯度求解法"></a>梯度求解法</h3><p>见上述</p>
+<h3 id="一阶梯度求解法扩张"><a href="#一阶梯度求解法扩张" class="headerlink" title="一阶梯度求解法扩张"></a>一阶梯度求解法扩张</h3><p>通过梯度求解法求解出 Pareto 平稳点 $x_0^{\ast}$ 后，基于该点扩展出局部 Pareto 集 $\{x_i \}$，这一过程分解为两步</p>
+<ul>
+<li>计算权重 $\alpha$</li>
+<li>求解搜索方向 $v$，估计梯度迭代的搜索方向 $v_i$</li>
+</ul>
+<p>通过如下更新公式求解</p>
+<script type="math/tex; mode=display">
+x_i = x_0^{\ast} + sv_i</script><p>计算 $\alpha$ 可以归结为求解如下的约束问题</p>
+<script type="math/tex; mode=display">
+\min_\alpha \| \sum_{i=1}^m \alpha_i \nabla f_i(x_0^{\ast}) \|^2 \\
+\text{s.t.} \quad \alpha_i \geq 0,\sum_{i=1}^m \alpha_i = 1</script><p>上述问题规模为 $m$， 量级较小，可以很方便的求解出来</p>
+<p>再由基本概念，得求解的线性方程组</p>
+<script type="math/tex; mode=display">
+H(x_0^{\ast})v = \nabla f(x_0^{\ast})^T \beta</script><p>上述问题求解有两个难点</p>
+<ul>
+<li>$x_0^{\ast}$ 不一定为 Pareto 平稳点</li>
+<li>当 $n$ 非常大时，求解起来非常困难</li>
+</ul>
+<p>为此引入校正向量 $c$（correction vector），约束问题改写为</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+&\min_{a,c} \| c \|^2 \\
+\text{s.t.} & \alpha_i \geq 0 \\
+& \sum_{i=1}^m \alpha_i = 1 \\
+& \sum_{i=1}^{m} \alpha_i(\nabla f_i(x_0^{\ast})-c)=0
+\end{array}</script><p>用 $\nabla f_i(x_0^{\ast})-c$ 近似 $\nabla f_i(x_0^{\ast})$，$x_0^{\ast}$ 将会是 Pareto 平稳点</p>
+<p>设 $a^{\ast}$ 是未引入校正向量约束问题的解，则引入 $c$ 后的解为</p>
+<script type="math/tex; mode=display">
+(a,c) = (a^{\ast},\nabla f(x_0^{\ast})^T a^{\ast})</script><p>在计算出 $a^{\ast},x_0^{\ast},c$ 后，可以计算出 $\nabla f(x_0^{\ast})$，考虑如下稀疏线性方程组</p>
+<script type="math/tex; mode=display">
+H(x_0^{\ast})v = (\nabla f(x_0^{\ast})^T - c^T) \beta</script><p>$\beta$ 为随机生成的向量，$v$ 为待求解的变量。上述式可以通过 $krylov$ 子空间，$MINERS$ 方法求解</p>
+<p>寻找离散 Pareto 解集合的求解算法</p>
+<ul>
+<li>Input：随机初始化网络</li>
+<li>ParetoExpand($x^{\ast}$) 生成点 $x^{\ast}$ 的 $K$ 个搜索方向 $v_i$</li>
+<li>由 $K$ 个搜索方向扩展出 $K$ 个子网络</li>
+<li>更新子网络节点 $x_i = x^{\ast} + sv_i$</li>
+<li>ParetoExpand($x_i$) 输出 Pareto 平稳点 $x_i^{\ast}$</li>
+<li>Output：$N$ 个 Pareto 平稳网络</li>
+</ul>
 <p><img src="/image/多目标优化笔记/efficient_Pareto.png" style="zoom: 60%;" /></p>
+<h3 id="连续-Pareto-解（Pareto-front）构建"><a href="#连续-Pareto-解（Pareto-front）构建" class="headerlink" title="连续 Pareto 解（Pareto front）构建"></a>连续 Pareto 解（Pareto front）构建</h3><p>通过前面求解出来 $N$ 个 Pareto 平稳网络（父节点及 $K$ 个子网络），由离散 Pareto 点合并成更大的连续 Pareto 前沿</p>
+<p>给定 $x_i^{\ast}$ 及基其对应的 $K$ 个节点 $\{ {x_i^{\ast}}_1,\cdots,{x_i^{\ast}}_k \}$，定义连续变量 $r_{i \rightarrow {i}_j} \in [0,1]$ 以及搜索方向</p>
+<script type="math/tex; mode=display">
+v_{i \rightarrow {i}_j} = {x_i^{\ast}}_j - x_i^{\ast},j = 1,2,\cdots,K</script><p>$x_i^{\ast}$ 处局部 Pareto 集可以通过下式进行构建</p>
+<script type="math/tex; mode=display">
+S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \rightarrow {i}_j} | r_{i \rightarrow {i}_j} \geq 0,\sum_{i=1}^K r_{i \rightarrow {i}_j} \leq 1 \}</script><p>$S(x_i^{\ast})$ 是点 $x_i^{\ast}$ 及对应的 $K$ 个子节点 $\{ {x_i^{\ast}}_1,\cdots,{x_i^{\ast}}_K \}$ 构成的凸包，切平面中切向量的线性组合仍然在切平面</p>
+<p>对于 $N$ 个局部 Pareto 集</p>
+<script type="math/tex; mode=display">
+\{ S(x_1^{\ast}),\cdots,S(x_N^{\ast}) \}</script><p>可以将两两接壤处合并成一个更大的局部 Pareto 集合，全部合并完后，可以生成多个的连续 Pareto 前沿</p>
 <p><img src="/image/多目标优化笔记/pareto_continuous.png" style="zoom:67%;" /></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf</a></li>
