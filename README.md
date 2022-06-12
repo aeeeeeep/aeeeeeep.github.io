@@ -1,2 +1,2 @@
 # aeeeeeep.github.io
-To the rainbow sea.
+https://aeeeeeep.top/
