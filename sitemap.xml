@@ -334,14 +334,14 @@
   </url>
   
   <url>
-    <loc>https://aeeeeeep.top/tags/tensorflow/</loc>
+    <loc>https://aeeeeeep.top/tags/grub/</loc>
     <lastmod>2022-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://aeeeeeep.top/tags/grub/</loc>
+    <loc>https://aeeeeeep.top/tags/tensorflow/</loc>
     <lastmod>2022-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -420,13 +420,6 @@
   </url>
   
   <url>
-    <loc>https://aeeeeeep.top/categories/misc/</loc>
-    <lastmod>2022-10-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://aeeeeeep.top/categories/archlinux/</loc>
     <lastmod>2022-10-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -435,6 +428,13 @@
   
   <url>
     <loc>https://aeeeeeep.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2022-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://aeeeeeep.top/categories/misc/</loc>
     <lastmod>2022-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
