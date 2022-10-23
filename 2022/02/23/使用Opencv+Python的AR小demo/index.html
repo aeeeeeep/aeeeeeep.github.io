@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>使用Opencv+Python的AR小demo | Aeeeeeep Blog</title><link rel="shortcut icon" href="/images/favicon64.ico"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><script src="/js/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body><main class="content"><section class="outer"><article id="post-使用Opencv+Python的AR小demo" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">使用Opencv+Python的AR小demo</h1></header><div class="article-meta"><a href="/2022/02/23/%E4%BD%BF%E7%94%A8Opencv+Python%E7%9A%84AR%E5%B0%8Fdemo/" class="article-date"><time datetime="2022-02-23T02:11:02.000Z" itemprop="datePublished">2022-02-23</time></a><div class="article-category"><a class="article-category-link" href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>浅浅了解一下 Python OpenCV，试着给自己的 iphone 8 做一下相机标定</p><span id="more"></span><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote><p>增强现实( AR ) 是一种真实世界环境的交互式体验，其中存在于现实世界中的对象通过计算机生成的感知信息得到增强，有时跨越多种感官模式，包括视觉、听觉、触觉、体感和嗅觉。AR 可以定义为一个包含三个基本特征的系统：真实和虚拟世界的结合、实时交互以及虚拟和真实对象的准确 3D 配准。重叠的感觉信息可以是建设性的（即对自然环境的补充）或破坏性的（即对自然环境的掩蔽）。这种体验与物理世界无缝交织，因此被视为真实环境的沉浸式体验。[4]通过这种方式，增强现实改变了人们对现实世界环境的持续感知，而虚拟现实完全用模拟环境取代了用户的现实世界环境。增强现实与两个主要同义词相关：混合现实和计算机介导的现实。</p><p align="right">——以上内容来自Wiki百科</p></blockquote><h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><h3 id="Vision-based-AR（基于计算机视觉的AR）"><a href="#Vision-based-AR（基于计算机视觉的AR）" class="headerlink" title="Vision based AR（基于计算机视觉的AR）"></a>Vision based AR（基于计算机视觉的AR）</h3><h4 id="Marker-Based-AR-（基于标定的AR）"><a href="#Marker-Based-AR-（基于标定的AR）" class="headerlink" title="Marker-Based AR （基于标定的AR）"></a>Marker-Based AR （基于标定的AR）</h4><p>如：</p><p><img src="/image/使用Opencv+Python的AR小demo/6.png" alt=""></p><h4 id="Marker-Less-AR（基于特征点的AR"><a href="#Marker-Less-AR（基于特征点的AR" class="headerlink" title="Marker-Less AR（基于特征点的AR)"></a>Marker-Less AR（基于特征点的AR)</h4><p>如：</p><p><img src="/image/使用Opencv+Python的AR小demo/7.png" alt=""></p><h3 id="LBS-based-AR（基于地理位置信息的AR）"><a href="#LBS-based-AR（基于地理位置信息的AR）" class="headerlink" title="LBS based AR（基于地理位置信息的AR）"></a>LBS based AR（基于地理位置信息的AR）</h3><p>如：</p><p><img src="/image/使用Opencv+Python的AR小demo/8.png" alt=""></p><blockquote><p>本文将具体讲解和实验基于特征点的AR技术</p></blockquote><h2 id="Demo-演示"><a href="#Demo-演示" class="headerlink" title="Demo 演示"></a>Demo 演示</h2><h3 id="演示环境"><a href="#演示环境" class="headerlink" title="演示环境"></a>演示环境</h3><ul><li><p>iphone 8 手机：App Store 下载 Focus [+] # 手动对焦拍摄</p></li><li><p>计算机：vim，python和 conda</p></li><li><p>OpenCV 棋盘标定纸</p></li></ul><p><img src="/image/使用Opencv+Python的AR小demo/calibration_img/9.png" alt=""></p><h3 id="准备图片"><a href="#准备图片" class="headerlink" title="准备图片"></a>准备图片</h3><ul><li>参考图片</li></ul><p><img src="/image/使用Opencv+Python的AR小demo/referenceImage.png" alt=""></p><ul><li>用例图片</li></ul><p><img src="/image/使用Opencv+Python的AR小demo/sourceImage.png" alt=""></p><h3 id="相机标定原理"><a href="#相机标定原理" class="headerlink" title="相机标定原理"></a>相机标定原理</h3><p>从世界坐标系转换到图像坐标系，求投影矩阵 $P$ 的过程</p><p>分为两步</p><ul><li>从世界坐标系转换为相机坐标系，这一步是三维点到三维点的转换，包括 $R,t$ （相机外参）等参数</li></ul><p><img src="/image/使用Opencv+Python的AR小demo/5.png" alt="5"></p><script type="math/tex;mode=display">\widetilde{X}_{c a m}=R(\widetilde{X}-\widetilde{C})</script><pre><code>* $ \widetilde&#123;X&#125; $ 为 $X$ 在世界坐标中的位置
+* $ R $ 为旋转矩阵
+* $ \widetilde&#123;C&#125; $ 为相机原点 $C$ 所在世界坐标中的位置
+* $ \widetilde&#123;X&#125;_&#123;c a m&#125; $ 为 $ X $ 在相机坐标系中的位置
+</code></pre><ul><li>从相机坐标系转换为图像坐标系，这一步是三维点到二维点的转换，包括 $K$（相机内参）等参数</li></ul><p><img src="/image/使用Opencv+Python的AR小demo/9.png" alt=""></p><ul><li><p>$C$为相机的中心点，也是相机坐标系的中心点</p></li><li><p>$Z$为相机的主轴</p></li><li><p>$p$为相机的像平面，也就是图片坐标系所在的二维平面</p></li><li><p>$C$ 点到 $p$点的距离$f$，为相机的焦距</p></li></ul><p>可得到</p><script type="math/tex;mode=display">\begin{aligned}
+x &=f X / Z \\
+y &=f Y / Z \\
+(X, \quad Y, \quad Z) & \mapsto(f X / Z, \quad f Y / Z)
+\end{aligned}</script><p>由图可知偏移量</p><p><img src="/image/使用Opencv+Python的AR小demo/10.png" alt=""></p><script type="math/tex;mode=display">(X, \quad Y, \quad Z) \mapsto\left(f X / Z+p_{x}, \quad f Y / Z+p_{y}\right)</script><p>矩阵形式为</p><script type="math/tex;mode=display">\left(\begin{array}{c}
+X \\
+Y \\
+Z \\
+    1
+\end{array}\right) \mapsto\left(\begin{array}{c}
+f X+Z p_{x} \\
+f Y+Z p_{y} \\
+Z
+\end{array}\right)=\left[\begin{array}{ccc}
+f & p_{x} & 0 \\
+& f & p_{y} & 0 \\
+& & 1 & 0
+\end{array}\right]\left(\begin{array}{c}
+X \\
+Y \\
+Z \\
+1
+\end{array}\right)</script><p>化简得</p><script type="math/tex;mode=display">\left(\begin{array}{c}
+f X+Z p_{x} \\
+f Y+Z p_{y} \\
+Z
+\end{array}\right)=\left[\begin{array}{cc}
+f & p_{x} \\
+& f & p_{y} \\
+& & 1
+\end{array}\right]\left[\begin{array}{llll}
+1 & & & 0 \\
+& 1 & & 0 \\
+& & 1 & 0
+\end{array}\right]\left(\begin{array}{l}
+X \\
+Y \\
+Z \\
+1
+\end{array}\right)</script><p>则</p><script type="math/tex;mode=display">K=\left[\begin{array}{ccc}
+f & & p_{x} \\
+& f & p_{y} \\
+& & 1
+\end{array}\right]</script><p>设旋转矩阵 $R$ 为单位矩阵 $I$，平移矩阵 $t$ 为0</p><script type="math/tex;mode=display">\begin{aligned}
+P &=K[R \mid t] \\
+&=K[I \mid 0]
+\end{aligned}</script><blockquote><p>畸变参数本例未考虑到，不作讨论</p></blockquote><h3 id="获得相机标定矩阵"><a href="#获得相机标定矩阵" class="headerlink" title="获得相机标定矩阵"></a>获得相机标定矩阵</h3><h4 id="手动对焦，固定焦距，拍摄各个方面的标定板"><a href="#手动对焦，固定焦距，拍摄各个方面的标定板" class="headerlink" title="手动对焦，固定焦距，拍摄各个方面的标定板"></a>手动对焦，固定焦距，拍摄各个方面的标定板</h4><p><img src="/image/使用Opencv+Python的AR小demo/11.png" alt=""></p><h4 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h4><ul><li>提取角点 本例使用的标定板来自 <a target="_blank" rel="noopener" href="https://calib.io/pages/camera-calibration-pattern-generator">calib</a> 有13 * 9 个角点</li><li>提取亚像素角点 提高精度</li><li>角点绘制</li><li>标定</li></ul><h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p><img src="/image/使用Opencv+Python的AR小demo/13.png" alt=""></p><p>得到 iphone 8 的相机标定矩阵为 (代码见camera_calibration.py)</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">1.09358481e+03</span> <span class="number">0.00000000e+00</span> <span class="number">5.12119524e+02</span>]</span><br><span class="line">[<span class="number">0.00000000e+00</span> <span class="number">1.08983166e+03</span> <span class="number">6.61345525e+02</span>]</span><br><span class="line">[<span class="number">0.00000000e+00</span> <span class="number">0.00000000e+00</span> <span class="number">1.00000000e+00</span>]]</span><br></pre></td></tr></table></figure><h3 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h3><h4 id="特征检测"><a href="#特征检测" class="headerlink" title="特征检测"></a>特征检测</h4><p>使用ORB法进行特征检测，ORB基于FAST算法，FAST算法的原理如下</p><p><img src="/image/使用Opencv+Python的AR小demo/12.png" alt=""></p><p>任选图像中的一点 $P$，以该点为圆形，$r$为半径确定一个圆，在圆上均匀取$m$个像素点，设定一个阈值$t$，如果$m$个像素点中，有连续$N$个像素点的大小均大于或小于$t$，则这个点就是角点。但是在进行FAST进行角点检测时，边缘位置的部分易混淆，针对这种情况，ORB算法通过增加图像金字塔和计算角度的方法，用Harris角点检测器把$N$个关键点进行等级排序，使用者可提取前n个自己需要的点。不同的是，ORB在进行特征点匹配时，检测出的角点需要满足尺度不变形和旋转不变性。</p><ul><li>尺度不变形</li></ul><p>通过对初始图像的按1/2的比例不断下采样(即按1/2的比例不断缩放)，得到一系列图像，形成图像金字塔。对每层图像，进行FAST角点检测</p><ul><li>旋转不变形</li></ul><p>采用灰度质心法进行计算每个特征点的主方向</p><script type="math/tex;mode=display">\mathrm{m}_{p q}=\sum_{x, y} x^{p} y^{q} I(x, y)</script><p>其中$x,y$分别表示像素点周围圆上所选取点的横坐标和纵坐标，$I(x,y)$表示灰度值大小，$p,q$表示指数，角度计算的方法如下</p><script type="math/tex;mode=display">\theta=\operatorname{atan} 2(\mathrm{m_{01}}, \mathrm{m_{10}})</script><h4 id="特征描述"><a href="#特征描述" class="headerlink" title="特征描述"></a>特征描述</h4><p>ORB法采用BRIEF描述子计算算法实现，BRIEF算法可分为两步</p><ul><li>特征点大小的对比</li></ul><p>以特征点为中心，取邻域窗口，在窗口上选择两个点p(x)和p(y)，比较两个点像素值的大小</p><script type="math/tex;mode=display">\tau(p ; x, y):=\left\{\begin{array}{cc}
+1 & if\quad p(x)<p(y) \\
+0 & \text { otherwise }
+\end{array}\right.</script><ul><li>重复第一步进行像素值大小的比较，形成二进制编码</li></ul><p>OBR算法对BRIEF有两种改变，分别为 steer BRIEF 和 rBRIEF</p><ul><li>steer BRIEF具备旋转不变形的特征，已知 $ /theta $，将该点周围的点旋转 $ /theta $ 度，得到新的点对<script type="math/tex;mode=display">D_{\theta}=R_{\theta} D</script></li></ul><p>$R$ 为旋转矩阵<br>旋转后，在新的位置上比较像素值的大小，得到描述子</p><ul><li>rBRIEF算法通过改变描述子的计算方法，进一步减弱同一图像中特征点的描述子的相关性，对每个角点，考虑其 $31X31$ 的邻域，使用领域中每个点周围的 $5X5$ 的邻域的像素值平均值作为该点的像素值，进而比较点对的大小。上面计算可得到 $(31-5+1)*(31-5+1)=729$ 个子窗口，提取点对的方法有 $729X728=265356$ 种，通过在这 $265356$ 中方法中选取 $256$ 种取法，形成描述子</li></ul><p>结果</p><p><img src="/image/使用Opencv+Python的AR小demo/1.png" alt=""></p><h4 id="特征匹配"><a href="#特征匹配" class="headerlink" title="特征匹配"></a>特征匹配</h4><p>本例使用 Brute-Force Matcher 进行特征匹配，也就是暴力匹配</p><p>结果</p><p><img src="/image/使用Opencv+Python的AR小demo/2.png" alt=""></p><h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><p>将参考图像表面的平面的点映射到用例图像的平面上，也就是单应性变换，单应性变换是将一个平面（齐次坐标）中的点映射到另一个平面的二维投影变换</p><script type="math/tex;mode=display">\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime} \\
+z^{\prime}
+\end{array}\right]=\left[\begin{array}{lll}
+h_{1} & h_{2} & h_{3} \\
+h_{4} & h_{5} & h_{6} \\
+h_{7} & h_{8} & h_{9}
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right]</script><p>从两个图像中传递点集，它将找到该对象的透视变换，至少需要四个正确的点才能找到转换，但两幅图像之间的单应性变换包含不适合的点。会导致匹配时出现错误，影响结果，使用 RANSAC 迭代法验证拟合</p><p>结果</p><p><img src="/image/使用Opencv+Python的AR小demo/3.png" alt=""></p><h4 id="3D-绘制"><a href="#3D-绘制" class="headerlink" title="3D 绘制"></a>3D 绘制</h4><p>使用 <a target="_blank" rel="noopener" href="https://github.com/yarolig/OBJFileLoader">yarolig的OBJFileLoader</a> 加载 3D obj 模型 (代码见 objloader_simple.py)</p><h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><p><img src="/image/使用Opencv+Python的AR小demo/4.png" alt="4"></p><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">ar_python_opencv.py</summary><pre><code class="python">
+import cv2
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from objloader_simple import *
+referenceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.png',0)
+plt.imshow(referenceImage, cmap = 'gray')
+sourceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/sourceImage.png',0)
+plt.imshow(sourceImage, cmap='gray')
+
+orb = cv2.ORB_create()
+
+referenceImagePts = orb.detect(referenceImage, None)
+sourceImagePts = orb.detect(sourceImage, None)
+
+referenceImagePts, referenceImageDsc = orb.compute(referenceImage, referenceImagePts)
+sourceImagePts, sourceImageDsc = orb.compute(sourceImage, sourceImagePts)
+
+referenceImageFeatures = cv2.drawKeypoints(referenceImage, referenceImagePts,
+                                                                                        referenceImage, color = (0,255,0), flags = 0)
+sourceImageFeatures = cv2.drawKeypoints(sourceImage, sourceImagePts,
+                                                                                        sourceImage, color = (0,255,0), flags = 0)
+
+plt.figure(figsize=(10,5))
+plt.subplot(1,2,1)
+plt.axis("off")
+plt.imshow(referenceImageFeatures, cmap = 'gray')
+plt.title('Reference Image Features')
+plt.subplot(1,2,2)
+plt.axis("off")
+plt.imshow(sourceImageFeatures,cmap='gray')
+plt.title('Source Image Features')
+plt.tight_layout()
+plt.show()
+
+MIN_MATCHES = 30
+bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
+referenceImagePts, referenceImageDsc = orb.detectAndCompute(referenceImage, None)
+sourceImagePts, sourceImageDsc = orb.detectAndCompute(sourceImage, None)
+matches = bf.match(referenceImageDsc, sourceImageDsc)
+matches = sorted(matches, key = lambda x: x.distance)
+
+if len(matches) > MIN_MATCHES:
+    idxPairs = cv2.drawMatches(referenceImage, referenceImagePts,
+                                sourceImage, sourceImagePts, matches[:MIN_MATCHES],0,flags =2)
+
+    plt.figure(figsize=(12,6))
+    plt.axis('off')
+    plt.imshow(idxPairs, cmap='gray')
+    plt.title('Matching between features')
+    plt.show()
+
+else:
+    print("Not enough matches have been found - %d/%d" %(len(matches), MIN_MATCHES))
+    matchesMask = None
+
+if len(matches) > MIN_MATCHES:
+    sourcePoints = np.float32([referenceImagePts[m.queryIdx].pt for m in matches]).reshape(-1,1,2)
+    destinationPoints = np.float32([sourceImagePts[m.trainIdx].pt for m in matches]).reshape(-1,1,2)
+    homography, mask = cv2.findHomography(sourcePoints, destinationPoints, cv2.RANSAC, 5.0)
+    matchesMask = mask.ravel().tolist()
+
+    h, w = referenceImage.shape
+    corners = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
+    transformedCorners = cv2.perspectiveTransform(corners, homography)
+
+    sourceImageMarker = cv2.polylines(sourceImage, [np.int32(transformedCorners)], True,
+                                      255, 5, cv2.LINE_AA)
+
+else:
+    print("Not enough matches are found - %d/%d" % (len(matches), MIN_MATCHES))
+    matchesMask = None
+
+drawParameters = dict(matchColor=(0, 255, 0), singlePointColor=None,
+                      matchesMask=matchesMask, flags=2)
+result = cv2.drawMatches(referenceImage, referenceImagePts, sourceImageMarker,
+                         sourceImagePts, matches, None, **drawParameters)
+
+plt.figure(figsize=(12, 6))
+plt.imshow(result, cmap='gray')
+plt.show()
+
+camera_parameters = np.array([[1108.38916, 0,          513.796472],
+                              [0,          1111.41724, 661.637500],
+                              [0,          0,          1]])
+
+obj = OBJ('/home/pacaep/Tests/OpenCvArDemo/models/fox.obj', swapyz = True)
+
+def projection_matrix(camera_parameters, homography):
+    homography = homography * (-1)
+    rot_and_transl = np.dot(np.linalg.inv(camera_parameters), homography )
+    col_1 = rot_and_transl[:,0]
+    col_2 = rot_and_transl[:,1]
+    col_3 = rot_and_transl[:,2]
+
+    l = math.sqrt(np.linalg.norm(col_1, 2) * np.linalg.norm(col_2, 2))
+    rot_1 = col_1 / l
+    rot_2 = col_2 / l
+    translation = col_3 / l
+
+    c = rot_1 + rot_2
+    p = np.cross(rot_1, rot_2)
+    d = np.cross(c,p)
+    rot_1 = np.dot(c/np.linalg.norm(c,2) + d / np.linalg.norm(d,2), 1/math.sqrt(2))
+    rot_2 = np.dot(c/np.linalg.norm(c,2) - d / np.linalg.norm(d,2), 1/math.sqrt(2))
+    rot_3 = np.cross(rot_1, rot_2)
+
+    projection = np.stack((rot_1, rot_2, rot_3, translation)).T
+    return np.dot(camera_parameters, projection)
+
+def render(img, obj, projection, model, color=False):
+    vertices = obj.vertices
+    scale_matrix = np.eye(3)*6
+    h,w = model.shape
+
+    for face in obj.faces:
+        face_vertices = face[0]
+        points = np.array([vertices[vertex -1] for vertex in face_vertices])
+        points = np.dot(points, scale_matrix)
+
+        points = np.array([[p[0] + w / 2, p[1] + h/2, p[2]] for p in points])
+        dst = cv2.perspectiveTransform(points.reshape(-1,1,3), projection)
+        imgpts = np.int32(dst)
+
+        cv2.fillConvexPoly(img, imgpts, (80, 217, 81))
+    return img
+
+sourcePoints = np.float32([referenceImagePts[m.queryIdx].pt for m in matches]).reshape(-1,1,2)
+destinationPoints = np.float32([sourceImagePts[m.trainIdx].pt for m in matches]).reshape(-1,1,2)
+
+homography, _ = cv2.findHomography(sourcePoints,destinationPoints, cv2.RANSAC, 5.0)
+matchesMask = mask.ravel().tolist()
+h, w = referenceImage.shape
+corners = np.float32([[0,0],[0,h-1],[w-1,h-1],[w-1,0]]).reshape(-1,1,2)
+transformedCorners = cv2.perspectiveTransform(corners, homography)
+frame = cv2.polylines(sourceImage, [np.int32(transformedCorners)], True, 255,3,cv2.LINE_AA)
+projection = projection_matrix(camera_parameters, homography)
+frame = render(frame, obj, projection, referenceImage, True)
+
+plt.figure(figsize=(6,12))
+plt.imshow(frame, cmap='gray')
+plt.show()
+</code></pre></details><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">camera_calibration.py</summary><pre><code class="python">
+import cv2
+import numpy as np
+import glob
+
+criteria = (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 30, 0.001)
+
+objp = np.zeros((9 * 13, 3), np.float32)
+objp[:, :2] = np.mgrid[0:13, 0:9].T.reshape(-1, 2)
+
+obj_points = []
+img_points = []
+
+images = glob.glob("/home/pacaep/Tests/OpenCvArDemo/calibration_img/*.png")
+i=0;
+for fname in images:
+    img = cv2.imread(fname)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    size = gray.shape[::-1]
+    ret, corners = cv2.findChessboardCorners(gray, (13, 9), None)
+
+    if ret:
+
+        obj_points.append(objp)
+
+        corners2 = cv2.cornerSubPix(gray, corners, (5, 5), (-1, -1), criteria)
+        if [corners2]:
+            img_points.append(corners2)
+        else:
+            img_points.append(corners)
+
+        cv2.drawChessboardCorners(img, (13, 9), corners, ret)
+        i+=1;
+        cv2.imwrite('conimg'+str(i)+'.png', img)
+        cv2.waitKey(1500)
+
+print(len(img_points))
+cv2.destroyAllWindows()
+
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, size, None, None)
+
+print("ret:", ret)
+print("mtx:\n", mtx)
+print("dist:\n", dist)
+print("rvecs:\n", rvecs)
+print("tvecs:\n", tvecs )
+
+print("-----------------------------------------------------")
+
+img = cv2.imread(images[2])
+h, w = img.shape[:2]
+newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
+print (newcameramtx)
+print("------------------use undistort-------------------")
+dst = cv2.undistort(img,mtx,dist,None,newcameramtx)
+x,y,w,h = roi
+dst1 = dst[y:y+h,x:x+w]
+cv2.imwrite('calibresult.png', dst1)
+print ("dst:", dst1.shape)
+</code></pre></details><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">objloader_simple.py</summary><pre><code class="python">
+class OBJ:
+    def __init__(self, filename, swapyz=False):
+        self.vertices = []
+        self.normals = []
+        self.texcoords = []
+        self.faces = []
+        material = None
+        for line in open(filename, "r"):
+            if line.startswith('#'): continue
+            values = line.split()
+            if not values: continue
+            if values[0] == 'v':
+                v = list(map(float, values[1:4]))
+                if swapyz:
+                    v = v[0], v[2], v[1]
+                self.vertices.append(v)
+            elif values[0] == 'vn':
+                v = list(map(float, values[1:4]))
+                if swapyz:
+                    v = v[0], v[2], v[1]
+                self.normals.append(v)
+            elif values[0] == 'vt':
+                self.texcoords.append(map(float, values[1:3]))
+            elif values[0] == 'f':
+                face = []
+                texcoords = []
+                norms = []
+                for v in values[1:]:
+                    w = v.split('/')
+                    face.append(int(w[0]))
+                    if len(w) >= 2 and len(w[1]) > 0:
+                        texcoords.append(int(w[1]))
+                    else:
+                        texcoords.append(0)
+                    if len(w) >= 3 and len(w[2]) > 0:
+                        norms.append(int(w[2]))
+                    else:
+                        norms.append(0)
+                self.faces.append((face, norms, texcoords))
+</code></pre></details></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag">作业</a></li></ul><div style="text-align:center;color:#ccc;font-size:14px">- ETX &nbsp;<i class="fe fe-smile"></i>&nbsp;Thank you for reading -</div><div><ul class="post-copyright"><li class="post-copyright-license"><strong>Copyright: </strong>All posts on this blog except otherwise stated, All adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> license agreement. Please indicate the source of reprint!</li></ul><div></div></div></footer></div><nav class="article-nav"><a href="/2022/03/05/%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E4%B8%8E%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC/" class="article-nav-link"><strong class="article-nav-caption">Newer</strong><div class="article-nav-title">最小化交叉熵损失与最大似然估计的推导</div></a><a href="/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/" class="article-nav-link"><strong class="article-nav-caption">Older</strong><div class="article-nav-title">labelImg闪退错误修复</div></a></nav><div class="gitalk" id="gitalk-container"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script><script type="text/javascript">var gitalk=new Gitalk({clientID:"1eb16485d4cf892a21bb",clientSecret:"d134888956393ad07790db31a3c50eea40618d43",repo:"gitalkIssue",owner:"aeeeeeep",admin:["aeeeeeep"],id:md5(location.pathname),distractionFreeMode:!1,pagerDirection:"last"});gitalk.render("gitalk-container")</script></article><script type="text/x-mathjax-config">MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></section><footer class="footer"><div class="outer"><div class="float-right"><div class="powered-by">&emsp;<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span></span>&emsp; <i class="fe fe-bookmark"></i>文章访问量:<span id="busuanzi_value_page_pv"></span></div></div><ul class="list-inline"><li>Aeeeeeep Blog &copy; 2022</li><li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32090202001024" style="display:inline-block;text-decoration:none;height:20px;line-height:20px"><img src="/images/备案图标.png" style="float:left"><p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#1e3e3f">苏公网安备 32090202001024号</p></a></li></ul></div></footer></main><aside class="sidebar"><button class="navbar-toggle"></button><nav class="navbar"><div class="logo"><a href="/"><img src="/images/aepBlack.svg" alt="Aeeeeeep Blog"></a></div><ul class="nav nav-main"><li class="nav-item"><a class="nav-item-link" href="/">Home</a></li><li class="nav-item"><a class="nav-item-link" href="/archives">Archives</a></li><li class="nav-item"><a class="nav-item-link" href="/links">Links</a></li><li class="nav-item"><a class="nav-item-link" href="/about">About</a></li><li class="nav-item"><a class="nav-item-link nav-item-search" title="Search"><i class="fe fe-search"></i> Search</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><div class="totop" id="totop"><i class="fe fe-rocket"></i></div></li><li class="nav-item"></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"><input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><script src="/js/jquery-2.0.3.min.js"></script><script src="/js/jquery.justifiedGallery.min.js"></script><script src="/js/lazyload.min.js"></script><script src="/js/busuanzi-2.3.pure.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/copybtn.js"></script><script src="/js/tocbot.min.js"></script><script>tocbot.init({tocSelector:".tocbot",contentSelector:".article-entry",headingSelector:"h1, h2, h3, h4, h5, h6",hasInnerContainers:!0,scrollSmooth:!0,positionFixedSelector:".tocbot",positionFixedClass:"is-position-fixed",fixedSidebarOffset:"auto"})</script><script src="/js/ocean.js"></script><script src="/js/cursor.js"></script></body></html>
