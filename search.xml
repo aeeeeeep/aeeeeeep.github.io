@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>新年愿望</title>
+    <url>/2023/01/21/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/</url>
+    <content><![CDATA[<p>写于壬寅年除夕夜</p>
+<span id="more"></span>
+<ul>
+<li>[ ] 通过英语六级</li>
+<li>[ ] 通过某高校人工智能学院研究生初试</li>
+<li>[ ] 完成编写 CUDA C 并行编程系列教程（40%）</li>
+<li>[ ] go 微服务部署并行编程</li>
+<li>[ ] 购入高性能工作站</li>
+</ul>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
     <title>caj文档批量转换为pdf-shell脚本多线程</title>
     <url>/2023/01/10/caj%E6%96%87%E6%A1%A3%E6%89%B9%E9%87%8F%E8%BD%AC%E6%8D%A2%E4%B8%BApdf-shell%E8%84%9A%E6%9C%AC%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>最近看的论文有些多，但知网上的 caj 文档又卡又难做笔记，遂写了一个 caj 文档批量转换为 pdf 的 shell 脚本。</p>
