@@ -34,17 +34,12 @@
     <url>/2023/01/21/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/</url>
     <content><![CDATA[<p>写于壬寅年除夕夜</p>
 <span id="more"></span>
-<ul>
-<li><p>[ ] 通过英语六级</p>
-</li>
-<li><p>[ ] 通过某高校人工智能学院研究生初试</p>
-</li>
-<li><p>[ ] 完成编写 CUDA C 并行编程系列教程（40%）</p>
-</li>
-<li><p>[ ] go 微服务部署并行编程</p>
-</li>
-<li><p>[x] 购入 <del>高</del> 低性能工作站</p>
-<p>配置清单</p>
+<p>❎ 通过英语六级</p>
+<p>❎ 通过某高校人工智能学院研究生初试</p>
+<p>❎ 完成编写 CUDA C 并行编程系列教程（40%）</p>
+<p>❎ go 微服务部署并行编程</p>
+<p>✅ 购入 <del>高</del> 低性能工作站</p>
+<p>  配置清单</p>
 <ul>
 <li>CPU：i5 10400</li>
 <li>主板：华擎B460M-ITX/AC</li>
@@ -54,8 +49,6 @@
 <li>机箱：金河田N1 mini-itx</li>
 <li>电源：航嘉wd500k</li>
 <li>系统：Arch Linux</li>
-</ul>
-</li>
 </ul>
 ]]></content>
       <categories>
