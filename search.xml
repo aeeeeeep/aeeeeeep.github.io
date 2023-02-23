@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2023MCM-ICM美赛C题第二问思路</title>
+    <url>/2023/02/23/2023MCM-ICM%E7%BE%8E%E8%B5%9BC%E9%A2%98%E7%AC%AC%E4%BA%8C%E9%A2%98%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在睡了十一个小时后，蹦出的思路，目前网上没有看到相同的方法（不知道比赛刚结束就发思路会不会出事），第一题和第三题大家大同小异，就不讲解了。</p>
+<span id="more"></span>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>对于给定的未来解决方案单词，在未来的日期，开发一个模型，使您能够预测报告结果的分布。换句话说，预测未来日期（1，2，3，4，5，6，X）的相关百分比。你的模型和预测有哪些不确定性？举一个具体的例子，说明你对2023年3月1日<code>EERIE</code>一词的预测。你对模型的预测有多自信？</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先是单词特征，笔者在这里选择了 6 个特征</p>
+<ul>
+<li>词频（<a href="https://www.kaggle.com/datasets/rtatman/english-word-frequency）">https://www.kaggle.com/datasets/rtatman/english-word-frequency）</a></li>
+<li>词性（名词，动词 ……）</li>
+<li>音节数</li>
+<li>词的情感分类（贬义，中性，褒义）</li>
+<li>重复字母数</li>
+<li>当天是否是假期</li>
+</ul>
+<p>要预测的 7 个百分比是很明显呈正态分布，可以使用正态分布曲线拟合，可视化如下</p>
+<p><img src="/home/pacaep/aepBlog/source/image/2023MCM-ICM美赛C题第二题思路/std.png" alt=""></p>
+<p>这样就可以将 7 个要预测的特征转化为 2 个特征（std，mean）</p>
+<p>再搭建神经网络预测即可，由于数据量较少，笔者使用多层 Dropout 的方法，p 相继下降来防止过拟合，提高泛化。网络结构如下所示，超参在文末代码中</p>
+<p><img src="/home/pacaep/aepBlog/source/image/2023MCM-ICM美赛C题第二题思路/net.png" alt=""></p>
+<p>最后预测的<code>EERIE</code>百分比如下图所示</p>
+<p><img src="/home/pacaep/aepBlog/source/image/2023MCM-ICM美赛C题第二题思路/eerie.png" alt=""></p>
+<p>代码我放在了 github 仓库（<a href="https://github.com/aeeeeeep/2023MCM-C-Task2），欢迎给个">https://github.com/aeeeeeep/2023MCM-C-Task2），欢迎给个</a> star ⭐⭐⭐～</p>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HGame_2023_Week3_3ctu4_card_problem</title>
     <url>/2023/01/31/HGame-2023-Week3-3ctu4-card-problem/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>干扰特征非常多的二分类问题，解题步骤如下</p>
