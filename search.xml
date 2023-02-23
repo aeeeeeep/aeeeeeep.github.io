@@ -16,12 +16,12 @@
 <li>当天是否是假期</li>
 </ul>
 <p>要预测的 7 个百分比是很明显呈正态分布，可以使用正态分布曲线拟合，可视化如下</p>
-<p><img src="image/2023MCM-ICM美赛C题第二题思路/std.png" alt=""></p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/std.png" alt=""></p>
 <p>这样就可以将 7 个要预测的特征转化为 2 个特征（std，mean）</p>
 <p>再搭建神经网络预测即可，由于数据量较少，笔者使用多层 Dropout 的方法，p 相继下降来防止过拟合，提高泛化。网络结构如下所示，超参在文末代码中</p>
-<p><img src="image/2023MCM-ICM美赛C题第二题思路/net.png" alt=""></p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/net.png" alt=""></p>
 <p>最后预测的<code>EERIE</code>百分比如下图所示</p>
-<p><img src="image/2023MCM-ICM美赛C题第二题思路/eerie.png" alt=""></p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/eerie.png" alt=""></p>
 <p>代码我放在了 github 仓库</p>
 <p><a href="https://github.com/aeeeeeep/2023MCM-C-Task2">https://github.com/aeeeeeep/2023MCM-C-Task2</a></p>
 <p>欢迎给个 star ⭐⭐⭐～</p>
