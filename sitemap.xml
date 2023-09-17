@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://aeeeeeep.top/about/index.html</loc>
+    
+    <lastmod>2023-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://aeeeeeep.top/2023/09/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/</loc>
     
     <lastmod>2023-09-17</lastmod>
@@ -138,15 +147,6 @@
   
   <url>
     <loc>https://aeeeeeep.top/2022/02/23/%E4%BD%BF%E7%94%A8Opencv+Python%E7%9A%84AR%E5%B0%8Fdemo/</loc>
-    
-    <lastmod>2022-08-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://aeeeeeep.top/about/index.html</loc>
     
     <lastmod>2022-08-07</lastmod>
     
