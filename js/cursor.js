@@ -18,7 +18,8 @@
                 "z-index": "10000000",
                 fontSize: "25px",
                 "will-change": "transform",
-                color: "#000000"
+                color: "#000000",
+                opacity: "0.5"
             };
             //初始化
             this.init = function (x, y, color) {
@@ -37,7 +38,7 @@
                 this.position.x += this.velocity.x;
                 this.position.y += this.velocity.y;
                 this.lifeSpan--;
-                this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px,0) scale(" + this.lifeSpan / 120 + ")";
+                this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px,0) scale(" + this.lifeSpan / 150 + ")";
             };
             //销毁
             this.die = function () {
@@ -52,7 +53,7 @@
         function () {
             Rander();
         },
-        1000 / 60);
+        1000 / 80);
     //添加事件监听器
     function AddListener() {
         //当前事件对象会作为第一个参数传入函数
