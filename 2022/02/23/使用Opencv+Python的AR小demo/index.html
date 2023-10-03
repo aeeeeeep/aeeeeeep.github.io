@@ -63,13 +63,13 @@ h_{7} & h_{8} & h_{9}
 x \\
 y \\
 z
-\end{array}\right]</script><p>从两个图像中传递点集，它将找到该对象的透视变换，至少需要四个正确的点才能找到转换，但两幅图像之间的单应性变换包含不适合的点。会导致匹配时出现错误，影响结果，使用 RANSAC 迭代法验证拟合</p><p>结果</p><p><img src="/image/使用Opencv+Python的AR小demo/3.png" alt=""></p><h4 id="3D-绘制"><a href="#3D-绘制" class="headerlink" title="3D 绘制"></a>3D 绘制</h4><p>使用 <a href="加载 3D obj 模型 (代码见 objloader_simple.py">yarolig的OBJFileLoader</a></p><h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><p><img src="/image/使用Opencv+Python的AR小demo/4.webp" alt="4"></p><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">ar_python_opencv.py</summary><pre><code class="python">
+\end{array}\right]</script><p>从两个图像中传递点集，它将找到该对象的透视变换，至少需要四个正确的点才能找到转换，但两幅图像之间的单应性变换包含不适合的点。会导致匹配时出现错误，影响结果，使用 RANSAC 迭代法验证拟合</p><p>结果</p><p><img src="/image/使用Opencv+Python的AR小demo/3.webp" alt=""></p><h4 id="3D-绘制"><a href="#3D-绘制" class="headerlink" title="3D 绘制"></a>3D 绘制</h4><p>使用 <a href="加载 3D obj 模型 (代码见 objloader_simple.py">yarolig的OBJFileLoader</a></p><h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><p><img src="/image/使用Opencv+Python的AR小demo/4.webp" alt="4"></p><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">ar_python_opencv.py</summary><pre><code class="python">
 import cv2
 import numpy as np
 import math
 import matplotlib.pyplot as plt
 from objloader_simple import *
-referenceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.png',0)
+referenceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/referenceImage.webp',0)
 plt.imshow(referenceImage, cmap = 'gray')
 sourceImage = cv2.imread('/home/pacaep/Tests/OpenCvArDemo/img/sourceImage.webp',0)
 plt.imshow(sourceImage, cmap='gray')
