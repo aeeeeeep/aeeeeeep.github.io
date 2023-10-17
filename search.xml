@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>《将博客搬至CSDN》</title>
+    <url>/2023/10/18/Move-blog-to-CSDN/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>论文阅读: ZeRO-Offload: Democratizing Billion-Scale Model Training</title>
     <url>/2023/10/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Offload-Democratizing-Billion-Scale-Model-Training/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ZeRO-Offload 主要优化在于尽量减少数据在 GPU 与 CPU 之间的移动，并减少 CPU 计算时间，同时最大限度地节省 GPU 上的内存。</p>
