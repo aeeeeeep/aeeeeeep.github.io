@@ -159,9 +159,9 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
 <h3 id="Design-for-Unprecedented-Scale"><a href="#Design-for-Unprecedented-Scale" class="headerlink" title="Design for Unprecedented Scale"></a>Design for Unprecedented Scale</h3><ul>
 <li>Infinity offload engine for model states：ZeRO Infinity 基于 ZeRO-3 设计，对所有模型状态进行分区，消除内存冗余，设计了 Infinity offload engine，将所有分区模型状态 offload 到 CPU 或 NVMe，或者根据内存需求保留在 GPU 上。请注意，上面图 2a 和图 2b 中，96 个节点（1536个GPU）的 DGX-2 集群的总 NVMe 内存足够存储 100  万亿参数模型的模型状态</li>
 <li>CPU Offload for activations：将激活值内存 offload 到 CPU 内存中</li>
-<li>Memory-centric tiling for working memory：ZeRO-Infinity 可以支持任意大小的算子，不依赖 MP，将大型算子分解为由原始算子的参数切片组成的数学上等价的较小线性算子序列，逐个获取和释放每个切片的参数和梯度<br>Design for Excellent Training Efficiency</li>
+<li>Memory-centric tiling for working memory：ZeRO-Infinity 可以支持任意大小的算子，不依赖 MP，将大型算子分解为由原始算子的参数切片组成的数学上等价的较小线性算子序列，逐个获取和释放每个切片的参数和梯度</li>
 </ul>
-<p>问题：带宽不匹配：GPU &gt; CPU &gt; NVMe</p>
+<h3 id="Design-for-Excellent-Training-Efficiency"><a href="#Design-for-Excellent-Training-Efficiency" class="headerlink" title="Design for Excellent Training Efficiency"></a>Design for Excellent Training Efficiency</h3><p>问题：带宽不匹配：GPU &gt; CPU &gt; NVMe</p>
 <p>必要带宽：</p>
 <ul>
 <li>参数和梯度：70GB/s</li>
