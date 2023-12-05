@@ -94,7 +94,7 @@
 <p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/6.webp" width="500" /></p>
 <p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/7.webp" width="500" /></p>
 <p>给定每个节点 N 个 GPU、M 的模型大小和 Z 的量化比率，NCCL all-to-all 将生成 M*N/Z 跨节点流量</p>
-<p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/8.webp" width="500" /></p>
+<p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/8.webp" width="1000" /></p>
 <p>相比之下，通过 qgZ，将每个 GPU 的跨节点流量从 M/Z 减少到 M/(Z<em>N)。 因此，总通信量从 M</em>N/Z 减少到 M<em>N/(Z</em>N) = M/Z</p>
 <p>此外，通过重叠节点内和节点间通信以及融合 CUDA 内核来进一步优化 qgZ 的端到端延迟</p>
 <ul>
