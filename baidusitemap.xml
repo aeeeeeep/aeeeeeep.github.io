@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://aeeeeeep.top/2022/02/23/%E4%BD%BF%E7%94%A8Opencv+Python%E7%9A%84AR%E5%B0%8Fdemo/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/02/06/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E5%B9%B6%E5%8F%91%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/01/30/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E4%BA%8B%E4%BB%B6%E4%B8%8E%E5%90%8C%E6%AD%A5/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/01/16/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/01/09/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/01/02/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2023/12/12/CUDA%E7%BC%96%E7%A8%8B-GPU%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0%E5%92%8CCUDA%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2023/12/26/CUDA%E7%BC%96%E7%A8%8B-PyCUDA%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2023/01/21/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA-C%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
+    <loc>https://aeeeeeep.top/2024/01/23/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <lastmod>2024-03-27</lastmod>
+  </url>
+  <url>
     <loc>https://aeeeeeep.top/2023/11/25/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/</loc>
     <lastmod>2023-12-05</lastmod>
   </url>
@@ -57,10 +105,6 @@
     <lastmod>2023-10-03</lastmod>
   </url>
   <url>
-    <loc>https://aeeeeeep.top/2023/01/21/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/</loc>
-    <lastmod>2023-10-03</lastmod>
-  </url>
-  <url>
     <loc>https://aeeeeeep.top/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</loc>
     <lastmod>2023-10-03</lastmod>
   </url>
@@ -109,10 +153,6 @@
     <lastmod>2023-10-03</lastmod>
   </url>
   <url>
-    <loc>https://aeeeeeep.top/2022/02/23/%E4%BD%BF%E7%94%A8Opencv+Python%E7%9A%84AR%E5%B0%8Fdemo/</loc>
-    <lastmod>2023-10-03</lastmod>
-  </url>
-  <url>
     <loc>https://aeeeeeep.top/2022/04/09/%E5%88%B6%E4%BD%9C%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86%E5%B8%B8%E7%94%A8python%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</loc>
     <lastmod>2023-10-03</lastmod>
   </url>
@@ -145,11 +185,11 @@
     <lastmod>2023-10-03</lastmod>
   </url>
   <url>
-    <loc>https://aeeeeeep.top/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/</loc>
+    <loc>https://aeeeeeep.top/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2023-10-03</lastmod>
   </url>
   <url>
-    <loc>https://aeeeeeep.top/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://aeeeeeep.top/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/</loc>
     <lastmod>2023-10-03</lastmod>
   </url>
 </urlset> 
