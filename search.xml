@@ -2783,7 +2783,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>最近看的论文有些多，但知网上的 caj 文档又卡又难做笔记，遂写了一个 caj 文档批量转换为 pdf 的 shell 脚本。</p>
 <span id="more"></span>
 <h2 id="caj2pdf"><a href="#caj2pdf" class="headerlink" title="caj2pdf"></a>caj2pdf</h2><p>安装 caj2pdf 命令行工具</p>
-<p>github 源码: [</p>
+<p>github 源码: <a href="https://github.com/caj2pdf/caj2pdf">https://github.com/caj2pdf/caj2pdf</a></p>
 <p>aur 用户</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yay -S caj2pdf-git</span><br></pre></td></tr></table></figure>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>当前目录下所有 caj 文件批量转换为pdf，并删除原 caj 文件</p>
@@ -4371,7 +4371,7 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
 <span id="more"></span>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>监控摄像机标定一直是计算机视觉工业应用的一个重要课题。内部和外部参数都必须精确校准，才能从记录的 2D 图像或视频中识别出 3D 场景中发生的事情，相机标定的一般方法是使用标定对象，如棋盘标定。然而，这些方法对于监控摄像机来说往往是不切实际的，因为它们需要一个足够大的校准对象来覆盖整个拍摄区域。</p>
 <blockquote>
-<p> 原论文下载：</p>
+<p> 源码：<a href="https://github.com/EmanueleGhelfi/iacv">https://github.com/EmanueleGhelfi/iacv</a></p>
 </blockquote>
 <h2 id="直线提取"><a href="#直线提取" class="headerlink" title="直线提取"></a>直线提取</h2><h3 id="Canny"><a href="#Canny" class="headerlink" title="Canny"></a>Canny</h3><h3 id="Hough-Transform"><a href="#Hough-Transform" class="headerlink" title="Hough Transform"></a>Hough Transform</h3><h2 id="形状重建"><a href="#形状重建" class="headerlink" title="形状重建"></a>形状重建</h2><h3 id="Affine-Rectification"><a href="#Affine-Rectification" class="headerlink" title="Affine Rectification"></a>Affine Rectification</h3><h3 id="Euclidean-Rectification"><a href="#Euclidean-Rectification" class="headerlink" title="Euclidean Rectification"></a>Euclidean Rectification</h3><h2 id="度量指标属性"><a href="#度量指标属性" class="headerlink" title="度量指标属性"></a>度量指标属性</h2><h2 id="相机标定"><a href="#相机标定" class="headerlink" title="相机标定"></a>相机标定</h2><h2 id="世界坐标定位"><a href="#世界坐标定位" class="headerlink" title="世界坐标定位"></a>世界坐标定位</h2><h2 id="3D-形状重构"><a href="#3D-形状重构" class="headerlink" title="3D 形状重构"></a>3D 形状重构</h2><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Fitting-Vanishing-Point"><a href="#Fitting-Vanishing-Point" class="headerlink" title="Fitting Vanishing Point"></a>Fitting Vanishing Point</h3><h3 id="Fitting-Line-at-Infinity"><a href="#Fitting-Line-at-Infinity" class="headerlink" title="Fitting Line at Infinity"></a>Fitting Line at Infinity</h3><h3 id="Fitting-Conics"><a href="#Fitting-Conics" class="headerlink" title="Fitting Conics"></a>Fitting Conics</h3><h2 id="总结分析"><a href="#总结分析" class="headerlink" title="总结分析"></a>总结分析</h2><h2 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h2>]]></content>
       <categories>
