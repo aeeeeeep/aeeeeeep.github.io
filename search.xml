@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2023MCM-ICM美赛C题第二问思路</title>
-    <url>/2023/02/23/2023MCM-ICM%E7%BE%8E%E8%B5%9BC%E9%A2%98%E7%AC%AC%E4%BA%8C%E9%A2%98%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在睡了十一个小时后，蹦出的思路，目前网上没有看到相同的方法（不知道比赛刚结束就发思路会不会出事），第一题和第三题大家大同小异，就不讲解了。</p>
-<span id="more"></span>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>对于给定的未来解决方案单词，在未来的日期，开发一个模型，使您能够预测报告结果的分布。换句话说，预测未来日期（1，2，3，4，5，6，X）的相关百分比。你的模型和预测有哪些不确定性？举一个具体的例子，说明你对2023年3月1日<code>EERIE</code>一词的预测。你对模型的预测有多自信？</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先是单词特征，笔者在这里选择了 6 个特征</p>
-<ul>
-<li>词频（</li>
-<li>词性（名词，动词 ……）</li>
-<li>音节数</li>
-<li>词的情感分类（贬义，中性，褒义）</li>
-<li>重复字母数</li>
-<li>当天是否是假期</li>
-</ul>
-<p>要预测的 7 个百分比是很明显呈正态分布，可以使用正态分布曲线拟合，可视化如下</p>
-<p><img src="/image/2023MCM-ICM美赛C题第二题思路/std.png" alt=""></p>
-<p>这样就可以将 7 个要预测的特征转化为 2 个特征（std，mean）</p>
-<p>再搭建神经网络预测即可，由于数据量较少，笔者使用多层 Dropout 的方法，p 相继下降来防止过拟合，提高泛化。网络结构如下所示，超参在文末代码中</p>
-<p><img src="/image/2023MCM-ICM美赛C题第二题思路/net.webp" alt=""></p>
-<p>最后预测的<code>EERIE</code>百分比如下图所示</p>
-<p><img src="/image/2023MCM-ICM美赛C题第二题思路/eerie.webp" alt=""></p>
-<p>代码我放在了 github 仓库</p>
-<p><a href="https://github.com/aeeeeeep/2023MCM-C-Task2">https://github.com/aeeeeeep/2023MCM-C-Task2</a></p>
-<p>欢迎给个 star ⭐⭐⭐～</p>
-]]></content>
-      <categories>
-        <category>数学建模</category>
-      </categories>
-      <tags>
-        <tag>数据分析</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2021亚太数学建模竞赛A题简要思路</title>
     <url>/2021/11/29/2021%E4%BA%9A%E5%A4%AA%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AB%9E%E8%B5%9BA%E9%A2%98/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>小记一下第一次参加数模赛</p>
@@ -359,6 +326,39 @@ dxf_close(FID);
       </categories>
       <tags>
         <tag>图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2023MCM-ICM美赛C题第二问思路</title>
+    <url>/2023/02/23/2023MCM-ICM%E7%BE%8E%E8%B5%9BC%E9%A2%98%E7%AC%AC%E4%BA%8C%E9%A2%98%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在睡了十一个小时后，蹦出的思路，目前网上没有看到相同的方法（不知道比赛刚结束就发思路会不会出事），第一题和第三题大家大同小异，就不讲解了。</p>
+<span id="more"></span>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>对于给定的未来解决方案单词，在未来的日期，开发一个模型，使您能够预测报告结果的分布。换句话说，预测未来日期（1，2，3，4，5，6，X）的相关百分比。你的模型和预测有哪些不确定性？举一个具体的例子，说明你对2023年3月1日<code>EERIE</code>一词的预测。你对模型的预测有多自信？</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先是单词特征，笔者在这里选择了 6 个特征</p>
+<ul>
+<li>词频（</li>
+<li>词性（名词，动词 ……）</li>
+<li>音节数</li>
+<li>词的情感分类（贬义，中性，褒义）</li>
+<li>重复字母数</li>
+<li>当天是否是假期</li>
+</ul>
+<p>要预测的 7 个百分比是很明显呈正态分布，可以使用正态分布曲线拟合，可视化如下</p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/std.png" alt=""></p>
+<p>这样就可以将 7 个要预测的特征转化为 2 个特征（std，mean）</p>
+<p>再搭建神经网络预测即可，由于数据量较少，笔者使用多层 Dropout 的方法，p 相继下降来防止过拟合，提高泛化。网络结构如下所示，超参在文末代码中</p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/net.webp" alt=""></p>
+<p>最后预测的<code>EERIE</code>百分比如下图所示</p>
+<p><img src="/image/2023MCM-ICM美赛C题第二题思路/eerie.webp" alt=""></p>
+<p>代码我放在了 github 仓库</p>
+<p><a href="https://github.com/aeeeeeep/2023MCM-C-Task2">https://github.com/aeeeeeep/2023MCM-C-Task2</a></p>
+<p>欢迎给个 star ⭐⭐⭐～</p>
+]]></content>
+      <categories>
+        <category>数学建模</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
       </tags>
   </entry>
   <entry>
@@ -1317,6 +1317,159 @@ dxf_close(FID);
       </tags>
   </entry>
   <entry>
+    <title>CUDA编程: CUDA模型概述</title>
+    <url>/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>讨论 GPU 的并行计算是如何在硬件上实现的，CUDA 中的模块理解以及 CPU和 GPU 之间的交互，指令的同步。</p>
+<span id="more"></span>
+<h2 id="GPU-架构与异构并行计算"><a href="#GPU-架构与异构并行计算" class="headerlink" title="GPU 架构与异构并行计算"></a>GPU 架构与异构并行计算</h2><h3 id="什么是异构并行计算"><a href="#什么是异构并行计算" class="headerlink" title="什么是异构并行计算"></a>什么是异构并行计算</h3><p>最初的计算机只包含中央处理器，为了处理越来越复杂的图形计算，GPU 营运而生，因其数据众多的轻量级线程，非常适合处理大规模异构并行计算。</p>
+<p>下图所示是一个典型的异构并行架构，包括一个 CPU及其内存 和一个 GPU及其内存，GPU 设备端通过 PCIe 总线与基于 CPU 主机端进行交互。一个异构并行应用包括主机代码和设备代码，分别运行在主机端和设备端。应用由 CPU 初始化，在设备端进行数据运算前，CPU 负责管理设备端的环境，代码和数据。我们称 host 为 CPU 及其内存，device 为 GPU 及其内存。</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/0.png" alt=""></p>
+<p>CPU 计算适合处理控制密集型任务，GPU 计算适合处理包含数据并行的计算密集型任务。在 CPU 上执行串行部分或任务并行部分，在 GPU 上执行数据密集型并行部分，这种异构并行架构使得计算能力可以充分被利用。</p>
+<h3 id="NVIDIA-GPU-显卡架构发展历程"><a href="#NVIDIA-GPU-显卡架构发展历程" class="headerlink" title="NVIDIA GPU 显卡架构发展历程"></a>NVIDIA GPU 显卡架构发展历程</h3><ul>
+<li><strong>Tesla</strong>（特斯拉）2008年，应用于早期的 CUDA 系列显卡芯片中，并不是真正意义上的 GPU 芯片。</li>
+<li><strong>Fermi</strong>（费米）2010年，是第一个完整的 GPU 计算架构。首款可支持与共享存储结合纯 cache 层次的 GPU 架构，支持 ECC(Error Correcting Code) 的 GPU 架构。</li>
+<li><strong>Kepler</strong>（开普勒）2012年，Fermi 的优化版。</li>
+<li><strong>Maxwell</strong>（麦克斯韦）2014年，首次支持实时的动态全局光照效果，</li>
+<li><strong>Pascal</strong>（帕斯卡）2016年，GPU 将处理器和数据集成在同一个程序包内，以实现更高的计算效率。</li>
+<li><strong>Volta</strong>（伏打）2017年，首次将一个 CUDA 内核拆分为FP32 和 INT32 两部分，首次支持混合精度运算，提高了5倍于 Pascal 计算速度，还增加了专用于深度学习的 Tensor Core 张量单元。</li>
+<li><strong>Turing</strong>（图灵）2018年，增加了 RT Core 专用光线追踪处理器，将实时光线追踪运算加速至上一代架构的 25 倍，并能以高出 CPU 30 多倍的速度进行电影效果的最终帧渲染。去掉了对 FP64 计算的支持。</li>
+<li><strong>Ampere</strong>（安培）2020年，重新支持 FP64，新增异步拷贝指令能够从 global memory 中将数据直接加载到 SM shared memory，降低中间寄存器堆（RF）的需求。新增 BF16 数据类型，专为深度学习优化。</li>
+</ul>
+<h2 id="CUDA-编程模型"><a href="#CUDA-编程模型" class="headerlink" title="CUDA 编程模型"></a>CUDA 编程模型</h2><p>CUDA 是一个通用并行计算平台和编程模型，如下图所示，CUDA 平台可以通过 CUDA 加速库、编译器指令、应用程序编程接口或编程语言接口来使用。后面的章节我们会重点讲解 CUDA C 以及 PyCUDA 的编程。</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/1.png" alt=""></p>
+<h3 id="CUDA-软件体系"><a href="#CUDA-软件体系" class="headerlink" title="CUDA 软件体系"></a>CUDA 软件体系</h3><p>CUDA 提供了两层 API 来调用底层 GPU 硬件</p>
+<ul>
+<li><p>CUDA 驱动 API (CUDA Driver API)</p>
+<p>是一种基于句柄的底层接口,大多数对象通过句柄被引用,其函数前缀均为<code>cu</code>，在调用 Driver API 前必须进行初始化，再创建 CUDA  上下文，该上下文关联到特定设备并成为主机线程的当前上下文，通过加载 PTX 汇编形式 或 二进制对象形式 的内核，然后启动内核计算。Driver API 可以通过直接操作硬件执行一些复杂的功能，但其编程较为复杂，难度较大。</p>
+</li>
+<li><p>CUDA 运行时 API (CUDA Runtime API)</p>
+<p>Runtime API 对 Driver API 进行了一定的封装，隐藏了部分实现细节，因此使用起来更为方便，因此我们更多使用的是 Runtime API。Runtime API 没有专门的初始化函数，它将在第一次调用运行时函数时自动完成初始化。使用时，通常需要包含头文件 <code>cuda_runtime.h</code>，其函数前缀均为cuda。</p>
+</li>
+</ul>
+<p>如下图所示</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/2.png" alt=""></p>
+<p>Runtime API 和 Driver API 之间没有明显的性能差距，这两种 API 不能混合使用，只用单独使用其一。</p>
+<h3 id="CUDA-函数库-CUDA-Libraries"><a href="#CUDA-函数库-CUDA-Libraries" class="headerlink" title="CUDA 函数库 (CUDA Libraries)"></a>CUDA 函数库 (CUDA Libraries)</h3><p>CUDA 提供了几个较为成熟的高效函数库，可以直接调用这些库函数进行计算，常见的包括</p>
+<ul>
+<li><p>CUFFT：利用 CUDA 进行傅立叶变换的函数库</p>
+</li>
+<li><p>CUBLAS：利用 CUDA 进行加速的完整标准矩阵与向量的运算库</p>
+</li>
+<li><p>CUDPP：并行操作函数库</p>
+</li>
+<li><p>CUDNN：利用CUDA进行深度卷积神经网络</p>
+</li>
+</ul>
+<h3 id="CUDA-应用程序-CUDA-Application"><a href="#CUDA-应用程序-CUDA-Application" class="headerlink" title="CUDA 应用程序 (CUDA Application)"></a>CUDA 应用程序 (CUDA Application)</h3><p>CUDA 程序包含在 host 上运行的主机代码和在 device 上运行的设备代码，设备代码会在编译时通过 CUDA  nvcc 编译器从主机代码中分离，再转换成 PTX(ParallelThread Execution) 汇编语言，由 GPU 并行线程执行，主机代码由 CPU 执行。如下图所示</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/3.png" alt=""></p>
+<p>执行流程如下</p>
+<ul>
+<li><p>分配 host 内存，并进行数据初始化（CPU初始化）</p>
+</li>
+<li><p>分配 device 内存，并从 host 将数据拷贝到 device 上（GPU初始化）</p>
+</li>
+<li><p>调用 CUDA 的核函数在 device 上完成指定的运算（GPU并行运算）</p>
+</li>
+<li><p>将 device上的运算结果拷贝到 host 上（将GPU结果传回CPU）</p>
+</li>
+<li><p>释放 device 和 host 上分配的内存（初始化清空）</p>
+</li>
+</ul>
+<h3 id="CUDA-硬件结构"><a href="#CUDA-硬件结构" class="headerlink" title="CUDA 硬件结构"></a>CUDA 硬件结构</h3><ul>
+<li><p>SP（Streaming Processor）也称为 CUDA core，是最基本的处理单元，最后具体的指令和任务都是在 SP 上处理的。GPU 进行并行计算，也就是很多个 SP 同时做处理。</p>
+</li>
+<li><p>SM（Streaming Multiprocessor）多个 SP 加上其他资源组成一个 SM，也叫 GPU 大核，其他资源如包括warp scheduler，register，shared memory 等。SM可以看做GPU的心脏（类似 CPU 核心）。每个 SM 都拥有 register 和 shared memory，CUDA 将这些资源分配给所有驻留在 SM 中的线程，但资源非常有限，SM 结构如下图所示。</p>
+</li>
+</ul>
+<p><img src="/image/CUDA编程-CUDA模型概述/5.png" alt=""></p>
+<p>每个 SM 包含的 SP 数量依据 GPU 架构而不同，如 Fermi 架构 GF100 是 32 个，GF10X 是 48 个，Kepler 架构都是 192 个，Maxwell 都是128 个。</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/6.png" alt=""></p>
+<p>在软件逻辑上是所有 SP 是并行计算的，但是物理上并不是，比如只有 8 个 SM 却有 1024 个线程块需要调度处理，因为有些会处于挂起，就绪等其他状态，这有关 GPU 的线程调度，后续章节会展开讨论。</p>
+<h2 id="三-理解-kernel-thread-block-grid-与-warp"><a href="#三-理解-kernel-thread-block-grid-与-warp" class="headerlink" title="三 理解 kernel, thread, block , grid 与 warp"></a>三 理解 kernel, thread, block , grid 与 warp</h2><h3 id="CUDA-线程模型"><a href="#CUDA-线程模型" class="headerlink" title="CUDA 线程模型"></a>CUDA 线程模型</h3><p>线程是程序执行的最基本单元，CUDA 的并行计算通过成千上万个线程的并行执行来实现。下图为 GPU 的线程结构</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/7.png" alt=""></p>
+<p>CUDA的线程模型从小往大依次是</p>
+<ul>
+<li><p>Thread，线程，并行的基本单位</p>
+</li>
+<li><p>Block，线程块，互相合作的线程组，线程块有如下几个特点：</p>
+<ul>
+<li><p>以1维、2维或3维组织</p>
+</li>
+<li><p>允许彼此同步</p>
+</li>
+<li>可以通过共享内存快速交换数据</li>
+</ul>
+</li>
+<li><p>Grid，网格，由一组 Block 组成</p>
+<ul>
+<li>以1维、2维组织</li>
+</ul>
+<ul>
+<li>共享全局内存</li>
+</ul>
+</li>
+</ul>
+<h3 id="kernel"><a href="#kernel" class="headerlink" title="kernel"></a>kernel</h3><p>kernel 是在 device 上线程中并行执行的函数，是软件概念，核函数用<code>__global__</code>符号声明，并用 <code>&lt;&lt;&lt;grid, block&gt;&gt;&gt;</code> 执行配置语法指定内核调用的 CUDA 线程数，每个 kernel 的 thread 都有一个唯一的线程 ID，可以通过内置变量在内核中访问。block 一旦被分配好 SM，该 block 就会一直驻留在该 SM 中，直到执行结束。一个 SM 可以同时拥有多个 blocks。</p>
+<h3 id="warp"><a href="#warp" class="headerlink" title="warp"></a>warp</h3><p>warp 是 SM 的基本执行单元，也称线程束，一个 warp 有 32 个并行的 thread， SM 旨在同时执行数百个 thread，为了管理如此大量的线程，采用了 SIMT （Single-Instruction, Multiple-Thread：单指令，多线程）的架构，也就是一个 warp 中的所有 thread 一次执行一条公共指令，并且每个thread会使用各自的data执行该指令。</p>
+<p>一个块中的 warp 总数计算如下</p>
+<script type="math/tex; mode=display">
+WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下图</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/8.png" alt=""></p>
+<p>从硬件角度来看，所有的 thread 以一维形式组织，每个 thread 都有个唯一的 ID，于是作为补全整数倍的 thread 在所在的 warp 中为 inactive 状态，会额外消耗 SM 资源，所以要设定 block 中的 thread 一般为32的倍数。</p>
+<p>下面从硬件角度和软件角度解释 CUDA 的线程模型</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>硬件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread</td>
+<td>SP</td>
+<td>每个线程由每个线程处理器（SP）执行</td>
+</tr>
+<tr>
+<td>Block</td>
+<td>SM</td>
+<td>线程块由多核处理器（SM）执行</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>Device</td>
+<td>一个 kernel 由一个 grid 来执行，一次只能在一个 GPU 上执行</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="线程索引"><a href="#线程索引" class="headerlink" title="线程索引"></a>线程索引</h3><p>确定线程的唯一索引，以 2D grid 和 2D block 的情况为例。</p>
+<p>我们要计算的数值矩阵在内存中是 row-major（行主序） 线性存储的，如下图</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/9.png" alt=""></p>
+<p>将 thread 和 block 索引映射到矩阵坐标</p>
+<p>ix = threadIdx.x + blockIdx.x * blockDim.x</p>
+<p>iy = threadIdx.y + blockIdx.y * blockDim.y</p>
+<p>idx = iy * nx + ix</p>
+<p>下图为 block 和 thread 索引，矩阵坐标以及线性地址之间的关系</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/10.png" alt=""></p>
+<p>在实践应用中，常常会多一维 grid， 那就是三维情况的索引，如下图所示，设  (gridDim.x,gridDim.y) = (2,3), (blockDim.x,blockDim.y) = (4,2)，我们以 thread_id(3,1) block_id(0,1) 为例</p>
+<p><img src="/image/CUDA编程-CUDA模型概述/11.png" alt=""></p>
+<p>可以得到</p>
+<p>ix = threadIdx.x + blockIdx.x <em> blockDim.x = 3 + 0 </em> 4 = 3</p>
+<p>iy = threadIdx.y + blockIdx.y <em> blockDim.y = 1 + 1 </em> 2 = 3</p>
+<p>coordinate(3,3)</p>
+<p>global index: idx = iy <em> blockDim.x </em> gridDim.x + ix = 3 <em> 4 </em> 2 + 3 = 27</p>
+]]></content>
+      <categories>
+        <category>CUDA 编程</category>
+      </categories>
+      <tags>
+        <tag>CUDA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CUDA编程: CUDA内存管理（二）</title>
     <url>/2024/01/16/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细讲解共享内存存储体、存储体冲突、访问模式以及内存填充等知识点。</p>
@@ -1543,159 +1696,6 @@ dxf_close(FID);
       </tags>
   </entry>
   <entry>
-    <title>CUDA编程: CUDA模型概述</title>
-    <url>/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>讨论 GPU 的并行计算是如何在硬件上实现的，CUDA 中的模块理解以及 CPU和 GPU 之间的交互，指令的同步。</p>
-<span id="more"></span>
-<h2 id="GPU-架构与异构并行计算"><a href="#GPU-架构与异构并行计算" class="headerlink" title="GPU 架构与异构并行计算"></a>GPU 架构与异构并行计算</h2><h3 id="什么是异构并行计算"><a href="#什么是异构并行计算" class="headerlink" title="什么是异构并行计算"></a>什么是异构并行计算</h3><p>最初的计算机只包含中央处理器，为了处理越来越复杂的图形计算，GPU 营运而生，因其数据众多的轻量级线程，非常适合处理大规模异构并行计算。</p>
-<p>下图所示是一个典型的异构并行架构，包括一个 CPU及其内存 和一个 GPU及其内存，GPU 设备端通过 PCIe 总线与基于 CPU 主机端进行交互。一个异构并行应用包括主机代码和设备代码，分别运行在主机端和设备端。应用由 CPU 初始化，在设备端进行数据运算前，CPU 负责管理设备端的环境，代码和数据。我们称 host 为 CPU 及其内存，device 为 GPU 及其内存。</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/0.png" alt=""></p>
-<p>CPU 计算适合处理控制密集型任务，GPU 计算适合处理包含数据并行的计算密集型任务。在 CPU 上执行串行部分或任务并行部分，在 GPU 上执行数据密集型并行部分，这种异构并行架构使得计算能力可以充分被利用。</p>
-<h3 id="NVIDIA-GPU-显卡架构发展历程"><a href="#NVIDIA-GPU-显卡架构发展历程" class="headerlink" title="NVIDIA GPU 显卡架构发展历程"></a>NVIDIA GPU 显卡架构发展历程</h3><ul>
-<li><strong>Tesla</strong>（特斯拉）2008年，应用于早期的 CUDA 系列显卡芯片中，并不是真正意义上的 GPU 芯片。</li>
-<li><strong>Fermi</strong>（费米）2010年，是第一个完整的 GPU 计算架构。首款可支持与共享存储结合纯 cache 层次的 GPU 架构，支持 ECC(Error Correcting Code) 的 GPU 架构。</li>
-<li><strong>Kepler</strong>（开普勒）2012年，Fermi 的优化版。</li>
-<li><strong>Maxwell</strong>（麦克斯韦）2014年，首次支持实时的动态全局光照效果，</li>
-<li><strong>Pascal</strong>（帕斯卡）2016年，GPU 将处理器和数据集成在同一个程序包内，以实现更高的计算效率。</li>
-<li><strong>Volta</strong>（伏打）2017年，首次将一个 CUDA 内核拆分为FP32 和 INT32 两部分，首次支持混合精度运算，提高了5倍于 Pascal 计算速度，还增加了专用于深度学习的 Tensor Core 张量单元。</li>
-<li><strong>Turing</strong>（图灵）2018年，增加了 RT Core 专用光线追踪处理器，将实时光线追踪运算加速至上一代架构的 25 倍，并能以高出 CPU 30 多倍的速度进行电影效果的最终帧渲染。去掉了对 FP64 计算的支持。</li>
-<li><strong>Ampere</strong>（安培）2020年，重新支持 FP64，新增异步拷贝指令能够从 global memory 中将数据直接加载到 SM shared memory，降低中间寄存器堆（RF）的需求。新增 BF16 数据类型，专为深度学习优化。</li>
-</ul>
-<h2 id="CUDA-编程模型"><a href="#CUDA-编程模型" class="headerlink" title="CUDA 编程模型"></a>CUDA 编程模型</h2><p>CUDA 是一个通用并行计算平台和编程模型，如下图所示，CUDA 平台可以通过 CUDA 加速库、编译器指令、应用程序编程接口或编程语言接口来使用。后面的章节我们会重点讲解 CUDA C 以及 PyCUDA 的编程。</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/1.png" alt=""></p>
-<h3 id="CUDA-软件体系"><a href="#CUDA-软件体系" class="headerlink" title="CUDA 软件体系"></a>CUDA 软件体系</h3><p>CUDA 提供了两层 API 来调用底层 GPU 硬件</p>
-<ul>
-<li><p>CUDA 驱动 API (CUDA Driver API)</p>
-<p>是一种基于句柄的底层接口,大多数对象通过句柄被引用,其函数前缀均为<code>cu</code>，在调用 Driver API 前必须进行初始化，再创建 CUDA  上下文，该上下文关联到特定设备并成为主机线程的当前上下文，通过加载 PTX 汇编形式 或 二进制对象形式 的内核，然后启动内核计算。Driver API 可以通过直接操作硬件执行一些复杂的功能，但其编程较为复杂，难度较大。</p>
-</li>
-<li><p>CUDA 运行时 API (CUDA Runtime API)</p>
-<p>Runtime API 对 Driver API 进行了一定的封装，隐藏了部分实现细节，因此使用起来更为方便，因此我们更多使用的是 Runtime API。Runtime API 没有专门的初始化函数，它将在第一次调用运行时函数时自动完成初始化。使用时，通常需要包含头文件 <code>cuda_runtime.h</code>，其函数前缀均为cuda。</p>
-</li>
-</ul>
-<p>如下图所示</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/2.png" alt=""></p>
-<p>Runtime API 和 Driver API 之间没有明显的性能差距，这两种 API 不能混合使用，只用单独使用其一。</p>
-<h3 id="CUDA-函数库-CUDA-Libraries"><a href="#CUDA-函数库-CUDA-Libraries" class="headerlink" title="CUDA 函数库 (CUDA Libraries)"></a>CUDA 函数库 (CUDA Libraries)</h3><p>CUDA 提供了几个较为成熟的高效函数库，可以直接调用这些库函数进行计算，常见的包括</p>
-<ul>
-<li><p>CUFFT：利用 CUDA 进行傅立叶变换的函数库</p>
-</li>
-<li><p>CUBLAS：利用 CUDA 进行加速的完整标准矩阵与向量的运算库</p>
-</li>
-<li><p>CUDPP：并行操作函数库</p>
-</li>
-<li><p>CUDNN：利用CUDA进行深度卷积神经网络</p>
-</li>
-</ul>
-<h3 id="CUDA-应用程序-CUDA-Application"><a href="#CUDA-应用程序-CUDA-Application" class="headerlink" title="CUDA 应用程序 (CUDA Application)"></a>CUDA 应用程序 (CUDA Application)</h3><p>CUDA 程序包含在 host 上运行的主机代码和在 device 上运行的设备代码，设备代码会在编译时通过 CUDA  nvcc 编译器从主机代码中分离，再转换成 PTX(ParallelThread Execution) 汇编语言，由 GPU 并行线程执行，主机代码由 CPU 执行。如下图所示</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/3.png" alt=""></p>
-<p>执行流程如下</p>
-<ul>
-<li><p>分配 host 内存，并进行数据初始化（CPU初始化）</p>
-</li>
-<li><p>分配 device 内存，并从 host 将数据拷贝到 device 上（GPU初始化）</p>
-</li>
-<li><p>调用 CUDA 的核函数在 device 上完成指定的运算（GPU并行运算）</p>
-</li>
-<li><p>将 device上的运算结果拷贝到 host 上（将GPU结果传回CPU）</p>
-</li>
-<li><p>释放 device 和 host 上分配的内存（初始化清空）</p>
-</li>
-</ul>
-<h3 id="CUDA-硬件结构"><a href="#CUDA-硬件结构" class="headerlink" title="CUDA 硬件结构"></a>CUDA 硬件结构</h3><ul>
-<li><p>SP（Streaming Processor）也称为 CUDA core，是最基本的处理单元，最后具体的指令和任务都是在 SP 上处理的。GPU 进行并行计算，也就是很多个 SP 同时做处理。</p>
-</li>
-<li><p>SM（Streaming Multiprocessor）多个 SP 加上其他资源组成一个 SM，也叫 GPU 大核，其他资源如包括warp scheduler，register，shared memory 等。SM可以看做GPU的心脏（类似 CPU 核心）。每个 SM 都拥有 register 和 shared memory，CUDA 将这些资源分配给所有驻留在 SM 中的线程，但资源非常有限，SM 结构如下图所示。</p>
-</li>
-</ul>
-<p><img src="/image/CUDA编程-CUDA模型概述/5.png" alt=""></p>
-<p>每个 SM 包含的 SP 数量依据 GPU 架构而不同，如 Fermi 架构 GF100 是 32 个，GF10X 是 48 个，Kepler 架构都是 192 个，Maxwell 都是128 个。</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/6.png" alt=""></p>
-<p>在软件逻辑上是所有 SP 是并行计算的，但是物理上并不是，比如只有 8 个 SM 却有 1024 个线程块需要调度处理，因为有些会处于挂起，就绪等其他状态，这有关 GPU 的线程调度，后续章节会展开讨论。</p>
-<h2 id="三-理解-kernel-thread-block-grid-与-warp"><a href="#三-理解-kernel-thread-block-grid-与-warp" class="headerlink" title="三 理解 kernel, thread, block , grid 与 warp"></a>三 理解 kernel, thread, block , grid 与 warp</h2><h3 id="CUDA-线程模型"><a href="#CUDA-线程模型" class="headerlink" title="CUDA 线程模型"></a>CUDA 线程模型</h3><p>线程是程序执行的最基本单元，CUDA 的并行计算通过成千上万个线程的并行执行来实现。下图为 GPU 的线程结构</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/7.png" alt=""></p>
-<p>CUDA的线程模型从小往大依次是</p>
-<ul>
-<li><p>Thread，线程，并行的基本单位</p>
-</li>
-<li><p>Block，线程块，互相合作的线程组，线程块有如下几个特点：</p>
-<ul>
-<li><p>以1维、2维或3维组织</p>
-</li>
-<li><p>允许彼此同步</p>
-</li>
-<li>可以通过共享内存快速交换数据</li>
-</ul>
-</li>
-<li><p>Grid，网格，由一组 Block 组成</p>
-<ul>
-<li>以1维、2维组织</li>
-</ul>
-<ul>
-<li>共享全局内存</li>
-</ul>
-</li>
-</ul>
-<h3 id="kernel"><a href="#kernel" class="headerlink" title="kernel"></a>kernel</h3><p>kernel 是在 device 上线程中并行执行的函数，是软件概念，核函数用<code>__global__</code>符号声明，并用 <code>&lt;&lt;&lt;grid, block&gt;&gt;&gt;</code> 执行配置语法指定内核调用的 CUDA 线程数，每个 kernel 的 thread 都有一个唯一的线程 ID，可以通过内置变量在内核中访问。block 一旦被分配好 SM，该 block 就会一直驻留在该 SM 中，直到执行结束。一个 SM 可以同时拥有多个 blocks。</p>
-<h3 id="warp"><a href="#warp" class="headerlink" title="warp"></a>warp</h3><p>warp 是 SM 的基本执行单元，也称线程束，一个 warp 有 32 个并行的 thread， SM 旨在同时执行数百个 thread，为了管理如此大量的线程，采用了 SIMT （Single-Instruction, Multiple-Thread：单指令，多线程）的架构，也就是一个 warp 中的所有 thread 一次执行一条公共指令，并且每个thread会使用各自的data执行该指令。</p>
-<p>一个块中的 warp 总数计算如下</p>
-<script type="math/tex; mode=display">
-WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下图</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/8.png" alt=""></p>
-<p>从硬件角度来看，所有的 thread 以一维形式组织，每个 thread 都有个唯一的 ID，于是作为补全整数倍的 thread 在所在的 warp 中为 inactive 状态，会额外消耗 SM 资源，所以要设定 block 中的 thread 一般为32的倍数。</p>
-<p>下面从硬件角度和软件角度解释 CUDA 的线程模型</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>软件</th>
-<th>硬件</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Thread</td>
-<td>SP</td>
-<td>每个线程由每个线程处理器（SP）执行</td>
-</tr>
-<tr>
-<td>Block</td>
-<td>SM</td>
-<td>线程块由多核处理器（SM）执行</td>
-</tr>
-<tr>
-<td>Grid</td>
-<td>Device</td>
-<td>一个 kernel 由一个 grid 来执行，一次只能在一个 GPU 上执行</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="线程索引"><a href="#线程索引" class="headerlink" title="线程索引"></a>线程索引</h3><p>确定线程的唯一索引，以 2D grid 和 2D block 的情况为例。</p>
-<p>我们要计算的数值矩阵在内存中是 row-major（行主序） 线性存储的，如下图</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/9.png" alt=""></p>
-<p>将 thread 和 block 索引映射到矩阵坐标</p>
-<p>ix = threadIdx.x + blockIdx.x * blockDim.x</p>
-<p>iy = threadIdx.y + blockIdx.y * blockDim.y</p>
-<p>idx = iy * nx + ix</p>
-<p>下图为 block 和 thread 索引，矩阵坐标以及线性地址之间的关系</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/10.png" alt=""></p>
-<p>在实践应用中，常常会多一维 grid， 那就是三维情况的索引，如下图所示，设  (gridDim.x,gridDim.y) = (2,3), (blockDim.x,blockDim.y) = (4,2)，我们以 thread_id(3,1) block_id(0,1) 为例</p>
-<p><img src="/image/CUDA编程-CUDA模型概述/11.png" alt=""></p>
-<p>可以得到</p>
-<p>ix = threadIdx.x + blockIdx.x <em> blockDim.x = 3 + 0 </em> 4 = 3</p>
-<p>iy = threadIdx.y + blockIdx.y <em> blockDim.y = 1 + 1 </em> 2 = 3</p>
-<p>coordinate(3,3)</p>
-<p>global index: idx = iy <em> blockDim.x </em> gridDim.x + ix = 3 <em> 4 </em> 2 + 3 = 27</p>
-]]></content>
-      <categories>
-        <category>CUDA 编程</category>
-      </categories>
-      <tags>
-        <tag>CUDA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CUDA编程: CUDA流,事件与同步</title>
     <url>/2024/01/30/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E4%BA%8B%E4%BB%B6%E4%B8%8E%E5%90%8C%E6%AD%A5/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细讲解 CUDA 流，事件的概念以及声明，以此为基础，深入了解 CUDA 流操作之间的依赖关系，流的同步与异步，以及如何优化事件的创建与管理等等。</p>
@@ -1879,104 +1879,6 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
       </tags>
   </entry>
   <entry>
-    <title>CUDA编程: GPU编程概述和CUDA环境搭建</title>
-    <url>/2023/12/12/CUDA%E7%BC%96%E7%A8%8B-GPU%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0%E5%92%8CCUDA%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>模型变得越来越深，参数愈加庞大，虽然准确率不断增长，由于硬件受限，对实际场景部署的要求也越来越高，CUDA 编程成为了一门必备的武林绝学。</p>
-<span id="more"></span>
-<h2 id="CUDA简介"><a href="#CUDA简介" class="headerlink" title="CUDA简介"></a>CUDA简介</h2><p>首先介绍一下 GPU，在计算机中，GPU 相比 CPU，拥有非常多的内核，这意味着 GPU 可以以非常高的吞吐量执行程序，如同一条非常宽阔的道路可以同时让很多车辆同时通行，例如最新的 RTX 3090 的核心数达到了恐怖的 10496 个，而当前的顶级 CPU 通常只有不超过 32 核心。因此我们需要正确地设计并行化加速算法，就可以发挥 GPU 的强大优势。</p>
-<p>CUDA 是由英伟达 NVIDIA 于 2007 年所推出针对 NVIDIA GPU 专有系统，通过 CUDA，用户可方便地使用封闭好的 SDK 对 GPU 进行复杂的数值计算，在深度学习领域，CUDA 提供了一套强大的加速并行计算和人工智能相关的代码库，同时，NVIDIA 官方提供了非常完善的安装程序。</p>
-<h2 id="CUDA-安装"><a href="#CUDA-安装" class="headerlink" title="CUDA 安装"></a>CUDA 安装</h2><h3 id="Linux-安装"><a href="#Linux-安装" class="headerlink" title="Linux 安装"></a>Linux 安装</h3><p>首先检查本机是否有 nvidia 的显卡</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lspci | grep -i <span class="string">&quot;nvidia&quot;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>请不要在vm虚拟机中安装 CUDA</p>
-</blockquote>
-<p>以笔主的电脑为例，有一张 RTX 3060 的移动显卡</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">01:00.0 VGA compatible controller: NVIDIA Corporation GA106M [GeForce RTX 3060 Mobile / Max-Q] (rev a1)</span><br><span class="line">01:00.1 Audio device: NVIDIA Corporation Device 228e (rev a1)</span><br></pre></td></tr></table></figure>
-<p>之后去 NVIDIA 官网 下载对应发行版的 <a href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA Toolkit</a>，这里根据自己的深度学习框架选择版本，在安装 Toolkit 时会自带 CUDA Driver</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/1.png" alt=""></p>
-<p>下载文件推荐选择 runfile 格式</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/2.png" alt=""></p>
-<p>文件比较大，等待时确保机器上有相应的依赖库，可以运行下面命令安装依赖库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install gcc g++ make</span><br><span class="line">sudo apt install libglu1-mesa libxi-dev libxmu-dev libglu1-mesa-dev freeglut3-dev</span><br></pre></td></tr></table></figure>
-<p>如果系统为图形界面，需要检查系统是否自带开源 NVIDIA Nouveau 驱动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsmod | grep -i <span class="string">&quot;nouveau&quot;</span></span><br></pre></td></tr></table></figure>
-<p>如果有输出，需要禁用 Nouveau 驱动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/modprobe.d/blacklist.conf</span><br></pre></td></tr></table></figure>
-<p>在文件中追加如下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line">alias nouveau off</span><br><span class="line">alias lbm-nouveau off</span><br></pre></td></tr></table></figure>
-<p>同时卸载 nvidia 相关包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt purge nvidia-*</span><br></pre></td></tr></table></figure>
-<p>重启系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-<p>重启后使用<code>Ctrl + Alt + F2</code>进入 tt2，再次检查开源驱动是否启动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsmod | grep -i <span class="string">&quot;nouveau&quot;</span></span><br></pre></td></tr></table></figure>
-<p>然后关闭显示服务，并修改安装文件权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service lightdm stop</span><br><span class="line"><span class="built_in">chmod</span> 777 cuda_10.2.89_440.33.01_linux.run</span><br></pre></td></tr></table></figure>
-<p>之后运行 CUDA 安装脚本，在安装时</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo sh cuda_*_linux.run</span><br></pre></td></tr></table></figure>
-<p>安装完成后脚本会自动在<code>/usr/local</code>创建 <code>cuda -&gt; /usr/local/cuda-11.8/</code> 软链接，在 <code>~/.bashrc</code>写入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/local/cuda/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/cuda/lib64:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> CUDA_HOME=/usr/local/cuda</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:<span class="variable">$LD_LIBRARY_PATH</span></span><br></pre></td></tr></table></figure>
-<p>在终端中输入 <code>nvcc -V</code> ，如有类似下面的输出，则安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2022 NVIDIA Corporation</span><br><span class="line">Built on Wed_Sep_21_10:33:58_PDT_2022</span><br><span class="line">Cuda compilation tools, release 11.8, V11.8.89</span><br><span class="line">Build cuda_11.8.r11.8/compiler.31833905_0</span><br></pre></td></tr></table></figure>
-<p>安装完成后重启图形界面</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service lightdm restart</span><br></pre></td></tr></table></figure>
-<p>接下来安装 cuDNN</p>
-<p><a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/9.png" alt=""></p>
-<p>下载完成后解压</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xf cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tar.xz</span><br></pre></td></tr></table></figure>
-<p>将解压后的文件拷贝到 CUDA 对应的安装目录下，并添加权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> cudnn-linux-x86_64-8.6.0.163_cuda11-archive/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo <span class="built_in">cp</span> cudnn-linux-x86_64-8.6.0.163_cuda11-archive/lib/libcudnn* /usr/local/cuda/lib64*</span><br><span class="line">sudo <span class="built_in">chmod</span> a+r /usr/local/cuda-11.7/include/cudnn.h </span><br><span class="line">sudo <span class="built_in">chmod</span> a+r /usr/local/cuda-11.7/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
-<p>即安装完成</p>
-<h3 id="Windows-安装"><a href="#Windows-安装" class="headerlink" title="Windows 安装"></a>Windows 安装</h3><p>打开设备管理器，查看当前显卡型号</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/3.png" alt=""></p>
-<p>以笔主的电脑为例，有一张 RTX 3060 的移动显卡</p>
-<p>再在桌面右击或打开系统小托盘，打开 NVIDIA 控制面板</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/4.png" alt=""></p>
-<p>这里推荐 Studio 驱动程序，不建议 Game Ready 驱动程序，可以在 <a href="https://www.nvidia.cn/Download/index.aspx">NVIDIA 驱动程序下载</a> 找到对应显卡的驱动程序。安装完成后如图所示</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/5.png" alt=""></p>
-<p>之后根据系统驱动程序版本<a href="https://developer.nvidia.com/cuda-toolkit-archive">下载 CUDA 安装程序</a>，<a href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#cuda-major-component-versions">点击查看系统驱动程序版本和 CUDA 版本对应关系</a>，推荐 exe(local)</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/16.png" alt=""></p>
-<p>下载完成后双击打开，这里使用默认位置</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/6.png" alt=""></p>
-<p>使用自定义安装</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/7.png" alt=""></p>
-<p>这里要记住安装位置，推荐默认</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/11.png" alt=""></p>
-<p>安装后会自动添加环境变量，打开 Powershell / CMD，输入<code>nvcc -V</code></p>
-<p>如有类似下面的输出，则安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2022 NVIDIA Corporation</span><br><span class="line">Built on Wed_Sep_21_10:41:10_Pacific_Daylight_Time_2022</span><br><span class="line">Cuda compilation tools, release 11.8, V11.8.89</span><br><span class="line">Build cuda_11.8.r11.8/compiler.31833905_0</span><br></pre></td></tr></table></figure>
-<p>接下来安装 cuDNN</p>
-<p><a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p>
-<p>下载完成解压后如何下图</p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/10.png" alt=""></p>
-<p>把这三个文件夹拷贝到 CUDA 的安装目录下，同名文件夹会自动合并。</p>
-<p>将如下路径添加到系统环境变量中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\include</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\lib</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\libnvvp</span><br></pre></td></tr></table></figure>
-<p>即安装完成</p>
-<h2 id="PyCUDA"><a href="#PyCUDA" class="headerlink" title="PyCUDA"></a>PyCUDA</h2><p>PyCUDA 是 NVIDIA 针对 python 编写的 CUDA API，底层使用 C++， 使用 PyCUDA 可以更方便地编写代码。同样 CUDA 错误都会自动转换为 Python 异常。</p>
-<h3 id="Linux-安装-1"><a href="#Linux-安装-1" class="headerlink" title="Linux 安装"></a>Linux 安装</h3><p>确保电脑中安装了 python 环境和 pip，安装命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pycuda</span><br></pre></td></tr></table></figure>
-<h3 id="Windows-安装-1"><a href="#Windows-安装-1" class="headerlink" title="Windows 安装"></a>Windows 安装</h3><p>根据自己的 CUDA 版本 和 Python 版本下载 whl 文件 <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycuda">http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycuda</a></p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/17.png" alt=""></p>
-<p>安装命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pycuda*.whl</span><br></pre></td></tr></table></figure>
-<h2 id="Nvidia-Nsight-Systems"><a href="#Nvidia-Nsight-Systems" class="headerlink" title="Nvidia Nsight Systems"></a>Nvidia Nsight Systems</h2><p>简称 <code>nsys</code>，是一款低开销性能分析工具，旨在为开发人员提供优化软件所需的洞察力。无偏差的活动数据可在工具中可视化，可帮助用户调查瓶颈，避免推断误报，并以更高的性能提升概率实现优化。用户将能够识别问题，例如 GPU 闲置、不必要的 GPU 同步、CPU 并行化不足。</p>
-<p>根据系统平台选择合适的安装包</p>
-<p><a href="https://developer.nvidia.cn/gameworksdownload#?dn=nsight-systems-2022-4">https://developer.nvidia.cn/gameworksdownload#?dn=nsight-systems-2022-4</a></p>
-<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/18.png" alt=""></p>
-<p>安装完成后输入命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nsys --version</span><br></pre></td></tr></table></figure>
-<p>如有返回，即安装完成</p>
-]]></content>
-      <categories>
-        <category>CUDA 编程</category>
-      </categories>
-      <tags>
-        <tag>CUDA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CUDA编程: CUDA流,并发与上下文</title>
     <url>/2024/02/06/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E5%B9%B6%E5%8F%91%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深入介绍流的使用，包括流的并发，多线程调度流，并发限制，创建流间依赖关系，重叠主机与设备的执行等，同时，结合实例讲解了 CUDA 上下文以及 MPS 的概念，简单介绍了 CUDA Driver API 对 Context 的管理。</p>
@@ -2133,6 +2035,104 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
 <p>关闭 MPS 服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo nvidia-cuda-mps-control quit</span><br></pre></td></tr></table></figure>
 <p>在使用 MPS 时，需要避免使用所有 GPU 资源，因为MPS需要一些 GPU 资源来管理多个CUDA上下文。可以使用 nvidia-smi 工具来检查 MPS 所使用的 GPU 资源</p>
+]]></content>
+      <categories>
+        <category>CUDA 编程</category>
+      </categories>
+      <tags>
+        <tag>CUDA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CUDA编程: GPU编程概述和CUDA环境搭建</title>
+    <url>/2023/12/12/CUDA%E7%BC%96%E7%A8%8B-GPU%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0%E5%92%8CCUDA%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>模型变得越来越深，参数愈加庞大，虽然准确率不断增长，由于硬件受限，对实际场景部署的要求也越来越高，CUDA 编程成为了一门必备的武林绝学。</p>
+<span id="more"></span>
+<h2 id="CUDA简介"><a href="#CUDA简介" class="headerlink" title="CUDA简介"></a>CUDA简介</h2><p>首先介绍一下 GPU，在计算机中，GPU 相比 CPU，拥有非常多的内核，这意味着 GPU 可以以非常高的吞吐量执行程序，如同一条非常宽阔的道路可以同时让很多车辆同时通行，例如最新的 RTX 3090 的核心数达到了恐怖的 10496 个，而当前的顶级 CPU 通常只有不超过 32 核心。因此我们需要正确地设计并行化加速算法，就可以发挥 GPU 的强大优势。</p>
+<p>CUDA 是由英伟达 NVIDIA 于 2007 年所推出针对 NVIDIA GPU 专有系统，通过 CUDA，用户可方便地使用封闭好的 SDK 对 GPU 进行复杂的数值计算，在深度学习领域，CUDA 提供了一套强大的加速并行计算和人工智能相关的代码库，同时，NVIDIA 官方提供了非常完善的安装程序。</p>
+<h2 id="CUDA-安装"><a href="#CUDA-安装" class="headerlink" title="CUDA 安装"></a>CUDA 安装</h2><h3 id="Linux-安装"><a href="#Linux-安装" class="headerlink" title="Linux 安装"></a>Linux 安装</h3><p>首先检查本机是否有 nvidia 的显卡</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lspci | grep -i <span class="string">&quot;nvidia&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>请不要在vm虚拟机中安装 CUDA</p>
+</blockquote>
+<p>以笔主的电脑为例，有一张 RTX 3060 的移动显卡</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">01:00.0 VGA compatible controller: NVIDIA Corporation GA106M [GeForce RTX 3060 Mobile / Max-Q] (rev a1)</span><br><span class="line">01:00.1 Audio device: NVIDIA Corporation Device 228e (rev a1)</span><br></pre></td></tr></table></figure>
+<p>之后去 NVIDIA 官网 下载对应发行版的 <a href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA Toolkit</a>，这里根据自己的深度学习框架选择版本，在安装 Toolkit 时会自带 CUDA Driver</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/1.png" alt=""></p>
+<p>下载文件推荐选择 runfile 格式</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/2.png" alt=""></p>
+<p>文件比较大，等待时确保机器上有相应的依赖库，可以运行下面命令安装依赖库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install gcc g++ make</span><br><span class="line">sudo apt install libglu1-mesa libxi-dev libxmu-dev libglu1-mesa-dev freeglut3-dev</span><br></pre></td></tr></table></figure>
+<p>如果系统为图形界面，需要检查系统是否自带开源 NVIDIA Nouveau 驱动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsmod | grep -i <span class="string">&quot;nouveau&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果有输出，需要禁用 Nouveau 驱动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/modprobe.d/blacklist.conf</span><br></pre></td></tr></table></figure>
+<p>在文件中追加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">blacklist lbm-nouveau</span><br><span class="line">options nouveau modeset=0</span><br><span class="line">alias nouveau off</span><br><span class="line">alias lbm-nouveau off</span><br></pre></td></tr></table></figure>
+<p>同时卸载 nvidia 相关包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt purge nvidia-*</span><br></pre></td></tr></table></figure>
+<p>重启系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>重启后使用<code>Ctrl + Alt + F2</code>进入 tt2，再次检查开源驱动是否启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsmod | grep -i <span class="string">&quot;nouveau&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后关闭显示服务，并修改安装文件权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service lightdm stop</span><br><span class="line"><span class="built_in">chmod</span> 777 cuda_10.2.89_440.33.01_linux.run</span><br></pre></td></tr></table></figure>
+<p>之后运行 CUDA 安装脚本，在安装时</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo sh cuda_*_linux.run</span><br></pre></td></tr></table></figure>
+<p>安装完成后脚本会自动在<code>/usr/local</code>创建 <code>cuda -&gt; /usr/local/cuda-11.8/</code> 软链接，在 <code>~/.bashrc</code>写入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/local/cuda/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/cuda/lib64:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> CUDA_HOME=/usr/local/cuda</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:<span class="variable">$LD_LIBRARY_PATH</span></span><br></pre></td></tr></table></figure>
+<p>在终端中输入 <code>nvcc -V</code> ，如有类似下面的输出，则安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2022 NVIDIA Corporation</span><br><span class="line">Built on Wed_Sep_21_10:33:58_PDT_2022</span><br><span class="line">Cuda compilation tools, release 11.8, V11.8.89</span><br><span class="line">Build cuda_11.8.r11.8/compiler.31833905_0</span><br></pre></td></tr></table></figure>
+<p>安装完成后重启图形界面</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service lightdm restart</span><br></pre></td></tr></table></figure>
+<p>接下来安装 cuDNN</p>
+<p><a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/9.png" alt=""></p>
+<p>下载完成后解压</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xf cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tar.xz</span><br></pre></td></tr></table></figure>
+<p>将解压后的文件拷贝到 CUDA 对应的安装目录下，并添加权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> cudnn-linux-x86_64-8.6.0.163_cuda11-archive/include/cudnn.h /usr/local/cuda/include</span><br><span class="line">sudo <span class="built_in">cp</span> cudnn-linux-x86_64-8.6.0.163_cuda11-archive/lib/libcudnn* /usr/local/cuda/lib64*</span><br><span class="line">sudo <span class="built_in">chmod</span> a+r /usr/local/cuda-11.7/include/cudnn.h </span><br><span class="line">sudo <span class="built_in">chmod</span> a+r /usr/local/cuda-11.7/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
+<p>即安装完成</p>
+<h3 id="Windows-安装"><a href="#Windows-安装" class="headerlink" title="Windows 安装"></a>Windows 安装</h3><p>打开设备管理器，查看当前显卡型号</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/3.png" alt=""></p>
+<p>以笔主的电脑为例，有一张 RTX 3060 的移动显卡</p>
+<p>再在桌面右击或打开系统小托盘，打开 NVIDIA 控制面板</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/4.png" alt=""></p>
+<p>这里推荐 Studio 驱动程序，不建议 Game Ready 驱动程序，可以在 <a href="https://www.nvidia.cn/Download/index.aspx">NVIDIA 驱动程序下载</a> 找到对应显卡的驱动程序。安装完成后如图所示</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/5.png" alt=""></p>
+<p>之后根据系统驱动程序版本<a href="https://developer.nvidia.com/cuda-toolkit-archive">下载 CUDA 安装程序</a>，<a href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#cuda-major-component-versions">点击查看系统驱动程序版本和 CUDA 版本对应关系</a>，推荐 exe(local)</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/16.png" alt=""></p>
+<p>下载完成后双击打开，这里使用默认位置</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/6.png" alt=""></p>
+<p>使用自定义安装</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/7.png" alt=""></p>
+<p>这里要记住安装位置，推荐默认</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/11.png" alt=""></p>
+<p>安装后会自动添加环境变量，打开 Powershell / CMD，输入<code>nvcc -V</code></p>
+<p>如有类似下面的输出，则安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2022 NVIDIA Corporation</span><br><span class="line">Built on Wed_Sep_21_10:41:10_Pacific_Daylight_Time_2022</span><br><span class="line">Cuda compilation tools, release 11.8, V11.8.89</span><br><span class="line">Build cuda_11.8.r11.8/compiler.31833905_0</span><br></pre></td></tr></table></figure>
+<p>接下来安装 cuDNN</p>
+<p><a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p>
+<p>下载完成解压后如何下图</p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/10.png" alt=""></p>
+<p>把这三个文件夹拷贝到 CUDA 的安装目录下，同名文件夹会自动合并。</p>
+<p>将如下路径添加到系统环境变量中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\include</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\lib</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\libnvvp</span><br></pre></td></tr></table></figure>
+<p>即安装完成</p>
+<h2 id="PyCUDA"><a href="#PyCUDA" class="headerlink" title="PyCUDA"></a>PyCUDA</h2><p>PyCUDA 是 NVIDIA 针对 python 编写的 CUDA API，底层使用 C++， 使用 PyCUDA 可以更方便地编写代码。同样 CUDA 错误都会自动转换为 Python 异常。</p>
+<h3 id="Linux-安装-1"><a href="#Linux-安装-1" class="headerlink" title="Linux 安装"></a>Linux 安装</h3><p>确保电脑中安装了 python 环境和 pip，安装命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pycuda</span><br></pre></td></tr></table></figure>
+<h3 id="Windows-安装-1"><a href="#Windows-安装-1" class="headerlink" title="Windows 安装"></a>Windows 安装</h3><p>根据自己的 CUDA 版本 和 Python 版本下载 whl 文件 <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycuda">http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycuda</a></p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/17.png" alt=""></p>
+<p>安装命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pycuda*.whl</span><br></pre></td></tr></table></figure>
+<h2 id="Nvidia-Nsight-Systems"><a href="#Nvidia-Nsight-Systems" class="headerlink" title="Nvidia Nsight Systems"></a>Nvidia Nsight Systems</h2><p>简称 <code>nsys</code>，是一款低开销性能分析工具，旨在为开发人员提供优化软件所需的洞察力。无偏差的活动数据可在工具中可视化，可帮助用户调查瓶颈，避免推断误报，并以更高的性能提升概率实现优化。用户将能够识别问题，例如 GPU 闲置、不必要的 GPU 同步、CPU 并行化不足。</p>
+<p>根据系统平台选择合适的安装包</p>
+<p><a href="https://developer.nvidia.cn/gameworksdownload#?dn=nsight-systems-2022-4">https://developer.nvidia.cn/gameworksdownload#?dn=nsight-systems-2022-4</a></p>
+<p><img src="/image/CUDA编程-GPU编程概述和CUDA环境搭建/18.png" alt=""></p>
+<p>安装完成后输入命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nsys --version</span><br></pre></td></tr></table></figure>
+<p>如有返回，即安装完成</p>
 ]]></content>
       <categories>
         <category>CUDA 编程</category>
@@ -3118,6 +3118,45 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
       </tags>
   </entry>
   <entry>
+    <title>GroupFormer简要学习笔记</title>
+    <url>/2022/08/31/GroupFormer%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>快速记录下 GroupFormer 网络的核心思想。</p>
+<span id="more"></span>
+<p>paper: </p>
+<p>code: </p>
+<h2 id="主要结构"><a href="#主要结构" class="headerlink" title="主要结构"></a>主要结构</h2><p>![figure1](</p>
+<ol>
+<li>提取视频clip的特征表示的<strong>CNN主干</strong>;</li>
+<li>用于个体和场景特征初始化的<strong>群体表示生成器 (Group Representation Generator，GRG)</strong>;</li>
+<li>用于建模时空关系，细化群体表示和个体表示的<strong>聚类时空Transformer (CSTT)</strong>;</li>
+</ol>
+<h2 id="特征提取器"><a href="#特征提取器" class="headerlink" title="特征提取器"></a>特征提取器</h2><p>Kinetics预训练的3D网络 (I3D) 作为Backbone</p>
+<h2 id="群体表示生成器"><a href="#群体表示生成器" class="headerlink" title="群体表示生成器"></a>群体表示生成器</h2><p>是一个在模型中用于初始化群体表示的预处理组件，将场景特征和个体特征分别转换为视觉token，将它们聚合以生成群体表示</p>
+<h2 id="聚类时空Transformer"><a href="#聚类时空Transformer" class="headerlink" title="聚类时空Transformer"></a>聚类时空Transformer</h2><h3 id="时空Transformer"><a href="#时空Transformer" class="headerlink" title="时空Transformer"></a>时空Transformer</h3><p>为群体活动识别而设计的时空Transformer(STT)增强了个体表征和群体表征。它包括两个并行的编码器（一个空间编码器和时间编码器 ），分别生成空间和时间特征。并引入交叉的个体解码器 来解码时空上下文信息。最后，用一个群体解码器 来增强群体的表示。</p>
+<h4 id="Encoders"><a href="#Encoders" class="headerlink" title="Encoders"></a>Encoders</h4><p>采用了两个并行编码器来embed上下文特征。在一个分支中，作者采用了一个基于Transformer的空间编码器 来学习个体的上下文信息。将时间维度视为Batch维度，并应用一个编码器来建模所有帧的空间上下文。</p>
+<p>另一种并行时间编码器 利用时间动态线索增强输入特征，通过突出每个个体沿时间维度的信息特征来丰富时间上下文。时间编码器遵循空间编码器的操作。与上述空间编码器的不同之处在于，时间编码器将空间维度视为一个Batch维度。</p>
+<h4 id="Individual-Decoders"><a href="#Individual-Decoders" class="headerlink" title="Individual Decoders"></a>Individual Decoders</h4><p>作者提出了个体解码器 来综合考虑空间和时空上下文信息。个体解码器遵循标准Transformer的解码器的设计，来互补利用时空上下文。</p>
+<p>对于空间解码器 ，空间编码器的输出结果被视为 actor query，时间编码器输出结果的embedding被视为key和value。actor query和key、value进行cross-attention，捕获时间动态，并输出更新后的上下文特征。</p>
+<p>同样的，对于时间解码器 ，空间编码器的输出结果将时间维度与空间维度进行转换，可以看作是解码器使用的key和value。解码器将时间上下文视为time query，然后进行cross-attention的过程，时间解码器有助于查找视频中感兴趣的帧。</p>
+<p>最后，将这两个交叉解码器的输出embedding进行融合，生成增强的个体表示。这两种交叉解码器是利用了基于空间上下文和时间上下文的语义关联来增强个体表征。</p>
+<h4 id="Group-Decoder"><a href="#Group-Decoder" class="headerlink" title="Group Decoder"></a>Group Decoder</h4><p>引入了一个群体解码器 （Group Decoder）来通过个体表示来增强群体表示。群体解码器也遵循Transformer的解码器设计。与原Transformer的区别在于，群体解码器只包含多头交叉注意机制和一个前馈网络，不包含Self-Attention。</p>
+<h3 id="Clustered-Attention-Mechanism"><a href="#Clustered-Attention-Mechanism" class="headerlink" title="Clustered Attention Mechanism"></a>Clustered Attention Mechanism</h3><p>虽然基于全连接注意机制的时空Transformer(STT)能够建模个体的关系，但它包含了许多不相关个体的关系。为了使模型能够关注关键的群体关系，作者将全连接的注意力替换为聚类的注意力，并将整个模块称之为聚类时空Transformer(Clustered Spatial-Temporal Transformer，CSTT) 。它可以对个体进行分组，并利用组内和组间的关系来捕获全局活动上下文。</p>
+<p>首先将个体分组为C个聚类，然后计算一下两种类型的注意：</p>
+<ol>
+<li>组内注意（intra-group attention） ：只有来自同一个聚类内的query和key才会被考虑。</li>
+<li>组间注意（inter-group attention） ：考虑了聚类之间成对的加权连接。</li>
+</ol>
+<h2 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h2><p>本文提出的CSTT以端到端的方式进行训练。在CSTT中，可以直接从群体表示生成群体活动分数。同样，采用另一个分类器，使用CSTT生成的个体表示来预测个体的动作得分。对于这两个任务，作者都选择了交叉熵损失函数来指导优化过程：</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在本文中，作者提出了一种新的基于Transformer的结构，称为GroupFormer，它联合建模了时空上下文表示来推断群体活动。此外，作者还引入了聚类注意机制来对个体进行分组，并利用组内和组间的关系获得更好的群体特征表示。作者在两个数据集上进行了广泛的实验。结果表明，GroupFormer的表现超过了大多数目前的SOTA方法。</p>
+]]></content>
+      <categories>
+        <category>懵逼的深度学习</category>
+      </categories>
+      <tags>
+        <tag>群体行为识别</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Faster-RCNN原理笔记</title>
     <url>/2022/03/30/Faster-RCNN%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细记录了 Faster RCNN 网络原理和个人的理解</p>
@@ -3273,45 +3312,6 @@ Loss = \begin{cases}
       </tags>
   </entry>
   <entry>
-    <title>GroupFormer简要学习笔记</title>
-    <url>/2022/08/31/GroupFormer%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>快速记录下 GroupFormer 网络的核心思想。</p>
-<span id="more"></span>
-<p>paper: </p>
-<p>code: </p>
-<h2 id="主要结构"><a href="#主要结构" class="headerlink" title="主要结构"></a>主要结构</h2><p>![figure1](</p>
-<ol>
-<li>提取视频clip的特征表示的<strong>CNN主干</strong>;</li>
-<li>用于个体和场景特征初始化的<strong>群体表示生成器 (Group Representation Generator，GRG)</strong>;</li>
-<li>用于建模时空关系，细化群体表示和个体表示的<strong>聚类时空Transformer (CSTT)</strong>;</li>
-</ol>
-<h2 id="特征提取器"><a href="#特征提取器" class="headerlink" title="特征提取器"></a>特征提取器</h2><p>Kinetics预训练的3D网络 (I3D) 作为Backbone</p>
-<h2 id="群体表示生成器"><a href="#群体表示生成器" class="headerlink" title="群体表示生成器"></a>群体表示生成器</h2><p>是一个在模型中用于初始化群体表示的预处理组件，将场景特征和个体特征分别转换为视觉token，将它们聚合以生成群体表示</p>
-<h2 id="聚类时空Transformer"><a href="#聚类时空Transformer" class="headerlink" title="聚类时空Transformer"></a>聚类时空Transformer</h2><h3 id="时空Transformer"><a href="#时空Transformer" class="headerlink" title="时空Transformer"></a>时空Transformer</h3><p>为群体活动识别而设计的时空Transformer(STT)增强了个体表征和群体表征。它包括两个并行的编码器（一个空间编码器和时间编码器 ），分别生成空间和时间特征。并引入交叉的个体解码器 来解码时空上下文信息。最后，用一个群体解码器 来增强群体的表示。</p>
-<h4 id="Encoders"><a href="#Encoders" class="headerlink" title="Encoders"></a>Encoders</h4><p>采用了两个并行编码器来embed上下文特征。在一个分支中，作者采用了一个基于Transformer的空间编码器 来学习个体的上下文信息。将时间维度视为Batch维度，并应用一个编码器来建模所有帧的空间上下文。</p>
-<p>另一种并行时间编码器 利用时间动态线索增强输入特征，通过突出每个个体沿时间维度的信息特征来丰富时间上下文。时间编码器遵循空间编码器的操作。与上述空间编码器的不同之处在于，时间编码器将空间维度视为一个Batch维度。</p>
-<h4 id="Individual-Decoders"><a href="#Individual-Decoders" class="headerlink" title="Individual Decoders"></a>Individual Decoders</h4><p>作者提出了个体解码器 来综合考虑空间和时空上下文信息。个体解码器遵循标准Transformer的解码器的设计，来互补利用时空上下文。</p>
-<p>对于空间解码器 ，空间编码器的输出结果被视为 actor query，时间编码器输出结果的embedding被视为key和value。actor query和key、value进行cross-attention，捕获时间动态，并输出更新后的上下文特征。</p>
-<p>同样的，对于时间解码器 ，空间编码器的输出结果将时间维度与空间维度进行转换，可以看作是解码器使用的key和value。解码器将时间上下文视为time query，然后进行cross-attention的过程，时间解码器有助于查找视频中感兴趣的帧。</p>
-<p>最后，将这两个交叉解码器的输出embedding进行融合，生成增强的个体表示。这两种交叉解码器是利用了基于空间上下文和时间上下文的语义关联来增强个体表征。</p>
-<h4 id="Group-Decoder"><a href="#Group-Decoder" class="headerlink" title="Group Decoder"></a>Group Decoder</h4><p>引入了一个群体解码器 （Group Decoder）来通过个体表示来增强群体表示。群体解码器也遵循Transformer的解码器设计。与原Transformer的区别在于，群体解码器只包含多头交叉注意机制和一个前馈网络，不包含Self-Attention。</p>
-<h3 id="Clustered-Attention-Mechanism"><a href="#Clustered-Attention-Mechanism" class="headerlink" title="Clustered Attention Mechanism"></a>Clustered Attention Mechanism</h3><p>虽然基于全连接注意机制的时空Transformer(STT)能够建模个体的关系，但它包含了许多不相关个体的关系。为了使模型能够关注关键的群体关系，作者将全连接的注意力替换为聚类的注意力，并将整个模块称之为聚类时空Transformer(Clustered Spatial-Temporal Transformer，CSTT) 。它可以对个体进行分组，并利用组内和组间的关系来捕获全局活动上下文。</p>
-<p>首先将个体分组为C个聚类，然后计算一下两种类型的注意：</p>
-<ol>
-<li>组内注意（intra-group attention） ：只有来自同一个聚类内的query和key才会被考虑。</li>
-<li>组间注意（inter-group attention） ：考虑了聚类之间成对的加权连接。</li>
-</ol>
-<h2 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h2><p>本文提出的CSTT以端到端的方式进行训练。在CSTT中，可以直接从群体表示生成群体活动分数。同样，采用另一个分类器，使用CSTT生成的个体表示来预测个体的动作得分。对于这两个任务，作者都选择了交叉熵损失函数来指导优化过程：</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在本文中，作者提出了一种新的基于Transformer的结构，称为GroupFormer，它联合建模了时空上下文表示来推断群体活动。此外，作者还引入了聚类注意机制来对个体进行分组，并利用组内和组间的关系获得更好的群体特征表示。作者在两个数据集上进行了广泛的实验。结果表明，GroupFormer的表现超过了大多数目前的SOTA方法。</p>
-]]></content>
-      <categories>
-        <category>懵逼的深度学习</category>
-      </categories>
-      <tags>
-        <tag>群体行为识别</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HGame_2023_Week3_3ctu4_card_problem</title>
     <url>/2023/01/31/HGame-2023-Week3-3ctu4-card-problem/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>干扰特征非常多的二分类问题，解题步骤如下</p>
@@ -3393,6 +3393,21 @@ Loss = \begin{cases}
 ]]></content>
       <tags>
         <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>伽马函数</title>
+    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>遇到了这个伽马函数， 许多博客说对考研很重要，就浅浅记录一下</p>
+<span id="more"></span>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
+<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
+<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h2 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h2><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>知识点</tag>
       </tags>
   </entry>
   <entry>
@@ -3580,38 +3595,6 @@ Loss = \begin{cases}
       </categories>
       <tags>
         <tag>matlab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>伽马函数</title>
-    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>遇到了这个伽马函数， 许多博客说对考研很重要，就浅浅记录一下</p>
-<span id="more"></span>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
-<script type="math/tex; mode=display">\Gamma (n) = (n-1)!</script><p>对于实数部分为正的复数$\alpha$，伽玛函数为：</p>
-<script type="math/tex; mode=display">\Gamma(\alpha) = \int_0^{+\infty} x^{\alpha-1}e^{-x}dx(a>0)</script><script type="math/tex; mode=display">\Gamma(\alpha+1) = \alpha \Gamma(\alpha)</script><h2 id="常用的数值"><a href="#常用的数值" class="headerlink" title="常用的数值"></a>常用的数值</h2><script type="math/tex; mode=display">\Gamma(1) = 1</script><script type="math/tex; mode=display">\Gamma(\frac{1}{2}) = \sqrt{\pi}</script><script type="math/tex; mode=display">\Gamma(n+1) = n!</script>]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>知识点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用平行线段的相机标定[计划更新]</title>
-    <url>/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一种使用平行线段来进行相机标定以及形状重建的方法</p>
-<span id="more"></span>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>监控摄像机标定一直是计算机视觉工业应用的一个重要课题。内部和外部参数都必须精确校准，才能从记录的 2D 图像或视频中识别出 3D 场景中发生的事情，相机标定的一般方法是使用标定对象，如棋盘标定。然而，这些方法对于监控摄像机来说往往是不切实际的，因为它们需要一个足够大的校准对象来覆盖整个拍摄区域。</p>
-<blockquote>
-<p> 原论文下载：</p>
-</blockquote>
-<h2 id="直线提取"><a href="#直线提取" class="headerlink" title="直线提取"></a>直线提取</h2><h3 id="Canny"><a href="#Canny" class="headerlink" title="Canny"></a>Canny</h3><h3 id="Hough-Transform"><a href="#Hough-Transform" class="headerlink" title="Hough Transform"></a>Hough Transform</h3><h2 id="形状重建"><a href="#形状重建" class="headerlink" title="形状重建"></a>形状重建</h2><h3 id="Affine-Rectification"><a href="#Affine-Rectification" class="headerlink" title="Affine Rectification"></a>Affine Rectification</h3><h3 id="Euclidean-Rectification"><a href="#Euclidean-Rectification" class="headerlink" title="Euclidean Rectification"></a>Euclidean Rectification</h3><h2 id="度量指标属性"><a href="#度量指标属性" class="headerlink" title="度量指标属性"></a>度量指标属性</h2><h2 id="相机标定"><a href="#相机标定" class="headerlink" title="相机标定"></a>相机标定</h2><h2 id="世界坐标定位"><a href="#世界坐标定位" class="headerlink" title="世界坐标定位"></a>世界坐标定位</h2><h2 id="3D-形状重构"><a href="#3D-形状重构" class="headerlink" title="3D 形状重构"></a>3D 形状重构</h2><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Fitting-Vanishing-Point"><a href="#Fitting-Vanishing-Point" class="headerlink" title="Fitting Vanishing Point"></a>Fitting Vanishing Point</h3><h3 id="Fitting-Line-at-Infinity"><a href="#Fitting-Line-at-Infinity" class="headerlink" title="Fitting Line at Infinity"></a>Fitting Line at Infinity</h3><h3 id="Fitting-Conics"><a href="#Fitting-Conics" class="headerlink" title="Fitting Conics"></a>Fitting Conics</h3><h2 id="总结分析"><a href="#总结分析" class="headerlink" title="总结分析"></a>总结分析</h2><h2 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h2>]]></content>
-      <categories>
-        <category>图像处理</category>
-      </categories>
-      <tags>
-        <tag>论文复现</tag>
       </tags>
   </entry>
   <entry>
@@ -4062,6 +4045,23 @@ class OBJ:
       </tags>
   </entry>
   <entry>
+    <title>使用平行线段的相机标定[计划更新]</title>
+    <url>/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一种使用平行线段来进行相机标定以及形状重建的方法</p>
+<span id="more"></span>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>监控摄像机标定一直是计算机视觉工业应用的一个重要课题。内部和外部参数都必须精确校准，才能从记录的 2D 图像或视频中识别出 3D 场景中发生的事情，相机标定的一般方法是使用标定对象，如棋盘标定。然而，这些方法对于监控摄像机来说往往是不切实际的，因为它们需要一个足够大的校准对象来覆盖整个拍摄区域。</p>
+<blockquote>
+<p> 原论文下载：</p>
+</blockquote>
+<h2 id="直线提取"><a href="#直线提取" class="headerlink" title="直线提取"></a>直线提取</h2><h3 id="Canny"><a href="#Canny" class="headerlink" title="Canny"></a>Canny</h3><h3 id="Hough-Transform"><a href="#Hough-Transform" class="headerlink" title="Hough Transform"></a>Hough Transform</h3><h2 id="形状重建"><a href="#形状重建" class="headerlink" title="形状重建"></a>形状重建</h2><h3 id="Affine-Rectification"><a href="#Affine-Rectification" class="headerlink" title="Affine Rectification"></a>Affine Rectification</h3><h3 id="Euclidean-Rectification"><a href="#Euclidean-Rectification" class="headerlink" title="Euclidean Rectification"></a>Euclidean Rectification</h3><h2 id="度量指标属性"><a href="#度量指标属性" class="headerlink" title="度量指标属性"></a>度量指标属性</h2><h2 id="相机标定"><a href="#相机标定" class="headerlink" title="相机标定"></a>相机标定</h2><h2 id="世界坐标定位"><a href="#世界坐标定位" class="headerlink" title="世界坐标定位"></a>世界坐标定位</h2><h2 id="3D-形状重构"><a href="#3D-形状重构" class="headerlink" title="3D 形状重构"></a>3D 形状重构</h2><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><h3 id="Fitting-Vanishing-Point"><a href="#Fitting-Vanishing-Point" class="headerlink" title="Fitting Vanishing Point"></a>Fitting Vanishing Point</h3><h3 id="Fitting-Line-at-Infinity"><a href="#Fitting-Line-at-Infinity" class="headerlink" title="Fitting Line at Infinity"></a>Fitting Line at Infinity</h3><h3 id="Fitting-Conics"><a href="#Fitting-Conics" class="headerlink" title="Fitting Conics"></a>Fitting Conics</h3><h2 id="总结分析"><a href="#总结分析" class="headerlink" title="总结分析"></a>总结分析</h2><h2 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h2>]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>论文复现</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>制作目标检测数据集常用python脚本整理</title>
     <url>/2022/04/09/%E5%88%B6%E4%BD%9C%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86%E5%B8%B8%E7%94%A8python%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>制作个人目标检测数据集时，有查找爬取的错误图片，更改标注路径等等需要，写了以下python脚本</p>
@@ -4083,6 +4083,33 @@ class OBJ:
         <tag>数据集</tag>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>和周小姐高中的对话（一）</title>
+    <url>/2021/11/08/%E5%92%8C%E5%91%A8%E5%B0%8F%E5%A7%90%E9%AB%98%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%AF%9D%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>和周小姐的高中日常之一</p>
+<span id="more"></span>
+<p>一日，周小姐忽然递过一张纸条，上面写道：</p>
+<blockquote>
+<p>凡食人间烟火者，皆有所好，吾之所好者，乐也；爱华君之所好者，色也。</p>
+<p>何为色也？女色也，凡有面容姣好者，难以逃脱爱华之眼也。</p>
+<p>嗟乎！色字当头一把刀，吾甚恐爱华君不知也，特写此书以告之。</p>
+<p align="right">——by Ting</p>
+
+</blockquote>
+<p>我这样回复：</p>
+<blockquote>
+<p>汝庸也，华夏上下五千年，其人也以亿计，天地寿也数十亿年，其灵也以万亿计。此皆雌雄，男女分工之法。</p>
+<p>万物有灵，灵皆爱美，更有学者撰《物种起源》论进化之事矣，其意亦如此。</p>
+<p>今吾所思之女子，面容姣好，举止淑女，世人视之皆慕之，吾何理不念之。古人云：“窃窕淑女，君子好逑。”且吾止于远观而不骚扰，汝何理之言吾心色也？</p>
+<p align="right">——by Aep</p>
+
+</blockquote>
+<p>今料我所言应如是。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>卷积运算的输入输出shape</title>
@@ -4114,27 +4141,112 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
       </tags>
   </entry>
   <entry>
-    <title>和周小姐高中的对话（一）</title>
-    <url>/2021/11/08/%E5%92%8C%E5%91%A8%E5%B0%8F%E5%A7%90%E9%AB%98%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%AF%9D%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>和周小姐的高中日常之一</p>
+    <title>开个新坑: 精读pytorch源码</title>
+    <url>/2023/11/09/%E5%BC%80%E4%B8%AA%E6%96%B0%E5%9D%91-%E7%B2%BE%E8%AF%BBpytorch%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>毕设打算做个简单的深度学习框架，调研了几种语言目前的实现，各有优劣，先从最经典的 torch 读起。欢迎朋友们提出建议</p>
 <span id="more"></span>
-<p>一日，周小姐忽然递过一张纸条，上面写道：</p>
-<blockquote>
-<p>凡食人间烟火者，皆有所好，吾之所好者，乐也；爱华君之所好者，色也。</p>
-<p>何为色也？女色也，凡有面容姣好者，难以逃脱爱华之眼也。</p>
-<p>嗟乎！色字当头一把刀，吾甚恐爱华君不知也，特写此书以告之。</p>
-<p align="right">——by Ting</p>
-
-</blockquote>
-<p>我这样回复：</p>
-<blockquote>
-<p>汝庸也，华夏上下五千年，其人也以亿计，天地寿也数十亿年，其灵也以万亿计。此皆雌雄，男女分工之法。</p>
-<p>万物有灵，灵皆爱美，更有学者撰《物种起源》论进化之事矣，其意亦如此。</p>
-<p>今吾所思之女子，面容姣好，举止淑女，世人视之皆慕之，吾何理不念之。古人云：“窃窕淑女，君子好逑。”且吾止于远观而不骚扰，汝何理之言吾心色也？</p>
-<p align="right">——by Aep</p>
-
-</blockquote>
-<p>今料我所言应如是。</p>
+<h2 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a>mixed</h2><p><a href="https://github.com/pytorch/pytorch">https://github.com/pytorch/pytorch</a></p>
+<p><a href="https://github.com/tensorflow/tensorflow">https://github.com/tensorflow/tensorflow</a></p>
+<p><a href="https://github.com/PaddlePaddle/Paddle">https://github.com/PaddlePaddle/Paddle</a></p>
+<p><a href="https://github.com/mindspore-ai/mindspore">https://github.com/mindspore-ai/mindspore</a></p>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><a href="https://github.com/ggerganov/ggml">https://github.com/ggerganov/ggml</a></p>
+<h2 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust</h2><p><a href="https://github.com/huggingface/candle">https://github.com/huggingface/candle</a></p>
+<p><a href="https://github.com/burn-rs/burn">https://github.com/burn-rs/burn</a></p>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p><a href="https://github.com/tensorlayer/TensorLayer">https://github.com/tensorlayer/TensorLayer</a></p>
+<p><a href="https://github.com/alibaba/TinyNeuralNetwork">https://github.com/alibaba/TinyNeuralNetwork</a></p>
+<h2 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h2><p><a href="https://github.com/xylcbd/EasyCNN">https://github.com/xylcbd/EasyCNN</a></p>
+]]></content>
+      <categories>
+        <category>懵逼的深度学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>我的2022暑假独居生活</title>
+    <url>/2022/06/12/%E6%88%91%E7%9A%842022%E6%9A%91%E5%81%87%E7%8B%AC%E5%B1%85%E7%94%9F%E6%B4%BB/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一张小方桌，有一荤一素</p>
+<span id="more"></span>
+<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><h3 id="2022年6月10日"><a href="#2022年6月10日" class="headerlink" title="2022年6月10日"></a>2022年6月10日</h3><ul>
+<li>青椒土豆丝</li>
+<li>腊肠蒸蛋</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-10.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月11日"><a href="#2022年6月11日" class="headerlink" title="2022年6月11日"></a>2022年6月11日</h3><ul>
+<li>青椒土豆丝</li>
+<li>红烧带鱼</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-11.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月12日"><a href="#2022年6月12日" class="headerlink" title="2022年6月12日"></a>2022年6月12日</h3><ul>
+<li>土豆鸡腿</li>
+<li>炒青菜</li>
+<li>紫菜蛋汤</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-12.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月13日"><a href="#2022年6月13日" class="headerlink" title="2022年6月13日"></a>2022年6月13日</h3><ul>
+<li>番茄鸡蛋面</li>
+<li>包菜炒肉</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-13.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月14日"><a href="#2022年6月14日" class="headerlink" title="2022年6月14日"></a>2022年6月14日</h3><ul>
+<li>番茄鸡蛋面</li>
+<li>包菜炒肉</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-14.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月16日"><a href="#2022年6月16日" class="headerlink" title="2022年6月16日"></a>2022年6月16日</h3><ul>
+<li>蛋黄粽</li>
+<li>红枣粽</li>
+<li>虎皮青椒</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-16.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月17日"><a href="#2022年6月17日" class="headerlink" title="2022年6月17日"></a>2022年6月17日</h3><ul>
+<li>红烧鳊鱼</li>
+<li>土豆洋葱炒腊肠</li>
+<li>紫菜蛋汤</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-17.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年6月23日-30-日"><a href="#2022年6月23日-30-日" class="headerlink" title="2022年6月23日 - 30 日"></a>2022年6月23日 - 30 日</h3><ul>
+<li>去学校天天吃大餐</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-06-24.webp" style="zoom: 50%;" /></p>
+<p><img src="/image/我的2022暑假独居生活/2022-06-30.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月02日"><a href="#2022年07月02日" class="headerlink" title="2022年07月02日"></a>2022年07月02日</h3><ul>
+<li>蒸贝贝南瓜</li>
+<li>蒜蓉茄子</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-02.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月03日"><a href="#2022年07月03日" class="headerlink" title="2022年07月03日"></a>2022年07月03日</h3><ul>
+<li>金色传说煎饺</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-03.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月04日"><a href="#2022年07月04日" class="headerlink" title="2022年07月04日"></a>2022年07月04日</h3><ul>
+<li>空气炸锅奥尔良鸡腿</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-04.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月07日"><a href="#2022年07月07日" class="headerlink" title="2022年07月07日"></a>2022年07月07日</h3><ul>
+<li><p>番茄马铃薯排骨</p>
+</li>
+<li><p>炒豇豆</p>
+</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-07.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月14日"><a href="#2022年07月14日" class="headerlink" title="2022年07月14日"></a>2022年07月14日</h3><ul>
+<li>奥尔良鸡腿</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-14.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月19日"><a href="#2022年07月19日" class="headerlink" title="2022年07月19日"></a>2022年07月19日</h3><ul>
+<li>糖果煮蛋</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-19.webp" style="zoom: 50%;" /></p>
+<h3 id="2022年07月20日"><a href="#2022年07月20日" class="headerlink" title="2022年07月20日"></a>2022年07月20日</h3><ul>
+<li><p>空气炸锅鸡米花</p>
+</li>
+<li><p>丝瓜炒蛋</p>
+</li>
+<li><p>番茄鸡蛋汤</p>
+</li>
+<li><p>青椒土豆丝</p>
+</li>
+</ul>
+<p><img src="/image/我的2022暑假独居生活/2022-07-20.webp" style="zoom: 50%;" /></p>
 ]]></content>
       <categories>
         <category>生活</category>
@@ -4525,26 +4637,6 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
       </tags>
   </entry>
   <entry>
-    <title>开个新坑: 精读pytorch源码</title>
-    <url>/2023/11/09/%E5%BC%80%E4%B8%AA%E6%96%B0%E5%9D%91-%E7%B2%BE%E8%AF%BBpytorch%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>毕设打算做个简单的深度学习框架，调研了几种语言目前的实现，各有优劣，先从最经典的 torch 读起。欢迎朋友们提出建议</p>
-<span id="more"></span>
-<h2 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a>mixed</h2><p><a href="https://github.com/pytorch/pytorch">https://github.com/pytorch/pytorch</a></p>
-<p><a href="https://github.com/tensorflow/tensorflow">https://github.com/tensorflow/tensorflow</a></p>
-<p><a href="https://github.com/PaddlePaddle/Paddle">https://github.com/PaddlePaddle/Paddle</a></p>
-<p><a href="https://github.com/mindspore-ai/mindspore">https://github.com/mindspore-ai/mindspore</a></p>
-<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p><a href="https://github.com/ggerganov/ggml">https://github.com/ggerganov/ggml</a></p>
-<h2 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust</h2><p><a href="https://github.com/huggingface/candle">https://github.com/huggingface/candle</a></p>
-<p><a href="https://github.com/burn-rs/burn">https://github.com/burn-rs/burn</a></p>
-<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p><a href="https://github.com/tensorlayer/TensorLayer">https://github.com/tensorlayer/TensorLayer</a></p>
-<p><a href="https://github.com/alibaba/TinyNeuralNetwork">https://github.com/alibaba/TinyNeuralNetwork</a></p>
-<h2 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h2><p><a href="https://github.com/xylcbd/EasyCNN">https://github.com/xylcbd/EasyCNN</a></p>
-]]></content>
-      <categories>
-        <category>懵逼的深度学习</category>
-      </categories>
-  </entry>
-  <entry>
     <title>拉格朗日插值多项式</title>
     <url>/2021/10/06/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在数值分析中，多项式插值是最常提到的内容</p>
@@ -4605,98 +4697,6 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
       <tags>
         <tag>多项式插值</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>我的2022暑假独居生活</title>
-    <url>/2022/06/12/%E6%88%91%E7%9A%842022%E6%9A%91%E5%81%87%E7%8B%AC%E5%B1%85%E7%94%9F%E6%B4%BB/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一张小方桌，有一荤一素</p>
-<span id="more"></span>
-<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><h3 id="2022年6月10日"><a href="#2022年6月10日" class="headerlink" title="2022年6月10日"></a>2022年6月10日</h3><ul>
-<li>青椒土豆丝</li>
-<li>腊肠蒸蛋</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-10.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月11日"><a href="#2022年6月11日" class="headerlink" title="2022年6月11日"></a>2022年6月11日</h3><ul>
-<li>青椒土豆丝</li>
-<li>红烧带鱼</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-11.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月12日"><a href="#2022年6月12日" class="headerlink" title="2022年6月12日"></a>2022年6月12日</h3><ul>
-<li>土豆鸡腿</li>
-<li>炒青菜</li>
-<li>紫菜蛋汤</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-12.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月13日"><a href="#2022年6月13日" class="headerlink" title="2022年6月13日"></a>2022年6月13日</h3><ul>
-<li>番茄鸡蛋面</li>
-<li>包菜炒肉</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-13.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月14日"><a href="#2022年6月14日" class="headerlink" title="2022年6月14日"></a>2022年6月14日</h3><ul>
-<li>番茄鸡蛋面</li>
-<li>包菜炒肉</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-14.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月16日"><a href="#2022年6月16日" class="headerlink" title="2022年6月16日"></a>2022年6月16日</h3><ul>
-<li>蛋黄粽</li>
-<li>红枣粽</li>
-<li>虎皮青椒</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-16.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月17日"><a href="#2022年6月17日" class="headerlink" title="2022年6月17日"></a>2022年6月17日</h3><ul>
-<li>红烧鳊鱼</li>
-<li>土豆洋葱炒腊肠</li>
-<li>紫菜蛋汤</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-17.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年6月23日-30-日"><a href="#2022年6月23日-30-日" class="headerlink" title="2022年6月23日 - 30 日"></a>2022年6月23日 - 30 日</h3><ul>
-<li>去学校天天吃大餐</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-06-24.webp" style="zoom: 50%;" /></p>
-<p><img src="/image/我的2022暑假独居生活/2022-06-30.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月02日"><a href="#2022年07月02日" class="headerlink" title="2022年07月02日"></a>2022年07月02日</h3><ul>
-<li>蒸贝贝南瓜</li>
-<li>蒜蓉茄子</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-02.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月03日"><a href="#2022年07月03日" class="headerlink" title="2022年07月03日"></a>2022年07月03日</h3><ul>
-<li>金色传说煎饺</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-03.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月04日"><a href="#2022年07月04日" class="headerlink" title="2022年07月04日"></a>2022年07月04日</h3><ul>
-<li>空气炸锅奥尔良鸡腿</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-04.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月07日"><a href="#2022年07月07日" class="headerlink" title="2022年07月07日"></a>2022年07月07日</h3><ul>
-<li><p>番茄马铃薯排骨</p>
-</li>
-<li><p>炒豇豆</p>
-</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-07.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月14日"><a href="#2022年07月14日" class="headerlink" title="2022年07月14日"></a>2022年07月14日</h3><ul>
-<li>奥尔良鸡腿</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-14.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月19日"><a href="#2022年07月19日" class="headerlink" title="2022年07月19日"></a>2022年07月19日</h3><ul>
-<li>糖果煮蛋</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-19.webp" style="zoom: 50%;" /></p>
-<h3 id="2022年07月20日"><a href="#2022年07月20日" class="headerlink" title="2022年07月20日"></a>2022年07月20日</h3><ul>
-<li><p>空气炸锅鸡米花</p>
-</li>
-<li><p>丝瓜炒蛋</p>
-</li>
-<li><p>番茄鸡蛋汤</p>
-</li>
-<li><p>青椒土豆丝</p>
-</li>
-</ul>
-<p><img src="/image/我的2022暑假独居生活/2022-07-20.webp" style="zoom: 50%;" /></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
   </entry>
   <entry>
     <title>拟合和统计中的检验参数</title>
@@ -4934,20 +4934,6 @@ NMSE_hermite =
       </tags>
   </entry>
   <entry>
-    <title>第二届网刃杯misc所见非所见wp</title>
-    <url>/2022/04/25/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AFmisc%E6%89%80%E8%A7%81%E9%9D%9E%E6%89%80%E8%A7%81wp/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录一下这道深度学习入门的wp</p>
-<span id="more"></span>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>隐藏层的输出为512，输出层的输出10，导入模型得到报错，神经网络的输入必须为<code>(28,28)</code>，再用 <code>tf.latest_checkpoint</code> 和 <code>tf.load_weights</code> 导入模型文件，最后输出概率最大的预测结果组成 <code>flag</code> ，由于预测图片在压缩中有精度误差，和真实结果不同，所幸赛方给出了 <code>hint4</code>，修改第4位为 2。</p>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> models,layers</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">model</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        model = models.Sequential()</span><br><span class="line">        model.add(layers.Flatten(input_shape = (<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)))</span><br><span class="line">        model.add(layers.Dense(<span class="number">512</span>, activation=<span class="string">&#x27;relu&#x27;</span>))</span><br><span class="line">        model.add(layers.Dense(<span class="number">10</span>, activation=<span class="string">&#x27;softmax&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        model.summary()</span><br><span class="line">        self.model = model</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Predict</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        latest = tf.train.latest_checkpoint(<span class="string">&#x27;./weights&#x27;</span>)</span><br><span class="line">        self.cnn = model()</span><br><span class="line">        self.cnn.model.load_weights(latest)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        img = Image.<span class="built_in">open</span>(image_path).convert(<span class="string">&#x27;I&#x27;</span>)</span><br><span class="line">        img = img.resize((<span class="number">28</span>,<span class="number">28</span>))</span><br><span class="line">        img = np.reshape(img, (<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)) / <span class="number">255.</span></span><br><span class="line">        x = np.array([img])</span><br><span class="line">        y = np.argmax(self.cnn.model.predict(x))</span><br><span class="line">        <span class="built_in">print</span>(image_path)</span><br><span class="line">        <span class="built_in">print</span>(y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    p = Predict()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">14</span>):</span><br><span class="line">        p.predict(<span class="string">&#x27;./flag/&#123;&#125;.webp&#x27;</span>.<span class="built_in">format</span>(i))</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>misc</category>
-      </categories>
-      <tags>
-        <tag>tensorflow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>求解微分方程</title>
     <url>/2021/11/02/%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>解微分方程是我的弱项，就靠这个了</p>
@@ -5036,6 +5022,20 @@ NMSE_hermite =
       </categories>
       <tags>
         <tag>知识点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第二届网刃杯misc所见非所见wp</title>
+    <url>/2022/04/25/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AFmisc%E6%89%80%E8%A7%81%E9%9D%9E%E6%89%80%E8%A7%81wp/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录一下这道深度学习入门的wp</p>
+<span id="more"></span>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>隐藏层的输出为512，输出层的输出10，导入模型得到报错，神经网络的输入必须为<code>(28,28)</code>，再用 <code>tf.latest_checkpoint</code> 和 <code>tf.load_weights</code> 导入模型文件，最后输出概率最大的预测结果组成 <code>flag</code> ，由于预测图片在压缩中有精度误差，和真实结果不同，所幸赛方给出了 <code>hint4</code>，修改第4位为 2。</p>
+<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> models,layers</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">model</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        model = models.Sequential()</span><br><span class="line">        model.add(layers.Flatten(input_shape = (<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)))</span><br><span class="line">        model.add(layers.Dense(<span class="number">512</span>, activation=<span class="string">&#x27;relu&#x27;</span>))</span><br><span class="line">        model.add(layers.Dense(<span class="number">10</span>, activation=<span class="string">&#x27;softmax&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        model.summary()</span><br><span class="line">        self.model = model</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Predict</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        latest = tf.train.latest_checkpoint(<span class="string">&#x27;./weights&#x27;</span>)</span><br><span class="line">        self.cnn = model()</span><br><span class="line">        self.cnn.model.load_weights(latest)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, image_path</span>):</span><br><span class="line">        img = Image.<span class="built_in">open</span>(image_path).convert(<span class="string">&#x27;I&#x27;</span>)</span><br><span class="line">        img = img.resize((<span class="number">28</span>,<span class="number">28</span>))</span><br><span class="line">        img = np.reshape(img, (<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)) / <span class="number">255.</span></span><br><span class="line">        x = np.array([img])</span><br><span class="line">        y = np.argmax(self.cnn.model.predict(x))</span><br><span class="line">        <span class="built_in">print</span>(image_path)</span><br><span class="line">        <span class="built_in">print</span>(y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    p = Predict()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">14</span>):</span><br><span class="line">        p.predict(<span class="string">&#x27;./flag/&#123;&#125;.webp&#x27;</span>.<span class="built_in">format</span>(i))</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>misc</category>
+      </categories>
+      <tags>
+        <tag>tensorflow</tag>
       </tags>
   </entry>
   <entry>
@@ -5198,6 +5198,114 @@ NMSE_hermite =
       </tags>
   </entry>
   <entry>
+    <title>论文阅读: PyTorch Distributed: Experiences on Accelerating Data Parallel Training</title>
+    <url>/2023/09/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文提出的 DistributedDataParallel 在优化器运行之前进行梯度平均，用相同的梯度集更新所有模型副本，这样在数学上和本地训练完全等价，而且可以实现异步，比参数平均更加高效。</p>
+<span id="more"></span>
+<p>paper: <a href="https://arxiv.org/abs/2006.15704">https://arxiv.org/abs/2006.15704</a></p>
+<p>code: <a href="https://github.com/pytorch/pytorch/">https://github.com/pytorch/pytorch/</a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="PyTorch-训练流程"><a href="#PyTorch-训练流程" class="headerlink" title="PyTorch 训练流程"></a>PyTorch 训练流程</h3><ul>
+<li>Forward pass：计算损失 </li>
+<li>Backward pass：计算梯度 </li>
+<li>Optimizer step：更新参数</li>
+<li>数据并行 </li>
+</ul>
+<p>PyTorch 有以下方式进行分布式训练，如 </p>
+<ul>
+<li>DataParallel：单机多卡进行单进程多线程数据并行训练 </li>
+<li>DistributedDataParallel：多机多卡进行多进程数据并行训练 </li>
+<li>RPC（e.g. 参数服务器）：分布式模型并行训练 </li>
+</ul>
+<p>另一种方案：参数平均计算所有模型权重的均值，但是当优化器中有依赖过去局部梯度的值（如 Adam 中的动量），优化器的状态可能会逐渐偏离，最终导致训练效果下降。另外，向后传递和参数平均不能重叠运行，浪费了性能</p>
+<p>本文提出的 DistributedDataParallel 在优化器运行之前进行梯度平均，用相同的梯度集更新所有模型副本，这样在数学上和本地训练完全等价，而且可以实现异步，比参数平均更加高效 </p>
+<h2 id="AllReduce"><a href="#AllReduce" class="headerlink" title="AllReduce"></a>AllReduce</h2><p>次级实现</p>
+<p>每个进程将其输入张量广播给所有对等进程，然后独立地应用算术运算，然而效率不高 </p>
+<p>于是 Nvidia 在 NCCL 后端中提出了基于环的 AllReduce 和基于树的 AllReduce </p>
+<p>AllReduce 操作需要等待所有进程就绪后才能运行，是同步操作，而参数服务器中使用 P2P 通信 </p>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>API 实现</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/1.webp" width="300" /></p>
+<p>分布式训练时只需要修改少部分训练脚本</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/3.webp" width="500" /></p>
+<p>暴露更多接口以实现拦截信号和触发操作的机制进行优化 </p>
+<h2 id="梯度规约"><a href="#梯度规约" class="headerlink" title="梯度规约"></a>梯度规约</h2><h3 id="次级实现（All-Reduce）"><a href="#次级实现（All-Reduce）" class="headerlink" title="次级实现（All Reduce）"></a>次级实现（All Reduce）</h3><p>DDP控制所有的训练进程</p>
+<p>在模型初始化时广播网络状态，让所有模型以相同状态开始训练<br>每次迭代时在局部 backward() 之后和优化器 step() 之前执行梯度，以相同的梯度更新权重 </p>
+<p>DDP 可以注册 autograd hooks，每次 backward() 后触发以下操作</p>
+<ol>
+<li>hooks 扫描所有局部模型参数</li>
+<li>从每个参数中检索梯度张量</li>
+<li>再使用 AllReduce 集体通信计算所有进程中参数的平均梯度</li>
+<li>将结果返回梯度张量</li>
+</ol>
+<p>但是有两个性能问题</p>
+<ul>
+<li>在小 tensor 上的集合通信效率非常低</li>
+<li>把梯度计算和同步分开之后，不能让它们通信重叠 </li>
+</ul>
+<h3 id="梯度桶"><a href="#梯度桶" class="headerlink" title="梯度桶"></a>梯度桶</h3><p>下图显示了不同的参数规模在执行 All Reduce 时的效率，可以看到 tensor 越大，效率越高</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/2.webp" width="500" /></p>
+<p>梯度桶为了解决 All Reduce 在小 tensor 上的性能问题，将多个小 tensor 收集为一个桶，在达到一定规模后进行 All Reduce，这将 All Reduce 的操作转变为了异步</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/4.webp" width="500" /></p>
+<h3 id="通信和计算重叠"><a href="#通信和计算重叠" class="headerlink" title="通信和计算重叠"></a>通信和计算重叠</h3><p>在没有使用梯度桶机制之前，通信和梯度计算可以重叠。 </p>
+<p>在梯度桶机制下，需要等在同一个桶内的所有梯度都计算完成后，才能进行通信。为了重叠，PyTorch 引入 hook 机制，在反向传播计算完成后，调用自定义函数</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/5.webp" width="500" /></p>
+<p>每当一个梯度计算完成后，对应的 hook 将会被触发，当在同一个bucket中的梯度的hook都被fire后，就调用AllReduce对该bucket进行通信 </p>
+<p>但是这种策略会导致两个问题</p>
+<ul>
+<li><p>每个进程都是独立的，不能保证所有进程处理桶的顺序一致，如下图 (a) 所示 </p>
+<p>解决方法：将模型参数的反序作为桶的顺序，反向顺序可以近似表示反向传递中的梯度计算顺序</p>
+</li>
+<li><p>在某些阶段，网络中的一些层的梯度可以不需要使用，如 Dropout 等，这样这个层对应梯度的 hook 永远不会被触发，如下图 (b) 所示</p>
+<p>解决方法：在前向传播结束后从输出开始遍历计算图，使用 bitmap（用于表示二进制数据的数据结构） 记录哪些参数参与计算，哪些参数没有参与计算，对于没有参与计算的参数，标记为 ready </p>
+</li>
+</ul>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/6.webp" width="500" /></p>
+<h3 id="梯度累积"><a href="#梯度累积" class="headerlink" title="梯度累积"></a>梯度累积</h3><p>传统梯度传播频率是在每次训练完成后传播，PyTorch 通过在在全局同步梯度之前进行 n 次局部训练迭代，减少梯度通信的时间，这种思路还可以解决大 batch size 占用资源过大的问题，可以将一个batch切分为多个micro<br>batch，在最后一个micro batch训练完成后，进行梯度更新</p>
+<p>但是这种策略会导致某些迭代中没有参与计算的梯度（如 Dropout）和正常计算的梯度混合后，会导致有部分梯度在某些迭代中被累加，而在其他迭代中被清零，PyTorch也无法判断哪些梯度计算完成后立即进行同步，还是等<br>累加若干个迭代之后再进行同步</p>
+<p>解决方法：提出了 “no_sync”上下文。当进行梯度累积并使用 “no_sync”上下文时，会有一些参数在某些迭代中未被使用，但在其他迭代中被使用。为了确保这些未使用参数的梯度不会在下一次迭代中被误用，使用 “bitmap”<br>来记录这些未使用参数的信息。在进入”no_sync”上下文之后，所有的 DDP hook 都被禁用，这意味着参数的梯度将被累积而不会在该上下文中进行通信。同时，全局未使用参数的信息也会被记录在 “bitmap” 中。这样，在下<br>一次通信时，PyTorch会使用 “bitmap” 来指导梯度通信，以确保未使用的参数不会被传输，从而保持梯度的正确性。</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/11.webp" width="500" /></p>
+<h2 id="集合通信"><a href="#集合通信" class="headerlink" title="集合通信"></a>集合通信</h2><p>PyTorch DDP 支持三种通讯库：NCCL，Gloo 和 MPI。这些库被包装到同一个 ProcessGroup API 中，在运行多个 ProcessGroup 时，会使用轮询调度将集体通信分派给各个 ProcessGroup 实例，获得更高的带宽利用率 </p>
+<h2 id="工程实现"><a href="#工程实现" class="headerlink" title="工程实现"></a>工程实现</h2><h3 id="python-前后端"><a href="#python-前后端" class="headerlink" title="python 前后端"></a>python 前后端</h3><p>可配置参数</p>
+<ul>
+<li>Process Group：指定进程组运行 AllReduce</li>
+<li>bucket_cap_mb：调整桶大小优化训练速度 </li>
+<li><p>find_unused_parameters：控制 DDP 是否应该通过遍历计算图来检测未使用的参数 </p>
+</li>
+<li><p>Model Buffers：在某些层中，例如BatchNorm层，需要维护一些状态，比如running variance（运行方差）和running mean（运行均值）。这些状态需要在训练过程中持续更新和使用，以确保模型在训练过程中的稳定性和性能。为了正确处理Model Buffers的同步和广播。DDP通过指定 rank 0 进程来处理。在启用no sync模式时，相应地调整缓冲区的广播，确保所有进程在进行本地计算之前，都拥有最新的Model Buffers的值 </p>
+</li>
+</ul>
+<h3 id="梯度规约的重点实现"><a href="#梯度规约的重点实现" class="headerlink" title="梯度规约的重点实现"></a>梯度规约的重点实现</h3><p>参数与桶的映射：确保同一 bucket 中的 parameter 都来自同一个device</p>
+<p>Autograd Hook：通过为每个桶添加值为梯度数量的递减计数器来判断当前 backward 到了第几层，从而在合适的时候 AllReduce，在下一次前向传播时，重置计数器</p>
+<p>桶规约：默认 bucket size 为 25M，实践中需要实验得到最佳大小 </p>
+<p>全局未使用参数：在 CPU 上创建 bitmap 来保存本地没有使用的参数信息，并通过一个额外的allreduce得到 global bitmap</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/7.webp" width="300" /></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>通过 Latency Breakdown（对训练过程中不同阶段的延迟进行细分和分析）比较了不同模型、使用不同 backend、有无通信和训练的 overlap，得到反向传播是最耗时是阶段，AllReduce 就是在这一阶段中，仍然需要优化通信效率 </p>
+<p>下图实验了不同 bucket size</p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/9.webp" width="800" /></p>
+<p>DDP通过使用多个round-robin（轮询调度）进程组从而充分利用带宽。下图实验比较了使用不同数量进程组对 latency 的影响 </p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/10.webp" width="800" /></p>
+<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ul>
+<li><p>通信后端：NCCL 优于 GLOO </p>
+<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/8.webp" width="300" /></p>
+</li>
+<li><p>bucket size：大小随着模型的增大而增大 </p>
+</li>
+<li><p>资源分配：用 NCCL 时建议把同一台机器上的所有进程都放到同一个进程组中 </p>
+</li>
+</ul>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ul>
+<li>梯度顺序预测：使用 autograd hook 记录 backward 的顺序，并相应地更新 bucket mapping 中的对应参数</li>
+<li>Layer dropping：在forward的过程中随机 drop 掉几层网络，加速训练的同时避免过拟合，与此同时相应修改 parameter-to-bucket mapping，或从 bucket 层面 drop 网络层</li>
+<li>梯度压缩：只通信需要高精度的梯度</li>
+</ul>
+]]></content>
+      <categories>
+        <category>懵逼的深度学习</category>
+      </categories>
+      <tags>
+        <tag>分布式训练框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文阅读: ZeRO++: Extremely Eficient Collective Communication for Giant Model Training</title>
     <url>/2023/11/25/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>原文链接：<a href="https://arxiv.org/pdf/2306.10209.pdf">https://arxiv.org/pdf/2306.10209.pdf</a></p>
@@ -5319,114 +5427,6 @@ NMSE_hermite =
 <p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/17.webp" width="500" /></p>
 <p><img src="/image/论文阅读-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/18.webp" width="500" /></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>合并上述三项优化，使用 384 V100 GPU 进行大规模模型训练时系统吞吐量提高 2.16 倍</p>
-]]></content>
-      <categories>
-        <category>懵逼的深度学习</category>
-      </categories>
-      <tags>
-        <tag>分布式训练框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文阅读: PyTorch Distributed: Experiences on Accelerating Data Parallel Training</title>
-    <url>/2023/09/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文提出的 DistributedDataParallel 在优化器运行之前进行梯度平均，用相同的梯度集更新所有模型副本，这样在数学上和本地训练完全等价，而且可以实现异步，比参数平均更加高效。</p>
-<span id="more"></span>
-<p>paper: <a href="https://arxiv.org/abs/2006.15704">https://arxiv.org/abs/2006.15704</a></p>
-<p>code: <a href="https://github.com/pytorch/pytorch/">https://github.com/pytorch/pytorch/</a></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="PyTorch-训练流程"><a href="#PyTorch-训练流程" class="headerlink" title="PyTorch 训练流程"></a>PyTorch 训练流程</h3><ul>
-<li>Forward pass：计算损失 </li>
-<li>Backward pass：计算梯度 </li>
-<li>Optimizer step：更新参数</li>
-<li>数据并行 </li>
-</ul>
-<p>PyTorch 有以下方式进行分布式训练，如 </p>
-<ul>
-<li>DataParallel：单机多卡进行单进程多线程数据并行训练 </li>
-<li>DistributedDataParallel：多机多卡进行多进程数据并行训练 </li>
-<li>RPC（e.g. 参数服务器）：分布式模型并行训练 </li>
-</ul>
-<p>另一种方案：参数平均计算所有模型权重的均值，但是当优化器中有依赖过去局部梯度的值（如 Adam 中的动量），优化器的状态可能会逐渐偏离，最终导致训练效果下降。另外，向后传递和参数平均不能重叠运行，浪费了性能</p>
-<p>本文提出的 DistributedDataParallel 在优化器运行之前进行梯度平均，用相同的梯度集更新所有模型副本，这样在数学上和本地训练完全等价，而且可以实现异步，比参数平均更加高效 </p>
-<h2 id="AllReduce"><a href="#AllReduce" class="headerlink" title="AllReduce"></a>AllReduce</h2><p>次级实现</p>
-<p>每个进程将其输入张量广播给所有对等进程，然后独立地应用算术运算，然而效率不高 </p>
-<p>于是 Nvidia 在 NCCL 后端中提出了基于环的 AllReduce 和基于树的 AllReduce </p>
-<p>AllReduce 操作需要等待所有进程就绪后才能运行，是同步操作，而参数服务器中使用 P2P 通信 </p>
-<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>API 实现</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/1.webp" width="300" /></p>
-<p>分布式训练时只需要修改少部分训练脚本</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/3.webp" width="500" /></p>
-<p>暴露更多接口以实现拦截信号和触发操作的机制进行优化 </p>
-<h2 id="梯度规约"><a href="#梯度规约" class="headerlink" title="梯度规约"></a>梯度规约</h2><h3 id="次级实现（All-Reduce）"><a href="#次级实现（All-Reduce）" class="headerlink" title="次级实现（All Reduce）"></a>次级实现（All Reduce）</h3><p>DDP控制所有的训练进程</p>
-<p>在模型初始化时广播网络状态，让所有模型以相同状态开始训练<br>每次迭代时在局部 backward() 之后和优化器 step() 之前执行梯度，以相同的梯度更新权重 </p>
-<p>DDP 可以注册 autograd hooks，每次 backward() 后触发以下操作</p>
-<ol>
-<li>hooks 扫描所有局部模型参数</li>
-<li>从每个参数中检索梯度张量</li>
-<li>再使用 AllReduce 集体通信计算所有进程中参数的平均梯度</li>
-<li>将结果返回梯度张量</li>
-</ol>
-<p>但是有两个性能问题</p>
-<ul>
-<li>在小 tensor 上的集合通信效率非常低</li>
-<li>把梯度计算和同步分开之后，不能让它们通信重叠 </li>
-</ul>
-<h3 id="梯度桶"><a href="#梯度桶" class="headerlink" title="梯度桶"></a>梯度桶</h3><p>下图显示了不同的参数规模在执行 All Reduce 时的效率，可以看到 tensor 越大，效率越高</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/2.webp" width="500" /></p>
-<p>梯度桶为了解决 All Reduce 在小 tensor 上的性能问题，将多个小 tensor 收集为一个桶，在达到一定规模后进行 All Reduce，这将 All Reduce 的操作转变为了异步</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/4.webp" width="500" /></p>
-<h3 id="通信和计算重叠"><a href="#通信和计算重叠" class="headerlink" title="通信和计算重叠"></a>通信和计算重叠</h3><p>在没有使用梯度桶机制之前，通信和梯度计算可以重叠。 </p>
-<p>在梯度桶机制下，需要等在同一个桶内的所有梯度都计算完成后，才能进行通信。为了重叠，PyTorch 引入 hook 机制，在反向传播计算完成后，调用自定义函数</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/5.webp" width="500" /></p>
-<p>每当一个梯度计算完成后，对应的 hook 将会被触发，当在同一个bucket中的梯度的hook都被fire后，就调用AllReduce对该bucket进行通信 </p>
-<p>但是这种策略会导致两个问题</p>
-<ul>
-<li><p>每个进程都是独立的，不能保证所有进程处理桶的顺序一致，如下图 (a) 所示 </p>
-<p>解决方法：将模型参数的反序作为桶的顺序，反向顺序可以近似表示反向传递中的梯度计算顺序</p>
-</li>
-<li><p>在某些阶段，网络中的一些层的梯度可以不需要使用，如 Dropout 等，这样这个层对应梯度的 hook 永远不会被触发，如下图 (b) 所示</p>
-<p>解决方法：在前向传播结束后从输出开始遍历计算图，使用 bitmap（用于表示二进制数据的数据结构） 记录哪些参数参与计算，哪些参数没有参与计算，对于没有参与计算的参数，标记为 ready </p>
-</li>
-</ul>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/6.webp" width="500" /></p>
-<h3 id="梯度累积"><a href="#梯度累积" class="headerlink" title="梯度累积"></a>梯度累积</h3><p>传统梯度传播频率是在每次训练完成后传播，PyTorch 通过在在全局同步梯度之前进行 n 次局部训练迭代，减少梯度通信的时间，这种思路还可以解决大 batch size 占用资源过大的问题，可以将一个batch切分为多个micro<br>batch，在最后一个micro batch训练完成后，进行梯度更新</p>
-<p>但是这种策略会导致某些迭代中没有参与计算的梯度（如 Dropout）和正常计算的梯度混合后，会导致有部分梯度在某些迭代中被累加，而在其他迭代中被清零，PyTorch也无法判断哪些梯度计算完成后立即进行同步，还是等<br>累加若干个迭代之后再进行同步</p>
-<p>解决方法：提出了 “no_sync”上下文。当进行梯度累积并使用 “no_sync”上下文时，会有一些参数在某些迭代中未被使用，但在其他迭代中被使用。为了确保这些未使用参数的梯度不会在下一次迭代中被误用，使用 “bitmap”<br>来记录这些未使用参数的信息。在进入”no_sync”上下文之后，所有的 DDP hook 都被禁用，这意味着参数的梯度将被累积而不会在该上下文中进行通信。同时，全局未使用参数的信息也会被记录在 “bitmap” 中。这样，在下<br>一次通信时，PyTorch会使用 “bitmap” 来指导梯度通信，以确保未使用的参数不会被传输，从而保持梯度的正确性。</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/11.webp" width="500" /></p>
-<h2 id="集合通信"><a href="#集合通信" class="headerlink" title="集合通信"></a>集合通信</h2><p>PyTorch DDP 支持三种通讯库：NCCL，Gloo 和 MPI。这些库被包装到同一个 ProcessGroup API 中，在运行多个 ProcessGroup 时，会使用轮询调度将集体通信分派给各个 ProcessGroup 实例，获得更高的带宽利用率 </p>
-<h2 id="工程实现"><a href="#工程实现" class="headerlink" title="工程实现"></a>工程实现</h2><h3 id="python-前后端"><a href="#python-前后端" class="headerlink" title="python 前后端"></a>python 前后端</h3><p>可配置参数</p>
-<ul>
-<li>Process Group：指定进程组运行 AllReduce</li>
-<li>bucket_cap_mb：调整桶大小优化训练速度 </li>
-<li><p>find_unused_parameters：控制 DDP 是否应该通过遍历计算图来检测未使用的参数 </p>
-</li>
-<li><p>Model Buffers：在某些层中，例如BatchNorm层，需要维护一些状态，比如running variance（运行方差）和running mean（运行均值）。这些状态需要在训练过程中持续更新和使用，以确保模型在训练过程中的稳定性和性能。为了正确处理Model Buffers的同步和广播。DDP通过指定 rank 0 进程来处理。在启用no sync模式时，相应地调整缓冲区的广播，确保所有进程在进行本地计算之前，都拥有最新的Model Buffers的值 </p>
-</li>
-</ul>
-<h3 id="梯度规约的重点实现"><a href="#梯度规约的重点实现" class="headerlink" title="梯度规约的重点实现"></a>梯度规约的重点实现</h3><p>参数与桶的映射：确保同一 bucket 中的 parameter 都来自同一个device</p>
-<p>Autograd Hook：通过为每个桶添加值为梯度数量的递减计数器来判断当前 backward 到了第几层，从而在合适的时候 AllReduce，在下一次前向传播时，重置计数器</p>
-<p>桶规约：默认 bucket size 为 25M，实践中需要实验得到最佳大小 </p>
-<p>全局未使用参数：在 CPU 上创建 bitmap 来保存本地没有使用的参数信息，并通过一个额外的allreduce得到 global bitmap</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/7.webp" width="300" /></p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>通过 Latency Breakdown（对训练过程中不同阶段的延迟进行细分和分析）比较了不同模型、使用不同 backend、有无通信和训练的 overlap，得到反向传播是最耗时是阶段，AllReduce 就是在这一阶段中，仍然需要优化通信效率 </p>
-<p>下图实验了不同 bucket size</p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/9.webp" width="800" /></p>
-<p>DDP通过使用多个round-robin（轮询调度）进程组从而充分利用带宽。下图实验比较了使用不同数量进程组对 latency 的影响 </p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/10.webp" width="800" /></p>
-<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ul>
-<li><p>通信后端：NCCL 优于 GLOO </p>
-<p><img src="/image/论文阅读-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/8.webp" width="300" /></p>
-</li>
-<li><p>bucket size：大小随着模型的增大而增大 </p>
-</li>
-<li><p>资源分配：用 NCCL 时建议把同一台机器上的所有进程都放到同一个进程组中 </p>
-</li>
-</ul>
-<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ul>
-<li>梯度顺序预测：使用 autograd hook 记录 backward 的顺序，并相应地更新 bucket mapping 中的对应参数</li>
-<li>Layer dropping：在forward的过程中随机 drop 掉几层网络，加速训练的同时避免过拟合，与此同时相应修改 parameter-to-bucket mapping，或从 bucket 层面 drop 网络层</li>
-<li>梯度压缩：只通信需要高精度的梯度</li>
-</ul>
 ]]></content>
       <categories>
         <category>懵逼的深度学习</category>
@@ -5849,6 +5849,100 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
       </tags>
   </entry>
   <entry>
+    <title>设计实现内存的分配和回收算法</title>
+    <url>/2022/04/13/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>操作系统作业</p>
+<span id="more"></span>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如下数据结构下，设计实现内存的分配和回收算法：</p>
+<ul>
+<li>归还区有下邻空闲区；</li>
+<li>归还区有上邻空闲区；</li>
+<li>归还区既有上邻空闲区又有下邻空闲区；</li>
+<li>归还区既无上邻空闲区又无下邻空闲区</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct</span><br><span class="line">&#123; float address;  /*已分分区起始地址*/</span><br><span class="line"> float length;  	/*已分分区长度，单位为字节*/</span><br><span class="line"> int flag;   	/*已分配区表登记栏标志，用“0”表示空栏目，实验中只支持一个字符的作业名*/</span><br><span class="line">&#125;used_table[n]; 	/*已分配区表*/</span><br><span class="line">struct</span><br><span class="line">&#123;float address;	/*空闲区起始地址*/</span><br><span class="line"> float length;    /*空闲区长度，单位为字节*/</span><br><span class="line"> int flag;  	/*空闲区表登记栏标志，用“0”表示空栏目，用“1”表示未分配*/</span><br><span class="line">&#125;free_table[m]; 	/*空闲区表*/</span><br></pre></td></tr></table></figure>
+<p>编写程序，并输出结果。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//区表数组结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UsedTable</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> address;  <span class="comment">/*已分分区起始地址*/</span></span><br><span class="line">    <span class="type">int</span> length;  	<span class="comment">/*已分分区长度，单位为字节*/</span></span><br><span class="line">    <span class="type">int</span> flag;   	<span class="comment">/*已分配区表登记栏标志，用“0”表示空栏目，实验中只支持一个编号的作业名*/</span></span><br><span class="line">&#125; usedTable[<span class="number">100</span>]; 	<span class="comment">/*已分配区表*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FreeTable</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> address;	<span class="comment">/*空闲区起始地址*/</span></span><br><span class="line">    <span class="type">int</span> length;    <span class="comment">/*空闲区长度，单位为字节*/</span></span><br><span class="line">    <span class="type">int</span> flag;  	<span class="comment">/*空闲区表登记栏标志，用“0”表示空栏目，用“1”表示未分配*/</span></span><br><span class="line">&#125; freeTable[<span class="number">100</span>]; 	<span class="comment">/*空闲区表*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitTable</span><span class="params">()</span>;                                                   <span class="comment">// 初始化区表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">allocTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName, <span class="type">const</span> <span class="type">int</span> proLenth)</span>;             <span class="comment">// 创建作业</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reclaimTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName)</span>;                               <span class="comment">// 回收作业</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">findProName</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp[], <span class="type">const</span> <span class="type">int</span> proName)</span>;  <span class="comment">// 按作业名查找下标</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortUsedTable</span><span class="params">(<span class="keyword">struct</span> UsedTable temp[])</span>;                        <span class="comment">// 排序已分配区表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printUsedTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp)</span>;                   <span class="comment">// 输出作业分区信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printFreeTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> FreeTable temp)</span>;                   <span class="comment">// 输出空闲分区信息</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;                    <span class="comment">//记录当前 已分配/空闲 区表数量</span></span><br><span class="line"><span class="type">int</span> Minsize=<span class="number">1</span>;              <span class="comment">//作业间最小空余地址</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitTable</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//OS</span></span><br><span class="line">    usedTable[<span class="number">0</span>].address = <span class="number">0</span>;</span><br><span class="line">    usedTable[<span class="number">0</span>].length = <span class="number">3</span>;</span><br><span class="line">    usedTable[<span class="number">0</span>].flag = <span class="number">1</span>; <span class="comment">//OS 的作业名为1</span></span><br><span class="line">    </span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">3</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">97</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//图形界面</span></span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">8</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">92</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    usedTable[<span class="number">1</span>].address = <span class="number">3</span>;</span><br><span class="line">    usedTable[<span class="number">1</span>].length = <span class="number">5</span>;</span><br><span class="line">    usedTable[<span class="number">1</span>].flag = <span class="number">2</span>; <span class="comment">//图形界面 的作业名为2</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//网络程序</span></span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">8</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">12</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    usedTable[<span class="number">2</span>].address = <span class="number">20</span>;</span><br><span class="line">    usedTable[<span class="number">2</span>].length = <span class="number">10</span>;</span><br><span class="line">    usedTable[<span class="number">2</span>].flag = <span class="number">3</span>; <span class="comment">//网络程序 的作业名为3</span></span><br><span class="line"></span><br><span class="line">    freeTable[<span class="number">1</span>].address = <span class="number">30</span>;</span><br><span class="line">    freeTable[<span class="number">1</span>].length = <span class="number">70</span>;</span><br><span class="line">    freeTable[<span class="number">1</span>].flag = <span class="number">1</span>;</span><br><span class="line">    i += <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">allocTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName, <span class="type">const</span> <span class="type">int</span> proLenth)</span> &#123;</span><br><span class="line">    <span class="type">int</span> j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(freeTable[j].flag) &#123;</span><br><span class="line">        <span class="keyword">if</span>(freeTable[j].length &gt;= proLenth) <span class="keyword">break</span>;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(freeTable[j].flag == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mNo free space available\033[0m\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(freeTable[j].length - proLenth &lt;= Minsize) &#123;</span><br><span class="line">        usedTable[i].address = freeTable[j].address;</span><br><span class="line">        usedTable[i].length  = freeTable[j].length;</span><br><span class="line">        usedTable[i].flag    = proName;</span><br><span class="line">        <span class="keyword">while</span>(freeTable[j].flag) &#123;</span><br><span class="line">            freeTable[j] = freeTable[j+<span class="number">1</span>];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        freeTable[j].address = freeTable[j].length = freeTable[j].flag = <span class="number">0</span>;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        usedTable[i].address = freeTable[j].address;</span><br><span class="line">        usedTable[i].length  = proLenth;</span><br><span class="line">        usedTable[i].flag    = proName;</span><br><span class="line">        freeTable[j].address = freeTable[j].address + proLenth;</span><br><span class="line">        freeTable[j].length  = freeTable[j].length  - proLenth;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">findProName</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp[], <span class="type">const</span> <span class="type">int</span> proName)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; m&lt;i; m++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(temp[m].flag == proName)</span><br><span class="line">            <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">reclaimTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(proName==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mCannot reclaim OS progress!\n\033[0m&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> k=<span class="number">0</span>,j=<span class="number">0</span>,h=<span class="number">0</span>;</span><br><span class="line">    sortUsedTable(usedTable);</span><br><span class="line">    <span class="keyword">if</span>(findProName(usedTable, <span class="number">1</span>) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mERROR!\033[0m&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k = findProName(usedTable, proName);</span><br><span class="line">    <span class="keyword">if</span>(k == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mCannot find this progress!\033[0m\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(freeTable[j].flag || usedTable[h].flag) &#123;</span><br><span class="line">            <span class="keyword">if</span>(freeTable[j].address + freeTable[j].length == usedTable[k].address) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(freeTable[j+<span class="number">1</span>].flag &amp;&amp; usedTable[k].address + usedTable[k].length == freeTable[j+<span class="number">1</span>].address) &#123;</span><br><span class="line">                    freeTable[j].length += (usedTable[k].length + freeTable[j+<span class="number">1</span>].length);</span><br><span class="line">                    usedTable[k].address = usedTable[k].flag = usedTable[k].length = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> l=j+<span class="number">1</span>; freeTable[l].flag; l++) &#123;</span><br><span class="line">                        freeTable[l] = freeTable[l+<span class="number">1</span>];</span><br><span class="line">                    &#125; <span class="comment">//上有，下有</span></span><br><span class="line">                    i--;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    freeTable[j].length += usedTable[k].length;</span><br><span class="line">                    usedTable[k].address = usedTable[k].length = usedTable[k].flag = <span class="number">0</span>;</span><br><span class="line">                    i--;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125; <span class="comment">//上有，下无</span></span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (usedTable[k].address + usedTable[k].length == freeTable[j].address) &#123;</span><br><span class="line">                freeTable[j].address = usedTable[k].address;</span><br><span class="line">                freeTable[j].length += usedTable[k].length;</span><br><span class="line">                usedTable[k].address = usedTable[k].flag = usedTable[k].length = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//上无，下有</span></span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            &#125;  <span class="keyword">else</span> <span class="keyword">if</span> (usedTable[k<span class="number">-1</span>].address + usedTable[k<span class="number">-1</span>].length + usedTable[k].length == usedTable[k+<span class="number">1</span>].address) &#123;</span><br><span class="line">                <span class="type">int</span> e=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>(freeTable[e].flag) &#123;</span><br><span class="line">                    e++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> m=e; j&lt;m; m--) &#123;</span><br><span class="line">                    freeTable[m].address = freeTable[m<span class="number">-1</span>].address;</span><br><span class="line">                    freeTable[m].length  = freeTable[m<span class="number">-1</span>].length;</span><br><span class="line">                    freeTable[m].flag    = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                freeTable[j].address = usedTable[k].address;</span><br><span class="line">                freeTable[j].length  = usedTable[k].length;</span><br><span class="line">                usedTable[k].address = usedTable[k].length = usedTable[k].flag = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//上无，下无</span></span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="comment">//elif</span></span><br><span class="line">            j++, h++;</span><br><span class="line">        &#125; <span class="comment">//while</span></span><br><span class="line">    &#125; <span class="comment">//else</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortUsedTable</span><span class="params">(<span class="keyword">struct</span> UsedTable temp[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> j, k, f;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UsedTable</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">0</span>; l&lt;i; l++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(temp[l].flag == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> m = l; m&lt;=i; m++) temp[m] = temp[m+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;i<span class="number">-1</span>; j++) &#123;</span><br><span class="line">        f=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;i<span class="number">-1</span>-j; k++)</span><br><span class="line">            <span class="keyword">if</span>(temp[k+<span class="number">1</span>].address &lt; temp[k].address) &#123;</span><br><span class="line">                f=<span class="number">0</span>;</span><br><span class="line">                t         = temp[k];</span><br><span class="line">                temp[k]   = temp[k+<span class="number">1</span>];</span><br><span class="line">                temp[k+<span class="number">1</span>] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(f) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printUsedTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\t%d\t%d\t%d\tNormal\n&quot;</span>, temp.flag, temp.address, temp.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printFreeTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> FreeTable temp)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\033[0;36m\tNULL\t%d\t%d\tNULL\n\033[0m&quot;</span>, temp.address, temp.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>, proName=<span class="number">0</span>, proLenth=<span class="number">0</span>;</span><br><span class="line">    InitTable();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> m=<span class="number">0</span>, j=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32m*Select operation:\n\033[0m&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\t(0) - exit\n\t(1) - allocate memory\n\t(2) - reclaim memory\n\t(3) - print table\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32minput operation: \033[0m&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line">        <span class="keyword">switch</span>(a) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Bye~\n&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mthe name of the progress: \033[0m&quot;</span>);</span><br><span class="line">                    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proName);</span><br><span class="line">                    <span class="keyword">if</span>(proName == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31munvalidated proName!\033[0m\n&quot;</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(findProName(usedTable, proName) != <span class="number">-1</span>) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mthis proName has been used!\033[0m\n&quot;</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mrequired memory size: \033[0m&quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proLenth);</span><br><span class="line">                allocTable(proName, proLenth);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mthe name of the progress to reclaim: \033[0m&quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proName);</span><br><span class="line">                reclaimTable(proName);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;----------------------------------------------\n&quot;</span>);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mmemory table:\033[0m\n&quot;</span>);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;34m\tproName\taddress\tlength\tstatus\033[0m\n&quot;</span>);</span><br><span class="line">                sortUsedTable(usedTable);</span><br><span class="line">                <span class="keyword">while</span>(usedTable[m].flag || freeTable[j].flag) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(usedTable[m].address &lt; freeTable[j].address &amp;&amp; usedTable[m].flag) &#123;</span><br><span class="line">                        printUsedTable(usedTable[m]);</span><br><span class="line">                        m++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (freeTable[j].flag) &#123;</span><br><span class="line">                        printFreeTable(freeTable[j]);</span><br><span class="line">                        j++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;----------------------------------------------\n&quot;</span>);</span><br><span class="line">                <span class="comment">//getchar();</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mNo such this operation\n\033[0m&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>作业</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高斯函数与高斯核函数</title>
+    <url>/2022/08/07/%E9%AB%98%E6%96%AF%E5%87%BD%E6%95%B0%E4%B8%8E%E9%AB%98%E6%96%AF%E6%A0%B8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>图像处理领域中，高斯核函数常用于图像低通滤波，记录下原理，同时用代码实现下。</p>
+<span id="more"></span>
+<h2 id="高斯函数"><a href="#高斯函数" class="headerlink" title="高斯函数"></a>高斯函数</h2><h3 id="一维高斯函数"><a href="#一维高斯函数" class="headerlink" title="一维高斯函数"></a>一维高斯函数</h3><script type="math/tex; mode=display">
+f(x) = ae^{\frac{-(x-b)^2}{2c^2}}</script><p>$a, b, c$ 为实数常数， 且 $a&gt;0$</p>
+<p>$a$ 为曲线尖峰高度，$b$ 为尖峰的中心位置， $c$ 为钟的宽度</p>
+<p><img src="" style="zoom: 40%;" /></p>
+<p>由高斯积分公式，得</p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{\infty}e^{-x^2}dx = \sqrt{\pi}</script><p>令 $y=x-b$, 得 $dx = dy$</p>
+<script type="math/tex; mode=display">
+a \int_{-\infty}^{\infty}e^{-\frac{y^2}{2c^2}}dx</script><p>令 $z= \frac{y}{\sqrt{2}c}$, 得 $dy = \sqrt{2}cdz$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+  & a\int_{-\infty}^{\infty}e^{-z^2}\sqrt{2}cdz \\
+= & \sqrt{2}ac \int_{-\infty}^{\infty}e^{-z^2}dz \\
+= & \sqrt{2\pi}\cdot ac
+\end{aligned}</script><p>得</p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{\infty}ae^{\frac{-(x-b)^2}{2c^2}}dx = \sqrt{2\pi}\cdot ac</script><p>令 $f(x)=1$，使宽度范围内所有概率为$ 1$，得</p>
+<script type="math/tex; mode=display">
+a = \frac{1}{\sqrt{2\pi}\cdot c}</script><p>令期望 $\mu$ 为 $b$，标准差 $\sigma$ 为 $c$，得满足正态分布的高斯函数</p>
+<script type="math/tex; mode=display">
+g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^{2}}</script><h3 id="二维高斯函数（高斯分布、正态分布）"><a href="#二维高斯函数（高斯分布、正态分布）" class="headerlink" title="二维高斯函数（高斯分布、正态分布）"></a>二维高斯函数（高斯分布、正态分布）</h3><script type="math/tex; mode=display">
+G(x,y) = \frac{1}{2\pi\sigma^2}e^{-(x^2+y^2)/2\sigma^2}</script><p>$\mu=0$，即原点为中心点</p>
+<p>在实际编程应用中，高斯函数中的参数如下</p>
+<ul>
+<li>ksize 核大小</li>
+<li>sigma 方差</li>
+<li>center 尖峰中心点坐标</li>
+<li>bias 尖峰中心点的偏移量，用于控制截断高斯函数</li>
+</ul>
+<p>以下程序递增高斯函数的方差，并将结果图保存为 gif 图像</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line">item = <span class="number">10</span></span><br><span class="line">dt = <span class="number">1</span></span><br><span class="line">ksize = <span class="number">20</span></span><br><span class="line">sigma = <span class="number">2</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">plt.ion()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(item)):</span><br><span class="line">    center = <span class="built_in">round</span>(ksize/<span class="number">2</span>)</span><br><span class="line">    bias = ksize *<span class="number">10</span>/<span class="number">10</span></span><br><span class="line">    ksigma = np.multiply(cv2.getGaussianKernel(ksize, sigma),</span><br><span class="line">            (cv2.getGaussianKernel(ksize,sigma)).T)</span><br><span class="line">    [m, n] = ksigma.shape</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(m)):</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(n)):</span><br><span class="line">            <span class="keyword">if</span>((x&lt;center-bias) <span class="keyword">or</span> (x&gt;center+bias) <span class="keyword">or</span> (y&lt;center-bias) <span class="keyword">or</span></span><br><span class="line">                    (y&gt;center+bias)):</span><br><span class="line">                ksigma[x, y] = <span class="number">0</span></span><br><span class="line">    sigma = sigma + dt</span><br><span class="line"></span><br><span class="line">    ax3 = plt.axes(projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">    ax3.set_zlim3d(<span class="number">0</span>,<span class="number">8e-3</span>)</span><br><span class="line">    x = <span class="built_in">list</span>(<span class="built_in">range</span>(ksize))</span><br><span class="line">    y = x</span><br><span class="line">    ax3.plot_surface(x,y,ksigma,cmap=<span class="string">&#x27;rainbow&#x27;</span>)</span><br><span class="line">    plt.draw()</span><br><span class="line">    plt.pause(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<p>图片如下</p>
+<p><img src="/image/高斯函数与高斯核函数/gaussian_curve.gif" style="zoom: 80%;" /></p>
+<p>随着方差的增大，整个高斯函数的尖峰逐渐减小，整体也变的更加平缓，则对图像的平滑效果越来越明显</p>
+<p>保持参数不变，对上述高斯函数进行截断，bias 的大小为 ksize *3/10，则结果如下</p>
+<p><img src="/image/高斯函数与高斯核函数/gaussian_curve2.gif" style="zoom: 80%;" /></p>
+<p>bias 的作用主要是对超过一定区域的原始图像信息不再考虑，这就保证在更加合理的利用靠近高斯函数中心点的周围像素，同时还可以改变高斯函数的中心坐标</p>
+<h2 id="高斯核函数卷积"><a href="#高斯核函数卷积" class="headerlink" title="高斯核函数卷积"></a>高斯核函数卷积</h2><p>径向基函数（Radial Basis Function）， 就是某种沿径向对称的标量函数。 通常定义为空间中任一点 $x_1$ 到某一中心 $x_2$ 之间欧氏距离的单调函数，其作用往往是局部的 , 即当 $x_1$ 远离 $x_2$ 时函数取值很小</p>
+<p>最常用的一个核函数为高斯核函数，形式为</p>
+<script type="math/tex; mode=display">
+k(\|x_1-x_2\|)=e^{-\|x_1-x_2\|^2/2\sigma^2}</script><p>也称为<strong>径向基函数</strong></p>
+<p>高斯核函数的代码实现如下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gaussian_kernel</span>(<span class="params">x1, x2, l=<span class="number">1.0</span>, sigma_f=<span class="number">1.0</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Easy to understand but inefficient.&quot;&quot;&quot;</span></span><br><span class="line">    m, n = x1.shape[<span class="number">0</span>], x2.shape[<span class="number">0</span>]</span><br><span class="line">    dist_matrix = np.zeros((m, n), dtype=<span class="built_in">float</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            dist_matrix[i][j] = np.<span class="built_in">sum</span>((x1[i] - x2[j]) ** <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> sigma_f ** <span class="number">2</span> * np.exp(- <span class="number">0.5</span> / l ** <span class="number">2</span> * dist_matrix)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gaussian_kernel_vectorization</span>(<span class="params">x1, x2, l=<span class="number">1.0</span>, sigma_f=<span class="number">1.0</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;More efficient approach.&quot;&quot;&quot;</span></span><br><span class="line">    dist_matrix = np.<span class="built_in">sum</span>(x1**<span class="number">2</span>, <span class="number">1</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>) + np.<span class="built_in">sum</span>(x2**<span class="number">2</span>, <span class="number">1</span>) - <span class="number">2</span> * np.dot(x1, x2.T)</span><br><span class="line">    <span class="keyword">return</span> sigma_f ** <span class="number">2</span> * np.exp(-<span class="number">0.5</span> / l ** <span class="number">2</span> * dist_matrix)</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">700</span>, <span class="number">800</span>, <span class="number">1029</span>]).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(gaussian_kernel_vectorization(x, x, l=<span class="number">500</span>, sigma=<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[[<span class="number">100.</span>          <span class="number">98.01986733</span>  <span class="number">80.5347031</span> ]</span><br><span class="line"> [ <span class="number">98.01986733</span> <span class="number">100.</span>          <span class="number">90.04307671</span>]</span><br><span class="line"> [ <span class="number">80.5347031</span>   <span class="number">90.04307671</span> <span class="number">100.</span>        ]]</span><br></pre></td></tr></table></figure>
+<h2 id="高斯函数性质"><a href="#高斯函数性质" class="headerlink" title="高斯函数性质"></a>高斯函数性质</h2><p>高斯函数具有五个重要的性质，这些性质使得它在早期图像处理中特别有用。这些性质表明，高斯平滑滤波器无论在空间域还是在频率域都是十分有效的低通滤波器，且在实际图像处理中得到了有效使用。高斯函数具有五个十分重要的性质</p>
+<ol>
+<li><p>二维高斯函数具有旋转对称性，即滤波器在各个方向上的平滑程度是相同的。一般来说，一幅图像的边缘方向是事先不知道的，因此，在滤波前是无法确定一个方向上比另一方向上需要更多的平滑。旋转对称性意味着高斯平滑滤波器在后续边缘检测中不会偏向任一方向。</p>
+</li>
+<li><p>高斯函数是单值函数。这表明，高斯滤波器用像素邻域的加权均值来代替该点的像素值，而每一邻域像素点权值是随该点与中心点的距离单调增减的。边缘是一种图像局部特征，如果平滑运算对离算子中心很远的像素点仍然有很大作用，则平滑运算会使图像失真。</p>
+</li>
+<li><p>高斯函数的傅立叶变换频谱是单瓣的。正如下面所示，这一性质是高斯函数傅立叶变换等于高斯函数本身这一事实的直接推论。图像常被不希望的高频信号所污染（噪声和细纹理）。而所希望的图像特征（如边缘），既含有低频分量，又含有高频分量。高斯函数傅立叶变换的单瓣意味着平滑图像不会被不需要的高频信号所污染，同时保留了大部分所需信号。</p>
+</li>
+<li><p>高斯滤波器宽度(决定着平滑程度)是由参数 $\sigma$ 表征的，而且 $\sigma$ 和平滑程度的关系是非常简单的。 $\sigma$ 越大，高斯滤波器的频带就越宽，平滑程度就越好。通过调节平滑程度参数 $\sigma$ ，可在图像特征过分模糊(过平滑)与平滑图像中由于噪声和细纹理所引起的过多的不希望突变量（欠平滑）之间取得折衷。</p>
+</li>
+<li><p>由于高斯函数的可分离性，大高斯滤波器可以得以有效地实现。二维高斯函数卷积可以分两步来进行，首先将图像与一维高斯函数进行卷积，然后将卷积结果与方向垂直的相同一维高斯函数卷积。因此，二维高斯滤波的计算量随滤波模板宽度成线性增长而不是成平方增长。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>空间滤波</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文阅读: ZeRO-Offload: Democratizing Billion-Scale Model Training</title>
     <url>/2023/10/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Offload-Democratizing-Billion-Scale-Model-Training/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ZeRO-Offload 主要优化在于尽量减少数据在 GPU 与 CPU 之间的移动，并减少 CPU 计算时间，同时最大限度地节省 GPU 上的内存。</p>
@@ -5952,100 +6046,6 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
       </categories>
       <tags>
         <tag>分布式训练框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计实现内存的分配和回收算法</title>
-    <url>/2022/04/13/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>操作系统作业</p>
-<span id="more"></span>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如下数据结构下，设计实现内存的分配和回收算法：</p>
-<ul>
-<li>归还区有下邻空闲区；</li>
-<li>归还区有上邻空闲区；</li>
-<li>归还区既有上邻空闲区又有下邻空闲区；</li>
-<li>归还区既无上邻空闲区又无下邻空闲区</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct</span><br><span class="line">&#123; float address;  /*已分分区起始地址*/</span><br><span class="line"> float length;  	/*已分分区长度，单位为字节*/</span><br><span class="line"> int flag;   	/*已分配区表登记栏标志，用“0”表示空栏目，实验中只支持一个字符的作业名*/</span><br><span class="line">&#125;used_table[n]; 	/*已分配区表*/</span><br><span class="line">struct</span><br><span class="line">&#123;float address;	/*空闲区起始地址*/</span><br><span class="line"> float length;    /*空闲区长度，单位为字节*/</span><br><span class="line"> int flag;  	/*空闲区表登记栏标志，用“0”表示空栏目，用“1”表示未分配*/</span><br><span class="line">&#125;free_table[m]; 	/*空闲区表*/</span><br></pre></td></tr></table></figure>
-<p>编写程序，并输出结果。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//区表数组结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UsedTable</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> address;  <span class="comment">/*已分分区起始地址*/</span></span><br><span class="line">    <span class="type">int</span> length;  	<span class="comment">/*已分分区长度，单位为字节*/</span></span><br><span class="line">    <span class="type">int</span> flag;   	<span class="comment">/*已分配区表登记栏标志，用“0”表示空栏目，实验中只支持一个编号的作业名*/</span></span><br><span class="line">&#125; usedTable[<span class="number">100</span>]; 	<span class="comment">/*已分配区表*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FreeTable</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> address;	<span class="comment">/*空闲区起始地址*/</span></span><br><span class="line">    <span class="type">int</span> length;    <span class="comment">/*空闲区长度，单位为字节*/</span></span><br><span class="line">    <span class="type">int</span> flag;  	<span class="comment">/*空闲区表登记栏标志，用“0”表示空栏目，用“1”表示未分配*/</span></span><br><span class="line">&#125; freeTable[<span class="number">100</span>]; 	<span class="comment">/*空闲区表*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitTable</span><span class="params">()</span>;                                                   <span class="comment">// 初始化区表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">allocTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName, <span class="type">const</span> <span class="type">int</span> proLenth)</span>;             <span class="comment">// 创建作业</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reclaimTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName)</span>;                               <span class="comment">// 回收作业</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">findProName</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp[], <span class="type">const</span> <span class="type">int</span> proName)</span>;  <span class="comment">// 按作业名查找下标</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortUsedTable</span><span class="params">(<span class="keyword">struct</span> UsedTable temp[])</span>;                        <span class="comment">// 排序已分配区表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printUsedTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp)</span>;                   <span class="comment">// 输出作业分区信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printFreeTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> FreeTable temp)</span>;                   <span class="comment">// 输出空闲分区信息</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;                    <span class="comment">//记录当前 已分配/空闲 区表数量</span></span><br><span class="line"><span class="type">int</span> Minsize=<span class="number">1</span>;              <span class="comment">//作业间最小空余地址</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitTable</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//OS</span></span><br><span class="line">    usedTable[<span class="number">0</span>].address = <span class="number">0</span>;</span><br><span class="line">    usedTable[<span class="number">0</span>].length = <span class="number">3</span>;</span><br><span class="line">    usedTable[<span class="number">0</span>].flag = <span class="number">1</span>; <span class="comment">//OS 的作业名为1</span></span><br><span class="line">    </span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">3</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">97</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//图形界面</span></span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">8</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">92</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    usedTable[<span class="number">1</span>].address = <span class="number">3</span>;</span><br><span class="line">    usedTable[<span class="number">1</span>].length = <span class="number">5</span>;</span><br><span class="line">    usedTable[<span class="number">1</span>].flag = <span class="number">2</span>; <span class="comment">//图形界面 的作业名为2</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//网络程序</span></span><br><span class="line">    freeTable[<span class="number">0</span>].address = <span class="number">8</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].length = <span class="number">12</span>;</span><br><span class="line">    freeTable[<span class="number">0</span>].flag = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    usedTable[<span class="number">2</span>].address = <span class="number">20</span>;</span><br><span class="line">    usedTable[<span class="number">2</span>].length = <span class="number">10</span>;</span><br><span class="line">    usedTable[<span class="number">2</span>].flag = <span class="number">3</span>; <span class="comment">//网络程序 的作业名为3</span></span><br><span class="line"></span><br><span class="line">    freeTable[<span class="number">1</span>].address = <span class="number">30</span>;</span><br><span class="line">    freeTable[<span class="number">1</span>].length = <span class="number">70</span>;</span><br><span class="line">    freeTable[<span class="number">1</span>].flag = <span class="number">1</span>;</span><br><span class="line">    i += <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">allocTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName, <span class="type">const</span> <span class="type">int</span> proLenth)</span> &#123;</span><br><span class="line">    <span class="type">int</span> j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(freeTable[j].flag) &#123;</span><br><span class="line">        <span class="keyword">if</span>(freeTable[j].length &gt;= proLenth) <span class="keyword">break</span>;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(freeTable[j].flag == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mNo free space available\033[0m\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(freeTable[j].length - proLenth &lt;= Minsize) &#123;</span><br><span class="line">        usedTable[i].address = freeTable[j].address;</span><br><span class="line">        usedTable[i].length  = freeTable[j].length;</span><br><span class="line">        usedTable[i].flag    = proName;</span><br><span class="line">        <span class="keyword">while</span>(freeTable[j].flag) &#123;</span><br><span class="line">            freeTable[j] = freeTable[j+<span class="number">1</span>];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        freeTable[j].address = freeTable[j].length = freeTable[j].flag = <span class="number">0</span>;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        usedTable[i].address = freeTable[j].address;</span><br><span class="line">        usedTable[i].length  = proLenth;</span><br><span class="line">        usedTable[i].flag    = proName;</span><br><span class="line">        freeTable[j].address = freeTable[j].address + proLenth;</span><br><span class="line">        freeTable[j].length  = freeTable[j].length  - proLenth;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">findProName</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp[], <span class="type">const</span> <span class="type">int</span> proName)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; m&lt;i; m++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(temp[m].flag == proName)</span><br><span class="line">            <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">reclaimTable</span><span class="params">(<span class="type">const</span> <span class="type">int</span> proName)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(proName==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mCannot reclaim OS progress!\n\033[0m&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> k=<span class="number">0</span>,j=<span class="number">0</span>,h=<span class="number">0</span>;</span><br><span class="line">    sortUsedTable(usedTable);</span><br><span class="line">    <span class="keyword">if</span>(findProName(usedTable, <span class="number">1</span>) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mERROR!\033[0m&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k = findProName(usedTable, proName);</span><br><span class="line">    <span class="keyword">if</span>(k == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mCannot find this progress!\033[0m\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(freeTable[j].flag || usedTable[h].flag) &#123;</span><br><span class="line">            <span class="keyword">if</span>(freeTable[j].address + freeTable[j].length == usedTable[k].address) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(freeTable[j+<span class="number">1</span>].flag &amp;&amp; usedTable[k].address + usedTable[k].length == freeTable[j+<span class="number">1</span>].address) &#123;</span><br><span class="line">                    freeTable[j].length += (usedTable[k].length + freeTable[j+<span class="number">1</span>].length);</span><br><span class="line">                    usedTable[k].address = usedTable[k].flag = usedTable[k].length = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> l=j+<span class="number">1</span>; freeTable[l].flag; l++) &#123;</span><br><span class="line">                        freeTable[l] = freeTable[l+<span class="number">1</span>];</span><br><span class="line">                    &#125; <span class="comment">//上有，下有</span></span><br><span class="line">                    i--;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    freeTable[j].length += usedTable[k].length;</span><br><span class="line">                    usedTable[k].address = usedTable[k].length = usedTable[k].flag = <span class="number">0</span>;</span><br><span class="line">                    i--;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125; <span class="comment">//上有，下无</span></span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (usedTable[k].address + usedTable[k].length == freeTable[j].address) &#123;</span><br><span class="line">                freeTable[j].address = usedTable[k].address;</span><br><span class="line">                freeTable[j].length += usedTable[k].length;</span><br><span class="line">                usedTable[k].address = usedTable[k].flag = usedTable[k].length = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//上无，下有</span></span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            &#125;  <span class="keyword">else</span> <span class="keyword">if</span> (usedTable[k<span class="number">-1</span>].address + usedTable[k<span class="number">-1</span>].length + usedTable[k].length == usedTable[k+<span class="number">1</span>].address) &#123;</span><br><span class="line">                <span class="type">int</span> e=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>(freeTable[e].flag) &#123;</span><br><span class="line">                    e++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> m=e; j&lt;m; m--) &#123;</span><br><span class="line">                    freeTable[m].address = freeTable[m<span class="number">-1</span>].address;</span><br><span class="line">                    freeTable[m].length  = freeTable[m<span class="number">-1</span>].length;</span><br><span class="line">                    freeTable[m].flag    = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                freeTable[j].address = usedTable[k].address;</span><br><span class="line">                freeTable[j].length  = usedTable[k].length;</span><br><span class="line">                usedTable[k].address = usedTable[k].length = usedTable[k].flag = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//上无，下无</span></span><br><span class="line">                i--;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="comment">//elif</span></span><br><span class="line">            j++, h++;</span><br><span class="line">        &#125; <span class="comment">//while</span></span><br><span class="line">    &#125; <span class="comment">//else</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortUsedTable</span><span class="params">(<span class="keyword">struct</span> UsedTable temp[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> j, k, f;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">UsedTable</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">0</span>; l&lt;i; l++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(temp[l].flag == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> m = l; m&lt;=i; m++) temp[m] = temp[m+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;i<span class="number">-1</span>; j++) &#123;</span><br><span class="line">        f=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;i<span class="number">-1</span>-j; k++)</span><br><span class="line">            <span class="keyword">if</span>(temp[k+<span class="number">1</span>].address &lt; temp[k].address) &#123;</span><br><span class="line">                f=<span class="number">0</span>;</span><br><span class="line">                t         = temp[k];</span><br><span class="line">                temp[k]   = temp[k+<span class="number">1</span>];</span><br><span class="line">                temp[k+<span class="number">1</span>] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span>(f) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printUsedTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> UsedTable temp)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\t%d\t%d\t%d\tNormal\n&quot;</span>, temp.flag, temp.address, temp.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printFreeTable</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> FreeTable temp)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\033[0;36m\tNULL\t%d\t%d\tNULL\n\033[0m&quot;</span>, temp.address, temp.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a=<span class="number">0</span>, proName=<span class="number">0</span>, proLenth=<span class="number">0</span>;</span><br><span class="line">    InitTable();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> m=<span class="number">0</span>, j=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32m*Select operation:\n\033[0m&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\t(0) - exit\n\t(1) - allocate memory\n\t(2) - reclaim memory\n\t(3) - print table\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32minput operation: \033[0m&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line">        <span class="keyword">switch</span>(a) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Bye~\n&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mthe name of the progress: \033[0m&quot;</span>);</span><br><span class="line">                    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proName);</span><br><span class="line">                    <span class="keyword">if</span>(proName == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31munvalidated proName!\033[0m\n&quot;</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(findProName(usedTable, proName) != <span class="number">-1</span>) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mthis proName has been used!\033[0m\n&quot;</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mrequired memory size: \033[0m&quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proLenth);</span><br><span class="line">                allocTable(proName, proLenth);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mthe name of the progress to reclaim: \033[0m&quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;proName);</span><br><span class="line">                reclaimTable(proName);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;----------------------------------------------\n&quot;</span>);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;32mmemory table:\033[0m\n&quot;</span>);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\033[0;34m\tproName\taddress\tlength\tstatus\033[0m\n&quot;</span>);</span><br><span class="line">                sortUsedTable(usedTable);</span><br><span class="line">                <span class="keyword">while</span>(usedTable[m].flag || freeTable[j].flag) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(usedTable[m].address &lt; freeTable[j].address &amp;&amp; usedTable[m].flag) &#123;</span><br><span class="line">                        printUsedTable(usedTable[m]);</span><br><span class="line">                        m++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (freeTable[j].flag) &#123;</span><br><span class="line">                        printFreeTable(freeTable[j]);</span><br><span class="line">                        j++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;----------------------------------------------\n&quot;</span>);</span><br><span class="line">                <span class="comment">//getchar();</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="built_in">printf</span>(<span class="string">&quot;\033[0;31mNo such this operation\n\033[0m&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>作业</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高斯函数与高斯核函数</title>
-    <url>/2022/08/07/%E9%AB%98%E6%96%AF%E5%87%BD%E6%95%B0%E4%B8%8E%E9%AB%98%E6%96%AF%E6%A0%B8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>图像处理领域中，高斯核函数常用于图像低通滤波，记录下原理，同时用代码实现下。</p>
-<span id="more"></span>
-<h2 id="高斯函数"><a href="#高斯函数" class="headerlink" title="高斯函数"></a>高斯函数</h2><h3 id="一维高斯函数"><a href="#一维高斯函数" class="headerlink" title="一维高斯函数"></a>一维高斯函数</h3><script type="math/tex; mode=display">
-f(x) = ae^{\frac{-(x-b)^2}{2c^2}}</script><p>$a, b, c$ 为实数常数， 且 $a&gt;0$</p>
-<p>$a$ 为曲线尖峰高度，$b$ 为尖峰的中心位置， $c$ 为钟的宽度</p>
-<p><img src="" style="zoom: 40%;" /></p>
-<p>由高斯积分公式，得</p>
-<script type="math/tex; mode=display">
-\int_{-\infty}^{\infty}e^{-x^2}dx = \sqrt{\pi}</script><p>令 $y=x-b$, 得 $dx = dy$</p>
-<script type="math/tex; mode=display">
-a \int_{-\infty}^{\infty}e^{-\frac{y^2}{2c^2}}dx</script><p>令 $z= \frac{y}{\sqrt{2}c}$, 得 $dy = \sqrt{2}cdz$</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-  & a\int_{-\infty}^{\infty}e^{-z^2}\sqrt{2}cdz \\
-= & \sqrt{2}ac \int_{-\infty}^{\infty}e^{-z^2}dz \\
-= & \sqrt{2\pi}\cdot ac
-\end{aligned}</script><p>得</p>
-<script type="math/tex; mode=display">
-\int_{-\infty}^{\infty}ae^{\frac{-(x-b)^2}{2c^2}}dx = \sqrt{2\pi}\cdot ac</script><p>令 $f(x)=1$，使宽度范围内所有概率为$ 1$，得</p>
-<script type="math/tex; mode=display">
-a = \frac{1}{\sqrt{2\pi}\cdot c}</script><p>令期望 $\mu$ 为 $b$，标准差 $\sigma$ 为 $c$，得满足正态分布的高斯函数</p>
-<script type="math/tex; mode=display">
-g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^{2}}</script><h3 id="二维高斯函数（高斯分布、正态分布）"><a href="#二维高斯函数（高斯分布、正态分布）" class="headerlink" title="二维高斯函数（高斯分布、正态分布）"></a>二维高斯函数（高斯分布、正态分布）</h3><script type="math/tex; mode=display">
-G(x,y) = \frac{1}{2\pi\sigma^2}e^{-(x^2+y^2)/2\sigma^2}</script><p>$\mu=0$，即原点为中心点</p>
-<p>在实际编程应用中，高斯函数中的参数如下</p>
-<ul>
-<li>ksize 核大小</li>
-<li>sigma 方差</li>
-<li>center 尖峰中心点坐标</li>
-<li>bias 尖峰中心点的偏移量，用于控制截断高斯函数</li>
-</ul>
-<p>以下程序递增高斯函数的方差，并将结果图保存为 gif 图像</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line">item = <span class="number">10</span></span><br><span class="line">dt = <span class="number">1</span></span><br><span class="line">ksize = <span class="number">20</span></span><br><span class="line">sigma = <span class="number">2</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">plt.ion()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(item)):</span><br><span class="line">    center = <span class="built_in">round</span>(ksize/<span class="number">2</span>)</span><br><span class="line">    bias = ksize *<span class="number">10</span>/<span class="number">10</span></span><br><span class="line">    ksigma = np.multiply(cv2.getGaussianKernel(ksize, sigma),</span><br><span class="line">            (cv2.getGaussianKernel(ksize,sigma)).T)</span><br><span class="line">    [m, n] = ksigma.shape</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(m)):</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">range</span>(n)):</span><br><span class="line">            <span class="keyword">if</span>((x&lt;center-bias) <span class="keyword">or</span> (x&gt;center+bias) <span class="keyword">or</span> (y&lt;center-bias) <span class="keyword">or</span></span><br><span class="line">                    (y&gt;center+bias)):</span><br><span class="line">                ksigma[x, y] = <span class="number">0</span></span><br><span class="line">    sigma = sigma + dt</span><br><span class="line"></span><br><span class="line">    ax3 = plt.axes(projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">    ax3.set_zlim3d(<span class="number">0</span>,<span class="number">8e-3</span>)</span><br><span class="line">    x = <span class="built_in">list</span>(<span class="built_in">range</span>(ksize))</span><br><span class="line">    y = x</span><br><span class="line">    ax3.plot_surface(x,y,ksigma,cmap=<span class="string">&#x27;rainbow&#x27;</span>)</span><br><span class="line">    plt.draw()</span><br><span class="line">    plt.pause(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
-<p>图片如下</p>
-<p><img src="/image/高斯函数与高斯核函数/gaussian_curve.gif" style="zoom: 80%;" /></p>
-<p>随着方差的增大，整个高斯函数的尖峰逐渐减小，整体也变的更加平缓，则对图像的平滑效果越来越明显</p>
-<p>保持参数不变，对上述高斯函数进行截断，bias 的大小为 ksize *3/10，则结果如下</p>
-<p><img src="/image/高斯函数与高斯核函数/gaussian_curve2.gif" style="zoom: 80%;" /></p>
-<p>bias 的作用主要是对超过一定区域的原始图像信息不再考虑，这就保证在更加合理的利用靠近高斯函数中心点的周围像素，同时还可以改变高斯函数的中心坐标</p>
-<h2 id="高斯核函数卷积"><a href="#高斯核函数卷积" class="headerlink" title="高斯核函数卷积"></a>高斯核函数卷积</h2><p>径向基函数（Radial Basis Function）， 就是某种沿径向对称的标量函数。 通常定义为空间中任一点 $x_1$ 到某一中心 $x_2$ 之间欧氏距离的单调函数，其作用往往是局部的 , 即当 $x_1$ 远离 $x_2$ 时函数取值很小</p>
-<p>最常用的一个核函数为高斯核函数，形式为</p>
-<script type="math/tex; mode=display">
-k(\|x_1-x_2\|)=e^{-\|x_1-x_2\|^2/2\sigma^2}</script><p>也称为<strong>径向基函数</strong></p>
-<p>高斯核函数的代码实现如下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gaussian_kernel</span>(<span class="params">x1, x2, l=<span class="number">1.0</span>, sigma_f=<span class="number">1.0</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Easy to understand but inefficient.&quot;&quot;&quot;</span></span><br><span class="line">    m, n = x1.shape[<span class="number">0</span>], x2.shape[<span class="number">0</span>]</span><br><span class="line">    dist_matrix = np.zeros((m, n), dtype=<span class="built_in">float</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            dist_matrix[i][j] = np.<span class="built_in">sum</span>((x1[i] - x2[j]) ** <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> sigma_f ** <span class="number">2</span> * np.exp(- <span class="number">0.5</span> / l ** <span class="number">2</span> * dist_matrix)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gaussian_kernel_vectorization</span>(<span class="params">x1, x2, l=<span class="number">1.0</span>, sigma_f=<span class="number">1.0</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;More efficient approach.&quot;&quot;&quot;</span></span><br><span class="line">    dist_matrix = np.<span class="built_in">sum</span>(x1**<span class="number">2</span>, <span class="number">1</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>) + np.<span class="built_in">sum</span>(x2**<span class="number">2</span>, <span class="number">1</span>) - <span class="number">2</span> * np.dot(x1, x2.T)</span><br><span class="line">    <span class="keyword">return</span> sigma_f ** <span class="number">2</span> * np.exp(-<span class="number">0.5</span> / l ** <span class="number">2</span> * dist_matrix)</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">700</span>, <span class="number">800</span>, <span class="number">1029</span>]).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(gaussian_kernel_vectorization(x, x, l=<span class="number">500</span>, sigma=<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p>输出</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[[<span class="number">100.</span>          <span class="number">98.01986733</span>  <span class="number">80.5347031</span> ]</span><br><span class="line"> [ <span class="number">98.01986733</span> <span class="number">100.</span>          <span class="number">90.04307671</span>]</span><br><span class="line"> [ <span class="number">80.5347031</span>   <span class="number">90.04307671</span> <span class="number">100.</span>        ]]</span><br></pre></td></tr></table></figure>
-<h2 id="高斯函数性质"><a href="#高斯函数性质" class="headerlink" title="高斯函数性质"></a>高斯函数性质</h2><p>高斯函数具有五个重要的性质，这些性质使得它在早期图像处理中特别有用。这些性质表明，高斯平滑滤波器无论在空间域还是在频率域都是十分有效的低通滤波器，且在实际图像处理中得到了有效使用。高斯函数具有五个十分重要的性质</p>
-<ol>
-<li><p>二维高斯函数具有旋转对称性，即滤波器在各个方向上的平滑程度是相同的。一般来说，一幅图像的边缘方向是事先不知道的，因此，在滤波前是无法确定一个方向上比另一方向上需要更多的平滑。旋转对称性意味着高斯平滑滤波器在后续边缘检测中不会偏向任一方向。</p>
-</li>
-<li><p>高斯函数是单值函数。这表明，高斯滤波器用像素邻域的加权均值来代替该点的像素值，而每一邻域像素点权值是随该点与中心点的距离单调增减的。边缘是一种图像局部特征，如果平滑运算对离算子中心很远的像素点仍然有很大作用，则平滑运算会使图像失真。</p>
-</li>
-<li><p>高斯函数的傅立叶变换频谱是单瓣的。正如下面所示，这一性质是高斯函数傅立叶变换等于高斯函数本身这一事实的直接推论。图像常被不希望的高频信号所污染（噪声和细纹理）。而所希望的图像特征（如边缘），既含有低频分量，又含有高频分量。高斯函数傅立叶变换的单瓣意味着平滑图像不会被不需要的高频信号所污染，同时保留了大部分所需信号。</p>
-</li>
-<li><p>高斯滤波器宽度(决定着平滑程度)是由参数 $\sigma$ 表征的，而且 $\sigma$ 和平滑程度的关系是非常简单的。 $\sigma$ 越大，高斯滤波器的频带就越宽，平滑程度就越好。通过调节平滑程度参数 $\sigma$ ，可在图像特征过分模糊(过平滑)与平滑图像中由于噪声和细纹理所引起的过多的不希望突变量（欠平滑）之间取得折衷。</p>
-</li>
-<li><p>由于高斯函数的可分离性，大高斯滤波器可以得以有效地实现。二维高斯函数卷积可以分两步来进行，首先将图像与一维高斯函数进行卷积，然后将卷积结果与方向垂直的相同一维高斯函数卷积。因此，二维高斯滤波的计算量随滤波模板宽度成线性增长而不是成平方增长。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-      </categories>
-      <tags>
-        <tag>空间滤波</tag>
       </tags>
   </entry>
 </search>
