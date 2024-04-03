@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>2021亚太数学建模竞赛A题简要思路 | Aeeeeeep Blog</title><link rel="shortcut icon" href="/images/favicon64.ico"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css"><script src="/js/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"><meta name="generator" content="Hexo 7.0.0"></head><body><main class="content"><section class="outer"><article id="post-2021亚太数学建模竞赛A题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">2021亚太数学建模竞赛A题简要思路</h1></header><div class="article-meta"><a href="/p/ae4fbfca/" class="article-date"><time datetime="2021-11-28T19:50:51.000Z" itemprop="datePublished">2021-11-29</time></a><div class="article-category"><a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>小记一下第一次参加数模赛</p><span id="more"></span><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><img src="/image/2021亚太数学建模竞赛A题/mind.png" alt="1"></p><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>用高斯滤波对图像 Pic1<em>1 和 Pic1_2 进行降噪处理，用灰度值开运算降低图像 Pic1</em> 3的噪声；对三个图像进行二值化处理，将灰度图像转化为二值化图像，其次用圆形元素对区域进行膨胀，再用改进的 canny 方法提取亚像素精确边缘，对 XLD 轮廓用最小二乘近似线平滑，再根据斜率以及拐点将 XLD 轮廓分割为直线段和圆弧段或椭圆弧，最后根据轮廓的相对位置对轮廓进行排序，并获取XLD轮廓的长度及区域位置</p><h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>为达到自标定消除畸变的目的，通过最小二乘近似线平滑、均值滤波降噪、局部阈值分割等算法，将输出的XLD轮廓分割，连接两个标志性的对象元组重复问题一的步骤得到最佳的校准径向畸变参数，用来校准图像的径向畸变由轮廓的相对位置对轮廓进行排序并获取XLD轮廓的长度，最后根据轮廓长度以及实际的物理坐标计算出6个轮廓的真实长度</p><h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>依据问题一的模型将 XLD 轮廓分割为直线段和圆弧段或椭圆弧。当分割轮廓为直线段时，用最小二乘法进行直线拟合并用多边形生成XLD轮廓；圆弧段或圆，用 algebraic 方法使轮廓点与生成的圆之间的代数距离最小化；椭圆弧或椭圆，基于 tukey 的算法对轮廓点进行加权并忽略异常值</p><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><h3 id="问题一-1"><a href="#问题一-1" class="headerlink" title="问题一"></a>问题一</h3><p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit1.png" alt="1_1"></p><p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit2.png" alt="1_2"></p><p><img src="/image/2021亚太数学建模竞赛A题/ContoursSplit3.png" alt="1_3"></p><h3 id="问题二-1"><a href="#问题二-1" class="headerlink" title="问题二"></a>问题二</h3><p><img src="/image/2021亚太数学建模竞赛A题/Borders.webp" alt="2"></p><h3 id="问题三-1"><a href="#问题三-1" class="headerlink" title="问题三"></a>问题三</h3><p><img src="/image/2021亚太数学建模竞赛A题/SortedContours.webp" alt="3"></p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">问题一</summary><pre><code class="halcon">
+read_image (Img, 'Pic1_1.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDread_image (Img, 'Pic1_1.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 24 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+X := Col
+Y := Rowilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 24 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+X := Col
+Y := Row
+read_image (Img, 'Pic1_2.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+smooth_contours_xld(Edges, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 84 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+x := round(Col)
+y := round(Row)
+read_image (Img, 'Pic1_3.bmp')
+dev_close_window ()
+get_image_size (Img, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gray_opening_shape (Img, ImgOpen, 16, 16, 'octagon')
+mean_image(ImgOpen, ImgMean, 9.3, 9.3)
+binary_threshold (ImgMean, Region,  'smooth_histo', 'dark',  UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 4.6)
+reduce_domain (ImgMean, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Edges, 'canny', 2, 20, 60)
+union_cotangential_contours_xld (Edges, UnionContours, 2, 5, 3.14, 25.0, 10, 2.0, 'attr_forget')
+smooth_contours_xld(UnionContours, ImgSmoothed, 9)
+segment_contours_xld (ImgSmoothed, ContoursSplit, 'lines_circles', 5, 4, 3)
+count_obj (ContoursSplit, Number)
+dev_display (Img)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (ContoursSplit)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ContoursSplit, Number)
+length_xld(SortedContours,Length)
+gen_empty_obj (Line)
+for i := 1 to 120 by 1
+    select_obj (SortedContours, ObjectSelected, i)
+    get_contour_xld (ObjectSelected, Row, Col)
+    gen_region_polygon (Region, Row,Col)
+    concat_obj (Line, Region, Line)
+endfor
+x := round(Col)
+y := round(Row)
+</code></pre></details><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">问题二</summary><pre><code class="halcon">
+dev_update_off ()
+read_image (Img, 'Pic2_4.bmp')
+dev_close_window ()
+dev_open_window_fit_image (Img, 0, 0, -1, -1, WindowHandle)
+set_display_font (WindowHandle, 16, 'mono', 'true', 'false')
+dev_display (Img)
+disp_message (WindowHandle, 'Img with radial distortions', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+gen_empty_obj (Borders)
+for N := 1 to 4 by 1
+    read_image (Img, 'Pic2_' + N$'d' + '.bmp')
+    edges_sub_pix (Img, ImgBorders, 'canny', 1, 10, 40)
+    smooth_contours_xld(ImgBorders, ImgSmoothed, 9)
+    segment_contours_xld (ImgSmoothed, SplitBorders, 'lines_circles', 5, 4, 2)
+    select_shape_xld (SplitBorders, SelectedBorders, 'contlength', 'and', 30, 100000)
+    concat_obj (Borders, SelectedBorders, Borders)
+    dev_display (Img)
+    dev_set_colored (12)
+    dev_display (SelectedBorders)
+    disp_message (WindowHandle, 'Edges extracted from image ' + N$'d', 'window', 0, 0, 'black', 'true')
+endfor
+dev_clear_window ()
+dev_set_colored (12)
+dev_display (Borders)
+disp_message (WindowHandle, 'Collected edges from multiple images', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+dev_clear_window ()
+disp_message (WindowHandle, 'Performing self-calibration...', 'window', 0, 0, 'black', 'true')
+radial_distortion_self_calibration (Borders, CalibrationBorders, 1296, 972, 0.08, 42, 'division', 'fixed', 0, CamParMultiImage)
+dev_clear_window ()
+dev_set_colored (12)
+dev_display (CalibrationBorders)
+disp_message (WindowHandle, 'Edges used for calibration', 'window', 0, 0, 'black', 'true')
+disp_continue_message (WindowHandle, 'black', 'true')
+change_radial_distortion_cam_par ('fixed', CamParMultiImage, 0, CamParMultiImageRect)
+read_image (ImgCir, 'Pic2_1.bmp')
+get_domain (ImgCir, Domain)
+change_radial_distortion_image (ImgCir, Domain, ImgCirRectified, CamParMultiImage, CamParMultiImageRect)
+get_image_size (ImgCir, WidthCir, HeightCir)
+dev_open_window_fit_image (ImgCir, 0, 0, -1, -1, WindowHandleCir)
+set_display_font (WindowHandleCir, 16, 'mono', 'true', 'false')
+dev_display (ImgCir)
+mean_image(ImgCir, MeanCir, 61, 61)
+dyn_threshold(ImgCir, MeanCir, SegCir, 5, 'dark')
+fill_up(SegCir, SegFillUpCir)
+connection(SegFillUpCir, segConnectCir)
+select_shape(segConnectCir, SelectedRegionsCir, ['area','circularity'], 'and', [500, 0.7], [20000, 1])
+smallest_circle(SelectedRegionsCir, RowCir, ColumnCir, RadiusCir)
+area_center(SelectedRegionsCir, AreaCir, Row1Cir, Column1Cir)
+CRadius:=sqrt(AreaCir/3.1415926)
+RowSize := mean(0.5 / CRadius)
+read_image (Img, 'Pic2_4.bmp')
+get_domain (Img, Domain)
+change_radial_distortion_image (Img, Domain, ImageRectified, CamParMultiImage, CamParMultiImageRect)
+dev_close_window ()
+get_image_size (ImageRectified, Width, Height)
+dev_open_window (0, 0, Width, Height, 'black', WindowHandle)
+gauss_filter(Img, ImgGauss, 11)
+binary_threshold (ImgGauss, Region,  'smooth_histo', 'dark', UsedThreshold)
+boundary (Region, RegionBorder, 'inner')
+dilation_circle (RegionBorder, RegionDilation, 2.5)
+reduce_domain (ImgGauss, RegionDilation, ImgReduced)
+edges_sub_pix (ImgReduced, Borders, 'canny', 2, 20, 60)
+smooth_contours_xld(Borders, ImgSmoothed, 9)
+dev_display (ImgSmoothed)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+sort_contours_xld (ImgSmoothed, SortedContours, 'upper_left', 'true', 'column')
+count_obj (ImgSmoothed, Number)
+length_xld(SortedContours,Length)
+RealSize := Length * RowSize
+AllSzie := sum(RealSize)
+</code></pre></details><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">问题三</summary><pre><code class="halcon">
+read_contour_xld_dxf (DxfContours, 'EdgeContour.dxf', [], [], DxfStatus)
+segment_contours_xld (DxfContours, ContoursSplit, 'lines_circles', 5, 4, 3)
+sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')
+count_obj (SortedContours, Number)
+dev_display (DxfContours)
+dev_set_draw ('margin')
+dev_set_color ('white')
+dev_update_window ('off')
+dev_set_colored (12)
+dev_set_line_width (3)
+dev_display (SortedContours)
+dev_set_colored (3)
+dev_set_line_width (3)
+ColBL := []
+RowsBL := []
+ColEL := []
+RowsEL := []
+Lines := []
+ColsC := []
+RowsC := []
+RadiiC := []
+PhisC := []
+ColsSC := []
+RowsSC := []
+ColsEC := []
+RowsEC := []
+ColsE := []
+RowsE := []
+RadiiE := []
+PhisE := []
+ColsSE := []
+RowsSE := []
+ColsEE := []
+RowsEE := []
+k:=0
+J := []
+for I := 1 to Number by 1
+   select_obj (SortedContours, ObjectSelected, I)
+   get_contour_global_attrib_xld (ObjectSelected, 'cont_approx', Attrib)
+    if(Attrib == -1)
+        k := k+1
+        J := [J,k]
+        fit_line_contour_xld (ObjectSelected, 'tukey', -1, 2, 6, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)
+        gen_contour_polygon_xld (ContLine, [RowBegin,RowEnd], [ColBegin,ColEnd])
+        RowsBL := [RowsBL,RowBegin]
+        RowsEL := [RowsEL,RowEnd]
+        ColBL := [ColBL,ColBegin]
+        ColEL := [ColEL,ColEnd]
+        length_xld(ContLine,LengthL)
+        Lines := [Lines, LengthL]
+        dev_display (ContLine)
+    elseif(Attrib == 1)
+        J := [J,0]
+        fit_circle_contour_xld (ObjectSelected, 'algebraic', -1, 6, 0, 3, 2, RowC, ColumnC, RadiusC, StartPhiC, EndPhiC, PointOrderC)
+        gen_circle_contour_xld (ContCircle, RowC, ColumnC, RadiusC, 0, rad(360), PointOrderC, 1.0)
+        RowsC := [RowsC,RowC]
+        ColsC := [ColsC,ColumnC]
+        RadiiC := [RadiiC,RadiusC]
+        PhisC := [PhisC,(EndPhiC-StartPhiC)*180/3.14159]
+        ColsSC := [ColsSC,ColumnC+RadiusC*cos(StartPhiC)]
+        RowsSC := [RowsSC,RowC+RadiusC*sin(StartPhiC)]
+        ColsEC := [ColsEC,ColumnC+RadiusC*cos(EndPhiC)]
+        RowsEC := [RowsEC,RowC+RadiusC*sin(EndPhiC)]
+        dev_display (ContCircle)
+    else
+        fit_ellipse_contour_xld(ObjectSelected, 'ftukey',-1, 6, 0, 2, 3, 2, RowE, ColumnE, RadiusE, RaE, RbE, StartPhiE, EndPhiE, PointOrderE)
+        gen_ellipse_contour_xld(ContEllipse, RowE, ColumnE, RadiusE, RaE, RbE, 0, rad(360), PointOrderE, 1.0)
+        RowsE := [RowsE,RowE]
+        ColsE := [ColsE,ColumnE]
+        RadiiE := [RadiiE,RadiusE]
+        PhisE := [PhisE,(EndPhiE-StartPhiE)*180/3.14159]
+        ColsSE := [ColsSE,ColumnE+RadiusE*cos(StartPhiE)]
+        RowsSE := [RowsSE,RowE+RadiusE*sin(StartPhiE)]
+        ColsEE := [ColsEE,ColumnE+RadiusE*cos(EndPhiE)]
+        RowsEE := [RowsEE,RowE+RadiusE*sin(EndPhiE)]
+        dev_display (ContEllipse)
+        J:=[J,-1]
+    endif
+endfor
+</code></pre></details><details class="custom-block details" style="display:block;position:relative;border-radius:2px;margin:1.6em 0;padding:1.6em;background-color:#eee;color:#2c3e50;font-family:-apple-system,BlinkMacSystemFont,&quot;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0;text-transform:none;white-space:normal;widows:2;word-spacing:0;-webkit-text-stroke-width:0;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><summary style="outline:0;cursor:pointer">matlab代码</summary><pre><code class="matlab">
+clear;
+clc;
+a = xlsread('Edge1.xlsx');
+b = xlsread('Edge2.xlsx');
+FID = dxf_open('EdgeContour.dxf');
+dxf_polyline(FID, a(:,1), a(:,2), zeros(length(a),1));
+dxf_polyline(FID, b(:,1), b(:,2), zeros(length(b),1));
+dxf_close(FID);
+</code></pre></details><blockquote><p>DXFLib 库地址: <a target="_blank" rel="noopener" href="https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib">https://www.mathworks.com/matlabcentral/fileexchange/33884-dxflib</a></p></blockquote></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul><div style="text-align:center;color:#ccc;font-size:14px">- ETX &nbsp;<i class="fe fe-smile"></i>&nbsp;Thank you for reading -</div><div><ul class="post-copyright"><li class="post-copyright-license"><strong>Copyright: </strong>All posts on this blog except otherwise stated, All adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> license agreement. Please indicate the source of reprint!</li></ul><div></div></div></footer></div><nav class="article-nav"><a href="/p/a524281d/" class="article-nav-link"><strong class="article-nav-caption">Newer</strong><div class="article-nav-title">labelImg闪退错误修复</div></a><a href="/p/3b4e1f24/" class="article-nav-link"><strong class="article-nav-caption">Older</strong><div class="article-nav-title">和周小姐高中的对话（一）</div></a></nav><div class="gitalk" id="gitalk-container"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script><script type="text/javascript">var gitalk=new Gitalk({clientID:"1eb16485d4cf892a21bb",clientSecret:"d134888956393ad07790db31a3c50eea40618d43",repo:"gitalkIssue",owner:"aeeeeeep",admin:["aeeeeeep"],id:md5(location.pathname),distractionFreeMode:!1,pagerDirection:"last"});gitalk.render("gitalk-container")</script></article><script type="text/x-mathjax-config">MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></section><footer class="footer"><div class="outer"><div class="float-right"><div class="powered-by">&emsp;<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">Visitors:<span id="busuanzi_value_site_uv"></span></span>&emsp; <i class="fe fe-bookmark"></i>Article Views:<span id="busuanzi_value_page_pv"></span></div></div><ul class="list-inline"><li><a target="_blank" href=https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32090202001024 style="display:inline-block;text-decoration:none;"> <img src="/images/备案图标.webp" style="float:left;width:14px;height:14px;margin-top:2px;margin-right:-3px"><p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#1e3e3f">苏公网安备32090202001024号</p><a target="_blank" href="https://beian.miit.gov.cn" style="display:inline-block;text-decoration:none"><p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#1e3e3f">&nbsp苏ICP备2023045098号</p></a></li><li>Aeeeeeep Blog &copy; 2024</li><li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li><li>theme <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li></ul><div class="float-left"><span id="timeDate">Loading days...</span><span id="times">Loading hours, minutes...</span><script>var now=new Date,grt=new Date("11/11/2021 00:08:39");function daysInYear(e){return e%4==0&&e%100!=0||e%400==0?366:365}function createTime(){now.setTime(now.getTime()+250);for(var e=0,t=new Date(grt.getTime());t<=now;){var n=daysInYear(t.getFullYear());t.setDate(t.getDate()+n),t<=now&&e++}t.setDate(t.getDate()-daysInYear(t.getFullYear()));var a=Math.floor((now-t)/864e5),r=now.getHours(),o=now.getMinutes(),i=r<10?"0"+r:r,g=o<10?"0"+o:o;document.getElementById("timeDate").innerHTML="Site has been running for "+e+"y "+a+"d ",document.getElementById("times").innerHTML=i+"h "+g+"m "}setInterval(createTime,250)</script></div></div></footer></main><aside class="sidebar"><button class="navbar-toggle"></button><nav class="navbar"><div class="logo"><a href="/"><img src="/images/aepBlack.svg" alt="Aeeeeeep Blog"></a></div><ul class="nav nav-main"><li class="nav-item"><a class="nav-item-link" href="/">Home</a></li><li class="nav-item"><a class="nav-item-link" href="/archives">Archives</a></li><li class="nav-item"><a class="nav-item-link" href="/links">Links</a></li><li class="nav-item"><a class="nav-item-link" href="/about">About</a></li><li class="nav-item"><a class="nav-item-link nav-item-search" title="Search"><i class="fe fe-search"></i> Search</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><div class="totop" id="totop" style="font-size:24px"><i class="fe fe-drop-up"></i></div></li><li class="nav-item"></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"><input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><script src="/js/jquery-2.0.3.min.js"></script><script src="/js/jquery.justifiedGallery.min.js"></script><script src="/js/lazyload.min.js"></script><script src="/js/busuanzi-2.3.pure.min.js"></script><script src="/fancybox/jquery.fancybox.min.js"></script><script src="/js/copybtn.js"></script><script src="/js/tocbot.min.js"></script><script>tocbot.init({tocSelector:".tocbot",contentSelector:".article-entry",headingSelector:"h1, h2, h3, h4, h5, h6",hasInnerContainers:!0,scrollSmooth:!0,positionFixedSelector:".tocbot",positionFixedClass:"is-position-fixed",fixedSidebarOffset:"auto"})</script><script src="/js/ocean.js"></script><script src="/js/cursor.js"></script></body></html>

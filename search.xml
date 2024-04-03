@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Jax编程: 踩坑记录</title>
-    <url>/2024/03/30/Jax%E7%BC%96%E7%A8%8B-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
+    <url>/p/80c749f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录 jax 使用过程中的坑。</p>
 <span id="more"></span>
 <p>gpu 上安装 jax 需要</p>
@@ -25,7 +25,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA流,并发与上下文</title>
-    <url>/2024/02/06/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E5%B9%B6%E5%8F%91%E4%B8%8E%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
+    <url>/p/40cda68f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深入介绍流的使用，包括流的并发，多线程调度流，并发限制，创建流间依赖关系，重叠主机与设备的执行等，同时，结合实例讲解了 CUDA 上下文以及 MPS 的概念，简单介绍了 CUDA Driver API 对 Context 的管理。</p>
 <span id="more"></span>
 <h2 id="并发流的执行"><a href="#并发流的执行" class="headerlink" title="并发流的执行"></a>并发流的执行</h2><h3 id="非空流中的并发"><a href="#非空流中的并发" class="headerlink" title="非空流中的并发"></a>非空流中的并发</h3><p>以下面的核函数为例，定义一个非空流，将多个核函数加入到该流中。再循环定义多个流</p>
@@ -190,7 +190,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA流,事件与同步</title>
-    <url>/2024/01/30/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%B5%81-%E4%BA%8B%E4%BB%B6%E4%B8%8E%E5%90%8C%E6%AD%A5/</url>
+    <url>/p/5a01a3bf/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细讲解 CUDA 流，事件的概念以及声明，以此为基础，深入了解 CUDA 流操作之间的依赖关系，流的同步与异步，以及如何优化事件的创建与管理等等。</p>
 <span id="more"></span>
 <h2 id="CUDA-流"><a href="#CUDA-流" class="headerlink" title="CUDA 流"></a>CUDA 流</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>CUDA 流是一系列异步的 CUDA 操作，这些操作按照主机代码所定义的顺序在设备上执行。流会封装这些操作，保持操作的顺序，允许操作在流中排队，并使它们在先前的所有操作之后执行。CUDA 流中的操作可以是主机与设备的内存数据传输，设备内核启动，主机和设备之间的同步等由主机发起但由设备处理的命令</p>
@@ -373,7 +373,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA内存管理（三）</title>
-    <url>/2024/01/23/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <url>/p/d7bb3d7c/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>CUDA C 编程中的简单的内存管理，线程操作，如何编写核函数，使用 Thrust 库，并行计算，性能分析工具。</p>
 <span id="more"></span>
 <h2 id="获取-GPU-信息"><a href="#获取-GPU-信息" class="headerlink" title="获取 GPU 信息"></a>获取 GPU 信息</h2><p>CUDA  提供了几种获取 GPU 信息的方法，这里介绍一下通过调用 <code>cuda_runtime.h</code>中的 API 得到 GPU 的一些属性。</p>
@@ -546,7 +546,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA内存管理（二）</title>
-    <url>/2024/01/16/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <url>/p/9aa59e2e/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细讲解共享内存存储体、存储体冲突、访问模式以及内存填充等知识点。</p>
 <span id="more"></span>
 <h2 id="CUDA-共享内存"><a href="#CUDA-共享内存" class="headerlink" title="CUDA 共享内存"></a>CUDA 共享内存</h2><p>GPU 的物理内存可以分为</p>
@@ -772,7 +772,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA内存管理（一）</title>
-    <url>/2024/01/09/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <url>/p/aab372f6/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>各种内存的对齐访问以及实验，避免带宽浪费。还对比了 AoS 与 SoA 结构体在 GPU 上的性能表现。</p>
 <span id="more"></span>
 <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h3 id="固定内存"><a href="#固定内存" class="headerlink" title="固定内存"></a>固定内存</h3><p>分配的主机内存默认是可分页的（pageable），操作系统会分配给程序一个很大的虚拟内存，但实际的物理内存会小很多，为了让程序正常运行，操作系统对物理内存以页为单位组织，将数据存储到不同的页中，这些页是不连续的，程序只可以看到虚拟内存地址，而操作系统可能随时更换数据的在物理内存中的页，但是在使用 GPU 时，如果从主机传输到设备上的时候，页被更改了，对于传输数据而言是致命的，所以在传输之前，CUDA 驱动会锁定页面，或者直接分配固定的主机内存，将主机数据复制到固定内存上，再从固定内存传输数据到设备上，如下图左边所示</p>
@@ -1009,7 +1009,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA内存模型概述</title>
-    <url>/2024/01/02/CUDA%E7%BC%96%E7%A8%8B-CUDA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</url>
+    <url>/p/62a8be74/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>讲解 CUDA 内存层次结构，如寄存器，共享内存，纹理内存，全局内存等。</p>
 <span id="more"></span>
 <h2 id="内存层次结构"><a href="#内存层次结构" class="headerlink" title="内存层次结构"></a>内存层次结构</h2><p>首先了解一下应用程序遵循的局部性原则</p>
@@ -1292,7 +1292,7 @@
   </entry>
   <entry>
     <title>CUDA编程: PyCUDA编程简介</title>
-    <url>/2023/12/26/CUDA%E7%BC%96%E7%A8%8B-PyCUDA%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B/</url>
+    <url>/p/ec855d6e/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>PyCUDA GPU 编程。主要内容是掌握几种PyCUDA 的基本内核函数，在 Python 中生成和调用并行化的 CUDA C 内核函数，以及了解 PyCUDA 的并行前缀算法。</p>
 <span id="more"></span>
 <h2 id="获取-GPU-信息"><a href="#获取-GPU-信息" class="headerlink" title="获取 GPU 信息"></a>获取 GPU 信息</h2><p>首先，需要初始化 CUDA，使用 <code>pycuda.driver.init()</code>或通过<code>import pycuda.autoinit</code>使用<code>autoinit</code>子模块初始化，接下来使用<code>pycuda.driver.Device(i)</code>来访问不同的 GPU 设备，这里笔者的电脑为单 GPU</p>
@@ -1384,7 +1384,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA C编程简介</title>
-    <url>/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA-C%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B/</url>
+    <url>/p/55d1319f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>讲解 CUDA C 编程中的简单的内存管理，线程操作，如何编写核函数，使用 Thrust 库，并行计算，性能分析工具。</p>
 <span id="more"></span>
 <h2 id="获取-GPU-信息"><a href="#获取-GPU-信息" class="headerlink" title="获取 GPU 信息"></a>获取 GPU 信息</h2><p>CUDA  提供了几种获取 GPU 信息的方法，这里介绍一下通过调用 <code>cuda_runtime.h</code>中的 API 得到 GPU 的一些属性。</p>
@@ -1556,7 +1556,7 @@
   </entry>
   <entry>
     <title>CUDA编程: CUDA模型概述</title>
-    <url>/2023/12/19/CUDA%E7%BC%96%E7%A8%8B-CUDA%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/</url>
+    <url>/p/e07c9171/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>讨论 GPU 的并行计算是如何在硬件上实现的，CUDA 中的模块理解以及 CPU和 GPU 之间的交互，指令的同步。</p>
 <span id="more"></span>
 <h2 id="GPU-架构与异构并行计算"><a href="#GPU-架构与异构并行计算" class="headerlink" title="GPU 架构与异构并行计算"></a>GPU 架构与异构并行计算</h2><h3 id="什么是异构并行计算"><a href="#什么是异构并行计算" class="headerlink" title="什么是异构并行计算"></a>什么是异构并行计算</h3><p>最初的计算机只包含中央处理器，为了处理越来越复杂的图形计算，GPU 营运而生，因其数据众多的轻量级线程，非常适合处理大规模异构并行计算。</p>
@@ -1709,7 +1709,7 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
   </entry>
   <entry>
     <title>CUDA编程: GPU编程概述和CUDA环境搭建</title>
-    <url>/2023/12/12/CUDA%E7%BC%96%E7%A8%8B-GPU%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0%E5%92%8CCUDA%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <url>/p/b3409785/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>模型变得越来越深，参数愈加庞大，虽然准确率不断增长，由于硬件受限，对实际场景部署的要求也越来越高，CUDA 编程成为了一门必备的武林绝学。</p>
 <span id="more"></span>
 <h2 id="CUDA简介"><a href="#CUDA简介" class="headerlink" title="CUDA简介"></a>CUDA简介</h2><p>首先介绍一下 GPU，在计算机中，GPU 相比 CPU，拥有非常多的内核，这意味着 GPU 可以以非常高的吞吐量执行程序，如同一条非常宽阔的道路可以同时让很多车辆同时通行，例如最新的 RTX 3090 的核心数达到了恐怖的 10496 个，而当前的顶级 CPU 通常只有不超过 32 核心。因此我们需要正确地设计并行化加速算法，就可以发挥 GPU 的强大优势。</p>
@@ -1807,7 +1807,7 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
   </entry>
   <entry>
     <title>记录第n次创建启用并清理临时swap</title>
-    <url>/2023/12/05/%E8%AE%B0%E5%BD%95%E7%AC%ACn%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%AF%E7%94%A8%E4%B8%B4%E6%97%B6swap/</url>
+    <url>/p/f3209fd4/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>时常要用 chatgpt 辅助生成 swap，记录下来方便</p>
 <span id="more"></span>
 <h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">function create_swap &#123;</span><br><span class="line">    SWAPFILE=$1</span><br><span class="line">    SIZE=$2</span><br><span class="line"></span><br><span class="line">    mkdir -p $(dirname &quot;$SWAPFILE&quot;)</span><br><span class="line"></span><br><span class="line">    sudo dd if=/dev/zero of=&quot;$SWAPFILE&quot; bs=1G count=&quot;$SIZE&quot; status=progress</span><br><span class="line"></span><br><span class="line">    sudo chmod 600 &quot;$SWAPFILE&quot;</span><br><span class="line"></span><br><span class="line">    sudo mkswap &quot;$SWAPFILE&quot;</span><br><span class="line">    sudo swapon &quot;$SWAPFILE&quot;</span><br><span class="line"></span><br><span class="line">    echo &quot;Swap file created and enabled at $SWAPFILE with size $&#123;SIZE&#125;G&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function clean_swap &#123;</span><br><span class="line">    SWAPFILE=$1</span><br><span class="line"></span><br><span class="line">    if [ -f &quot;$SWAPFILE&quot; ]; then</span><br><span class="line">        sudo swapoff &quot;$SWAPFILE&quot;</span><br><span class="line">        sudo rm -f &quot;$SWAPFILE&quot;</span><br><span class="line">        echo &quot;Swap file at $SWAPFILE has been removed.&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;Swap file at $SWAPFILE does not exist.&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CLEAN_MODE=0</span><br><span class="line"></span><br><span class="line">while getopts &quot;c&quot; opt; do</span><br><span class="line">    case $opt in</span><br><span class="line">        c)</span><br><span class="line">            CLEAN_MODE=1</span><br><span class="line">            ;;</span><br><span class="line">        \?)</span><br><span class="line">            echo &quot;Invalid option: -$OPTARG&quot; &gt;&amp;2</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">shift $((OPTIND -1))</span><br><span class="line"></span><br><span class="line">if [ &quot;$CLEAN_MODE&quot; -eq 1 ]; then</span><br><span class="line">    if [ &quot;$#&quot; -ne 1 ]; then</span><br><span class="line">        echo &quot;Usage: $0 -c [swap file path]&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">    clean_swap $1</span><br><span class="line">else</span><br><span class="line">    if [ &quot;$#&quot; -ne 2 ]; then</span><br><span class="line">        echo &quot;Usage: $0 [swap file path] [size in GB]&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">    create_swap $1 $2</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
@@ -1822,7 +1822,7 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
   </entry>
   <entry>
     <title>论文阅读: ZeRO++: Extremely Eficient Collective Communication for Giant Model Training</title>
-    <url>/2023/11/25/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Extremely-Eficient-Collective-Communication-for-Giant-Model-Training/</url>
+    <url>/p/82ab1321/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>原文链接：<a href="https://arxiv.org/pdf/2306.10209.pdf">https://arxiv.org/pdf/2306.10209.pdf</a></p>
 <p>开源代码：<a href="https://github.com/microsoft/deepspeed">https://github.com/microsoft/deepspeed</a></p>
 <span id="more"></span>
@@ -1952,7 +1952,7 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
   </entry>
   <entry>
     <title>开个新坑: 精读pytorch源码</title>
-    <url>/2023/11/09/%E5%BC%80%E4%B8%AA%E6%96%B0%E5%9D%91-%E7%B2%BE%E8%AF%BBpytorch%E6%BA%90%E7%A0%81/</url>
+    <url>/p/d343b623/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>毕设打算做个简单的深度学习框架，调研了几种语言目前的实现，各有优劣，先从最经典的 torch 读起。欢迎朋友们提出建议</p>
 <span id="more"></span>
 <h2 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a>mixed</h2><p><a href="https://github.com/pytorch/pytorch">https://github.com/pytorch/pytorch</a></p>
@@ -1972,7 +1972,7 @@ WarpsPerBlock = ceil(\frac{ThreadsPerBlock}{WarpSize}, 1)</script><p>对应下�
   </entry>
   <entry>
     <title>论文阅读: ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning</title>
-    <url>/2023/10/26/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Infinity-Breaking-the-GPU-Memory-Wall-for-Extreme-Scale-Deep-Learning/</url>
+    <url>/p/fc5b020/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ZeRO-Infinity 是基于 ZeRO 的扩展，Infinity 离线引擎可以同时利用 GPU、CPU 和 NVMe 内存，还提出了其他的优化技术。</p>
 <span id="more"></span>
 <p>原文链接：<a href="https://arxiv.org/pdf/2104.07857.pdf">https://arxiv.org/pdf/2104.07857.pdf</a></p>
@@ -2233,7 +2233,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>论文阅读: ZeRO-Offload: Democratizing Billion-Scale Model Training</title>
-    <url>/2023/10/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Offload-Democratizing-Billion-Scale-Model-Training/</url>
+    <url>/p/17582ba3/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ZeRO-Offload 主要优化在于尽量减少数据在 GPU 与 CPU 之间的移动，并减少 CPU 计算时间，同时最大限度地节省 GPU 上的内存。</p>
 <span id="more"></span>
 <p>原文链接：<a href="https://arxiv.org/pdf/2101.06840.pdf">https://arxiv.org/pdf/2101.06840.pdf</a></p>
@@ -2339,7 +2339,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>记录第n次修复USB设备无法识别挂载</title>
-    <url>/2023/10/11/%E8%AE%B0%E5%BD%95%E7%AC%ACn%E6%AC%A1%E4%BF%AE%E5%A4%8DUSB%E8%AE%BE%E5%A4%87%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%AB%E6%8C%82%E8%BD%BD/</url>
+    <url>/p/bddb5e0d/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>archlinux 滚着滚着就不能识别 USB 设备了，记录一下修复过程</p>
 <span id="more"></span>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>一个U盘</p>
@@ -2368,7 +2368,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>论文阅读: ZeRO: Memory Optimizations Toward Training Trillion Parameter Models</title>
-    <url>/2023/09/30/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ZeRO-Memory-Optimizations-Toward-Training-Trillion-Parameter-Models/</url>
+    <url>/p/706a94b5/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>ZeRO 是一种用于大规模深度学习模型的内存优化解决方案，通过消除数据和模型并行训练中的内存冗余，同时保持了低通信量和高计算粒度。</p>
 <span id="more"></span>
 <p>paper: <a href="https://arxiv.org/abs/1910.02054">https://arxiv.org/abs/1910.02054</a></p>
@@ -2520,7 +2520,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>论文阅读: PyTorch Distributed: Experiences on Accelerating Data Parallel Training</title>
-    <url>/2023/09/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-PyTorch-Distributed-Experiences-on-Accelerating-Data-Parallel-Training/</url>
+    <url>/p/a8cf276f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文提出的 DistributedDataParallel 在优化器运行之前进行梯度平均，用相同的梯度集更新所有模型副本，这样在数学上和本地训练完全等价，而且可以实现异步，比参数平均更加高效。</p>
 <span id="more"></span>
 <p>paper: <a href="https://arxiv.org/abs/2006.15704">https://arxiv.org/abs/2006.15704</a></p>
@@ -2628,7 +2628,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>论文阅读: Horovod: fast and easy distributed deep learning in TensorFlow</title>
-    <url>/2023/09/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-Horovod-fast-and-easy-distributed-deep-learning-in-TensorFlow/</url>
+    <url>/p/b353fa5f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>最近忙实习去了，断更大半年。整理了一下论文，有十几篇没读，后面有时间慢慢更。</p>
 <p>这篇论文主要工作是对 TensorFlow 框架 API 的重写，使用 ring-allreduce 和 broadcast 方法，进行数据并行。</p>
 <span id="more"></span>
@@ -2691,7 +2691,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>2023MCM-ICM美赛C题第二问思路</title>
-    <url>/2023/02/23/2023MCM-ICM%E7%BE%8E%E8%B5%9BC%E9%A2%98%E7%AC%AC%E4%BA%8C%E9%A2%98%E6%80%9D%E8%B7%AF/</url>
+    <url>/p/c1bfab13/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在睡了十一个小时后，蹦出的思路，目前网上没有看到相同的方法（不知道比赛刚结束就发思路会不会出事），第一题和第三题大家大同小异，就不讲解了。</p>
 <span id="more"></span>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>对于给定的未来解决方案单词，在未来的日期，开发一个模型，使您能够预测报告结果的分布。换句话说，预测未来日期（1，2，3，4，5，6，X）的相关百分比。你的模型和预测有哪些不确定性？举一个具体的例子，说明你对2023年3月1日<code>EERIE</code>一词的预测。你对模型的预测有多自信？</p>
@@ -2724,7 +2724,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>HGame_2023_Week3_3ctu4_card_problem</title>
-    <url>/2023/01/31/HGame-2023-Week3-3ctu4-card-problem/</url>
+    <url>/p/f100aba/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>干扰特征非常多的二分类问题，解题步骤如下</p>
 <span id="more"></span>
 <ul>
@@ -2741,7 +2741,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>linux下中文路径命名规范化</title>
-    <url>/2023/01/29/linux%E4%B8%8B%E4%B8%AD%E6%96%87%E8%B7%AF%E5%BE%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E5%8C%96/</url>
+    <url>/p/19affb6/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>shell 中无法正常访问带空格或某些字符的目录，写了个脚本规范一下中文路径命名</p>
 <span id="more"></span>
 <p>将指定目录下所有子目录和文件命名中的<code>、，。()！、？：“”‘’【】《》（）</code>全部替换为<code>_</code>，去除首尾的<code>_</code>。</p>
@@ -2753,7 +2753,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>新年愿望</title>
-    <url>/2023/01/21/%E6%96%B0%E5%B9%B4%E6%84%BF%E6%9C%9B/</url>
+    <url>/p/d827211b/</url>
     <content><![CDATA[<p>写于壬寅年除夕夜</p>
 <span id="more"></span>
 <p>❎ 通过英语六级 (2023-03-12 听力没涂…)</p>
@@ -2779,7 +2779,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>caj文档批量转换为pdf-shell脚本多线程</title>
-    <url>/2023/01/10/caj%E6%96%87%E6%A1%A3%E6%89%B9%E9%87%8F%E8%BD%AC%E6%8D%A2%E4%B8%BApdf-shell%E8%84%9A%E6%9C%AC%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <url>/p/5513d824/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>最近看的论文有些多，但知网上的 caj 文档又卡又难做笔记，遂写了一个 caj 文档批量转换为 pdf 的 shell 脚本。</p>
 <span id="more"></span>
 <h2 id="caj2pdf"><a href="#caj2pdf" class="headerlink" title="caj2pdf"></a>caj2pdf</h2><p>安装 caj2pdf 命令行工具</p>
@@ -2792,7 +2792,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>CUDA编程性能分析工具 nvprof/ncu --metrics参数含义</title>
-    <url>/2023/01/07/CUDA%E7%BC%96%E7%A8%8B%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-metrics%E5%8F%82%E6%95%B0%E5%90%AB%E4%B9%89/</url>
+    <url>/p/68deaade/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在网上没有比较全的中文 ncu —metrics 参数含义，于是自己整理了一下官方和外国友人的笔记。</p>
 <span id="more"></span>
 <h2 id="nvprof-和-ncu"><a href="#nvprof-和-ncu" class="headerlink" title="nvprof 和 ncu"></a>nvprof 和 ncu</h2><p>nvprof 是过去比较常用的命令行工具，但在终端直接输入<code>nvprof ./*.o</code>会得到以下 Warning</p>
@@ -3676,7 +3676,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>CT-Windowing医学CT图像增强</title>
-    <url>/2022/10/06/CT-Windowing%E5%8C%BB%E5%AD%A6CT%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</url>
+    <url>/p/b1e8187e/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>CT winding 是CT扫描的一项图像处理任务，它有助于突出关键的组织结构，通过修改 HU (Hounsfield Units) 参数，使图像更易于分析。</p>
 <span id="more"></span>
 <p><img src="/image/CT-Windowing医学CT图像增强/0.webp" style="zoom:50%;" /></p>
@@ -3766,7 +3766,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>GroupFormer简要学习笔记</title>
-    <url>/2022/08/31/GroupFormer%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/p/28e012f/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>快速记录下 GroupFormer 网络的核心思想。</p>
 <span id="more"></span>
 <p>paper: </p>
@@ -3805,7 +3805,7 @@ efficiency & = \frac{compute\_time}{compute\_time + communication\_time} \\
   </entry>
   <entry>
     <title>高斯函数与高斯核函数</title>
-    <url>/2022/08/07/%E9%AB%98%E6%96%AF%E5%87%BD%E6%95%B0%E4%B8%8E%E9%AB%98%E6%96%AF%E6%A0%B8%E5%87%BD%E6%95%B0/</url>
+    <url>/p/908291b2/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>图像处理领域中，高斯核函数常用于图像低通滤波，记录下原理，同时用代码实现下。</p>
 <span id="more"></span>
 <h2 id="高斯函数"><a href="#高斯函数" class="headerlink" title="高斯函数"></a>高斯函数</h2><h3 id="一维高斯函数"><a href="#一维高斯函数" class="headerlink" title="一维高斯函数"></a>一维高斯函数</h3><script type="math/tex; mode=display">
@@ -3876,7 +3876,7 @@ k(\|x_1-x_2\|)=e^{-\|x_1-x_2\|^2/2\sigma^2}</script><p>也称为<strong>径向�
   </entry>
   <entry>
     <title>我的2022暑假独居生活</title>
-    <url>/2022/06/12/%E6%88%91%E7%9A%842022%E6%9A%91%E5%81%87%E7%8B%AC%E5%B1%85%E7%94%9F%E6%B4%BB/</url>
+    <url>/p/5f24596c/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一张小方桌，有一荤一素</p>
 <span id="more"></span>
 <h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><h3 id="2022年6月10日"><a href="#2022年6月10日" class="headerlink" title="2022年6月10日"></a>2022年6月10日</h3><ul>
@@ -3968,7 +3968,7 @@ k(\|x_1-x_2\|)=e^{-\|x_1-x_2\|^2/2\sigma^2}</script><p>也称为<strong>径向�
   </entry>
   <entry>
     <title>第二届网刃杯misc所见非所见wp</title>
-    <url>/2022/04/25/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E7%BD%91%E5%88%83%E6%9D%AFmisc%E6%89%80%E8%A7%81%E9%9D%9E%E6%89%80%E8%A7%81wp/</url>
+    <url>/p/68ed93d0/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录一下这道深度学习入门的wp</p>
 <span id="more"></span>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>隐藏层的输出为512，输出层的输出10，导入模型得到报错，神经网络的输入必须为<code>(28,28)</code>，再用 <code>tf.latest_checkpoint</code> 和 <code>tf.load_weights</code> 导入模型文件，最后输出概率最大的预测结果组成 <code>flag</code> ，由于预测图片在压缩中有精度误差，和真实结果不同，所幸赛方给出了 <code>hint4</code>，修改第4位为 2。</p>
@@ -3982,7 +3982,7 @@ k(\|x_1-x_2\|)=e^{-\|x_1-x_2\|^2/2\sigma^2}</script><p>也称为<strong>径向�
   </entry>
   <entry>
     <title>多目标优化笔记</title>
-    <url>/2022/04/19/%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E7%AC%94%E8%AE%B0/</url>
+    <url>/p/d43ce4e7/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>多目标优化 ( MOO ) - Multi-Objective Optimization</p>
 <p>从问题定义，单目标、多目标，无约束、有约束方面了解多目标优化</p>
 <span id="more"></span>
@@ -4366,7 +4366,7 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
   </entry>
   <entry>
     <title>使用平行线段的相机标定[计划更新]</title>
-    <url>/2022/04/16/%E4%BD%BF%E7%94%A8%E5%B9%B3%E8%A1%8C%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/</url>
+    <url>/p/66d4364b/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一种使用平行线段来进行相机标定以及形状重建的方法</p>
 <span id="more"></span>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>监控摄像机标定一直是计算机视觉工业应用的一个重要课题。内部和外部参数都必须精确校准，才能从记录的 2D 图像或视频中识别出 3D 场景中发生的事情，相机标定的一般方法是使用标定对象，如棋盘标定。然而，这些方法对于监控摄像机来说往往是不切实际的，因为它们需要一个足够大的校准对象来覆盖整个拍摄区域。</p>
@@ -4383,7 +4383,7 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
   </entry>
   <entry>
     <title>设计实现内存的分配和回收算法</title>
-    <url>/2022/04/13/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
+    <url>/p/7f21964e/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>操作系统作业</p>
 <span id="more"></span>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如下数据结构下，设计实现内存的分配和回收算法：</p>
@@ -4406,7 +4406,7 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
   </entry>
   <entry>
     <title>制作目标检测数据集常用python脚本整理</title>
-    <url>/2022/04/09/%E5%88%B6%E4%BD%9C%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86%E5%B8%B8%E7%94%A8python%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
+    <url>/p/ddce6477/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>制作个人目标检测数据集时，有查找爬取的错误图片，更改标注路径等等需要，写了以下python脚本</p>
 <span id="more"></span>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="查找错误图片"><a href="#查找错误图片" class="headerlink" title="查找错误图片"></a>查找错误图片</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> imghdr</span><br><span class="line"><span class="keyword">from</span> progressbar <span class="keyword">import</span> ProgressBar</span><br><span class="line"></span><br><span class="line">path =<span class="string">&#x27;./JPEGImages&#x27;</span></span><br><span class="line">original_images =[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> root, dirs, filenames <span class="keyword">in</span> os.walk(path):</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">        original_images.append(os.path.join(root, filename))</span><br><span class="line"></span><br><span class="line">original_images = <span class="built_in">sorted</span>(original_images)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;num:&#x27;</span>,<span class="built_in">len</span>(original_images))</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;check_error.txt&#x27;</span>,<span class="string">&#x27;w+&#x27;</span>)</span><br><span class="line">error_images =[]</span><br><span class="line">progress = ProgressBar()</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> progress(original_images):</span><br><span class="line">    check = imghdr.what(filename)</span><br><span class="line">    <span class="keyword">if</span> check == <span class="literal">None</span>:</span><br><span class="line">        f.write(filename)</span><br><span class="line">        f.write(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        error_images.append(filename)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(error_images))</span><br><span class="line">f.seek(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> f:</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
@@ -4429,7 +4429,7 @@ S(x_i^{\ast}) = \{x_i^{\ast} + \sum_{i=1}^K r_{i \rightarrow {i}_j} u_{i \righta
   </entry>
   <entry>
     <title>Faster-RCNN原理笔记</title>
-    <url>/2022/03/30/Faster-RCNN%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</url>
+    <url>/p/6e84daf2/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>详细记录了 Faster RCNN 网络原理和个人的理解</p>
 <span id="more"></span>
 <ul>
@@ -4584,7 +4584,7 @@ Loss = \begin{cases}
   </entry>
   <entry>
     <title>卷积运算的输入输出shape</title>
-    <url>/2022/03/16/%E5%8D%B7%E7%A7%AF%E8%BF%90%E7%AE%97%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAshape/</url>
+    <url>/p/ec86e25e/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>记录一下二维卷积神经网络中卷积运算的输入输出shape大小</p>
 <span id="more"></span>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
@@ -4613,7 +4613,7 @@ OW = \frac{W + 2P - FW}{S} + 1</script>]]></content>
   </entry>
   <entry>
     <title>最小化交叉熵损失与最大似然估计的推导</title>
-    <url>/2022/03/05/%E6%9C%80%E5%B0%8F%E5%8C%96%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E4%B8%8E%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%8E%A8%E5%AF%BC/</url>
+    <url>/p/7aac45fd/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>机器学习所使用的交叉熵损失函数与信息论里的交叉熵的推导与思考</p>
 <span id="more"></span>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="信息论中的交叉熵定义"><a href="#信息论中的交叉熵定义" class="headerlink" title="信息论中的交叉熵定义"></a>信息论中的交叉熵定义</h3><script type="math/tex; mode=display">
@@ -4704,7 +4704,7 @@ P(D \mid \theta, X)=\prod_{i=1}^{N} \prod_{j=1}^{K} p_{\theta}\left(y_{i}=j \mid
   </entry>
   <entry>
     <title>使用Opencv+Python的AR小demo</title>
-    <url>/2022/02/23/%E4%BD%BF%E7%94%A8Opencv+Python%E7%9A%84AR%E5%B0%8Fdemo/</url>
+    <url>/p/e8ff6ba7/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>浅浅了解一下 Python OpenCV，试着给自己的 iphone 8 做一下相机标定</p>
 <span id="more"></span>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
@@ -5151,7 +5151,7 @@ class OBJ:
   </entry>
   <entry>
     <title>labelImg闪退错误修复</title>
-    <url>/2021/12/05/labelImg%E9%97%AA%E9%80%80%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
+    <url>/p/a524281d/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>使用labelImg时，在未选中数据标签时按<code>Ctrl+D</code>时会闪退，在终端中有以下报错</p>
 <span id="more"></span>
 <p><img src="/image/labelImg闪退错误修复/1.webp" alt="1"></p>
@@ -5170,7 +5170,7 @@ class OBJ:
   </entry>
   <entry>
     <title>2021亚太数学建模竞赛A题简要思路</title>
-    <url>/2021/11/29/2021%E4%BA%9A%E5%A4%AA%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AB%9E%E8%B5%9BA%E9%A2%98/</url>
+    <url>/p/ae4fbfca/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>小记一下第一次参加数模赛</p>
 <span id="more"></span>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><img src="/image/2021亚太数学建模竞赛A题/mind.png" alt="1"></p>
@@ -5498,7 +5498,7 @@ dxf_close(FID);
   </entry>
   <entry>
     <title>和周小姐高中的对话（一）</title>
-    <url>/2021/11/08/%E5%92%8C%E5%91%A8%E5%B0%8F%E5%A7%90%E9%AB%98%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%AF%9D%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <url>/p/3b4e1f24/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>和周小姐的高中日常之一</p>
 <span id="more"></span>
 <p>一日，周小姐忽然递过一张纸条，上面写道：</p>
@@ -5525,7 +5525,7 @@ dxf_close(FID);
   </entry>
   <entry>
     <title>记录第n次修复引导区</title>
-    <url>/2021/11/07/%E8%AE%B0%E5%BD%95%E7%AC%ACn%E6%AC%A1%E4%BF%AE%E5%A4%8D%E5%BC%95%E5%AF%BC%E5%8C%BA/</url>
+    <url>/p/93d3d7c3/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>给U盘装了archlinux后，没注意把固态上archlinux的/etc/fstab分区挂载配置文件修改了，以为是grub又坏了，干脆把挂载在/boot下的EFI 系统格式化了，孙子云：“置之死地而后生。” 从头开始</p>
 <span id="more"></span>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>插网线，喝热水</p>
@@ -5577,7 +5577,7 @@ dxf_close(FID);
   </entry>
   <entry>
     <title>求解微分方程</title>
-    <url>/2021/11/02/%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</url>
+    <url>/p/86ad67e4/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>解微分方程是我的弱项，就靠这个了</p>
 <span id="more"></span>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>含导数或微分的方程称之为微分方程，一般形式为$f(x,y’ \cdots y^{(n)})$</p>
@@ -5668,7 +5668,7 @@ dxf_close(FID);
   </entry>
   <entry>
     <title>拟合和统计中的检验参数</title>
-    <url>/2021/10/20/%E6%8B%9F%E5%90%88%E5%92%8C%E7%BB%9F%E8%AE%A1%E4%B8%AD%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8F%82%E6%95%B0/</url>
+    <url>/p/62c5a99c/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>数据分析中无处不在的知识点</p>
 <span id="more"></span>
 <blockquote>
@@ -5697,7 +5697,7 @@ dxf_close(FID);
   </entry>
   <entry>
     <title>正交多项式</title>
-    <url>/2021/10/17/%E6%AD%A3%E4%BA%A4%E5%A4%9A%E9%A1%B9%E5%BC%8F/</url>
+    <url>/p/6b91a7a9/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>总结一下可能会遇到的正交多项式</p>
 <span id="more"></span>
 <h2 id="正交多项式定义"><a href="#正交多项式定义" class="headerlink" title="正交多项式定义"></a>正交多项式定义</h2><p>一个多项式序列${ {p<em>n}(x)} </em>{n = 0}^\infty$，阶数为$[p_n(x)] = n$,对于每一个$n$，这个多项式序列在开区间$(a,b)$上关于权函数$w(x)$正交，如果：</p>
@@ -5786,7 +5786,7 @@ NMSE_hermite =
   </entry>
   <entry>
     <title>伽马函数</title>
-    <url>/2021/10/17/%E4%BC%BD%E9%A9%AC%E5%87%BD%E6%95%B0/</url>
+    <url>/p/7d2c710d/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>遇到了这个伽马函数， 许多博客说对考研很重要，就浅浅记录一下</p>
 <span id="more"></span>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在数学中，$\Gamma$函数（伽玛函数；Gamma函数），是阶乘函数在实数与复数域上的扩展。如果$n$为正整数，则：</p>
@@ -5801,7 +5801,7 @@ NMSE_hermite =
   </entry>
   <entry>
     <title>matlab画图功能再探</title>
-    <url>/2021/10/08/matlab%E7%94%BB%E5%9B%BE%E5%8A%9F%E8%83%BD%E5%86%8D%E6%8E%A2/</url>
+    <url>/p/1d9b66c4/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>复习了一下 matlab 里面的基本画图函数的属性</p>
 <span id="more"></span>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;</span><br><span class="line">th = <span class="built_in">linspace</span>()<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">fig1 = <span class="built_in">plot</span>(th,<span class="built_in">sin</span>(th),<span class="string">&#x27;g&#x27;</span>,th,<span class="built_in">cos</span>(th),<span class="string">&#x27;b:&#x27;</span>);</span><br></pre></td></tr></table></figure>
@@ -5988,7 +5988,7 @@ NMSE_hermite =
   </entry>
   <entry>
     <title>拉格朗日插值多项式</title>
-    <url>/2021/10/06/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F/</url>
+    <url>/p/b8ab2279/</url>
     <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在数值分析中，多项式插值是最常提到的内容</p>
 <span id="more"></span>
 <h2 id="多项式插值"><a href="#多项式插值" class="headerlink" title="多项式插值"></a>多项式插值</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
