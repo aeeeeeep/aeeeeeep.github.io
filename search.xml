@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>论文阅读: Colossal-Auto: Unified Automation of Parallelization and Activation Checkpoint for Large-scale Models</title>
-    <url>/p/45ad11ce/</url>
-    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><span id="more"></span>
+    <title>随笔</title>
+    <url>/p/f77810a8/</url>
+    <content><![CDATA[<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>一直以为关于代码的事情都不会很复杂。</p>
+<span id="more"></span>
+<p>之前一直是一个人自学，看博客打比赛什么的，代码是一个人管理，遇到的问题无非是自己写的 bug。最近遇到刚离职的同事遗留的未完成验证模块的 bug，排查了两天，3k 多行逻辑代码，眼睛又不舒服了🥲。</p>
+<p>但是看代码还好，工作总是多线程的，后面的事情被阻塞，各位 Owner 不会管这些，各种项目需要支持，压力一下子拉满了。</p>
+<p>晚上回到出租屋再整理一天的工作，颓败感，虚度光阴的感觉让自己爬上床的力气也没有🥱，之前打比赛再累也没这么难受过。</p>
+<p>工作中遇到的同事很多是几天就能实现一个复杂模块的水平，我只是刚进入职场的小白，是不是能发现问题并尝试解决已经可以了。这个 bug 是不是暂时可以跳过，毕竟用到的地方暂时没有，之前也不是没有遇到其他同事遗留的 bug。</p>
+<p>暂时跳过吧，后面还有项目要支持🫤。</p>
+<p>全靠晚上回来的两个小时回血。最近用了 spotify 免费体验了一个月的音乐会员，音质提升一大截😆，重要的是可以听逼哥的歌。先写到这里，要保持七小时的睡眠😪。</p>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1wFROudevSHtz7NegT9GeX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 ]]></content>
       <categories>
-        <category>懵逼的深度学习</category>
+        <category>生活</category>
       </categories>
-      <tags>
-        <tag>分布式训练框架</tag>
-      </tags>
   </entry>
   <entry>
     <title>Jax编程: 踩坑记录</title>
